@@ -1,0 +1,13 @@
+<hydraDef>
+
+  <typeEndian default="LITTLE"/>
+
+  <scriptDir name="Scripts"/>
+
+  <include>Config/keywords.xml</include>
+  <include>Config/types.xml</include>
+  <include>Config/ccsds.xml</include>
+  <include>Config/comm.xml</include>
+  <include>Config/seq.xml</include>
+  
+</hydraDef>
