@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<pageDef>
+  <page title="adcs_clock_sync">
+    <column>
+      <frame name="adcs_clock_sync"/>
+    </column>
+  </page>
+</pageDef>
+

@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hydraDef>
+  
+  <!-- CDI header defintion -->
+  <frameDef name="MINXSSCDIHeader">
+    <field>
+      <itemDef name="MINXSSSync1" type="dn8"/>
+      <itemDef name="MINXSSSync2" type="dn8"/>
+      <itemDef name="MINXSSIMsg" type="dn8"/>
+      <itemDef name="MINXSSCmd" type="dn8"/>
+      <itemDef name="MINXSSPayloadSize" type="dn16"/>
+      <itemDef name="MINXSSHdrChksumA" type="dn8"/>
+      <itemDef name="MINXSSHdrChksumB" type="dn8"/>
+    </field>
+  </frameDef>
+ 
+  <frameDef name="ax25TlmHdr">
+    <field>
+      <itemDef name="ax25TlmStart" type="dn8"/>
+      <itemDef name="ax25TlmAddr" type="dn8" num="14"/>
+      <itemDef name="ax25TlmControl" type="dn8"/>
+      <itemDef name="ax25TlmPID" type="dn8"/>
+    </field>
+  </frameDef>
+ 
+  <!-- CCSDS Header Definition -->
+  <frameDef name="MINXSSCCSDSHeader">
+    <field>
+	  <itemDef name="SyncWord" type="dn16"/>
+      <itemDef name="MINXSSVersion" type="dn3"/>
+      <itemDef name="MINXSSPktType" type="dn1"/>
+      <itemDef name="MINXSSSecHdrFlag" type="dn1"/>
+      <itemDef name="MINXSSApID" type="dn11"/>
+      <itemDef name="MINXSSGroup" type="dn2"/>
+      <itemDef name="MINXSSSeqCnt" type="dn14"/>
+      <itemDef name="MINXSSLength" type="dn16"/>
+      <itemDef name="MINXSSTimeGS" type="dn32l"/>
+      <itemDef name="MINXSSTimeMS" type="dn16l"/>
+      
+    </field>
+  </frameDef>
+  
+  <!-- DEFINES AND TYPES -->
+  <typeChar name="char8" size="8"/>
+   
+  <itemDef name="MINXSSCDHState" type="CDHState"/>
+  <itemDef name="MINXSSCDHEclipse" type="trueFalse1"/>
+  <itemDef name="MINXSSCDHMode" type="ModeStatus"/>
+  <itemDef name="MINXSSCmdLastOpcode" type="dn8l"/>
+  <itemDef name="MINXSSCmdLastStatus" type="CmdStatus"/>
+  <itemDef name="MINXSSCmdAcceptCnt" type="dn16l"/>
+  <itemDef name="MINXSSCmdRejectCnt" type="dn16l"/>
+  <itemDef name="MINXSSParamSetHdrByte1" type="ParamTableStatus"/>
+  <itemDef name="MINXSSParamSetHdrByte2" type="ParamTableValue"/>
+  <itemDef name="MINXSSBatHeaterEnabled" type="trueFalse1"/>
+  <itemDef name="MINXSSSADeployEnabled" type="trueFalse1"/>
+  <itemDef name="MINXSSAntDeployEnabled" type="trueFalse1"/>
+  <itemDef name="MINXSSSdCardEnabled" type="falseTrue1"/>
+  <itemDef name="MINXSSCommEnabled" type="falseTrue1"/>
+  <itemDef name="MINXSSADCSEnabled" type="trueFalse1"/>
+  <itemDef name="MINXSSX123Enabled" type="trueFalse1"/>
+  <itemDef name="MINXSSSPSEnabled" type="trueFalse1"/>
+  <itemDef name="MINXSSEnabledSpares" type="dn8l"/>
+	 
+  <frameDef name="DAXSS_Log" id="0x0B0">
+    <field>
+	  <itemCopy suffix="_Log" name="SyncWord"/>
+      <itemCopy suffix="_Log" name="MINXSSVersion"/>
+      <itemCopy suffix="_Log" name="MINXSSPktType"/>
+      <itemCopy suffix="_Log" name="MINXSSSecHdrFlag"/>
+      <itemCopy suffix="_Log" name="MINXSSApID"/>
+      <itemCopy suffix="_Log" name="MINXSSGroup"/>
+      <itemCopy suffix="_Log" name="MINXSSSeqCnt"/>
+      <itemCopy suffix="_Log" name="MINXSSLength"/>
+      <itemCopy suffix="_Log" name="MINXSSTimeGS"/>
+      <itemCopy suffix="_Log" name="MINXSSTimeMS"/>
+      <itemCopy suffix="_Log" name="MINXSSCDHState"/>
+      <itemCopy suffix="_Log" name="MINXSSCDHEclipse"/>
+      <itemCopy suffix="_Log" name="MINXSSCDHMode"/>
+	  <itemCopy suffix="_Log" name="MINXSSCmdLastOpcode"/>
+	  <itemCopy suffix="_Log" name="MINXSSCmdLastStatus"/>
+      <itemCopy suffix="_Log" name="MINXSSCmdAcceptCnt"/>
+      <itemCopy suffix="_Log" name="MINXSSCmdRejectCnt"/>
+	  <itemCopy suffix="_Log" name="MINXSSParamSetHdrByte1"/>
+      <itemCopy suffix="_Log" name="MINXSSParamSetHdrByte2"/>
+	  <itemCopy suffix="_Log" name="MINXSSBatHeaterEnabled"/>
+      <itemCopy suffix="_Log" name="MINXSSSADeployEnabled"/>
+      <itemCopy suffix="_Log" name="MINXSSAntDeployEnabled"/>
+      <itemCopy suffix="_Log" name="MINXSSSdCardEnabled"/>
+      <itemCopy suffix="_Log" name="MINXSSCommEnabled"/>
+      <itemCopy suffix="_Log" name="MINXSSADCSEnabled"/>
+      <itemCopy suffix="_Log" name="MINXSSX123Enabled"/>
+      <itemCopy suffix="_Log" name="MINXSSSPSEnabled"/>
+      <itemCopy suffix="_Log" name="MINXSSEnabledSpares"/>
+	  <itemDef name="MINXSSCDHTempMonitor" type="CDH_Temp"/>
+	  <itemDef name="MINXSSSpsSum" type="dn16l"/>
+      <itemDef name="MINXSSSpsXPos" type="SPS_Pos"/>
+      <itemDef name="MINXSSSpsYPos" type="SPS_Pos"/>
+      <itemDef name="MINXSSX123FastCountNorm" type="dn16l"/>
+      <itemDef name="MINXSSX123SlowCountNorm" type="dn16l"/>
+	  <itemDef name="MINXSSX123AccumTime" type="dn32l"/>
+      <itemDef name="MINXSSX123DetTemp" type="X123_Det_Temp"/>
+	  <itemDef name="LogSpares" type="dn8" num="2"/>
+      <itemDef name="LogMsgChars" type="char8" num="80"/>
+      <itemDef name="LogChecksum" type="dn16"/>
+    </field>
+  </frameDef>
+   
+  <msgDef name="DAXSSMsg" frame="DAXSS_Log" mainWindow="true">
+    <item name="LogMsgChars"/>
+  </msgDef>
+   
+  <frameDef name="MINXSS_Cmd_Echo" id="21">
+    <field>
+	  <itemCopy suffix="_Cmd_Echo" name="SyncWord"/>
+      <itemCopy suffix="_Cmd_Echo" name="MINXSSVersion"/>
+      <itemCopy suffix="_Cmd_Echo" name="MINXSSPktType"/>
+      <itemCopy suffix="_Cmd_Echo" name="MINXSSSecHdrFlag"/>
+      <itemCopy suffix="_Cmd_Echo" name="MINXSSApID"/>
+      <itemCopy suffix="_Cmd_Echo" name="MINXSSGroup"/>
+      <itemCopy suffix="_Cmd_Echo" name="MINXSSSeqCnt"/>
+      <itemCopy suffix="_Cmd_Echo" name="MINXSSLength"/>
+      <itemCopy suffix="_Cmd_Echo" name="MINXSSTimeGS"/>
+      <itemCopy suffix="_Cmd_Echo" name="MINXSSTimeMS"/>
+      <itemCopy suffix="_Cmd_Echo" name="MINXSSCDHState"/>
+      <itemCopy suffix="_Cmd_Echo" name="MINXSSCDHEclipse"/>
+      <itemCopy suffix="_Cmd_Echo" name="MINXSSCDHMode"/>
+	  <itemCopy suffix="_Cmd_Echo" name="MINXSSCmdLastOpcode"/>
+      <itemCopy suffix="_Cmd_Echo" name="MINXSSCmdLastStatus"/>
+      <itemCopy suffix="_Cmd_Echo" name="MINXSSCmdAcceptCnt"/>
+      <itemCopy suffix="_Cmd_Echo" name="MINXSSCmdRejectCnt"/>
+
+      <itemDef name="MINXSSCmdParams" type="dn8" num="10"/>
+      <itemDef name="EchoChecksum" type="dn16l"/>
+    </field>
+  </frameDef>
+ 
+  <frameDef name="MINXSS_Sci_All" id="0x0B2"> 
+     <field>
+	  <itemCopy suffix="_Sci_All" name="SyncWord"/>
+      <itemCopy suffix="_Sci_All" name="MINXSSVersion"/>
+      <itemCopy suffix="_Sci_All" name="MINXSSPktType"/>
+      <itemCopy suffix="_Sci_All" name="MINXSSSecHdrFlag"/>
+      <itemCopy suffix="_Sci_All" name="MINXSSApID"/>
+      <itemCopy suffix="_Sci_All" name="MINXSSGroup"/>
+      <itemCopy suffix="_Sci_All" name="MINXSSSeqCnt"/>
+      <itemCopy suffix="_Sci_All" name="MINXSSLength"/>
+      <itemCopy suffix="_Sci_All" name="MINXSSTimeGS"/>
+      <itemCopy suffix="_Sci_All" name="MINXSSTimeMS"/>
+      <itemCopy suffix="_Sci_All" name="MINXSSCDHState"/>
+      <itemCopy suffix="_Sci_All" name="MINXSSCDHEclipse"/>
+      <itemCopy suffix="_Sci_All" name="MINXSSCDHMode"/>
+	  <itemCopy suffix="_Sci_All" name="MINXSSCmdLastOpcode"/>
+  </field>
+  </frameDef>
+  
+   <frameDef name="MINXSS_Sci_EngData_first_in_group" id="1">
+    <field>
+	  <item name="SyncWord_Sci_All"/>
+	  <item name="MINXSSVersion_Sci_All"/>
+      <item name="MINXSSPktType_Sci_All"/>
+      <item name="MINXSSSecHdrFlag_Sci_All"/>
+      <item name="MINXSSApID_Sci_All"/>
+      <item name="MINXSSGroup_Sci_All"/>
+      <item name="MINXSSSeqCnt_Sci_All"/>
+      <item name="MINXSSLength_Sci_All"/>
+      <item name="MINXSSTimeGS_Sci_All"/>
+      <item name="MINXSSTimeMS_Sci_All"/>
+      <item name="MINXSSCDHState_Sci_All"/>
+      <item name="MINXSSCDHEclipse_Sci_All"/>
+      <item name="MINXSSCDHMode_Sci_All"/>
+	  <item name="MINXSSCmdLastOpcode_Sci_All"/>
+	  
+	  <itemCopy suffix="_Sci_All" name="MINXSSCmdLastStatus"/>
+      <itemCopy suffix="_Sci_All" name="MINXSSCmdAcceptCnt"/>
+      <itemCopy suffix="_Sci_All" name="MINXSSCmdRejectCnt"/>
+	  <itemCopy suffix="_Sci_All" name="MINXSSParamSetHdrByte1"/> <!-- TW: Each Byte has unique meaning. JPM 2019-03-27: Yes, there are two bytes for this but so is e.g. MINXSSCmdRejectCnt. Why is this broken into two separate lines?-->
+      <itemCopy suffix="_Sci_All" name="MINXSSParamSetHdrByte2"/>
+	  <!--  TW: Those are not used for DAXSS (handbook needs to be updated).
+	  <itemCopy suffix="_Sci_All" name="MINXSSLi1BaudRate19200Enabled"/> JPM 2019-03-27: Telemetry handbook suggests these should be here too
+	  <itemCopy suffix="_Sci_All" name="MINXSSEclipseUseCssEnabled"/>
+	  <itemCopy suffix="_Sci_All" name="MINXSSCommExtEnabled"/>  JPM 2019-03-27: Telemetry handbook has ???? listed for this one
+	  <itemCopy suffix="_Sci_All" name="MINXSSInstHeaterEnabled"/>
+	  -->
+	  <itemCopy suffix="_Sci_All" name="MINXSSBatHeaterEnabled"/>
+      <itemCopy suffix="_Sci_All" name="MINXSSSADeployEnabled"/>
+      <itemCopy suffix="_Sci_All" name="MINXSSAntDeployEnabled"/>
+      <itemCopy suffix="_Sci_All" name="MINXSSSdCardEnabled"/>
+      <itemCopy suffix="_Sci_All" name="MINXSSCommEnabled"/>
+      <itemCopy suffix="_Sci_All" name="MINXSSADCSEnabled"/>
+      <itemCopy suffix="_Sci_All" name="MINXSSX123Enabled"/>
+      <itemCopy suffix="_Sci_All" name="MINXSSSPSEnabled"/>
+      <itemCopy suffix="_Sci_All" name="MINXSSEnabledSpares"/> <!-- TW: It is correct (handbook needs updating). JPM 2019-03-27: According to handbook, this should be between instrument and battery heater enable. -->
+  <!-- JPM 2019-03-27: The definition does not end here in the telemetry handbook -->
+   
+  <!-- SCI Packet changed for FM-2, it was after X123_Flags3:
+      <itemDef name="X123_Read_Errors" type="dn8"/>
+      <itemDef name="X123_Radio_Active" type="dn8"/>
+      <itemDef name="X123_Write_Errors" type="dn8"/>
+      <itemDef name="X123_spare1_byte" type="dn8"/>
+  -->
+  	  <itemDef name="MINXSSFSWVersonMajorMinor" type="dn8"/>
+	  <itemDef name="MINXSSFM" type="dn4"/>
+      <itemDef name="MINXSSFSWPatchVersion" type="dn4"/>
+	  <itemDef name="MINXSSLockoutTimeoutCntr" type="dn16l"/>
+      <itemDef name="MINXSSInstHtrSetpoint" type="sn16l"/>
+	  <itemDef name="MINXSSTimeOffset" type="dn32l"/>
+      <itemDef name="MINXSSBatteryV1" type="CDH_Batt_V1"/>
+      <itemDef name="MINXSSBatteryV2" type="CDH_Batt_V2"/>
+      <itemDef name="MINXSS_5_V" type="CDH_V"/>
+      <itemDef name="MINXSS_3_V" type="CDH_V"/>
+	  <itemDef name="MINXSS_CDH_Temp" type="CDH_Temp"/>
+	  <itemDef name="MINXSSI2cErr" type="dn16l"/>
+      <itemDef name="MINXSSRtcErr" type="dn16l"/>
+      <itemDef name="MINXSSSpiSDErr" type="dn16l"/>
+      <itemDef name="MINXSSUart1Err" type="dn16l"/>
+      <itemDef name="MINXSSUart2Err" type="dn16l"/>
+      <itemDef name="MINXSSUart3Err" type="dn16l"/>
+      <itemDef name="MINXSSUart4Err" type="dn16l"/>
+	  <itemDef name="MINXSSMbTemp1" type="CDH_Temp"/>
+      <itemDef name="MINXSSMbTemp2" type="CDH_Temp"/>
+      <itemDef name="MINXSSEpsTemp1" type="CDH_Temp"/>
+      <itemDef name="MINXSSEpsTemp2" type="CDH_Temp"/>
+	  <itemDef name="MINXSSEpsBatteryAmp" type="EPS_SA_I5"/>
+      <itemDef name="MINXSSEpsBatteryVolt" type="EPS_SA_V"/>
+      <itemDef name="MINXSSEps3VAmp" type="EPS_SA_I"/>
+      <itemDef name="MINXSSEps3VVolt" type="EPS_SA_V"/>
+      <itemDef name="MINXSSEps5VAmp" type="EPS_SA_I"/>
+      <itemDef name="MINXSSEps5VVolt" type="EPS_SA_V"/>
+	  <itemDef name="MINXSSPicoSimTemp" type="sn8l"/>
+	  <itemDef name="MINXSSPicoSimTemp_dummy" type="sn8l"/><!--for sint16 def in FSW-->
+	  <itemDef name="MINXSSSPSBoardTemp" type="CDH_Temp"/>
+	  <itemDef name="MINXSSSciSpsSum" type="dn32l"/>
+      <itemDef name="MINXSSSciSpsXPos" type="SPS_Pos"/>
+      <itemDef name="MINXSSSciSpsYPos" type="SPS_Pos"/>
+	  <itemDef name="MINXSSSciSpares" type="dn8" num="4"/> <!-- was 16 for 16-bit PicoSim Data -->
+	  <itemDef name="MINXSSPicoSimIntegTime" type="dn16l"/>
+      <itemDef name="MINXSSPicoSimData1" type="dn24l"/>
+	  <itemDef name="MINXSSPicoSimCount1" type="dn8"/>
+      <itemDef name="MINXSSPicoSimData2" type="dn24l"/>
+	  <itemDef name="MINXSSPicoSimCount2" type="dn8"/>
+      <itemDef name="MINXSSPicoSimData3" type="dn24l"/>
+	  <itemDef name="MINXSSPicoSimCount3" type="dn8"/>
+      <itemDef name="MINXSSPicoSimData4" type="dn24l"/>
+	  <itemDef name="MINXSSPicoSimCount4" type="dn8"/>
+	  <itemDef name="MINXSSPicoSimData5" type="dn24l"/>
+	  <itemDef name="MINXSSPicoSimCount5" type="dn8"/>
+	  <itemDef name="MINXSSPicoSimData6" type="dn24l"/>
+	  <itemDef name="MINXSSPicoSimCount6" type="dn8"/>
+	  <itemDef name="MINXSSSpsData1" type="dn16l"/>
+	  <itemDef name="MINXSSSpsData2" type="dn16l"/>
+	  <itemDef name="MINXSSSpsData3" type="dn16l"/>
+	  <itemDef name="MINXSSSpsData4" type="dn16l"/>
+	  <itemDef name="MINXSSSpsIntegTime" type="dn16l"/>
+      <itemDef name="MINXSSX123FastCount" type="dn32l"/>
+      <itemDef name="MINXSSX123SlowCount" type="dn32l"/>
+      <itemDef name="X123_GP_Count" type="dn32l"/>
+      <itemDef name="X123_Accum_Time" type="dn32l"/>
+      <itemDef name="X123_Live_Time" type="dn32l"/>
+      <itemDef name="X123_Real_Time" type="dn32l"/>
+      <itemDef name="X123_HV" type="X123_High_V"/>
+      <itemDef name="X123_Det_Temp" type="X123_Det_Temp"/>
+      <itemDef name="X123_Brd_Temp" type="sn8"/>
+      <itemDef name="X123_Flags1" type="dn8"/>
+      <itemDef name="X123_Flags2" type="dn8"/>
+      <itemDef name="X123_Flags3" type="dn8"/>
+      <itemDef name="X123_Read_Errors" type="dn8"/>
+	  <itemDef name="X123_Radio_Active" type="dn8"/>
+      <itemDef name="X123_Write_Errors" type="dn8"/>
+	  <itemDef name="X123_Spare_Errors" type="dn8"/>
+      <itemDef name="X123_Cmp_Info" type="dn16l"/>
+      <itemDef name="X123_Spect_Len" type="dn16l"/>
+	  <itemDef name="X123_Group_Count" type="dn16l"/>
+	  <itemDef name="X123_First_Data" type="dn8" num="78"/>
+	  <itemDef name="MINXSSPayloadChksumA_Sci_All" type="dn8l"/>
+      <itemDef name="MINXSSPayloadChksumB_Sci_All" type="dn8l"/>
+    </field>
+  </frameDef>
+   
+    <frameDef name="MINXSS_Sci_EngData_No_group" id="3">
+    <field>
+	  <item name="SyncWord_Sci_All"/>
+	  <item name="MINXSSVersion_Sci_All"/>
+      <item name="MINXSSPktType_Sci_All"/>
+      <item name="MINXSSSecHdrFlag_Sci_All"/>
+      <item name="MINXSSApID_Sci_All"/>
+      <item name="MINXSSGroup_Sci_All"/>
+      <item name="MINXSSSeqCnt_Sci_All"/>
+      <item name="MINXSSLength_Sci_All"/>
+      <item name="MINXSSTimeGS_Sci_All"/>
+      <item name="MINXSSTimeMS_Sci_All"/>
+      <item name="MINXSSCDHState_Sci_All"/>
+      <item name="MINXSSCDHEclipse_Sci_All"/>
+      <item name="MINXSSCDHMode_Sci_All"/>
+	  <item name="MINXSSCmdLastOpcode_Sci_All"/>
+	  
+	  <item name="MINXSSCmdLastStatus_Sci_All"/>
+      <item name="MINXSSCmdAcceptCnt_Sci_All"/>
+      <item name="MINXSSCmdRejectCnt_Sci_All"/>
+	  <item name="MINXSSParamSetHdrByte1_Sci_All"/> 
+      <item name="MINXSSParamSetHdrByte2_Sci_All"/>
+	  <item name="MINXSSBatHeaterEnabled_Sci_All"/>
+      <item name="MINXSSSADeployEnabled_Sci_All"/>
+      <item name="MINXSSAntDeployEnabled_Sci_All"/>
+      <item name="MINXSSSdCardEnabled_Sci_All"/>
+      <item name="MINXSSCommEnabled_Sci_All"/>
+      <item name="MINXSSADCSEnabled_Sci_All"/>
+      <item name="MINXSSX123Enabled_Sci_All"/>
+      <item name="MINXSSSPSEnabled_Sci_All"/>
+      <item name="MINXSSEnabledSpares_Sci_All"/> 
+
+ 	  <item name="MINXSSFSWVersonMajorMinor"/>
+	  <item name="MINXSSFM"/>
+      <item name="MINXSSFSWPatchVersion"/>
+	  <item name="MINXSSLockoutTimeoutCntr"/>
+      <item name="MINXSSInstHtrSetpoint"/>
+	  <item name="MINXSSTimeOffset"/>
+      <item name="MINXSSBatteryV1"/>
+      <item name="MINXSSBatteryV2"/>
+      <item name="MINXSS_5_V"/>
+      <item name="MINXSS_3_V"/>
+	  <item name="MINXSS_CDH_Temp"/>
+	  <item name="MINXSSI2cErr"/>
+      <item name="MINXSSRtcErr"/>
+      <item name="MINXSSSpiSDErr"/>
+      <item name="MINXSSUart1Err"/>
+      <item name="MINXSSUart2Err"/>
+      <item name="MINXSSUart3Err"/>
+      <item name="MINXSSUart4Err"/>
+	  <item name="MINXSSMbTemp1"/>
+      <item name="MINXSSMbTemp2"/>
+      <item name="MINXSSEpsTemp1"/>
+      <item name="MINXSSEpsTemp2"/>
+	  <item name="MINXSSEpsBatteryAmp"/>
+      <item name="MINXSSEpsBatteryVolt"/>
+      <item name="MINXSSEps3VAmp"/>
+      <item name="MINXSSEps3VVolt"/>
+      <item name="MINXSSEps5VAmp"/>
+      <item name="MINXSSEps5VVolt"/>
+	  <item name="MINXSSPicoSimTemp"/>
+	  <item name="MINXSSPicoSimTemp_dummy"/><!--for sint16 def in FSW-->
+	  <item name="MINXSSSPSBoardTemp"/>
+	  <item name="MINXSSSciSpsSum"/>
+      <item name="MINXSSSciSpsXPos"/>
+      <item name="MINXSSSciSpsYPos"/>
+	  <item name="MINXSSSciSpares"/>
+	  <item name="MINXSSPicoSimIntegTime"/>
+      <item name="MINXSSPicoSimData1"/>
+	  <item name="MINXSSPicoSimCount1"/>
+      <item name="MINXSSPicoSimData2"/>
+	  <item name="MINXSSPicoSimCount2"/>
+      <item name="MINXSSPicoSimData3"/>
+	  <item name="MINXSSPicoSimCount3"/>
+      <item name="MINXSSPicoSimData4"/>
+	  <item name="MINXSSPicoSimCount4"/>
+	  <item name="MINXSSPicoSimData5"/>
+	  <item name="MINXSSPicoSimCount5"/>
+	  <item name="MINXSSPicoSimData6"/>
+	  <item name="MINXSSPicoSimCount6"/>
+	  <item name="MINXSSSpsData1"/>
+	  <item name="MINXSSSpsData2"/>
+	  <item name="MINXSSSpsData3"/>
+	  <item name="MINXSSSpsData4"/>
+	  <item name="MINXSSSpsIntegTime"/>
+      <item name="MINXSSX123FastCount"/>
+      <item name="MINXSSX123SlowCount"/>
+      <item name="X123_GP_Count"/>
+      <item name="X123_Accum_Time"/>
+      <item name="X123_Live_Time"/>
+      <item name="X123_Real_Time"/>
+      <item name="X123_HV"/>
+      <item name="X123_Det_Temp"/>
+      <item name="X123_Brd_Temp"/>
+      <item name="X123_Flags1"/>
+      <item name="X123_Flags2"/>
+      <item name="X123_Flags3"/>
+      <item name="X123_Read_Errors"/>
+	  <item name="X123_Radio_Active"/>
+      <item name="X123_Write_Errors"/>
+	  <item name="X123_Spare_Errors"/>
+      <item name="X123_Cmp_Info"/>
+      <item name="X123_Spect_Len"/>
+	  <item name="X123_Group_Count"/>
+	  <item name="X123_First_Data"/>
+	  <item name="MINXSSPayloadChksumA_Sci_All"/>
+      <item name="MINXSSPayloadChksumB_Sci_All"/>
+    </field>
+  </frameDef>
+  
+  <!-- Frame definition for the parameter dump set -->
+  <frameDef name="MINXSS_Param_Dump" id="0x0B1">
+    <field>
+	  <itemCopy suffix="_Param" name="SyncWord"/>
+      <itemCopy suffix="_Param" name="MINXSSVersion"/>
+      <itemCopy suffix="_Param" name="MINXSSPktType"/>
+      <itemCopy suffix="_Param" name="MINXSSSecHdrFlag"/>
+      <itemCopy suffix="_Param" name="MINXSSApID"/>
+      <itemCopy suffix="_Param" name="MINXSSGroup"/>
+      <itemCopy suffix="_Param" name="MINXSSSeqCnt"/>
+      <itemCopy suffix="_Param" name="MINXSSLength"/>
+      <itemCopy suffix="_Param" name="MINXSSTimeGS"/>
+      <itemCopy suffix="_Param" name="MINXSSTimeMS"/>.
+      <itemCopy suffix="_Param" name="MINXSSCDHState"/>
+      <itemCopy suffix="_Param" name="MINXSSCDHEclipse"/>
+      <itemCopy suffix="_Param" name="MINXSSCDHMode"/>
+	  <itemCopy suffix="_Param" name="MINXSSCmdLastOpcode"/>
+	  <itemCopy suffix="_Param" name="MINXSSCmdLastStatus"/>
+      <itemCopy suffix="_Param" name="MINXSSCmdAcceptCnt"/>
+      <itemCopy suffix="_Param" name="MINXSSCmdRejectCnt"/>
+	  <itemCopy suffix="_Param" name="MINXSSParamSetHdrByte1"/>
+      <itemCopy suffix="_Param" name="MINXSSParamSetHdrByte2"/>
+	  <itemCopy suffix="_Param" name="MINXSSBatHeaterEnabled"/>
+      <itemCopy suffix="_Param" name="MINXSSSADeployEnabled"/>
+      <itemCopy suffix="_Param" name="MINXSSAntDeployEnabled"/>
+      <itemCopy suffix="_Param" name="MINXSSSdCardEnabled"/>
+      <itemCopy suffix="_Param" name="MINXSSCommEnabled"/>
+      <itemCopy suffix="_Param" name="MINXSSADCSEnabled"/>
+      <itemCopy suffix="_Param" name="MINXSSX123Enabled"/>
+      <itemCopy suffix="_Param" name="MINXSSSPSEnabled"/>
+      <itemCopy suffix="_Param" name="MINXSSEnabledSpares"/>
+	  <itemDef name="MINXSSParamDataSpares" type="dn32l"/>
+      <itemDef name="MINXSSTableHeaderTable" type="ParamTableValue"/>
+      <itemDef name="MINXSSTableHeaderStatus" type="ParamTableStatus"/>
+      <itemDef name="MINXSSRtcSyncPeriod" type="dn16l"/>
+      <itemDef name="MINXSSSocSafe2Phoenix" type="dn16l"/>
+      <itemDef name="MINXSSSocPhoenix2Safe" type="dn16l"/>
+      <itemDef name="MINXSSSocSci2Safe" type="dn16l"/>
+      <itemDef name="MINXSSSocTriggerPersistence" type="dn16l"/>
+      <itemDef name="MINXSSMaxPhoenix2Safe" type="dn16l"/>
+      <itemDef name="MINXSSSpsSumThreshold" type="dn16l"/>
+      <itemDef name="MINXSSLastCmdWdogTimeout" type="dn16l"/>
+      <itemDef name="MINXSSEclipsePwrPhoenix" type="dn16l"/>
+      <itemDef name="MINXSSEclipsePwrSafe" type="dn16l"/>
+      <itemDef name="MINXSSEclipsePwrSci" type="dn16l"/>
+      <itemDef name="MINXSSEclipseOutVolt" type="dn16l"/>
+      <itemDef name="MINXSSEclipseOutAmp" type="dn16l"/>
+      <itemDef name="MINXSSEclipseOutEnd" type="dn16l"/>
+      <itemDef name="MINXSSEclipseInVolt" type="dn16l"/>
+      <itemDef name="MINXSSEclipseInAmp" type="dn16l"/>
+      <itemDef name="MINXSSEclipseInStart" type="dn16l"/>
+      <itemDef name="MINXSSBeaconRate" type="dn16l"/>
+      <itemDef name="MINXSSHKRate" type="dn16l"/>
+      <itemDef name="MINXSSAnalogDwellIndex" type="dn16l"/>
+      <itemDef name="MINXSSADCSRate" type="dn16l"/>
+      <itemDef name="MINXSSXimgRate" type="dn16l"/>
+      <itemDef name="MINXSSSpsRate" type="dn16l"/>
+      <itemDef name="MINXSSSciRate" type="dn16l"/>
+      <itemDef name="MINXSSAntDeployed" type="dn16l"/>
+      <itemDef name="MINXSSSaDeployed" type="dn16l"/>
+      <itemDef name="MINXSSBattHtrCtrlTemp" type="sn16l"/>
+      <itemDef name="MINXSSI2Ctimeout" type="dn16l"/>
+      <itemDef name="MINXSSTxOpTimeout" type="dn16l"/>
+      <itemDef name="MINXSSAntTimeout" type="dn16l"/>
+      <itemDef name="MINXSSSaTimeout" type="dn16l"/>
+      <itemDef name="MINXSSLEDTimeout" type="dn16l"/>
+      <itemDef name="MINXSSSpsAsicOffsets1" type="dn16l"/>
+      <itemDef name="MINXSSSpsAsicOffsets2" type="dn16l"/>
+      <itemDef name="MINXSSSpsAsicOffsets3" type="dn16l"/>
+      <itemDef name="MINXSSSpsAsicOffsets4" type="dn16l"/>
+      <itemDef name="MINXSSSpsAsicOffsets5" type="dn16l"/>
+      <itemDef name="MINXSSSpsAsicOffsets6" type="dn16l"/>
+      <itemDef name="MINXSSSpsOffsetX" type="sn16l"/>
+      <itemDef name="MINXSSSpsOffsetY" type="sn16l"/>
+      <itemDef name="MINXSSSdWriteCtrlAddrParam" type="dn16l"/>
+      <itemDef name="MINXSSSdEphemerisAddrParam" type="dn16l"/>
+      <itemDef name="MINXSSSdx123Comp" type="dn16l"/>
+      <itemDef name="MINXSSSocSafe2Science" type="dn16l"/>
+      <itemDef name="MINXSSCmdStoreTimeout" type="dn16l"/>
+      <itemDef name="MINXSSPicoSimGain" type="dn16l"/>
+	  <itemDef name="MINXSSPicoSimIntegration" type="dn16l"/>
+	  <itemDef name="MINXSSSpsAdcGain" type="dn16l"/>
+      <itemDef name="MINXSSParamSpare2" type="dn16l"/>
+      <itemDef name="MINXSSParamSpare3" type="dn32l"/>
+      <itemDef name="MINXSSParamSpare4" type="dn32l"/>
+      <itemDef name="MINXSSParamSpare5" type="dn32l"/>
+      <itemDef name="MINXSSParamSpare6" type="dn32l"/>
+      <itemDef name="MINXSSParamSpare7" type="dn32l"/>
+      <itemDef name="MINXSSParamSpare8" type="dn32l"/>
+      <itemDef name="MINXSSParamSpare9" type="dn16l"/>
+      <itemDef name="MINXSSParamTableChkbytes" type="dn16l"/>
+      <itemDef name="MINXSSParamCcsdsChksum" type="dn16l"/>
+      <itemDef name="MINXSSPayloadChksumA_Param" type="dn8l"/>
+      <itemDef name="MINXSSPayloadChksumB_Param" type="dn8l"/>
+    </field>
+  </frameDef>
+   
+<!--Limit Checks for CDH and Fuel Gauge --> 
+ 
+  <monitorRedYellow item="MINXSSBatteryV1" rl="6.3" yl="6.5" yh="8.3" rh="8.4" enabled="true"/>
+  <monitorRedYellow item="MINXSSBatteryV2" rl="0.05" yl="0.06" yh="1.1" rh="1.2" enabled="true"/>
+  <monitorRedYellow item="MINXSS_5_V" rl="4.7" yl="4.8" yh="5.2" rh="5.3" enabled="true"/>
+  <monitorRedYellow item="MINXSS_3_V" rl="3.15" yl="3.25" yh="3.65" rh="3.75" enabled="true"/>
+  <!-- SEE BELOW FOR Email Notification <monitorRedYellow item="MINXSSEpsFgBatteryV" rl="6.9" yl="7.1" yh="8.4" rh="8.5" enabled="true"/> -->
+ 
+<!--Limit Checks for EPS Monitors -->
+<!--
+  <monitorRedYellow item="MINXSSEpsBatteryAmp" rl="-5" yl="0" yh="1800" rh="2000" enabled="true"/>
+  <monitorRedYellow item="MINXSSEpsBatteryVolt" rl="6.3" yl="6.5" yh="8.3" rh="8.4" enabled="true"/>
+ -->
+  <monitorRedYellow item="MINXSSEps3VAmp" rl="70" yl="80" yh="110" rh="120" enabled="true"/>
+  <monitorRedYellow item="MINXSSEps3VVolt" rl="3.25" yl="3.35" yh="3.65" rh="3.75" enabled="true"/>
+  <monitorRedYellow item="MINXSSEps5VAmp" rl="-5" yl="0" yh="950" rh="1000" enabled="true"/>
+  <monitorRedYellow item="MINXSSEps5VVolt" rl="4.7" yl="4.8" yh="5.2" rh="5.3" enabled="true"/>
+    
+<!--Limit Checks for ASIC HK --> 
+<!--  
+  <monitorRedYellow item="MINXSSSpsXpsPwr3V" rl="3.2" yl="3.35" yh="3.65" rh="3.8" enabled="true"/>
+  <monitorRedYellow item="MINXSSSpsXsPwrD5V" rl="4.7" yl="4.85" yh="5.15" rh="5.3" enabled="true"/>
+  <monitorRedYellow item="MINXSSSpsXsPwrA5V" rl="4.7" yl="4.85" yh="5.15" rh="5.3" enabled="true"/>
+-->
+ 
+<!--Limit Checks for Temperatures -->
+  <monitorRedYellow item="MINXSS_CDH_Temp" rl="-40" yl="-30" yh="70" rh="85" enabled="true"/>
+ <!-- SEE BELOW for Email Notification <monitorRedYellow item="MINXSSCommTemp" rl="-20" yl="-10" yh="45" rh="55" enabled="true"/> -->
+  <monitorRedYellow item="MINXSSMbTemp1" rl="-40" yl="-30" yh="70" rh="85" enabled="true"/>
+  <monitorRedYellow item="MINXSSMbTemp2" rl="-40" yl="-30" yh="70" rh="85" enabled="true"/>
+  <monitorRedYellow item="MINXSSEpsTemp1" rl="-40" yl="-30" yh="70" rh="85" enabled="true"/>
+  <monitorRedYellow item="MINXSSEpsTemp2" rl="-40" yl="-30" yh="70" rh="85" enabled="true"/>
+  <monitorRedYellow item="MINXSSPicoSimTemp" rl="-40" yl="-30" yh="50" rh="65" enabled="true"/>
+  <monitorRedYellow item="MINXSSSPSBoardTemp" rl="-40" yl="-30" yh="50" rh="65" enabled="true"/>
+  <monitorRedYellow item="X123_Det_Temp" rl="210" yl="220" yh="245" rh="250" enabled="true"/>
+  <monitorRedYellow item="X123_Brd_Temp" rl="-40" yl="-20" yh="50" rh="85" enabled="true"/>
+  
+<!-- Checks the Mode -->
+  
+  <monitorRedYellow item="MINXSSCDHMode" rl="3" yl="3.5" yh="4.5" rh="5" enabled="true"/>
+  <monitorRedYellow item="MINXSSCDHState" rl="-1" yl="-0.5" yh="0.5" rh="1" enabled="true"/>
+   
+   
+ <!-- Checks the Switch Enables -->
+   <monitorRedYellow item="MINXSSX123Enabled" rl="0.5" yl="0.6" yh="1.5" rh="2" enabled="true"/>
+  <monitorRedYellow item="MINXSSSPSEnabled" rl="0.5" yl="0.6" yh="1.5" rh="2" enabled="true"/>
+    
+  <!-- Checks X123 counts. When normalized, we get overflow which is just truncated in FSW. So turn tlm red when that happens. -->
+  <monitorRedYellow item="MINXSSX123FastCount" rl="-2" yl="-1" yh="65534" rh="65535" enabled="true"/>
+  <monitorRedYellow item="MINXSSX123SlowCount" rl="-2" yl="-1" yh="65534" rh="65535" enabled="true"/>
+   
+  
+  <!-- Delta (change) limit checks -->
+  <!--  These 4 lines cause error message in Hydra V1.11 but not in V1.9
+  <monitorDelta item="MINXSSSeqCnt_Param" delta="2" enabled="true"/>
+  <monitorDelta item="MINXSSSeqCnt_Sci_All" delta="3" enabled="true"/>
+  <monitorDelta item="MINXSSSeqCnt_Cmd_Echo" delta="2" enabled="true"/>
+  <monitorDelta item="MINXSSSeqCnt_Log" delta="2" enabled="true"/>
+   -->
+   
+  <itemDef name="currentReader" type="commInterface" value="0"/>
+  <itemDef name="currentCommand" type="commInterface" value="1"/> <!-- Change default when ax25 is default commanding -->   
+   
+   <!--  Notifications - battery voltage less than 6.9V sends email messages -->
+   <!-- commented out for FM-2 testing so as not to confused with FM-2 operations: JPM: 2016/08/16
+   <notifyEmail name="EmailNotifyWoods" addr="tom.woods@lasp.colorado.edu"/>
+   <notifyEmail name="EmailNotifyKohnert" addr="rick.kohnert@lasp.colorado.edu"/>
+   <notifyEmail name="EmailNotifyMason" addr="james.mason@lasp.colorado.edu"/>
+   <notifyEmail name="EmailNotifyMoore" addr="Christopher.Moore-1@colorado.edu"/>
+   <notifyEmail name="EmailNotifyRouleau" addr="coro6555@colorado.edu"/>
+    -->
+     
+    <!--  operator="<"  has to be opeator="&lt;"  -->
+    <!-- <monitorValue name="emailBatteryLow" item="MINXSSEpsFgBatteryV" operator="&lt;" value="6.9" msg="red" color="red" enabled="true">  -->
+<!--  FOR INITIAL DEVELOPMENT, COMMENT OUT ALL NOTIFY OPTIONS
+     <monitorRedYellow item="MINXSSEpsFgBatteryV" rl="6.3" yl="6.5" rh="8.4" enabled="true">
+        <notify name="EmailNotifyMason"/> 
+        <notify name="EmailNotifyWoods"/> 
+        <notify name="EmailNotifyKohnert"/> 
+        <notify name="EmailNotifyMoore"/> 
+        <notify name="EmailNotifyRouleau"/> 
+    </monitorRedYellow>
+    
+    <monitorRedYellow item="MINXSSCommTemp" rl="-25" yl="-20" yh="60" rh="65" enabled="true">
+        <notify name="EmailNotifyMason"/> 
+        <notify name="EmailNotifyWoods"/> 
+        <notify name="EmailNotifyKohnert"/> 
+        <notify name="EmailNotifyMoore"/> 
+        <notify name="EmailNotifyRouleau"/> 
+    </monitorRedYellow>
+ -->
+ 
+    
+</hydraDef>

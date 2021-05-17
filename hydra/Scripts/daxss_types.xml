@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hydraDef>
+ <include>Config/daxss_eu.xml</include>
+ <include>Config/daxss_states.xml</include>
+ 
+  <typeState name="ModeStatus" size="3" dict="ModeStatus"/>
+  <typeState name="CDHState" size="4" dict="CDHState"/>
+  <typeState name="CDHEnablesNibble1" size="4" dict="CDHEnablesNibble1"/>
+  <typeState name="CDHEnablesNibble2" size="4" dict="CDHEnablesNibble2"/>
+  <typeState name="CDHEnablesNibble3" size="8" dict="CDHEnablesNibble3"/>
+  <typeState name="ADCSSunPointStatus" size="3" dict="ADCSSunPointStatus"/>
+  <typeState name="ADCSMode" size="1" dict="ADCSMode"/>
+  <typeState name="ADCSMode8" size="8" dict="ADCSMode"/>
+  <typeState name="eclipseStatus" size="1" dict="eclipseStatus"/>
+  <typeState name="ParamTableStatus" size="8" dict="ParamTableStatus"/>
+  <typeState name="ParamTableValue" size="8" dict="ParamTableValue"/>
+  <typeState name="yesNo1" size="1" dict="yesNo"/>
+  <typeState name="yesNo8" size="8" dict="yesNo"/>
+  <typeState name="MinXSSRouting" size="8" dict="MinXSSRouting"/>
+  <typeState name="routingCmd" size="8" dict="routingCmd"/>
+  <!-- CmdStatus changed to 16-bits for DAXSS; was 8-bits; Also make it Little Endian -->
+  <typeState name="CmdStatus" size="16" endian="LITTLE" dict="CmdStatus"/>
+  <typeState name="ADCSCmdStatus" size="8" dict="ADCSCmdStatus"/>
+  <typeState name="enableDisable8" size="8" endian="BIG" dict="enableDisable"/>
+  <typeState name="enableDisable1" size="1" dict="enableDisable"/>
+  <typeState name="trueFalse8" size="8" endian="BIG" dict="trueFalse"/>
+  <typeState name="trueFalse1" size="1" dict="trueFalse"/>
+  <typeState name="falseTrue1" size="1" dict="falseTrue"/>
+  <typeState name="detFilter8" size="8" dict="attDetFilter"/>
+  <typeState name="frameAxis8" size="8" dict="frameAxis"/>
+  <typeState name="refDir8" size="8" dict="refDir"/>
+  <typeState name="cmdDir8" size="8" dict="cmdDir"/>
+  <typeState name="rstGrp8" size="8" dict="rstGrp"/>
+  <typeState name="attInterp8" size="8" dict="attInterp"/>
+  <typeState name="rateInterp8" size="8" dict="rateInterp"/>
+  <typeState name="ctrlCode8" size="8" dict="ctrlCode"/>
+  <typeState name="wheelMode8" size="8" dict="wheelMode"/>
+  <typeState name="baudOptions" size="1" dict="baudOptions"/>
+  <typeState name="testModeStatus8" size="8" dict="testModeStatus"/>
+  <typeState name="setAmpOffsetMethod8" size="8" dict="setAmpOffsetMethod"/>
+  <typeDouble name="double64" size="64"/>
+  <typeFloat name="float32" size="32"/>
+  <typeState name="ADCSCommandStatus" size="8" dict="ADCSCommandStatus"/>
+  <typeState name="attitudeFilterAlgo" size="8" dict="attitudeFilterAlgo"/>
+  <typeState name="wheelOperatingMode" size="8" dict="wheelOperatingMode"/>
+  <typeState name="wheelCtrlMode" size="8" dict="wheelCtrlMode"/>
+  <typeState name="fault" size="8" dict="fault"/>
+  <typeState name="posNeg" size="8" dict="posNeg"/>
+  <typeState name="trackerOperMode" size="8" dict="trackerOperMode"/>
+  <typeState name="okBad" size="8" dict="okBad"/>
+  <typeState name="starIDStepStatus" size="8" dict="starIDStepStatus"/>
+  <typeState name="trackerAttStatus" size="8" dict="trackerAttStatus"/>
+  <typeState name="sunPointState" size="8" dict="sunPointState"/>
+  <typeState name="magFieldSource" size="8" dict="magFieldSource"/>
+  <typeState name="dsEn" size="8" dict="dsEn"/>
+  <typeState name="sunBodyVectorStatus" size="8" dict="sunBodyVectorStatus"/>
+  <typeState name="XACTTableUploadStatus" size="8" dict="XACTTableUploadStatus"/>
+
+  <typeState name="commInterface" size="8" dict="CommInterface"/>
+
+  <typeState name="orbitMethod8" size="8" dict="orbitMethod"/>
+  <typeState name="sunAxis8" size="8" dict="sunAxis"/>
+  <typeState name="trackerOpsResponse8" size="8" dict="trackerOpsResponse" />
+
+  <typeEU name="CDH_V" size="16" endian="LITTLE" eu="CDH_V"/>
+  <typeEU name="CDH_Batt_V1" size="16" endian="LITTLE" eu="CDH_Batt_V1"/>
+  <typeEU name="CDH_Batt_V2" size="16" endian="LITTLE" eu="CDH_Batt_V2"/>
+  <typeSN name="CDH_Temp" size="16" endian="LITTLE" eu="CDH_Temp"/>
+  <typeEU name="EPS_FG_V" size="16" endian="LITTLE" eu="EPS_FG_V"/>
+  <typeEU name="EPS_SA_I" size="16" endian="LITTLE" eu="EPS_SA_I"/>
+  <typeEU name="EPS_SA_I5" size="16" endian="LITTLE" eu="EPS_SA_I5"/>
+  <typeEU name="EPS_SA_V" size="16" endian="LITTLE" eu="EPS_SA_V"/>
+  <typeEU name="EPS_Batt_V" size="16" endian="LITTLE" eu="EPS_Batt_V"/>
+  <typeEU name="EPS_Batt_Charge" size="16" endian="LITTLE" eu="EPS_Batt_Charge"/>
+  <typeEU name="EPS_Batt_Discharge" size="16" endian="LITTLE" eu="EPS_Batt_Discharge"/>
+  <typeEU name="EPS_Batt_Temp1" size="16" endian="LITTLE" eu="EPS_Batt_Temp1"/>
+  <typeEU name="SPS_Pwr_3V" size="16" endian="LITTLE" eu="SPS_Pwr_3V"/>
+  <typeEU name="SPS_Pwr_Temp" size="16" endian="LITTLE" eu="SPS_Pwr_Temp"/>
+  <typeEU name="SPS_Det_Temp" size="16" endian="LITTLE" eu="SPS_Det_Temp"/>
+  <typeEU name="SPS_Pwr_5V" size="16" endian="LITTLE" eu="SPS_Pwr_5V"/>
+  <typeEU name="SPS_DAC" size="16" endian="LITTLE" eu="SPS_DAC"/>
+  <typeSN name="SPS_Pos" size="16" endian="LITTLE"/>
+  <typeEU name="X123_Det_Temp" size="16" endian="LITTLE" eu="X123_Det_Temp"/>
+  <typeSN name="X123_High_V" size="16" endian="LITTLE" eu="X123_High_V"/>
+  <typeDN name="SA_Temp" size="16" endian="LITTLE" eu="SA_Temp"/>
+  
+  <typeEU name="XACT_TAI_Sec" size="32" endian="BIG" eu="XACT_TAI_Sec"/>
+  <typeEU name="XACT_Orbit_Time" size="32" endian="BIG" eu="XACT_Orbit_Time"/>
+  <typeSN name="XACT_Q_ECEF_wrt_ECI" size="32" endian="BIG" eu="XACT_Q_ECEF_wrt_ECI"/>
+  <typeSN name="XACT_Orbit_Position_ECI" size="32" endian="BIG" eu="XACT_Orbit_Position_ECI"/>
+  <typeSN name="XACT_Orbit_Position_ECEF" size="32" endian="BIG" eu="XACT_Orbit_Position_ECEF"/>
+  <typeSN name="XACT_Orbit_Velocity_ECI" size="32" endian="BIG" eu="XACT_Orbit_Velocity_ECI"/>
+  <typeSN name="XACT_Orbit_Velocity_ECEF" size="32" endian="BIG" eu="XACT_Orbit_Velocity_ECEF"/>
+  <typeSN name="XACT_Mag_Model_Vector_ECI" size="16" endian="BIG" eu="XACT_Mag_Model_Vector_ECI"/>
+  <typeSN name="XACT_Mag_Model_Vector_Body" size="16" endian="BIG" eu="XACT_Mag_Model_Vector_Body"/>
+  <typeSN name="XACT_Sun_Model_Vector_ECI" size="16" endian="BIG" eu="XACT_Sun_Model_Vector_ECI"/>
+  <typeSN name="XACT_Sun_Model_Vector_Body" size="16" endian="BIG" eu="XACT_Sun_Model_Vector_Body"/>
+  <typeSN name="XACT_Moon_Model_Vector_ECI" size="16" endian="BIG" eu="XACT_Moon_Model_Vector_ECI"/>
+  <typeSN name="XACT_Moon_Model_Vector_Body" size="16" endian="BIG" eu="XACT_Moon_Model_Vector_Body"/>
+  <typeSN name="XACT_Attitude_Quaternion" size="32" endian="BIG" eu="XACT_Attitude_Quaternion"/>
+  <typeSN name="XACT_Attitude_Filter_Residual" size="32" endian="BIG" eu="XACT_Attitude_Filter_Residual"/>
+  <typeSN name="XACT_Body_Frame_Rate" size="32" endian="BIG" eu="XACT_Body_Frame_Rate"/>
+  <typeSN name="XACT_Est_Gyro_Bias" size="16" endian="BIG" eu="XACT_Est_Gyro_Bias"/>
+  <typeSN name="XACT_Commanded_Att_Quat" size="32" endian="BIG" eu="XACT_Commanded_Att_Quat"/>
+  <typeSN name="XACT_Commanded_Rate" size="32" endian="BIG" eu="XACT_Commanded_Rate"/>
+  <typeSN name="XACT_Commanded_Accel" size="32" endian="BIG" eu="XACT_Commanded_Accel"/>
+  <typeSN name="XACT_Desired_Sun_Vect" size="16" endian="BIG" eu="XACT_Desired_Sun_Vect"/>
+  <typeSN name="XACT_Desired_Sun_Rot_Rate" size="16" endian="BIG" eu="XACT_Desired_Sun_Rot_Rate"/>
+  <typeSN name="XACT_Wheel_Est_Drag" size="16" endian="BIG" eu="XACT_Wheel_Est_Drag"/>
+  <typeSN name="XACT_Wheel_Angle_Residual" size="16" endian="BIG" eu="XACT_Wheel_Angle_Residual"/>
+  <typeSN name="XACT_Wheel_Meas_Speed" size="16" endian="BIG" eu="XACT_Wheel_Meas_Speed"/>
+  <typeSN name="XACT_Cmd_Wheel_Speed" size="16" endian="BIG" eu="XACT_Cmd_Wheel_Speed"/>
+  <typeSN name="XACT_Cmd_Wheel_Torque" size="16" endian="BIG" eu="XACT_Cmd_Wheel_Torque"/>
+  <typeSN name="XACT_Meas_Wheel_Current" size="16" endian="BIG" eu="XACT_Meas_Wheel_Current"/>
+
+  <typeSN name="XACT_Tracker_Attitude" size="32" endian="BIG" eu="XACT_Tracker_Attitude"/>
+  <typeSN name="XACT_Tracker_Rate" size="16" endian="BIG" eu="XACT_Tracker_Rate"/>
+  <typeEU name="XACT_Tracker_Right_Ascension" size="16" endian="BIG" eu="XACT_Tracker_Right_Ascension"/>
+  <typeEU name="XACT_Tracker_Declination" size="16" endian="BIG" eu="XACT_Tracker_Declination"/>
+  <typeEU name="XACT_Tracker_Roll" size="16" endian="BIG" eu="XACT_Tracker_Roll"/>
+  <typeSN name="XACT_Tracker_Detector_Temp" size="8" endian="BIG" eu="XACT_Tracker_Detector_Temp"/>
+  <typeSN name="XACT_Tracker_Covariance_Amplitude" size="16" endian="BIG" eu="XACT_Tracker_Covariance_Amplitude"/>
+  <typeSN name="XACT_Tracker_Covariance_Matrix" size="16" endian="BIG" eu="XACT_Tracker_Covariance_Matrix"/>
+  <typeEU name="XACT_Analog_Gain" size="8" endian="BIG" eu="XACT_Analog_Gain"/>
+  <typeEU name="XACT_Magnitude_Correction" size="8" endian="BIG" eu="XACT_Magnitude_Correction"/>
+  <typeSN name="XACT_Dectector_Temp_Cmd" size="8" endian="BIG" eu="XACT_Dectector_Temp_Cmd"/>
+  <typeEU name="XACT_Bright_Magnitude_Limit" size="8" endian="BIG" eu="XACT_Bright_Magnitude_Limit"/>
+  <typeEU name="XACT_Dim_Magnitude_Limit" size="8" endian="BIG" eu="XACT_Dim_Magnitude_Limit"/>
+  <typeEU name="XACT_TEC_Duty_Cycle" size="8" endian="BIG" eu="XACT_TEC_Duty_Cycle"/>
+  <typeEU name="XACT_Peak_Mean_Bkgd_and_Noise" size="8" endian="BIG" eu="XACT_Peak_Mean_Bkgd_and_Noise"/>
+  <typeEU name="XACT_Median_Mean_Bkgd_and_Noise" size="8" endian="BIG" eu="XACT_Median_Mean_Bkgd_and_Noise"/>
+  <typeSN name="XACT_Attitude_Error" size="32" endian="BIG" eu="XACT_Attitude_Error"/>
+  <typeSN name="XACT_Rate_Error" size="32" endian="BIG" eu="XACT_Rate_Error"/>
+  <typeSN name="XACT_Integral_Error" size="16" endian="BIG" eu="XACT_Integral_Error"/>
+  <typeEU name="XACT_Commanded_Rate_Lim" size="16" endian="BIG" eu="XACT_Commanded_Rate_Lim"/>
+  <typeEU name="XACT_Commanded_Accel_Lim" size="16" endian="BIG" eu="XACT_Commanded_Accel_Lim"/>
+  <typeSN name="XACT_Feedback_Ctrl_Torque" size="16" endian="BIG" eu="XACT_Feedback_Ctrl_Torque"/>
+  <typeSN name="XACT_Total_Torque_Cmd" size="16" endian="BIG" eu="XACT_Total_Torque_Cmd"/>
+  <typeEU name="XACT_Sun_Point_Error" size="16" endian="BIG" eu="XACT_Sun_Point_Error"/>
+  <typeSN name="XACT_System_Momentum" size="16" endian="BIG" eu="XACT_System_Momentum"/>
+  <typeSN name="XACT_Wheel_Momentum_Body" size="16" endian="BIG" eu="XACT_Wheel_Momentum_Body"/>
+  <typeSN name="XACT_Body_Only_Momentum_Body" size="16" endian="BIG" eu="XACT_Body_Only_Momentum_Body"/>
+
+  <typeSN name="XACT_Torque_Rod_Torque" size="16" endian="BIG" eu="XACT_Torque_Rod_Torque"/>
+  <typeSN name="XACT_Meas_Sun_Body_Vect" size="16" endian="BIG" eu="XACT_Meas_Sun_Body_Vect"/>
+  <typeSN name="XACT_Meas_Mag_Field_Body" size="16" endian="BIG" eu="XACT_Meas_Mag_Field_Body"/>
+  <typeSN name="XACT_Mag_Compensation_Temp" size="16" endian="BIG" eu="XACT_Mag_Compensation_Temp"/>
+  <typeSN name="XACT_IMU_Channel_Rate" size="16" endian="BIG" eu="XACT_IMU_Channel_Rate"/>
+  <typeSN name="XACT_IMU_Body_Rate" size="16" endian="BIG" eu="XACT_IMU_Body_Rate"/>
+  <typeSN name="XACT_Payload_Fine_Sun_Vec_Body" size="16" endian="BIG" eu="XACT_Payload_Fine_Sun_Vec_Body"/>
+  <typeEU name="XACT_Voltage_5p0" size="8" endian="BIG" eu="XACT_Voltage_5p0"/>
+  <typeEU name="XACT_Voltage_3p3" size="8" endian="BIG" eu="XACT_Voltage_3p3"/>
+  <typeEU name="XACT_Voltage_2p5" size="8" endian="BIG" eu="XACT_Voltage_2p5"/>
+  <typeEU name="XACT_Voltage_1p8" size="8" endian="BIG" eu="XACT_Voltage_1p8"/>
+  <typeEU name="XACT_Voltage_1p0" size="8" endian="BIG" eu="XACT_Voltage_1p0"/>
+  <typeSN name="XACT_Wheel_Temp" size="16" endian="BIG" eu="XACT_Wheel_Temp"/>
+  <typeEU name="XACT_12V_Bus_Voltage" size="16" endian="BIG" eu="XACT_12V_Bus_Voltage"/>
+  <typeSN name="XACT_Q_Tracker_wrt_Body" size="32" endian="BIG" eu="XACT_Q_Tracker_wrt_Body"/>
+
+
+  <typeEU name="XACT_Voltage_5p0_HK" size="8" endian="LITTLE" eu="XACT_Voltage_5p0"/>
+  <typeEU name="XACT_12V_Bus_Voltage_HK" size="8" endian="LITTLE" eu="XACT_12V_Bus_Voltage_HK"/>
+  <typeSN name="XACT_Tracker_Detector_Temp_HK" size="8" endian="LITTLE" eu="XACT_Tracker_Detector_Temp"/>
+  <typeSN name="XACT_Wheel_Temp_HK" size="8" endian="LITTLE" eu="XACT_Wheel_Temp_HK"/>
+  <typeSN name="XACT_Meas_Sun_Body_Vector_HK" size="8" endian="LITTLE" eu="XACT_Meas_Sun_Body_Vector_HK"/>
+  <typeSN name="XACT_Wheel_Est_Drag_HK" size="16" endian="LITTLE" eu="XACT_Wheel_Est_Drag"/>
+  <typeSN name="XACT_Wheel_Meas_Speed_HK" size="16" endian="LITTLE" eu="XACT_Wheel_Meas_Speed"/>
+  <typeSN name="XACT_Body_Frame_Rate_HK" size="16" endian="LITTLE" eu="XACT_Body_Frame_Rate_HK"/>
+
+  <typeEU name="XACT_Level0_Volt" size="12" endian="BIG" eu="XACT_Level0_Volt"/>
+  <typeEU name="XACT_Level0_Volt2" size="12" endian="BIG" eu="XACT_Level0_Volt2"/>
+  
+</hydraDef>

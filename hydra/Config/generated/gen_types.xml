@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<hydraDef>
+  <typeDN endian="LITTLE" name="uint8L" size="8"/>
+  <typeDN endian="BIG" name="uint8B" size="8"/>
+  <typeDN endian="LITTLE" name="uint16L" size="16"/>
+  <typeDN endian="BIG" name="uint16B" size="16"/>
+  <typeDN endian="LITTLE" name="uint32L" size="32"/>
+  <typeDN endian="BIG" name="uint32B" size="32"/>
+  <typeSN endian="LITTLE" name="int8L" size="8"/>
+  <typeSN endian="BIG" name="int8B" size="8"/>
+  <typeSN endian="LITTLE" name="int16L" size="16"/>
+  <typeSN endian="BIG" name="int16B" size="16"/>
+  <typeSN endian="LITTLE" name="int32L" size="32"/>
+  <typeSN endian="BIG" name="int32B" size="32"/>
+  <typeFloat endian="LITTLE" name="floatL" size="32"/>
+  <typeFloat endian="BIG" name="floatB" size="32"/>
+  <typeDouble endian="LITTLE" name="doubleL" size="64"/>
+  <typeDouble endian="BIG" name="doubleB" size="64"/>
+  <typeChar endian="LITTLE" name="charL" size="8"/>
+  <typeChar endian="BIG" name="charB" size="8"/>
+
+  <typeSN name="sn8" size="8" endian="BIG" />
+  <typeSN name="dn8l" size="8" endian="LITTLE" />
+  <typeSN name="sn16" size="16" endian="BIG" />
+  <typeSN name="sn32" size="32" endian="BIG" />
+  <typeSN name="sn8l" size="8" endian="LITTLE" />
+  <typeSN name="sn6l" size="6" endian="LITTLE" />
+  <typeSN name="sn16l" size="16" endian="LITTLE" />
+  <typeSN name="sn32l" size="32" endian="LITTLE" />
+  <typeSN name="sn64l" size="64" endian="LITTLE" />
+</hydraDef>
+

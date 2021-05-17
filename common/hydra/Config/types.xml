@@ -1,0 +1,108 @@
+<hydraDef>
+    
+    <!-- Types with default endianness -->
+    <typeDN name="dn1" size="1"/>
+    <typeDN name="dn2" size="2"/>
+    <typeDN name="dn3" size="3"/>
+    <typeDN name="dn4" size="4"/>
+    <typeDN name="dn5" size="5"/>
+    <typeDN name="dn6" size="6"/>
+    <typeDN name="dn7" size="7"/>
+    <typeDN name="dn8" size="8"/>
+    <typeDN name="dn9" size="9"/>
+    <typeDN name="dn10" size="10"/>
+    <typeDN name="dn11" size="11"/>
+    <typeDN name="dn12" size="12"/>
+    <typeDN name="dn13" size="13"/>
+    <typeDN name="dn14" size="14"/>
+    <typeDN name="dn15" size="15"/>
+    <typeDN name="dn16" size="16"/>
+    <typeDN name="dn17" size="17"/>
+    <typeDN name="dn18" size="18"/>
+    <typeDN name="dn19" size="19"/>
+    <typeDN name="dn20" size="20"/>
+    <typeDN name="dn21" size="21"/>
+    <typeDN name="dn22" size="22"/>
+    <typeDN name="dn23" size="23"/>
+    <typeDN name="dn24" size="24"/>
+    <typeDN name="dn25" size="25"/>
+    <typeDN name="dn26" size="26"/>
+    <typeDN name="dn27" size="27"/>
+    <typeDN name="dn28" size="28"/>
+    <typeDN name="dn29" size="29"/>
+    <typeDN name="dn30" size="30"/>
+    <typeDN name="dn31" size="31"/>
+    <typeDN name="dn32" size="32"/>
+    <typeDN name="dn64" size="64"/>
+
+    <typeChar name="char8"/>
+    <typeFloat name="float32"/>
+    <typeDouble name="double32"/>
+
+    <!-- Explicitly LITTLE endian types -->
+    <typeDN name="dn9l" size="9" endian="LITTLE"/>
+    <typeDN name="dn10l" size="10" endian="LITTLE"/>
+    <typeDN name="dn11l" size="11" endian="LITTLE"/>
+    <typeDN name="dn12l" size="12" endian="LITTLE"/>
+    <typeDN name="dn13l" size="13" endian="LITTLE"/>
+    <typeDN name="dn14l" size="14" endian="LITTLE"/>
+    <typeDN name="dn15l" size="15" endian="LITTLE"/>
+    <typeDN name="dn16l" size="16" endian="LITTLE"/>
+    <typeDN name="dn17l" size="17" endian="LITTLE"/>
+    <typeDN name="dn18l" size="18" endian="LITTLE"/>
+    <typeDN name="dn19l" size="19" endian="LITTLE"/>
+    <typeDN name="dn20l" size="20" endian="LITTLE"/>
+    <typeDN name="dn21l" size="21" endian="LITTLE"/>
+    <typeDN name="dn22l" size="22" endian="LITTLE"/>
+    <typeDN name="dn23l" size="23" endian="LITTLE"/>
+    <typeDN name="dn24l" size="24" endian="LITTLE"/>
+    <typeDN name="dn25l" size="25" endian="LITTLE"/>
+    <typeDN name="dn26l" size="26" endian="LITTLE"/>
+    <typeDN name="dn27l" size="27" endian="LITTLE"/>
+    <typeDN name="dn28l" size="28" endian="LITTLE"/>
+    <typeDN name="dn29l" size="29" endian="LITTLE"/>
+    <typeDN name="dn30l" size="30" endian="LITTLE"/>
+    <typeDN name="dn31l" size="31" endian="LITTLE"/>
+    <typeDN name="dn32l" size="32" endian="LITTLE"/>
+    <typeDN name="dn64l" size="64" endian="LITTLE"/>
+    <typeFloat name="float32l" endian="LITTLE"/>
+    <typeDouble name="double64l" endian="LITTLE"/>
+
+    <!-- Explicitly BIG endian types -->
+    <typeDN name="dn9b" size="9" endian="BIG"/>
+    <typeDN name="dn10b" size="10" endian="BIG"/>
+    <typeDN name="dn11b" size="11" endian="BIG"/>
+    <typeDN name="dn12b" size="12" endian="BIG"/>
+    <typeDN name="dn13b" size="13" endian="BIG"/>
+    <typeDN name="dn14b" size="14" endian="BIG"/>
+    <typeDN name="dn15b" size="15" endian="BIG"/>
+    <typeDN name="dn16b" size="16" endian="BIG"/>
+    <typeDN name="dn17b" size="17" endian="BIG"/>
+    <typeDN name="dn18b" size="18" endian="BIG"/>
+    <typeDN name="dn19b" size="19" endian="BIG"/>
+    <typeDN name="dn20b" size="20" endian="BIG"/>
+    <typeDN name="dn21b" size="21" endian="BIG"/>
+    <typeDN name="dn22b" size="22" endian="BIG"/>
+    <typeDN name="dn23b" size="23" endian="BIG"/>
+    <typeDN name="dn24b" size="24" endian="BIG"/>
+    <typeDN name="dn25b" size="25" endian="BIG"/>
+    <typeDN name="dn26b" size="26" endian="BIG"/>
+    <typeDN name="dn27b" size="27" endian="BIG"/>
+    <typeDN name="dn28b" size="28" endian="BIG"/>
+    <typeDN name="dn29b" size="29" endian="BIG"/>
+    <typeDN name="dn30b" size="30" endian="BIG"/>
+    <typeDN name="dn31b" size="31" endian="BIG"/>
+    <typeDN name="dn32b" size="32" endian="BIG"/>
+    <typeDN name="dn64b" size="64" endian="BIG"/>
+    
+    <typeFloat name="float32b" endian="BIG"/>
+    <typeDouble name="double64b" endian="BIG"/>
+
+    <!-- Padding items, values unused -->
+    <itemDef name="pad8" type="dn8"/>
+    <itemDef name="pad16" type="dn16"/>
+    <itemDef name="pad24" type="dn24"/>
+    <itemDef name="pad32" type="dn32"/>
+
+</hydraDef>
+

@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<pageDef>
+  <page title="adcs_gps">
+    <column>
+      <frame name="adcs_gps"/>
+    </column>
+  </page>
+</pageDef>
+

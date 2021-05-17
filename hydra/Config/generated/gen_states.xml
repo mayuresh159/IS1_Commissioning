@@ -1,0 +1,2417 @@
+<?xml version="1.0" ?>
+<hydraDef>
+  <dictionary name="evtLogTypes">
+    <!--From file include/config/log_config.h-->
+    <pair key="#ID_EVT_LOG" str="EVT"/>
+    <pair key="#ID_PM_LOG" str="PM"/>
+    <pair key="#NUM_EVT_LOGS" str="MAX_LOGS"/>
+  </dictionary>
+  <typeState dict="evtLogTypes" endian="LITTLE" name="evtLogTypes8L" size="8"/>
+  <typeState dict="evtLogTypes" endian="LITTLE" name="evtLogTypes16L" size="16"/>
+  <typeState dict="evtLogTypes" endian="LITTLE" name="evtLogTypes32L" size="32"/>
+  <typeState dict="evtLogTypes" endian="BIG" name="evtLogTypes8B" size="8"/>
+  <typeState dict="evtLogTypes" endian="BIG" name="evtLogTypes16B" size="16"/>
+  <typeState dict="evtLogTypes" endian="BIG" name="evtLogTypes32B" size="32"/>
+  <dictionary name="evtLogGroups">
+    <!--From file include/config/log_config.h-->
+    <pair key="#LOG_EVT_GROUP_CMD_NOM" str="CMD_NOM"/>
+    <pair key="#LOG_EVT_GROUP_CMD_ERR" str="CMD_ERR"/>
+    <pair key="#LOG_EVT_GROUP_TLM_ERR" str="TLM_ERR"/>
+    <pair key="#LOG_EVT_GROUP_TLM_NOM" str="TLM_NOM"/>
+    <pair key="#LOG_EVT_GROUP_SEQ_NOM" str="SEQ"/>
+    <pair key="#LOG_EVT_GROUP_MEM_ERR" str="MEM_ERR"/>
+    <pair key="#LOG_EVT_GROUP_DES_ERR" str="DES_ERR"/>
+    <pair key="#LOG_EVT_GROUP_FP_ERR" str="FP_ERR"/>
+    <pair key="#LOG_EVT_GROUP_FP_NOM" str="FP_NOM"/>
+    <pair key="#LOG_EVT_GROUP_UHF_NOM" str="UHF_NOM"/>
+    <pair key="#LOG_EVT_GROUP_UHF_ERR" str="UHF_ERR"/>
+    <pair key="#LOG_EVT_GROUP_ADCS_NOM" str="ADCS_NOM"/>
+    <pair key="#LOG_EVT_GROUP_ADCS_ERR" str="ADCS_ERR"/>
+    <pair key="#LOG_EVT_GROUP_SD_NOM" str="SD_NOM"/>
+    <pair key="#LOG_EVT_GROUP_SD_ERR" str="SD_ERR"/>
+    <pair key="#LOG_EVT_GROUP_DAXSS_NOM" str="DAXSS_NOM"/>
+    <pair key="#LOG_EVT_GROUP_DAXSS_ERR" str="DAXSS_ERR"/>
+    <pair key="#LOG_EVT_GROUP_CIP_NOM" str="CIP_NOM"/>
+    <pair key="#LOG_EVT_GROUP_CIP_ERR" str="CIP_ERR"/>
+    <pair key="#LOG_EVT_GROUP_SBAND_NOM" str="SBAND_NOM"/>
+    <pair key="#LOG_EVT_GROUP_SBAND_ERR" str="SBAND_ERR"/>
+    <pair key="#LOG_EVT_GROUP_EPS_NOM" str="EPS_NOM"/>
+    <pair key="#LOG_EVT_GROUP_EPS_ERR" str="EPS_ERR"/>
+    <pair key="#LOG_EVT_GROUP_MODE_NOM" str="MODE_NOM"/>
+    <pair key="#LOG_EVT_GROUP_MODE_ERR" str="MODE_ERR"/>
+    <pair key="#LOG_EVT_GROUP_INIT_NOM" str="INIT_NOM"/>
+    <pair key="#LOG_EVT_GROUP_INIT_ERR" str="INIT_ERR"/>
+    <pair key="#LOG_EVT_GROUP_FLASH_NOM" str="FLASH_NOM"/>
+    <pair key="#LOG_EVT_GROUP_FLASH_ERR" str="FLASH_ERR"/>
+    <pair key="#LOG_EVT_GROUP_TBL_NOM" str="TBL_NOM"/>
+    <pair key="#LOG_EVT_GROUP_TBL_ERR" str="TBL_ERR"/>
+  </dictionary>
+  <typeState dict="evtLogGroups" endian="LITTLE" name="evtLogGroups8L" size="8"/>
+  <typeState dict="evtLogGroups" endian="LITTLE" name="evtLogGroups16L" size="16"/>
+  <typeState dict="evtLogGroups" endian="LITTLE" name="evtLogGroups32L" size="32"/>
+  <typeState dict="evtLogGroups" endian="BIG" name="evtLogGroups8B" size="8"/>
+  <typeState dict="evtLogGroups" endian="BIG" name="evtLogGroups16B" size="16"/>
+  <typeState dict="evtLogGroups" endian="BIG" name="evtLogGroups32B" size="32"/>
+  <dictionary name="SDPartitions">
+    <!--From file include/config/uart_config.h-->
+    <pair key="#STORAGE_PARTITION_MISC" str="MISC"/>
+    <pair key="#STORAGE_PARTITION_SCIC" str="SCIC"/>
+    <pair key="#STORAGE_PARTITION_SCID" str="SCID"/>
+    <pair key="#STORAGE_PARTITION_ADCS" str="ADCS"/>
+    <pair key="#STORAGE_PARTITION_BEACON" str="BEACON"/>
+    <pair key="#STORAGE_PARTITION_LOG" str="LOG"/>
+  </dictionary>
+  <typeState dict="SDPartitions" endian="LITTLE" name="SDPartitions8L" size="8"/>
+  <typeState dict="SDPartitions" endian="LITTLE" name="SDPartitions16L" size="16"/>
+  <typeState dict="SDPartitions" endian="LITTLE" name="SDPartitions32L" size="32"/>
+  <typeState dict="SDPartitions" endian="BIG" name="SDPartitions8B" size="8"/>
+  <typeState dict="SDPartitions" endian="BIG" name="SDPartitions16B" size="16"/>
+  <typeState dict="SDPartitions" endian="BIG" name="SDPartitions32B" size="32"/>
+  <dictionary name="CmdSources">
+    <!--From file include/config/cmd_config.h-->
+    <pair key="#CMD_SOURCE_EXT" str="EXT"/>
+    <pair key="#CMD_SOURCE_UHF" str="UHF"/>
+    <pair key="#CMD_SOURCE_SEQ1" str="SEQ1"/>
+  </dictionary>
+  <typeState dict="CmdSources" endian="LITTLE" name="CmdSources8L" size="8"/>
+  <typeState dict="CmdSources" endian="LITTLE" name="CmdSources16L" size="16"/>
+  <typeState dict="CmdSources" endian="LITTLE" name="CmdSources32L" size="32"/>
+  <typeState dict="CmdSources" endian="BIG" name="CmdSources8B" size="8"/>
+  <typeState dict="CmdSources" endian="BIG" name="CmdSources16B" size="16"/>
+  <typeState dict="CmdSources" endian="BIG" name="CmdSources32B" size="32"/>
+  <dictionary name="PktStream">
+    <!--From file include/config/pkt_config.h-->
+    <pair key="#PKT_STREAM_DEBUG" str="DBG"/>
+    <pair key="#PKT_STREAM_UHF" str="UHF"/>
+    <pair key="#PKT_STREAM_SD" str="SD"/>
+    <pair key="#PKT_STREAM_SBAND" str="SBAND"/>
+  </dictionary>
+  <typeState dict="PktStream" endian="LITTLE" name="PktStream8L" size="8"/>
+  <typeState dict="PktStream" endian="LITTLE" name="PktStream16L" size="16"/>
+  <typeState dict="PktStream" endian="LITTLE" name="PktStream32L" size="32"/>
+  <typeState dict="PktStream" endian="BIG" name="PktStream8B" size="8"/>
+  <typeState dict="PktStream" endian="BIG" name="PktStream16B" size="16"/>
+  <typeState dict="PktStream" endian="BIG" name="PktStream32B" size="32"/>
+  <dictionary name="TableIDs">
+    <!--From file include/config/tbl_config.h-->
+    <pair key="#TBL_ID_MODE" str="MODE"/>
+    <pair key="#TBL_ID_SD" str="SDCARD"/>
+    <pair key="#TBL_ID_ADCS" str="ADCS"/>
+    <pair key="#TBL_ID_EPS" str="EPS"/>
+  </dictionary>
+  <typeState dict="TableIDs" endian="LITTLE" name="TableIDs8L" size="8"/>
+  <typeState dict="TableIDs" endian="LITTLE" name="TableIDs16L" size="16"/>
+  <typeState dict="TableIDs" endian="LITTLE" name="TableIDs32L" size="32"/>
+  <typeState dict="TableIDs" endian="BIG" name="TableIDs8B" size="8"/>
+  <typeState dict="TableIDs" endian="BIG" name="TableIDs16B" size="16"/>
+  <typeState dict="TableIDs" endian="BIG" name="TableIDs32B" size="32"/>
+  <dictionary name="memSection">
+    <!--From file include/config/mem_config.h-->
+    <pair key="#MEM_SECTION_SPI_FLASH" str="FLASH"/>
+  </dictionary>
+  <typeState dict="memSection" endian="LITTLE" name="memSection8L" size="8"/>
+  <typeState dict="memSection" endian="LITTLE" name="memSection16L" size="16"/>
+  <typeState dict="memSection" endian="LITTLE" name="memSection32L" size="32"/>
+  <typeState dict="memSection" endian="BIG" name="memSection8B" size="8"/>
+  <typeState dict="memSection" endian="BIG" name="memSection16B" size="16"/>
+  <typeState dict="memSection" endian="BIG" name="memSection32B" size="32"/>
+  <dictionary name="SD_CLOCK_SPEEDS">
+    <!--From file include/hal/sdcard.h-->
+    <pair key="0" str="SD_CARD_MINIMUM_SPEED=512"/>
+    <pair key="1" str="SD_CARD_DEFAULT_SPEED=256"/>
+    <pair key="2" str="SD_CARD_1MHZ=60"/>
+    <pair key="3" str="SD_CARD_2MHZ=30"/>
+    <pair key="4" str="SD_CARD_3MHZ=20"/>
+    <pair key="5" str="SD_CARD_5MHZ=12"/>
+    <pair key="6" str="SD_CARD_6MHZ=10"/>
+    <pair key="7" str="SD_CARD_7POINT5MHZ=8"/>
+  </dictionary>
+  <typeState dict="SD_CLOCK_SPEEDS" endian="LITTLE" name="SD_CLOCK_SPEEDS8L" size="8"/>
+  <typeState dict="SD_CLOCK_SPEEDS" endian="LITTLE" name="SD_CLOCK_SPEEDS16L" size="16"/>
+  <typeState dict="SD_CLOCK_SPEEDS" endian="LITTLE" name="SD_CLOCK_SPEEDS32L" size="32"/>
+  <typeState dict="SD_CLOCK_SPEEDS" endian="BIG" name="SD_CLOCK_SPEEDS8B" size="8"/>
+  <typeState dict="SD_CLOCK_SPEEDS" endian="BIG" name="SD_CLOCK_SPEEDS16B" size="16"/>
+  <typeState dict="SD_CLOCK_SPEEDS" endian="BIG" name="SD_CLOCK_SPEEDS32B" size="32"/>
+  <dictionary name="SD_CMD_CODES">
+    <!--From file include/hal/sdcard.h-->
+    <pair key="0" str="SD_CMD0"/>
+    <pair key="1" str="SD_CMD7"/>
+    <pair key="2" str="SD_CMD14"/>
+  </dictionary>
+  <typeState dict="SD_CMD_CODES" endian="LITTLE" name="SD_CMD_CODES8L" size="8"/>
+  <typeState dict="SD_CMD_CODES" endian="LITTLE" name="SD_CMD_CODES16L" size="16"/>
+  <typeState dict="SD_CMD_CODES" endian="LITTLE" name="SD_CMD_CODES32L" size="32"/>
+  <typeState dict="SD_CMD_CODES" endian="BIG" name="SD_CMD_CODES8B" size="8"/>
+  <typeState dict="SD_CMD_CODES" endian="BIG" name="SD_CMD_CODES16B" size="16"/>
+  <typeState dict="SD_CMD_CODES" endian="BIG" name="SD_CMD_CODES32B" size="32"/>
+  <dictionary name="SDCardState">
+    <!--From file include/hal/sdcard.h-->
+    <pair key="#SD_STATUS_OFF" str="OFF"/>
+    <pair key="#SD_STATUS_GOOD" str="GOOD"/>
+    <pair key="#SD_STATUS_FAILED" str="FAILED"/>
+  </dictionary>
+  <typeState dict="SDCardState" endian="LITTLE" name="SDCardState8L" size="8"/>
+  <typeState dict="SDCardState" endian="LITTLE" name="SDCardState16L" size="16"/>
+  <typeState dict="SDCardState" endian="LITTLE" name="SDCardState32L" size="32"/>
+  <typeState dict="SDCardState" endian="BIG" name="SDCardState8B" size="8"/>
+  <typeState dict="SDCardState" endian="BIG" name="SDCardState16B" size="16"/>
+  <typeState dict="SDCardState" endian="BIG" name="SDCardState32B" size="32"/>
+  <dictionary name="SDCardInitState">
+    <!--From file include/hal/sdcard.h-->
+    <pair key="#SD_INIT_STATE_IDLE" str="IDLE"/>
+    <pair key="#SD_INIT_STATE_PWR_CYCLE_OFF" str="PWR_OFF"/>
+    <pair key="#SD_INIT_STATE_PWR_CYCLE_ON" str="PWR_ON"/>
+    <pair key="#SD_INIT_STATE_CMD0" str="CMD0"/>
+    <pair key="#SD_INIT_STATE_CMD8" str="CMD8"/>
+    <pair key="#SD_INIT_STATE_ACMD41" str="ACMD41"/>
+    <pair key="#SD_INIT_STATE_CMD58" str="CMD58"/>
+    <pair key="#SD_INIT_STATE_FAILED" str="FAILED"/>
+  </dictionary>
+  <typeState dict="SDCardInitState" endian="LITTLE" name="SDCardInitState8L" size="8"/>
+  <typeState dict="SDCardInitState" endian="LITTLE" name="SDCardInitState16L" size="16"/>
+  <typeState dict="SDCardInitState" endian="LITTLE" name="SDCardInitState32L" size="32"/>
+  <typeState dict="SDCardInitState" endian="BIG" name="SDCardInitState8B" size="8"/>
+  <typeState dict="SDCardInitState" endian="BIG" name="SDCardInitState16B" size="16"/>
+  <typeState dict="SDCardInitState" endian="BIG" name="SDCardInitState32B" size="32"/>
+  <dictionary name="PwrComponent">
+    <!--From file include/hal/eps.h-->
+    <pair key="#PWR_SWITCH_DAXSS" str="DAXSS"/>
+    <pair key="#PWR_SWITCH_CIP" str="CIP"/>
+    <pair key="#PWR_SWITCH_ADCS" str="ADCS"/>
+    <pair key="#PWR_SWITCH_SBAND" str="SBAND"/>
+    <pair key="#PWR_SWITCH_HEATER" str="HEATER"/>
+    <pair key="#PWR_SWITCH_SD0" str="SDCARD0"/>
+    <pair key="#PWR_SWITCH_SD1" str="SDCARD1"/>
+  </dictionary>
+  <typeState dict="PwrComponent" endian="LITTLE" name="PwrComponent8L" size="8"/>
+  <typeState dict="PwrComponent" endian="LITTLE" name="PwrComponent16L" size="16"/>
+  <typeState dict="PwrComponent" endian="LITTLE" name="PwrComponent32L" size="32"/>
+  <typeState dict="PwrComponent" endian="BIG" name="PwrComponent8B" size="8"/>
+  <typeState dict="PwrComponent" endian="BIG" name="PwrComponent16B" size="16"/>
+  <typeState dict="PwrComponent" endian="BIG" name="PwrComponent32B" size="32"/>
+  <dictionary name="PwrComponentCmd">
+    <!--From file include/hal/eps.h-->
+    <pair key="#PWR_SWITCH_CMD_DAXSS" str="DAXSS"/>
+    <pair key="#PWR_SWITCH_CMD_CIP" str="CIP"/>
+    <pair key="#PWR_SWITCH_CMD_ADCS" str="ADCS"/>
+    <pair key="#PWR_SWITCH_CMD_SBAND" str="SBAND"/>
+    <pair key="#PWR_SWITCH_CMD_HEATER" str="HEATER"/>
+  </dictionary>
+  <typeState dict="PwrComponentCmd" endian="LITTLE" name="PwrComponentCmd8L" size="8"/>
+  <typeState dict="PwrComponentCmd" endian="LITTLE" name="PwrComponentCmd16L" size="16"/>
+  <typeState dict="PwrComponentCmd" endian="LITTLE" name="PwrComponentCmd32L" size="32"/>
+  <typeState dict="PwrComponentCmd" endian="BIG" name="PwrComponentCmd8B" size="8"/>
+  <typeState dict="PwrComponentCmd" endian="BIG" name="PwrComponentCmd16B" size="16"/>
+  <typeState dict="PwrComponentCmd" endian="BIG" name="PwrComponentCmd32B" size="32"/>
+  <dictionary name="PwrState">
+    <!--From file include/hal/eps.h-->
+    <pair key="#PWR_STATE_OFF" str="OFF"/>
+    <pair key="#PWR_STATE_ON" str="ON"/>
+  </dictionary>
+  <typeState dict="PwrState" endian="LITTLE" name="PwrState8L" size="8"/>
+  <typeState dict="PwrState" endian="LITTLE" name="PwrState16L" size="16"/>
+  <typeState dict="PwrState" endian="LITTLE" name="PwrState32L" size="32"/>
+  <typeState dict="PwrState" endian="BIG" name="PwrState8B" size="8"/>
+  <typeState dict="PwrState" endian="BIG" name="PwrState16B" size="16"/>
+  <typeState dict="PwrState" endian="BIG" name="PwrState32B" size="32"/>
+  <dictionary name="DeployComponent">
+    <!--From file include/hal/eps.h-->
+    <pair key="#DEPLOY_SP1" str="PANEL1"/>
+    <pair key="#DEPLOY_SP2" str="PANEL2"/>
+    <pair key="#DEPLOY_ANT" str="ANTENNA"/>
+  </dictionary>
+  <typeState dict="DeployComponent" endian="LITTLE" name="DeployComponent8L" size="8"/>
+  <typeState dict="DeployComponent" endian="LITTLE" name="DeployComponent16L" size="16"/>
+  <typeState dict="DeployComponent" endian="LITTLE" name="DeployComponent32L" size="32"/>
+  <typeState dict="DeployComponent" endian="BIG" name="DeployComponent8B" size="8"/>
+  <typeState dict="DeployComponent" endian="BIG" name="DeployComponent16B" size="16"/>
+  <typeState dict="DeployComponent" endian="BIG" name="DeployComponent32B" size="32"/>
+  <dictionary name="desTaskID">
+    <!--From file include/apps.h-->
+    <pair key="#TASK_ID_TLM" str="TLM"/>
+    <pair key="#TASK_ID_CMD" str="CMD"/>
+    <pair key="#TASK_ID_HK" str="HK"/>
+    <pair key="#TASK_ID_SEQ" str="SEQ"/>
+    <pair key="#TASK_ID_MEM" str="MEM"/>
+    <pair key="#TASK_ID_LOG" str="LOG"/>
+    <pair key="#TASK_ID_FP" str="FP"/>
+    <pair key="#TASK_ID_UHF_CMD" str="UHF_CMD"/>
+    <pair key="#TASK_ID_UHF_TLM" str="UHF_TLM"/>
+    <pair key="#TASK_ID_UHF_HK" str="UHF_HK"/>
+    <pair key="#TASK_ID_ADCS" str="ADCS"/>
+    <pair key="#TASK_ID_SD_HK" str="SD_HK"/>
+    <pair key="#TASK_ID_TLM_SD" str="SD_TLM"/>
+    <pair key="#TASK_ID_DAXSS" str="DAXSS"/>
+    <pair key="#TASK_ID_CIP" str="CIP"/>
+    <pair key="#TASK_ID_SBAND" str="SBAND"/>
+    <pair key="#TASK_ID_MODE" str="MODE"/>
+    <pair key="#TASK_ID_TABLE" str="TABLE"/>
+    <pair key="#TASK_ID_SBAND_TLM" str="SBAND_TLM"/>
+    <pair key="#NUM_TASK_IDS" str="MAX_TASKS"/>
+  </dictionary>
+  <typeState dict="desTaskID" endian="LITTLE" name="desTaskID8L" size="8"/>
+  <typeState dict="desTaskID" endian="LITTLE" name="desTaskID16L" size="16"/>
+  <typeState dict="desTaskID" endian="LITTLE" name="desTaskID32L" size="32"/>
+  <typeState dict="desTaskID" endian="BIG" name="desTaskID8B" size="8"/>
+  <typeState dict="desTaskID" endian="BIG" name="desTaskID16B" size="16"/>
+  <typeState dict="desTaskID" endian="BIG" name="desTaskID32B" size="32"/>
+  <dictionary name="desBackgroundID">
+    <!--From file include/apps.h-->
+    <pair key="#TASK_ID_BACK_UART" str="UART_BACK"/>
+    <pair key="#TASK_ID_BACK_SD" str="SD_BACK"/>
+    <pair key="#TASK_ID_BACK_SBAND" str="SBAND_BACK"/>
+  </dictionary>
+  <typeState dict="desBackgroundID" endian="LITTLE" name="desBackgroundID8L" size="8"/>
+  <typeState dict="desBackgroundID" endian="LITTLE" name="desBackgroundID16L" size="16"/>
+  <typeState dict="desBackgroundID" endian="LITTLE" name="desBackgroundID32L" size="32"/>
+  <typeState dict="desBackgroundID" endian="BIG" name="desBackgroundID8B" size="8"/>
+  <typeState dict="desBackgroundID" endian="BIG" name="desBackgroundID16B" size="16"/>
+  <typeState dict="desBackgroundID" endian="BIG" name="desBackgroundID32B" size="32"/>
+  <dictionary name="PktApids">
+    <!--From file include/apids.h-->
+    <pair key="#APID_TLM_SW_STAT_PKT" str="SW_STAT"/>
+    <pair key="#APID_TLM_ANA_HK_PKT" str="ANA_HK"/>
+    <pair key="#APID_TLM_SEQ_PKT" str="SEQ"/>
+    <pair key="#APID_TLM_MEM_PKT" str="MEM"/>
+    <pair key="#APID_TLM_FP_PKT" str="FP"/>
+    <pair key="#APID_TLM_TBL_PKT" str="TBL"/>
+    <pair key="#APID_TLM_LIB_PKT" str="LIB"/>
+    <pair key="#APID_TLM_DES_PKT" str="DES_HK"/>
+    <pair key="#APID_TLM_CMD_PKT" str="CMD_HK"/>
+    <pair key="#APID_TLM_SCHED_PKT" str="DES_SCHED"/>
+    <pair key="#APID_TLM_TASK_PKT" str="DES_TASK"/>
+    <pair key="#APID_TLM_LOG_PKT_EVT" str="LOG_EVT_HK"/>
+    <pair key="#APID_TLM_LOG_PKT_PM" str="LOG_PM_HK"/>
+    <pair key="#APID_TLM_TLM_PKT" str="TLM_HK"/>
+    <pair key="#APID_TLM_TIME_PKT" str="TIME_HK"/>
+    <pair key="#APID_TLM_DES_TIME_PKT" str="DES_TIME"/>
+    <pair key="#APID_TLM_EVT_PKT" str="EVT_LOG"/>
+    <pair key="#APID_TLM_PM_PKT" str="PM_LOG"/>
+    <pair key="#APID_TLM_UHF_HK_PKT" str="UHF_HK"/>
+    <pair key="#APID_TLM_UHF_PASS_PKT" str="UHF_PASS"/>
+    <pair key="#APID_TLM_SD_HK_PKT" str="SD_HK"/>
+    <pair key="#APID_TLM_ADCS_PKT" str="ADCS_HK"/>
+    <pair key="#APID_TLM_ADCS_MSG_PKT" str="ADCS_MSG"/>
+    <pair key="#APID_TLM_DAXSS_HK_PKT" str="DAXSS_HK"/>
+    <pair key="#APID_TLM_DAXSS_MSG_PKT" str="DAXSS_MSG"/>
+    <pair key="#APID_TLM_CIP_HK_PKT" str="CIP_HK"/>
+    <pair key="#APID_TLM_CIP_SCI1_PKT" str="CIP_SCI_1"/>
+    <pair key="#APID_TLM_CIP_SCI2_PKT" str="CIP_SCI_2"/>
+    <pair key="#APID_TLM_CIP_SOH_PKT" str="CIP_SOH"/>
+    <pair key="#APID_TLM_CIP_MSG_PKT" str="CIP_MSG"/>
+    <pair key="#APID_TLM_SBAND_PKT" str="SBAND_HK"/>
+    <pair key="#APID_TLM_MODE_PKT" str="MODE_HK"/>
+    <pair key="#APID_TLM_ADCS_L0_PKT" str="ADCS_L0"/>
+    <pair key="#DAXSS_APID_TLM_LOG" str="DAXSS_LOG"/>
+    <pair key="#DAXSS_APID_TLM_MEM" str="DAXSS_MEM"/>
+    <pair key="#DAXSS_APID_TLM_SCI" str="DAXSS_SCI"/>
+  </dictionary>
+  <typeState dict="PktApids" endian="LITTLE" name="PktApids8L" size="8"/>
+  <typeState dict="PktApids" endian="LITTLE" name="PktApids16L" size="16"/>
+  <typeState dict="PktApids" endian="LITTLE" name="PktApids32L" size="32"/>
+  <typeState dict="PktApids" endian="BIG" name="PktApids8B" size="8"/>
+  <typeState dict="PktApids" endian="BIG" name="PktApids16B" size="16"/>
+  <typeState dict="PktApids" endian="BIG" name="PktApids32B" size="32"/>
+  <dictionary name="CmdApids">
+    <!--From file include/apids.h-->
+    <pair key="#APID_CMD_COMMON" str="COMMON"/>
+    <pair key="#APID_CMD_USER" str="USER"/>
+    <pair key="#APID_CMD_TIME" str="TIME"/>
+    <pair key="#APID_CMD_ADCS" str="ADCS"/>
+    <pair key="#APID_CMD_DAXSS" str="DAXSS"/>
+    <pair key="#APID_CMD_CIP" str="CIP"/>
+    <pair key="#APID_CMD_SEQ" str="SEQ"/>
+  </dictionary>
+  <typeState dict="CmdApids" endian="LITTLE" name="CmdApids8L" size="8"/>
+  <typeState dict="CmdApids" endian="LITTLE" name="CmdApids16L" size="16"/>
+  <typeState dict="CmdApids" endian="LITTLE" name="CmdApids32L" size="32"/>
+  <typeState dict="CmdApids" endian="BIG" name="CmdApids8B" size="8"/>
+  <typeState dict="CmdApids" endian="BIG" name="CmdApids16B" size="16"/>
+  <typeState dict="CmdApids" endian="BIG" name="CmdApids32B" size="32"/>
+  <dictionary name="PerfMonState">
+    <!--From file ../../common/src/apps/src/des/perfMon.h-->
+    <pair key="#PERF_STATUS_OFF" str="OFF"/>
+    <pair key="#PERF_STATUS_ON" str="ON"/>
+    <pair key="#PERF_STATUS_MAX" str="MAX"/>
+  </dictionary>
+  <typeState dict="PerfMonState" endian="LITTLE" name="PerfMonState8L" size="8"/>
+  <typeState dict="PerfMonState" endian="LITTLE" name="PerfMonState16L" size="16"/>
+  <typeState dict="PerfMonState" endian="LITTLE" name="PerfMonState32L" size="32"/>
+  <typeState dict="PerfMonState" endian="BIG" name="PerfMonState8B" size="8"/>
+  <typeState dict="PerfMonState" endian="BIG" name="PerfMonState16B" size="16"/>
+  <typeState dict="PerfMonState" endian="BIG" name="PerfMonState32B" size="32"/>
+  <dictionary name="CmdOpcodesHydra">
+    <!--From file ../../common/src/apps/src/des/desCmds.h-->
+    <pair key="#CMD_OPCODE_SET_PERF_MON_STATE" str="CMD_OPCODE_SET_PERF_MON_STATE"/>
+    <pair key="#CMD_OPCODE_DES_RESET_STATS" str="CMD_OPCODE_DES_RESET_STATS"/>
+    <pair key="#CMD_OPCODE_DES_ADD_TASK" str="CMD_OPCODE_DES_ADD_TASK"/>
+    <pair key="#CMD_OPCODE_DES_SUB_TASK" str="CMD_OPCODE_DES_SUB_TASK"/>
+    <pair key="#CMD_OPCODE_DES_ADD_BACK" str="CMD_OPCODE_DES_ADD_BACK"/>
+    <pair key="#CMD_OPCODE_DES_SUB_BACK" str="CMD_OPCODE_DES_SUB_BACK"/>
+    <pair key="#CMD_OPCODE_DES_SET_TIME" str="CMD_OPCODE_DES_SET_TIME"/>
+  </dictionary>
+  <typeState dict="CmdOpcodesHydra" endian="LITTLE" name="CmdOpcodesHydra8L" size="8"/>
+  <typeState dict="CmdOpcodesHydra" endian="LITTLE" name="CmdOpcodesHydra16L" size="16"/>
+  <typeState dict="CmdOpcodesHydra" endian="LITTLE" name="CmdOpcodesHydra32L" size="32"/>
+  <typeState dict="CmdOpcodesHydra" endian="BIG" name="CmdOpcodesHydra8B" size="8"/>
+  <typeState dict="CmdOpcodesHydra" endian="BIG" name="CmdOpcodesHydra16B" size="16"/>
+  <typeState dict="CmdOpcodesHydra" endian="BIG" name="CmdOpcodesHydra32B" size="32"/>
+  <dictionary name="memOpTypes">
+    <!--From file ../../common/src/apps/src/mem/MemoryManager.h-->
+    <pair key="0" str="MEM_OP_TYPE_NONE"/>
+    <pair key="1" str="MEM_OP_TYPE_DUMP"/>
+    <pair key="2" str="MEM_OP_TYPE_LOAD"/>
+    <pair key="3" str="MEM_OP_TYPE_XSUM"/>
+    <pair key="4" str="MEM_OP_TYPE_COPY"/>
+    <pair key="5" str="MEM_OP_TYPE_ERASE"/>
+    <pair key="6" str="MEM_OP_TYPE_ERASE_WAIT"/>
+  </dictionary>
+  <typeState dict="memOpTypes" endian="LITTLE" name="memOpTypes8L" size="8"/>
+  <typeState dict="memOpTypes" endian="LITTLE" name="memOpTypes16L" size="16"/>
+  <typeState dict="memOpTypes" endian="LITTLE" name="memOpTypes32L" size="32"/>
+  <typeState dict="memOpTypes" endian="BIG" name="memOpTypes8B" size="8"/>
+  <typeState dict="memOpTypes" endian="BIG" name="memOpTypes16B" size="16"/>
+  <typeState dict="memOpTypes" endian="BIG" name="memOpTypes32B" size="32"/>
+  <dictionary name="memCaseStms">
+    <!--From file ../../common/src/apps/src/mem/MemoryManager.h-->
+    <pair key="0" str="MEM_CASE_EXECUTE"/>
+    <pair key="1" str="MEM_CASE_LOAD"/>
+    <pair key="2" str="MEM_CASE_XSUM"/>
+    <pair key="3" str="MEM_CASE_ERASE"/>
+    <pair key="4" str="MEM_CASE_ERASE_WAIT"/>
+    <pair key="5" str="MEM_CASE_DUMP"/>
+  </dictionary>
+  <typeState dict="memCaseStms" endian="LITTLE" name="memCaseStms8L" size="8"/>
+  <typeState dict="memCaseStms" endian="LITTLE" name="memCaseStms16L" size="16"/>
+  <typeState dict="memCaseStms" endian="LITTLE" name="memCaseStms32L" size="32"/>
+  <typeState dict="memCaseStms" endian="BIG" name="memCaseStms8B" size="8"/>
+  <typeState dict="memCaseStms" endian="BIG" name="memCaseStms16B" size="16"/>
+  <typeState dict="memCaseStms" endian="BIG" name="memCaseStms32B" size="32"/>
+  <dictionary name="memSectionNames">
+    <!--From file ../../common/src/apps/src/mem/MemoryManager.h-->
+    <pair key="0" str="MEM_SECTION_NONE"/>
+    <pair key="1" str="MEM_SECTION_PTR"/>
+    <pair key="2" str="MEM_SECTION_CUSTOM"/>
+  </dictionary>
+  <typeState dict="memSectionNames" endian="LITTLE" name="memSectionNames8L" size="8"/>
+  <typeState dict="memSectionNames" endian="LITTLE" name="memSectionNames16L" size="16"/>
+  <typeState dict="memSectionNames" endian="LITTLE" name="memSectionNames32L" size="32"/>
+  <typeState dict="memSectionNames" endian="BIG" name="memSectionNames8B" size="8"/>
+  <typeState dict="memSectionNames" endian="BIG" name="memSectionNames16B" size="16"/>
+  <typeState dict="memSectionNames" endian="BIG" name="memSectionNames32B" size="32"/>
+  <dictionary name="flashId_t">
+    <!--From file ../../common/src/apps/src/mem/FlashManager.h-->
+    <pair key="0" str="DATA_FLASH_0"/>
+    <pair key="1" str="DATA_FLASH_1"/>
+    <pair key="2" str="CONFIG_FLASH_0"/>
+    <pair key="3" str="CONFIG_FLASH_1"/>
+  </dictionary>
+  <typeState dict="flashId_t" endian="LITTLE" name="flashId_t8L" size="8"/>
+  <typeState dict="flashId_t" endian="LITTLE" name="flashId_t16L" size="16"/>
+  <typeState dict="flashId_t" endian="LITTLE" name="flashId_t32L" size="32"/>
+  <typeState dict="flashId_t" endian="BIG" name="flashId_t8B" size="8"/>
+  <typeState dict="flashId_t" endian="BIG" name="flashId_t16B" size="16"/>
+  <typeState dict="flashId_t" endian="BIG" name="flashId_t32B" size="32"/>
+  <dictionary name="CmdOpcodesHydra">
+    <!--From file ../../common/src/apps/src/mem/MemCmds.h-->
+    <pair key="#CMD_OPCODE_MEM_DUMP_SECTION" str="MEM_DUMP"/>
+    <pair key="#CMD_OPCODE_MEM_LOAD_SECTION" str="MEM_LOAD"/>
+    <pair key="#CMD_OPCODE_MEM_ERASE_SECTION" str="MEM_ERASE"/>
+    <pair key="#CMD_OPCODE_MEM_XSUM_SECTION" str="MEM_XSUM"/>
+    <pair key="#CMD_OPCODE_MEM_ABORT" str="MEM_ABORT"/>
+    <pair key="#CMD_OPCODE_MEM_RESET_FLASH" str="MEM_RESET"/>
+    <pair key="#CMD_OPCODE_MEM_LOAD_DWORD" str="MEM_LOAD_DWORD"/>
+    <pair key="#CMD_OPCODE_MEM_LOAD_WORD" str="MEM_LOAD_WORD"/>
+    <pair key="#CMD_OPCODE_MEM_LOAD_BYTE" str="MEM_LOAD_BYTE"/>
+  </dictionary>
+  <dictionary name="EnableDisable">
+    <!--From file ../../common/src/apps/src/util/util.h-->
+    <pair key="#CMD_PARAM_DISABLE" str="DIS"/>
+    <pair key="#CMD_PARAM_ENABLE" str="ENA"/>
+  </dictionary>
+  <typeState dict="EnableDisable" endian="LITTLE" name="EnableDisable8L" size="8"/>
+  <typeState dict="EnableDisable" endian="LITTLE" name="EnableDisable16L" size="16"/>
+  <typeState dict="EnableDisable" endian="LITTLE" name="EnableDisable32L" size="32"/>
+  <typeState dict="EnableDisable" endian="BIG" name="EnableDisable8B" size="8"/>
+  <typeState dict="EnableDisable" endian="BIG" name="EnableDisable16B" size="16"/>
+  <typeState dict="EnableDisable" endian="BIG" name="EnableDisable32B" size="32"/>
+  <dictionary name="FpWatchState">
+    <!--From file ../../common/src/apps/src/fp/FpTask.h-->
+    <pair key="#FP_WATCH_STATE_DISABLED" str="DISABLED"/>
+    <pair key="#FP_WATCH_STATE_PASSIVE" str="PASSIVE"/>
+    <pair key="#FP_WATCH_STATE_ENABLED" str="ENABLED"/>
+  </dictionary>
+  <typeState dict="FpWatchState" endian="LITTLE" name="FpWatchState8L" size="8"/>
+  <typeState dict="FpWatchState" endian="LITTLE" name="FpWatchState16L" size="16"/>
+  <typeState dict="FpWatchState" endian="LITTLE" name="FpWatchState32L" size="32"/>
+  <typeState dict="FpWatchState" endian="BIG" name="FpWatchState8B" size="8"/>
+  <typeState dict="FpWatchState" endian="BIG" name="FpWatchState16B" size="16"/>
+  <typeState dict="FpWatchState" endian="BIG" name="FpWatchState32B" size="32"/>
+  <dictionary name="FpWatchOperator">
+    <!--From file ../../common/src/apps/src/fp/FpTask.h-->
+    <pair key="#FP_OPERATOR_GT" str="GT"/>
+    <pair key="#FP_OPERATOR_GE" str="GE"/>
+    <pair key="#FP_OPERATOR_LT" str="LT"/>
+    <pair key="#FP_OPERATOR_LE" str="LE"/>
+    <pair key="#FP_OPERATOR_EQ" str="EQ"/>
+    <pair key="#FP_OPERATOR_NE" str="NE"/>
+  </dictionary>
+  <typeState dict="FpWatchOperator" endian="LITTLE" name="FpWatchOperator8L" size="8"/>
+  <typeState dict="FpWatchOperator" endian="LITTLE" name="FpWatchOperator16L" size="16"/>
+  <typeState dict="FpWatchOperator" endian="LITTLE" name="FpWatchOperator32L" size="32"/>
+  <typeState dict="FpWatchOperator" endian="BIG" name="FpWatchOperator8B" size="8"/>
+  <typeState dict="FpWatchOperator" endian="BIG" name="FpWatchOperator16B" size="16"/>
+  <typeState dict="FpWatchOperator" endian="BIG" name="FpWatchOperator32B" size="32"/>
+  <dictionary name="fpValidReason">
+    <!--From file ../../common/src/apps/src/fp/FpTask.h-->
+    <pair key="#FP_VALIDATE_SUCCESS" str="NONE"/>
+    <pair key="#FP_VALIDATE_OPERATOR" str="OPERATOR"/>
+    <pair key="#FP_VALIDATE_SIZE" str="SIZE"/>
+    <pair key="#FP_VALIDATE_MSGID" str="MSGID"/>
+    <pair key="#FP_VALIDATE_STATE" str="STATE"/>
+  </dictionary>
+  <typeState dict="fpValidReason" endian="LITTLE" name="fpValidReason8L" size="8"/>
+  <typeState dict="fpValidReason" endian="LITTLE" name="fpValidReason16L" size="16"/>
+  <typeState dict="fpValidReason" endian="LITTLE" name="fpValidReason32L" size="32"/>
+  <typeState dict="fpValidReason" endian="BIG" name="fpValidReason8B" size="8"/>
+  <typeState dict="fpValidReason" endian="BIG" name="fpValidReason16B" size="16"/>
+  <typeState dict="fpValidReason" endian="BIG" name="fpValidReason32B" size="32"/>
+  <dictionary name="fpWatchError">
+    <!--From file ../../common/src/apps/src/fp/FpTask.h-->
+    <pair key="#FP_ERROR_NONE" str="NONE"/>
+    <pair key="#FP_ERROR_BAD_SIZE" str="SIZE"/>
+    <pair key="#FP_ERROR_READ" str="READ"/>
+    <pair key="#FP_ERROR_OPERATOR" str="OPERATOR"/>
+    <pair key="#FP_ERROR_RESPONSE" str="RESPONSE"/>
+  </dictionary>
+  <typeState dict="fpWatchError" endian="LITTLE" name="fpWatchError8L" size="8"/>
+  <typeState dict="fpWatchError" endian="LITTLE" name="fpWatchError16L" size="16"/>
+  <typeState dict="fpWatchError" endian="LITTLE" name="fpWatchError32L" size="32"/>
+  <typeState dict="fpWatchError" endian="BIG" name="fpWatchError8B" size="8"/>
+  <typeState dict="fpWatchError" endian="BIG" name="fpWatchError16B" size="16"/>
+  <typeState dict="fpWatchError" endian="BIG" name="fpWatchError32B" size="32"/>
+  <dictionary name="CmdOpcodesHydra">
+    <!--From file ../../common/src/apps/src/fp/FpCmds.h-->
+    <pair key="#CMD_OPCODE_FP_RESET" str="CMD_OPCODE_FP_RESET"/>
+    <pair key="#CMD_OPCODE_FP_RESET_RESULTS" str="CMD_OPCODE_FP_RESET_RESULTS"/>
+    <pair key="#CMD_OPCODE_FP_VALIDATE" str="CMD_OPCODE_FP_VALIDATE"/>
+    <pair key="#CMD_OPCODE_FP_SET_TASK_STATE" str="CMD_OPCODE_FP_SET_TASK_STATE"/>
+    <pair key="#CMD_OPCODE_FP_SET_WATCH_STATE" str="CMD_OPCODE_FP_SET_WATCH_STATE"/>
+    <pair key="#CMD_OPCODE_FP_DUMP_WATCH" str="CMD_OPCODE_FP_DUMP_WATCH"/>
+    <pair key="#CMD_OPCODE_FP_DUMP_RESULTS" str="CMD_OPCODE_FP_DUMP_RESULTS"/>
+    <pair key="#CMD_OPCODE_FP_SET_WATCH_VALUES" str="CMD_OPCODE_FP_SET_WATCH_VALUES"/>
+    <pair key="#CMD_OPCODE_FP_SET_WATCH_THRESH" str="CMD_OPCODE_FP_SET_WATCH_THRESH"/>
+    <pair key="#CMD_OPCODE_FP_SET_WATCH_RESP" str="CMD_OPCODE_FP_SET_WATCH_RESP"/>
+  </dictionary>
+  <dictionary name="evtLogGroupState">
+    <!--From file ../../common/src/apps/src/log/EvtLog.h-->
+    <pair key="#LOG_GROUP_STATE_MASKED" str="MASKED"/>
+    <pair key="#LOG_GROUP_STATE_UNMASKED" str="UNMASKED"/>
+  </dictionary>
+  <typeState dict="evtLogGroupState" endian="LITTLE" name="evtLogGroupState8L" size="8"/>
+  <typeState dict="evtLogGroupState" endian="LITTLE" name="evtLogGroupState16L" size="16"/>
+  <typeState dict="evtLogGroupState" endian="LITTLE" name="evtLogGroupState32L" size="32"/>
+  <typeState dict="evtLogGroupState" endian="BIG" name="evtLogGroupState8B" size="8"/>
+  <typeState dict="evtLogGroupState" endian="BIG" name="evtLogGroupState16B" size="16"/>
+  <typeState dict="evtLogGroupState" endian="BIG" name="evtLogGroupState32B" size="32"/>
+  <dictionary name="evtLogState">
+    <!--From file ../../common/src/apps/src/log/EvtLog.h-->
+    <pair key="#LOG_STATE_DISABLED" str="DS"/>
+    <pair key="#LOG_STATE_ENABLED" str="EN"/>
+  </dictionary>
+  <typeState dict="evtLogState" endian="LITTLE" name="evtLogState8L" size="8"/>
+  <typeState dict="evtLogState" endian="LITTLE" name="evtLogState16L" size="16"/>
+  <typeState dict="evtLogState" endian="LITTLE" name="evtLogState32L" size="32"/>
+  <typeState dict="evtLogState" endian="BIG" name="evtLogState8B" size="8"/>
+  <typeState dict="evtLogState" endian="BIG" name="evtLogState16B" size="16"/>
+  <typeState dict="evtLogState" endian="BIG" name="evtLogState32B" size="32"/>
+  <dictionary name="CmdOpcodesHydra">
+    <!--From file ../../common/src/apps/src/log/logCmds.h-->
+    <pair key="#CMD_OPCODE_SET_EVT_GROUP" str="CMD_OPCODE_SET_EVT_GROUP"/>
+    <pair key="#CMD_OPCODE_SET_EVT_LOG" str="CMD_OPCODE_SET_EVT_LOG"/>
+    <pair key="#CMD_OPCODE_LOG_RESET_STATS" str="CMD_OPCODE_LOG_RESET_STATS"/>
+    <pair key="#CMD_OPCODE_LOG_SET_MASK_STATE" str="CMD_OPCODE_LOG_SET_MASK_STATE"/>
+    <pair key="#CMD_OPCODE_LOG_RESET_LOG" str="CMD_OPCODE_LOG_RESET_LOG"/>
+    <pair key="#CMD_OPCODE_LOG_ISSUE_LOG" str="CMD_OPCODE_LOG_ISSUE_LOG"/>
+  </dictionary>
+  <dictionary name="StreamPriority">
+    <!--From file ../../common/src/apps/src/pkt/Stream.h-->
+    <pair key="#STREAM_PRIORITY_HIGH" str="HIGH"/>
+    <pair key="#STREAM_PRIORITY_MEDIUM" str="MEDIUM"/>
+    <pair key="#STREAM_PRIORITY_LOW" str="LOW"/>
+  </dictionary>
+  <typeState dict="StreamPriority" endian="LITTLE" name="StreamPriority8L" size="8"/>
+  <typeState dict="StreamPriority" endian="LITTLE" name="StreamPriority16L" size="16"/>
+  <typeState dict="StreamPriority" endian="LITTLE" name="StreamPriority32L" size="32"/>
+  <typeState dict="StreamPriority" endian="BIG" name="StreamPriority8B" size="8"/>
+  <typeState dict="StreamPriority" endian="BIG" name="StreamPriority16B" size="16"/>
+  <typeState dict="StreamPriority" endian="BIG" name="StreamPriority32B" size="32"/>
+  <dictionary name="CmdOpcodesHydra">
+    <!--From file ../../common/src/apps/src/pkt/PktCmds.h-->
+    <pair key="#CMD_OPCODE_ISSUE_TLM_PKT" str="CMD_OPCODE_ISSUE_TLM_PKT"/>
+    <pair key="#CMD_OPCODE_SET_TLM_RATE" str="CMD_OPCODE_SET_TLM_RATE"/>
+    <pair key="#CMD_OPCODE_SET_STREAM_STATE" str="CMD_OPCODE_SET_STREAM_STATE"/>
+    <pair key="#CMD_OPCODE_PKT_SET_PRIORITY" str="CMD_OPCODE_PKT_SET_PRIORITY"/>
+  </dictionary>
+  <dictionary name="seqState">
+    <!--From file ../../common/src/apps/src/seq/SeqEngine.h-->
+    <pair key="#SEQ_ENGINE_STATE_IDLE" str="IDLE"/>
+    <pair key="#SEQ_ENGINE_STATE_ACTIVE" str="ACTIVE"/>
+    <pair key="#SEQ_ENGINE_STATE_SUSPEND" str="SUSPEND"/>
+    <pair key="#SEQ_ENGINE_STATE_PAUSE" str="PAUSE"/>
+    <pair key="#SEQ_ENGINE_STATE_STALE" str="STALE"/>
+  </dictionary>
+  <typeState dict="seqState" endian="LITTLE" name="seqState8L" size="8"/>
+  <typeState dict="seqState" endian="LITTLE" name="seqState16L" size="16"/>
+  <typeState dict="seqState" endian="LITTLE" name="seqState32L" size="32"/>
+  <typeState dict="seqState" endian="BIG" name="seqState8B" size="8"/>
+  <typeState dict="seqState" endian="BIG" name="seqState16B" size="16"/>
+  <typeState dict="seqState" endian="BIG" name="seqState32B" size="32"/>
+  <dictionary name="seqStopCode">
+    <!--From file ../../common/src/apps/src/seq/SeqEngine.h-->
+    <pair key="#SEQ_ENGINE_STOP_NOMINAL" str="NOMINAL"/>
+    <pair key="#SEQ_ENGINE_STOP_CMD" str="CMD"/>
+    <pair key="#SEQ_ENGINE_STOP_INIT" str="INIT"/>
+    <pair key="#SEQ_ENGINE_STOP_CMD_REJECT" str="REJECT"/>
+    <pair key="#SEQ_ENGINE_STOP_STALE" str="STALE"/>
+    <pair key="#SEQ_ENGINE_STOP_BAD_INT_OP" str="BAD_INT"/>
+    <pair key="#SEQ_ENGINE_STOP_INT_FAIL" str="INT_FAIL"/>
+  </dictionary>
+  <typeState dict="seqStopCode" endian="LITTLE" name="seqStopCode8L" size="8"/>
+  <typeState dict="seqStopCode" endian="LITTLE" name="seqStopCode16L" size="16"/>
+  <typeState dict="seqStopCode" endian="LITTLE" name="seqStopCode32L" size="32"/>
+  <typeState dict="seqStopCode" endian="BIG" name="seqStopCode8B" size="8"/>
+  <typeState dict="seqStopCode" endian="BIG" name="seqStopCode16B" size="16"/>
+  <typeState dict="seqStopCode" endian="BIG" name="seqStopCode32B" size="32"/>
+  <dictionary name="seqWaitType">
+    <!--From file ../../common/src/apps/src/seq/SeqEngine.h-->
+    <pair key="#SEQ_ENGINE_WAIT_NONE" str="NONE"/>
+    <pair key="#SEQ_ENGINE_WAIT_ABS" str="ABS"/>
+    <pair key="#SEQ_ENGINE_WAIT_REL" str="REL"/>
+  </dictionary>
+  <typeState dict="seqWaitType" endian="LITTLE" name="seqWaitType8L" size="8"/>
+  <typeState dict="seqWaitType" endian="LITTLE" name="seqWaitType16L" size="16"/>
+  <typeState dict="seqWaitType" endian="LITTLE" name="seqWaitType32L" size="32"/>
+  <typeState dict="seqWaitType" endian="BIG" name="seqWaitType8B" size="8"/>
+  <typeState dict="seqWaitType" endian="BIG" name="seqWaitType16B" size="16"/>
+  <typeState dict="seqWaitType" endian="BIG" name="seqWaitType32B" size="32"/>
+  <dictionary name="CmdOpcodesHydra">
+    <!--From file ../../common/src/apps/src/seq/SeqCmds.h-->
+    <pair key="#CMD_OPCODE_LOAD_SEQUENCE" str="CMD_OPCODE_LOAD_SEQUENCE"/>
+    <pair key="#CMD_OPCODE_INIT_SEQUENCE" str="CMD_OPCODE_INIT_SEQUENCE"/>
+    <pair key="#CMD_OPCODE_SET_SEQUENCE_STATE" str="CMD_OPCODE_SET_SEQUENCE_STATE"/>
+    <pair key="#CMD_OPCODE_VERIFY_SEQUENCE" str="CMD_OPCODE_VERIFY_SEQUENCE"/>
+    <pair key="#CMD_OPCODE_STOP_SEQUENCE" str="CMD_OPCODE_STOP_SEQUENCE"/>
+    <pair key="#CMD_OPCODE_FIND_SEQUENCE" str="CMD_OPCODE_FIND_SEQUENCE"/>
+    <pair key="#CMD_OPCODE_INFO_SEQUENCE" str="CMD_OPCODE_INFO_SEQUENCE"/>
+    <pair key="#CMD_OPCODE_DUMP_SEQUENCE" str="CMD_OPCODE_DUMP_SEQUENCE"/>
+  </dictionary>
+  <dictionary name="SeqOpcodesHydra">
+    <!--From file ../../common/src/apps/src/seq/SeqInternalCmds.h-->
+    <pair key="#CMD_OPCODE_SEQ_SUSPEND_ABS" str="CMD_OPCODE_SEQ_SUSPEND_ABS"/>
+    <pair key="#CMD_OPCODE_SEQ_SUSPEND_REL" str="CMD_OPCODE_SEQ_SUSPEND_REL"/>
+    <pair key="#CMD_OPCODE_START_SEQUENCE" str="CMD_OPCODE_START_SEQUENCE"/>
+    <pair key="#CMD_OPCODE_CALL_SEQUENCE" str="CMD_OPCODE_CALL_SEQUENCE"/>
+  </dictionary>
+  <typeState dict="SeqOpcodesHydra" endian="LITTLE" name="SeqOpcodesHydra8L" size="8"/>
+  <typeState dict="SeqOpcodesHydra" endian="LITTLE" name="SeqOpcodesHydra16L" size="16"/>
+  <typeState dict="SeqOpcodesHydra" endian="LITTLE" name="SeqOpcodesHydra32L" size="32"/>
+  <typeState dict="SeqOpcodesHydra" endian="BIG" name="SeqOpcodesHydra8B" size="8"/>
+  <typeState dict="SeqOpcodesHydra" endian="BIG" name="SeqOpcodesHydra16B" size="16"/>
+  <typeState dict="SeqOpcodesHydra" endian="BIG" name="SeqOpcodesHydra32B" size="32"/>
+  <dictionary name="CmdFailCodes">
+    <!--From file ../../common/src/apps/src/cmd/Command.h-->
+    <pair key="#CMD_SUCCESS" str="SUCCESS"/>
+    <pair key="#CMD_FAIL_INVALID_MODE" str="MODE"/>
+    <pair key="#CMD_FAIL_INVALID_ARM" str="ARM"/>
+    <pair key="#CMD_FAIL_INVALID_SOURCE" str="SOURCE"/>
+    <pair key="#CMD_FAIL_INVALID_OPCODE" str="OPCODE"/>
+    <pair key="#CMD_FAIL_METHOD_ERR" str="METHOD"/>
+    <pair key="#CMD_FAIL_LENGTH_ERR" str="LENGTH"/>
+    <pair key="#CMD_FAIL_RANGE_ERR" str="RANGE"/>
+  </dictionary>
+  <typeState dict="CmdFailCodes" endian="LITTLE" name="CmdFailCodes8L" size="8"/>
+  <typeState dict="CmdFailCodes" endian="LITTLE" name="CmdFailCodes16L" size="16"/>
+  <typeState dict="CmdFailCodes" endian="LITTLE" name="CmdFailCodes32L" size="32"/>
+  <typeState dict="CmdFailCodes" endian="BIG" name="CmdFailCodes8B" size="8"/>
+  <typeState dict="CmdFailCodes" endian="BIG" name="CmdFailCodes16B" size="16"/>
+  <typeState dict="CmdFailCodes" endian="BIG" name="CmdFailCodes32B" size="32"/>
+  <dictionary name="CmdArmState">
+    <!--From file ../../common/src/apps/src/cmd/CmdEngine.h-->
+    <pair key="#CMD_ARM_STATE_OFF" str="OFF"/>
+    <pair key="#CMD_ARM_STATE_ARMED" str="ARMED"/>
+  </dictionary>
+  <typeState dict="CmdArmState" endian="LITTLE" name="CmdArmState8L" size="8"/>
+  <typeState dict="CmdArmState" endian="LITTLE" name="CmdArmState16L" size="16"/>
+  <typeState dict="CmdArmState" endian="LITTLE" name="CmdArmState32L" size="32"/>
+  <typeState dict="CmdArmState" endian="BIG" name="CmdArmState8B" size="8"/>
+  <typeState dict="CmdArmState" endian="BIG" name="CmdArmState16B" size="16"/>
+  <typeState dict="CmdArmState" endian="BIG" name="CmdArmState32B" size="32"/>
+  <dictionary name="CmdOpcodesHydra">
+    <!--From file ../../common/src/apps/src/cmd/CmdCmds.h-->
+    <pair key="#CMD_OPCODE_NOOP" str="CMD_OPCODE_NOOP"/>
+    <pair key="#CMD_OPCODE_ARM" str="CMD_OPCODE_ARM"/>
+    <pair key="#CMD_OPCODE_RESET_STATS" str="CMD_OPCODE_RESET_STATS"/>
+  </dictionary>
+  <dictionary name="CmdOpcodesHydra">
+    <!--From file apps/sband/sbandCmds.h-->
+    <pair key="#CMD_OPCODE_SBAND_SET_PA" str="CMD_OPCODE_SBAND_SET_PA"/>
+    <pair key="#CMD_OPCODE_SBAND_SET_MODE" str="CMD_OPCODE_SBAND_SET_MODE"/>
+    <pair key="#CMD_OPCODE_SBAND_SET_PA_LEVEL" str="CMD_OPCODE_SBAND_SET_PA_LEVEL"/>
+    <pair key="#CMD_OPCODE_SBAND_SET_SYNTH" str="CMD_OPCODE_SBAND_SET_SYNTH"/>
+    <pair key="#CMD_OPCODE_SBAND_RESET" str="CMD_OPCODE_SBAND_RESET"/>
+    <pair key="#CMD_OPCODE_SBAND_DEBUG" str="CMD_OPCODE_SBAND_DEBUG"/>
+    <pair key="#CMD_OPCODE_SBAND_SET_ENCODER" str="CMD_OPCODE_SBAND_SET_ENCODER"/>
+    <pair key="#CMD_OPCODE_SBAND_SYNC_ON" str="CMD_OPCODE_SBAND_SYNC_ON"/>
+    <pair key="#CMD_OPCODE_SBAND_SYNC_OFF" str="CMD_OPCODE_SBAND_SYNC_OFF"/>
+  </dictionary>
+  <dictionary name="SBANDPAPower">
+    <!--From file apps/sband/sbandPkt.h-->
+    <pair key="#SBAND_PA_POWER_24" str="_24DBM"/>
+    <pair key="#SBAND_PA_POWER_26" str="_26DBM"/>
+    <pair key="#SBAND_PA_POWER_28" str="_28DBM"/>
+    <pair key="#SBAND_PA_POWER_30" str="_30DBM"/>
+  </dictionary>
+  <typeState dict="SBANDPAPower" endian="LITTLE" name="SBANDPAPower8L" size="8"/>
+  <typeState dict="SBANDPAPower" endian="LITTLE" name="SBANDPAPower16L" size="16"/>
+  <typeState dict="SBANDPAPower" endian="LITTLE" name="SBANDPAPower32L" size="32"/>
+  <typeState dict="SBANDPAPower" endian="BIG" name="SBANDPAPower8B" size="8"/>
+  <typeState dict="SBANDPAPower" endian="BIG" name="SBANDPAPower16B" size="16"/>
+  <typeState dict="SBANDPAPower" endian="BIG" name="SBANDPAPower32B" size="32"/>
+  <dictionary name="SBANDDisEn">
+    <!--From file apps/sband/sbandPkt.h-->
+    <pair key="#SBAND_STATE_ENA" str="ENA"/>
+    <pair key="#SBAND_STATE_DIS" str="DIS"/>
+  </dictionary>
+  <typeState dict="SBANDDisEn" endian="LITTLE" name="SBANDDisEn8L" size="8"/>
+  <typeState dict="SBANDDisEn" endian="LITTLE" name="SBANDDisEn16L" size="16"/>
+  <typeState dict="SBANDDisEn" endian="LITTLE" name="SBANDDisEn32L" size="32"/>
+  <typeState dict="SBANDDisEn" endian="BIG" name="SBANDDisEn8B" size="8"/>
+  <typeState dict="SBANDDisEn" endian="BIG" name="SBANDDisEn16B" size="16"/>
+  <typeState dict="SBANDDisEn" endian="BIG" name="SBANDDisEn32B" size="32"/>
+  <dictionary name="SBANDStatus">
+    <!--From file apps/sband/sbandPkt.h-->
+    <pair key="#SBAND_STATUS_NOLOCK_PWRBAD" str="NOLOCK_PWRBAD"/>
+    <pair key="#SBAND_STATUS_LOCK_PWRBAD" str="LOCK_PWRBAD"/>
+    <pair key="#SBAND_STATUS_NOLOCK_PWRGD" str="NOLOCK_PWRGD"/>
+    <pair key="#SBAND_STATUS_LOCK_PWRGD" str="LOCK_PWRGD"/>
+  </dictionary>
+  <typeState dict="SBANDStatus" endian="LITTLE" name="SBANDStatus8L" size="8"/>
+  <typeState dict="SBANDStatus" endian="LITTLE" name="SBANDStatus16L" size="16"/>
+  <typeState dict="SBANDStatus" endian="LITTLE" name="SBANDStatus32L" size="32"/>
+  <typeState dict="SBANDStatus" endian="BIG" name="SBANDStatus8B" size="8"/>
+  <typeState dict="SBANDStatus" endian="BIG" name="SBANDStatus16B" size="16"/>
+  <typeState dict="SBANDStatus" endian="BIG" name="SBANDStatus32B" size="32"/>
+  <dictionary name="SbandRadioMode">
+    <!--From file apps/sband/sbandTask.h-->
+    <pair key="#SBAND_MODE_CONFIG" str="CONFIG"/>
+    <pair key="#SBAND_MODE_SYNC" str="SYNC"/>
+    <pair key="#SBAND_MODE_DATA" str="DATA"/>
+    <pair key="#SBAND_MODE_TEST" str="TEST"/>
+  </dictionary>
+  <typeState dict="SbandRadioMode" endian="LITTLE" name="SbandRadioMode8L" size="8"/>
+  <typeState dict="SbandRadioMode" endian="LITTLE" name="SbandRadioMode16L" size="16"/>
+  <typeState dict="SbandRadioMode" endian="LITTLE" name="SbandRadioMode32L" size="32"/>
+  <typeState dict="SbandRadioMode" endian="BIG" name="SbandRadioMode8B" size="8"/>
+  <typeState dict="SbandRadioMode" endian="BIG" name="SbandRadioMode16B" size="16"/>
+  <typeState dict="SbandRadioMode" endian="BIG" name="SbandRadioMode32B" size="32"/>
+  <dictionary name="CmdOpcodesHydra">
+    <!--From file apps/sdcard/SDCardCmds.h-->
+    <pair key="#CMD_OPCODE_SD_WRITE_STATE" str="CMD_OPCODE_SD_WRITE_STATE"/>
+    <pair key="#CMD_OPCODE_SD_READ" str="CMD_OPCODE_SD_READ"/>
+    <pair key="#CMD_OPCODE_SD_READ_HALT" str="CMD_OPCODE_SD_READ_HALT"/>
+    <pair key="#CMD_OPCODE_SD_PLAYBACK" str="CMD_OPCODE_SD_PLAYBACK"/>
+    <pair key="#CMD_OPCODE_SD_SELECT" str="CMD_OPCODE_SD_SELECT"/>
+    <pair key="#CMD_OPCODE_SD_INIT" str="CMD_OPCODE_SD_INIT"/>
+    <pair key="#CMD_OPCODE_SD_SET_PARTITION" str="CMD_OPCODE_SD_SET_PARTITION"/>
+    <pair key="#CMD_OPCODE_SD_UPDATE_PARTITION" str="CMD_OPCODE_SD_UPDATE_PARTITION"/>
+    <pair key="#CMD_OPCODE_SD_PWR_OFF" str="CMD_OPCODE_SD_PWR_OFF"/>
+    <pair key="#CMD_OPCODE_SD_RESET_FDRI" str="CMD_OPCODE_SD_RESET_FDRI"/>
+    <pair key="#CMD_OPCODE_SD_SET_FDRI_LIMT" str="CMD_OPCODE_SD_SET_FDRI_LIMT"/>
+    <pair key="#CMD_OPCODE_SD_TABLE_DEFAULT" str="CMD_OPCODE_SD_TABLE_DEFAULT"/>
+  </dictionary>
+  <dictionary name="SDCardId">
+    <!--From file apps/sdcard/Storage.h-->
+    <pair key="#SD_CARD_0" str="CARD_0"/>
+    <pair key="#SD_CARD_1" str="CARD_1"/>
+  </dictionary>
+  <typeState dict="SDCardId" endian="LITTLE" name="SDCardId8L" size="8"/>
+  <typeState dict="SDCardId" endian="LITTLE" name="SDCardId16L" size="16"/>
+  <typeState dict="SDCardId" endian="LITTLE" name="SDCardId32L" size="32"/>
+  <typeState dict="SDCardId" endian="BIG" name="SDCardId8B" size="8"/>
+  <typeState dict="SDCardId" endian="BIG" name="SDCardId16B" size="16"/>
+  <typeState dict="SDCardId" endian="BIG" name="SDCardId32B" size="32"/>
+  <dictionary name="StorageId">
+    <!--From file apps/sdcard/Storage.h-->
+    <pair key="#STORAGE_SD_CARD_0" str="CARD_0"/>
+    <pair key="#STORAGE_SD_CARD_1" str="CARD_1"/>
+    <pair key="#STORAGE_FLASH" str="FLASH"/>
+    <pair key="#SD_CARD_CURRENT_NONE" str="NONE"/>
+  </dictionary>
+  <typeState dict="StorageId" endian="LITTLE" name="StorageId8L" size="8"/>
+  <typeState dict="StorageId" endian="LITTLE" name="StorageId16L" size="16"/>
+  <typeState dict="StorageId" endian="LITTLE" name="StorageId32L" size="32"/>
+  <typeState dict="StorageId" endian="BIG" name="StorageId8B" size="8"/>
+  <typeState dict="StorageId" endian="BIG" name="StorageId16B" size="16"/>
+  <typeState dict="StorageId" endian="BIG" name="StorageId32B" size="32"/>
+  <dictionary name="CmdOpcodesHydra">
+    <!--From file apps/eps/EPSCmds.h-->
+    <pair key="#CMD_OPCODE_EPS_PWR_ON" str="CMD_OPCODE_EPS_PWR_ON"/>
+    <pair key="#CMD_OPCODE_EPS_PWR_OFF" str="CMD_OPCODE_EPS_PWR_OFF"/>
+    <pair key="#CMD_OPCODE_EPS_PWR_CYCLE" str="CMD_OPCODE_EPS_PWR_CYCLE"/>
+    <pair key="#CMD_OPCODE_EPS_DEPLOY" str="CMD_OPCODE_EPS_DEPLOY"/>
+    <pair key="#CMD_OPCODE_EPS_HEATER_SETPOINT" str="CMD_OPCODE_EPS_HEATER_SETPOINT"/>
+    <pair key="#CMD_OPCODE_EPS_HEATER_THRESH" str="CMD_OPCODE_EPS_HEATER_THRESH"/>
+    <pair key="#CMD_OPCODE_EPS_ECLIPSE_THRESH" str="CMD_OPCODE_EPS_ECLIPSE_THRESH"/>
+  </dictionary>
+  <dictionary name="EPSEclipseState">
+    <!--From file apps/eps/EPSManager.h-->
+    <pair key="#EPS_ECLIPSE_STATE_SUN" str="SUN"/>
+    <pair key="#EPS_ECLIPSE_STATE_ECLIPSE" str="ECLIPSE"/>
+  </dictionary>
+  <typeState dict="EPSEclipseState" endian="LITTLE" name="EPSEclipseState8L" size="8"/>
+  <typeState dict="EPSEclipseState" endian="LITTLE" name="EPSEclipseState16L" size="16"/>
+  <typeState dict="EPSEclipseState" endian="LITTLE" name="EPSEclipseState32L" size="32"/>
+  <typeState dict="EPSEclipseState" endian="BIG" name="EPSEclipseState8B" size="8"/>
+  <typeState dict="EPSEclipseState" endian="BIG" name="EPSEclipseState16B" size="16"/>
+  <typeState dict="EPSEclipseState" endian="BIG" name="EPSEclipseState32B" size="32"/>
+  <dictionary name="CmdOpcodesHydra">
+    <!--From file apps/uhf/UHFCmds.h-->
+    <pair key="#CMD_OPCODE_UHF_PASS" str="CMD_OPCODE_UHF_PASS"/>
+    <pair key="#CMD_OPCODE_UHF_INIT" str="CMD_OPCODE_UHF_INIT"/>
+    <pair key="#CMD_OPCODE_UHF_RESP_STATE" str="CMD_OPCODE_UHF_RESP_STATE"/>
+    <pair key="#CMD_OPCODE_UHF_SET_TX_GAP" str="CMD_OPCODE_UHF_SET_TX_GAP"/>
+  </dictionary>
+  <dictionary name="UHFAX25Errors">
+    <!--From file apps/uhf/Ax25Protocol.h-->
+    <pair key="#AX25_FMT_ERR_PID" str="PID"/>
+    <pair key="#AX25_FMT_ERR_CTRL" str="CTRL"/>
+    <pair key="#AX25_FMT_ERR_DST" str="DST"/>
+    <pair key="#AX25_FMT_ERR_SRC" str="SRC"/>
+    <pair key="#AX25_FMT_ERR_CRC" str="CRC"/>
+  </dictionary>
+  <typeState dict="UHFAX25Errors" endian="LITTLE" name="UHFAX25Errors8L" size="8"/>
+  <typeState dict="UHFAX25Errors" endian="LITTLE" name="UHFAX25Errors16L" size="16"/>
+  <typeState dict="UHFAX25Errors" endian="LITTLE" name="UHFAX25Errors32L" size="32"/>
+  <typeState dict="UHFAX25Errors" endian="BIG" name="UHFAX25Errors8B" size="8"/>
+  <typeState dict="UHFAX25Errors" endian="BIG" name="UHFAX25Errors16B" size="16"/>
+  <typeState dict="UHFAX25Errors" endian="BIG" name="UHFAX25Errors32B" size="32"/>
+  <dictionary name="CmdOpcodesHydra">
+    <!--From file apps/cip/CIPCmds.h-->
+    <pair key="#CMD_OPCODE_CIP_SCI_MODE" str="CMD_OPCODE_CIP_SCI_MODE"/>
+  </dictionary>
+  <dictionary name="CIPCmdOpcodes">
+    <!--From file apps/cip/CIPTask.h-->
+    <pair key="#CIP_OPCODE_SENSON" str="CIP_OPCODE_SENSON"/>
+    <pair key="#CIP_OPCODE_SENSDACC" str="CIP_OPCODE_SENSDACC"/>
+    <pair key="#CIP_OPCODE_SENSSVBC" str="CIP_OPCODE_SENSSVBC"/>
+    <pair key="#CIP_OPCODE_SENSHDST" str="CIP_OPCODE_SENSHDST"/>
+    <pair key="#CIP_OPCODE_SENSFRPT" str="CIP_OPCODE_SENSFRPT"/>
+    <pair key="#CIP_OPCODE_SENSPWRD" str="CIP_OPCODE_SENSPWRD"/>
+    <pair key="#CIP_OPCODE_SAFE" str="CIP_OPCODE_SAFE"/>
+    <pair key="#CIP_OPCODE_NORMAL" str="CIP_OPCODE_NORMAL"/>
+    <pair key="#CIP_OPCODE_FAST" str="CIP_OPCODE_FAST"/>
+    <pair key="#CIP_OPCODE_PLP" str="CIP_OPCODE_PLP"/>
+    <pair key="#CIP_OPCODE_RPAS" str="CIP_OPCODE_RPAS"/>
+    <pair key="#CIP_OPCODE_IDM" str="CIP_OPCODE_IDM"/>
+    <pair key="#CIP_OPCODE_RPA" str="CIP_OPCODE_RPA"/>
+    <pair key="#CIP_OPCODE_IT" str="CIP_OPCODE_IT"/>
+    <pair key="#CIP_OPCODE_IDM0" str="CIP_OPCODE_IDM0"/>
+    <pair key="#CIP_OPCODE_IDM1" str="CIP_OPCODE_IDM1"/>
+    <pair key="#CIP_OPCODE_IDM2" str="CIP_OPCODE_IDM2"/>
+    <pair key="#CIP_OPCODE_IDM3" str="CIP_OPCODE_IDM3"/>
+    <pair key="#CIP_OPCODE_IDMSV" str="CIP_OPCODE_IDMSV"/>
+    <pair key="#CIP_OPCODE_BIAS" str="CIP_OPCODE_BIAS"/>
+    <pair key="#CIP_OPCODE_ISV" str="CIP_OPCODE_ISV"/>
+    <pair key="#CIP_OPCODE_ESV" str="CIP_OPCODE_ESV"/>
+    <pair key="#CIP_OPCODE_PRI" str="CIP_OPCODE_PRI"/>
+    <pair key="#CIP_OPCODE_PRIS" str="CIP_OPCODE_PRIS"/>
+    <pair key="#CIP_OPCODE_AD0" str="CIP_OPCODE_AD0"/>
+    <pair key="#CIP_OPCODE_AD1" str="CIP_OPCODE_AD1"/>
+    <pair key="#CIP_OPCODE_DA0" str="CIP_OPCODE_DA0"/>
+    <pair key="#CIP_OPCODE_DA1" str="CIP_OPCODE_DA1"/>
+    <pair key="#CIP_OPCODE_DA2" str="CIP_OPCODE_DA2"/>
+    <pair key="#CIP_OPCODE_DA3" str="CIP_OPCODE_DA3"/>
+    <pair key="#CIP_OPCODE_PSVBLK0" str="CIP_OPCODE_PSVBLK0"/>
+    <pair key="#CIP_OPCODE_PSVBLK1" str="CIP_OPCODE_PSVBLK1"/>
+    <pair key="#CIP_OPCODE_PSVBLK2" str="CIP_OPCODE_PSVBLK2"/>
+    <pair key="#CIP_OPCODE_PSVBLK3" str="CIP_OPCODE_PSVBLK3"/>
+    <pair key="#CIP_OPCODE_RSVBLK0" str="CIP_OPCODE_RSVBLK0"/>
+    <pair key="#CIP_OPCODE_RSVBLK1" str="CIP_OPCODE_RSVBLK1"/>
+    <pair key="#CIP_OPCODE_RSVBLK2" str="CIP_OPCODE_RSVBLK2"/>
+    <pair key="#CIP_OPCODE_RSVBLK3" str="CIP_OPCODE_RSVBLK3"/>
+    <pair key="#CIP_OPCODE_IPBIASVAL0" str="CIP_OPCODE_IPBIASVAL0"/>
+    <pair key="#CIP_OPCODE_IPBIASVAL1" str="CIP_OPCODE_IPBIASVAL1"/>
+    <pair key="#CIP_OPCODE_IPBIASVAL2" str="CIP_OPCODE_IPBIASVAL2"/>
+    <pair key="#CIP_OPCODE_IPBIASVAL3" str="CIP_OPCODE_IPBIASVAL3"/>
+    <pair key="#CIP_OPCODE_SVFRQF" str="CIP_OPCODE_SVFRQF"/>
+    <pair key="#CIP_OPCODE_SVFRQ0" str="CIP_OPCODE_SVFRQ0"/>
+    <pair key="#CIP_OPCODE_SVFRQ1" str="CIP_OPCODE_SVFRQ1"/>
+    <pair key="#CIP_OPCODE_SVFRQ2" str="CIP_OPCODE_SVFRQ2"/>
+    <pair key="#CIP_OPCODE_SVFRQ3" str="CIP_OPCODE_SVFRQ3"/>
+    <pair key="#CIP_OPCODE_FPDOFF" str="CIP_OPCODE_FPDOFF"/>
+    <pair key="#CIP_OPCODE_FPDON" str="CIP_OPCODE_FPDON"/>
+    <pair key="#CIP_OPCODE_OCDOFF" str="CIP_OPCODE_OCDOFF"/>
+    <pair key="#CIP_OPCODE_OCDON" str="CIP_OPCODE_OCDON"/>
+  </dictionary>
+  <typeState dict="CIPCmdOpcodes" endian="LITTLE" name="CIPCmdOpcodes8L" size="8"/>
+  <typeState dict="CIPCmdOpcodes" endian="LITTLE" name="CIPCmdOpcodes16L" size="16"/>
+  <typeState dict="CIPCmdOpcodes" endian="LITTLE" name="CIPCmdOpcodes32L" size="32"/>
+  <typeState dict="CIPCmdOpcodes" endian="BIG" name="CIPCmdOpcodes8B" size="8"/>
+  <typeState dict="CIPCmdOpcodes" endian="BIG" name="CIPCmdOpcodes16B" size="16"/>
+  <typeState dict="CIPCmdOpcodes" endian="BIG" name="CIPCmdOpcodes32B" size="32"/>
+  <dictionary name="SystemMode">
+    <!--From file apps/mode/modeTask.h-->
+    <pair key="#MODE_SYSTEM_PHX" str="PHOENIX"/>
+    <pair key="#MODE_SYSTEM_SAFE" str="SAFE"/>
+    <pair key="#MODE_SYSTEM_SCID" str="SCID"/>
+    <pair key="#MODE_SYSTEM_SCIC" str="SCIC"/>
+  </dictionary>
+  <typeState dict="SystemMode" endian="LITTLE" name="SystemMode8L" size="8"/>
+  <typeState dict="SystemMode" endian="LITTLE" name="SystemMode16L" size="16"/>
+  <typeState dict="SystemMode" endian="LITTLE" name="SystemMode32L" size="32"/>
+  <typeState dict="SystemMode" endian="BIG" name="SystemMode8B" size="8"/>
+  <typeState dict="SystemMode" endian="BIG" name="SystemMode16B" size="16"/>
+  <typeState dict="SystemMode" endian="BIG" name="SystemMode32B" size="32"/>
+  <dictionary name="AvoidFlag">
+    <!--From file apps/mode/modeTask.h-->
+    <pair key="#MODE_AVOID_FALSE" str="FALSE"/>
+    <pair key="#MODE_AVOID_TRUE" str="TRUE"/>
+  </dictionary>
+  <typeState dict="AvoidFlag" endian="LITTLE" name="AvoidFlag8L" size="8"/>
+  <typeState dict="AvoidFlag" endian="LITTLE" name="AvoidFlag16L" size="16"/>
+  <typeState dict="AvoidFlag" endian="LITTLE" name="AvoidFlag32L" size="32"/>
+  <typeState dict="AvoidFlag" endian="BIG" name="AvoidFlag8B" size="8"/>
+  <typeState dict="AvoidFlag" endian="BIG" name="AvoidFlag16B" size="16"/>
+  <typeState dict="AvoidFlag" endian="BIG" name="AvoidFlag32B" size="32"/>
+  <dictionary name="ModeThreshold">
+    <!--From file apps/mode/modeTask.h-->
+    <pair key="#MODE_THRESHOLD_PHX_TO_SAFE" str="PHX_TO_SAFE"/>
+    <pair key="#MODE_THRESHOLD_SAFE_TO_PHX" str="SAFE_TO_PHX"/>
+    <pair key="#MODE_THRESHOLD_SAFE_TO_SCI" str="SAFE_TO_SCI"/>
+    <pair key="#MODE_THRESHOLD_SCI_TO_SAFE" str="SCI_TO_SAFE"/>
+  </dictionary>
+  <typeState dict="ModeThreshold" endian="LITTLE" name="ModeThreshold8L" size="8"/>
+  <typeState dict="ModeThreshold" endian="LITTLE" name="ModeThreshold16L" size="16"/>
+  <typeState dict="ModeThreshold" endian="LITTLE" name="ModeThreshold32L" size="32"/>
+  <typeState dict="ModeThreshold" endian="BIG" name="ModeThreshold8B" size="8"/>
+  <typeState dict="ModeThreshold" endian="BIG" name="ModeThreshold16B" size="16"/>
+  <typeState dict="ModeThreshold" endian="BIG" name="ModeThreshold32B" size="32"/>
+  <dictionary name="EclipseMethod">
+    <!--From file apps/mode/modeTask.h-->
+    <pair key="#MODE_ECLIPSE_METHOD_ADCS" str="ADCS"/>
+    <pair key="#MODE_ECLIPSE_METHOD_EPS" str="EPS"/>
+  </dictionary>
+  <typeState dict="EclipseMethod" endian="LITTLE" name="EclipseMethod8L" size="8"/>
+  <typeState dict="EclipseMethod" endian="LITTLE" name="EclipseMethod16L" size="16"/>
+  <typeState dict="EclipseMethod" endian="LITTLE" name="EclipseMethod32L" size="32"/>
+  <typeState dict="EclipseMethod" endian="BIG" name="EclipseMethod8B" size="8"/>
+  <typeState dict="EclipseMethod" endian="BIG" name="EclipseMethod16B" size="16"/>
+  <typeState dict="EclipseMethod" endian="BIG" name="EclipseMethod32B" size="32"/>
+  <dictionary name="EclipseState">
+    <!--From file apps/mode/modeTask.h-->
+    <pair key="#MODE_ECLIPSE_STATE_SUN" str="SUN"/>
+    <pair key="#MODE_ECLIPSE_STATE_ECLIPSE" str="ECLIPSE"/>
+  </dictionary>
+  <typeState dict="EclipseState" endian="LITTLE" name="EclipseState8L" size="8"/>
+  <typeState dict="EclipseState" endian="LITTLE" name="EclipseState16L" size="16"/>
+  <typeState dict="EclipseState" endian="LITTLE" name="EclipseState32L" size="32"/>
+  <typeState dict="EclipseState" endian="BIG" name="EclipseState8B" size="8"/>
+  <typeState dict="EclipseState" endian="BIG" name="EclipseState16B" size="16"/>
+  <typeState dict="EclipseState" endian="BIG" name="EclipseState32B" size="32"/>
+  <dictionary name="CmdOpcodesHydra">
+    <!--From file apps/mode/modeCmds.h-->
+    <pair key="#CMD_OPCODE_MODE_SET" str="CMD_OPCODE_MODE_SET"/>
+    <pair key="#CMD_OPCODE_MODE_AVOID" str="CMD_OPCODE_MODE_AVOID"/>
+    <pair key="#CMD_OPCODE_MODE_SET_THRESHOLD" str="CMD_OPCODE_MODE_SET_THRESHOLD"/>
+    <pair key="#CMD_OPCODE_MODE_CLEAR_CLT" str="CMD_OPCODE_MODE_CLEAR_CLT"/>
+    <pair key="#CMD_OPCODE_MODE_SET_CLT_THRESHOLD" str="CMD_OPCODE_MODE_SET_CLT_THRESHOLD"/>
+    <pair key="#CMD_OPCODE_MODE_SET_LAUNCH_DELAY" str="CMD_OPCODE_MODE_SET_LAUNCH_DELAY"/>
+    <pair key="#CMD_OPCODE_MODE_SET_LAUNCH_DELAY_STATE" str="CMD_OPCODE_MODE_SET_LAUNCH_DELAY_STATE"/>
+    <pair key="#CMD_OPCODE_MODE_SET_DEPLOY_INT" str="CMD_OPCODE_MODE_SET_DEPLOY_INT"/>
+    <pair key="#CMD_OPCODE_MODE_SET_DEPLOY_FLAG" str="CMD_OPCODE_MODE_SET_DEPLOY_FLAG"/>
+    <pair key="#CMD_OPCODE_MODE_RESET_SC" str="CMD_OPCODE_MODE_RESET_SC"/>
+    <pair key="#CMD_OPCODE_MODE_AVOID_CLEAR" str="CMD_OPCODE_MODE_AVOID_CLEAR"/>
+    <pair key="#CMD_OPCODE_MODE_ECLIPSE_METHOD" str="CMD_OPCODE_MODE_ECLIPSE_METHOD"/>
+    <pair key="#CMD_OPCODE_MODE_AUTO_DIS" str="CMD_OPCODE_MODE_AUTO_DIS"/>
+    <pair key="#CMD_OPCODE_MODE_AUTO_ENA" str="CMD_OPCODE_MODE_AUTO_ENA"/>
+  </dictionary>
+  <dictionary name="CmdOpcodesHydra">
+    <!--From file apps/daxss/DaxssCmds.h-->
+  </dictionary>
+  <dictionary name="PktApids">
+    <!--From file apps/adcs/ADCSGenDefs.h-->
+    <pair key="#APID_TLM_ADCS_EXT_TRACKER2_PKT" str="ADCS_EXT_TRACKER2"/>
+    <pair key="#APID_TLM_ADCS_CAL_PKT" str="ADCS_CAL"/>
+    <pair key="#APID_TLM_ADCS_IMU_PKT" str="ADCS_IMU"/>
+    <pair key="#APID_TLM_ADCS_TABLES_PKT" str="ADCS_TABLES"/>
+    <pair key="#APID_TLM_ADCS_MAG_PKT" str="ADCS_MAG"/>
+    <pair key="#APID_TLM_ADCS_TLM_PROC_PKT" str="ADCS_TLM_PROC"/>
+    <pair key="#APID_TLM_ADCS_MOMENTUM_PKT" str="ADCS_MOMENTUM"/>
+    <pair key="#APID_TLM_ADCS_ANALOGS_PKT" str="ADCS_ANALOGS"/>
+    <pair key="#APID_TLM_ADCS_TRACKER2_PKT" str="ADCS_TRACKER2"/>
+    <pair key="#APID_TLM_ADCS_RW_DRIVE_PKT" str="ADCS_RW_DRIVE"/>
+    <pair key="#APID_TLM_ADCS_TRACKER_PKT" str="ADCS_TRACKER"/>
+    <pair key="#APID_TLM_ADCS_TRACKER_CTRL_PKT" str="ADCS_TRACKER_CTRL"/>
+    <pair key="#APID_TLM_ADCS_REFS_PKT" str="ADCS_REFS"/>
+    <pair key="#APID_TLM_ADCS_ATT_CMD_PKT" str="ADCS_ATT_CMD"/>
+    <pair key="#APID_TLM_ADCS_TIME_PKT" str="ADCS_TIME"/>
+    <pair key="#APID_TLM_ADCS_COMMAND_TLM_PKT" str="ADCS_COMMAND_TLM"/>
+    <pair key="#APID_TLM_ADCS_ATT_CTRL_PKT" str="ADCS_ATT_CTRL"/>
+    <pair key="#APID_TLM_ADCS_CLOCK_SYNC_PKT" str="ADCS_CLOCK_SYNC"/>
+    <pair key="#APID_TLM_ADCS_GENERAL_PKT" str="ADCS_GENERAL"/>
+    <pair key="#APID_TLM_ADCS_CSS_PKT" str="ADCS_CSS"/>
+    <pair key="#APID_TLM_ADCS_ATT_DET_PKT" str="ADCS_ATT_DET"/>
+    <pair key="#APID_TLM_ADCS_GPS_PKT" str="ADCS_GPS"/>
+  </dictionary>
+  <dictionary name="adcsTaskState_t">
+    <!--From file apps/adcs/ADCSTask.h-->
+    <pair key="0" str="ADCS_TASK_STATE_REQ_HK"/>
+    <pair key="1" str="ADCS_TASK_STATE_READ_HK"/>
+    <pair key="2" str="ADCS_TASK_STATE_SEND_CMD"/>
+    <pair key="3" str="ADCS_TASK_STATE_READ_RESP"/>
+  </dictionary>
+  <typeState dict="adcsTaskState_t" endian="LITTLE" name="adcsTaskState_t8L" size="8"/>
+  <typeState dict="adcsTaskState_t" endian="LITTLE" name="adcsTaskState_t16L" size="16"/>
+  <typeState dict="adcsTaskState_t" endian="LITTLE" name="adcsTaskState_t32L" size="32"/>
+  <typeState dict="adcsTaskState_t" endian="BIG" name="adcsTaskState_t8B" size="8"/>
+  <typeState dict="adcsTaskState_t" endian="BIG" name="adcsTaskState_t16B" size="16"/>
+  <typeState dict="adcsTaskState_t" endian="BIG" name="adcsTaskState_t32B" size="32"/>
+  <dictionary name="adcs_gps_msg_data_valid_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_GPS_MSG_DATA_VALID_STATE_YES" str="YES"/>
+    <pair key="#ADCS_GPS_MSG_DATA_VALID_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_gps_msg_data_valid_state" endian="LITTLE" name="adcs_gps_msg_data_valid_state8L" size="8"/>
+  <typeState dict="adcs_gps_msg_data_valid_state" endian="LITTLE" name="adcs_gps_msg_data_valid_state16L" size="16"/>
+  <typeState dict="adcs_gps_msg_data_valid_state" endian="LITTLE" name="adcs_gps_msg_data_valid_state32L" size="32"/>
+  <typeState dict="adcs_gps_msg_data_valid_state" endian="BIG" name="adcs_gps_msg_data_valid_state8B" size="8"/>
+  <typeState dict="adcs_gps_msg_data_valid_state" endian="BIG" name="adcs_gps_msg_data_valid_state16B" size="16"/>
+  <typeState dict="adcs_gps_msg_data_valid_state" endian="BIG" name="adcs_gps_msg_data_valid_state32B" size="32"/>
+  <dictionary name="adcs_gps_gps_valid_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_GPS_GPS_VALID_STATE_YES" str="YES"/>
+    <pair key="#ADCS_GPS_GPS_VALID_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_gps_gps_valid_state" endian="LITTLE" name="adcs_gps_gps_valid_state8L" size="8"/>
+  <typeState dict="adcs_gps_gps_valid_state" endian="LITTLE" name="adcs_gps_gps_valid_state16L" size="16"/>
+  <typeState dict="adcs_gps_gps_valid_state" endian="LITTLE" name="adcs_gps_gps_valid_state32L" size="32"/>
+  <typeState dict="adcs_gps_gps_valid_state" endian="BIG" name="adcs_gps_gps_valid_state8B" size="8"/>
+  <typeState dict="adcs_gps_gps_valid_state" endian="BIG" name="adcs_gps_gps_valid_state16B" size="16"/>
+  <typeState dict="adcs_gps_gps_valid_state" endian="BIG" name="adcs_gps_gps_valid_state32B" size="32"/>
+  <dictionary name="adcs_gps_gps_enable_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_GPS_GPS_ENABLE_STATE_YES" str="YES"/>
+    <pair key="#ADCS_GPS_GPS_ENABLE_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_gps_gps_enable_state" endian="LITTLE" name="adcs_gps_gps_enable_state8L" size="8"/>
+  <typeState dict="adcs_gps_gps_enable_state" endian="LITTLE" name="adcs_gps_gps_enable_state16L" size="16"/>
+  <typeState dict="adcs_gps_gps_enable_state" endian="LITTLE" name="adcs_gps_gps_enable_state32L" size="32"/>
+  <typeState dict="adcs_gps_gps_enable_state" endian="BIG" name="adcs_gps_gps_enable_state8B" size="8"/>
+  <typeState dict="adcs_gps_gps_enable_state" endian="BIG" name="adcs_gps_gps_enable_state16B" size="16"/>
+  <typeState dict="adcs_gps_gps_enable_state" endian="BIG" name="adcs_gps_gps_enable_state32B" size="32"/>
+  <dictionary name="adcs_gps_new_data_received_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_GPS_NEW_DATA_RECEIVED_STATE_YES" str="YES"/>
+    <pair key="#ADCS_GPS_NEW_DATA_RECEIVED_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_gps_new_data_received_state" endian="LITTLE" name="adcs_gps_new_data_received_state8L" size="8"/>
+  <typeState dict="adcs_gps_new_data_received_state" endian="LITTLE" name="adcs_gps_new_data_received_state16L" size="16"/>
+  <typeState dict="adcs_gps_new_data_received_state" endian="LITTLE" name="adcs_gps_new_data_received_state32L" size="32"/>
+  <typeState dict="adcs_gps_new_data_received_state" endian="BIG" name="adcs_gps_new_data_received_state8B" size="8"/>
+  <typeState dict="adcs_gps_new_data_received_state" endian="BIG" name="adcs_gps_new_data_received_state16B" size="16"/>
+  <typeState dict="adcs_gps_new_data_received_state" endian="BIG" name="adcs_gps_new_data_received_state32B" size="32"/>
+  <dictionary name="adcs_tracker_operating_mode_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_OPERATING_MODE_STATE_TRACK" str="TRACK"/>
+    <pair key="#ADCS_TRACKER_OPERATING_MODE_STATE_PHOTO" str="PHOTO"/>
+    <pair key="#ADCS_TRACKER_OPERATING_MODE_STATE_CAL" str="CAL"/>
+    <pair key="#ADCS_TRACKER_OPERATING_MODE_STATE_IDLE" str="IDLE"/>
+    <pair key="#ADCS_TRACKER_OPERATING_MODE_STATE_INITIALIZE" str="INITIALIZE"/>
+    <pair key="#ADCS_TRACKER_OPERATING_MODE_STATE_STARID" str="STARID"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_operating_mode_state" endian="LITTLE" name="adcs_tracker_operating_mode_state8L" size="8"/>
+  <typeState dict="adcs_tracker_operating_mode_state" endian="LITTLE" name="adcs_tracker_operating_mode_state16L" size="16"/>
+  <typeState dict="adcs_tracker_operating_mode_state" endian="LITTLE" name="adcs_tracker_operating_mode_state32L" size="32"/>
+  <typeState dict="adcs_tracker_operating_mode_state" endian="BIG" name="adcs_tracker_operating_mode_state8B" size="8"/>
+  <typeState dict="adcs_tracker_operating_mode_state" endian="BIG" name="adcs_tracker_operating_mode_state16B" size="16"/>
+  <typeState dict="adcs_tracker_operating_mode_state" endian="BIG" name="adcs_tracker_operating_mode_state32B" size="32"/>
+  <dictionary name="adcs_tracker_star_id_step_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_STAR_ID_STEP_STATE_WAITING_FOR_IMAGE2" str="WAITING_FOR_IMAGE2"/>
+    <pair key="#ADCS_TRACKER_STAR_ID_STEP_STATE_CALCULATE_RATE" str="CALCULATE_RATE"/>
+    <pair key="#ADCS_TRACKER_STAR_ID_STEP_STATE_MAKE_UNIT_VECTORS" str="MAKE_UNIT_VECTORS"/>
+    <pair key="#ADCS_TRACKER_STAR_ID_STEP_STATE_OK_FOUND_3" str="OK_Found_3"/>
+    <pair key="#ADCS_TRACKER_STAR_ID_STEP_STATE_OK_FOUND_4" str="OK_Found_4"/>
+    <pair key="#ADCS_TRACKER_STAR_ID_STEP_STATE_IDLE" str="IDLE"/>
+    <pair key="#ADCS_TRACKER_STAR_ID_STEP_STATE_INITIALIZE" str="INITIALIZE"/>
+    <pair key="#ADCS_TRACKER_STAR_ID_STEP_STATE_NO_MATCH" str="NO_MATCH"/>
+    <pair key="#ADCS_TRACKER_STAR_ID_STEP_STATE_WAITING_FOR_IMAGE1" str="WAITING_FOR_IMAGE1"/>
+    <pair key="#ADCS_TRACKER_STAR_ID_STEP_STATE_AWAITING_TRISTAR" str="AWAITING_TRISTAR"/>
+    <pair key="#ADCS_TRACKER_STAR_ID_STEP_STATE_TIME_OUT" str="TIME_OUT"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_star_id_step_state" endian="LITTLE" name="adcs_tracker_star_id_step_state8L" size="8"/>
+  <typeState dict="adcs_tracker_star_id_step_state" endian="LITTLE" name="adcs_tracker_star_id_step_state16L" size="16"/>
+  <typeState dict="adcs_tracker_star_id_step_state" endian="LITTLE" name="adcs_tracker_star_id_step_state32L" size="32"/>
+  <typeState dict="adcs_tracker_star_id_step_state" endian="BIG" name="adcs_tracker_star_id_step_state8B" size="8"/>
+  <typeState dict="adcs_tracker_star_id_step_state" endian="BIG" name="adcs_tracker_star_id_step_state16B" size="16"/>
+  <typeState dict="adcs_tracker_star_id_step_state" endian="BIG" name="adcs_tracker_star_id_step_state32B" size="32"/>
+  <dictionary name="adcs_tracker_id_status_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_ID_STATUS_STATE_WAITING_FOR_IMAGE2" str="WAITING_FOR_IMAGE2"/>
+    <pair key="#ADCS_TRACKER_ID_STATUS_STATE_CALCULATE_RATE" str="CALCULATE_RATE"/>
+    <pair key="#ADCS_TRACKER_ID_STATUS_STATE_MAKE_UNIT_VECTORS" str="MAKE_UNIT_VECTORS"/>
+    <pair key="#ADCS_TRACKER_ID_STATUS_STATE_OK_FOUND_3" str="OK_Found_3"/>
+    <pair key="#ADCS_TRACKER_ID_STATUS_STATE_OK_FOUND_4" str="OK_Found_4"/>
+    <pair key="#ADCS_TRACKER_ID_STATUS_STATE_IDLE" str="IDLE"/>
+    <pair key="#ADCS_TRACKER_ID_STATUS_STATE_INITIALIZE" str="INITIALIZE"/>
+    <pair key="#ADCS_TRACKER_ID_STATUS_STATE_NO_MATCH" str="NO_MATCH"/>
+    <pair key="#ADCS_TRACKER_ID_STATUS_STATE_WAITING_FOR_IMAGE1" str="WAITING_FOR_IMAGE1"/>
+    <pair key="#ADCS_TRACKER_ID_STATUS_STATE_AWAITING_TRISTAR" str="AWAITING_TRISTAR"/>
+    <pair key="#ADCS_TRACKER_ID_STATUS_STATE_TIME_OUT" str="TIME_OUT"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_id_status_state" endian="LITTLE" name="adcs_tracker_id_status_state8L" size="8"/>
+  <typeState dict="adcs_tracker_id_status_state" endian="LITTLE" name="adcs_tracker_id_status_state16L" size="16"/>
+  <typeState dict="adcs_tracker_id_status_state" endian="LITTLE" name="adcs_tracker_id_status_state32L" size="32"/>
+  <typeState dict="adcs_tracker_id_status_state" endian="BIG" name="adcs_tracker_id_status_state8B" size="8"/>
+  <typeState dict="adcs_tracker_id_status_state" endian="BIG" name="adcs_tracker_id_status_state16B" size="16"/>
+  <typeState dict="adcs_tracker_id_status_state" endian="BIG" name="adcs_tracker_id_status_state32B" size="32"/>
+  <dictionary name="adcs_tracker_id_status_save_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_ID_STATUS_SAVE_STATE_WAITING_FOR_IMAGE2" str="WAITING_FOR_IMAGE2"/>
+    <pair key="#ADCS_TRACKER_ID_STATUS_SAVE_STATE_CALCULATE_RATE" str="CALCULATE_RATE"/>
+    <pair key="#ADCS_TRACKER_ID_STATUS_SAVE_STATE_MAKE_UNIT_VECTORS" str="MAKE_UNIT_VECTORS"/>
+    <pair key="#ADCS_TRACKER_ID_STATUS_SAVE_STATE_OK_FOUND_3" str="OK_Found_3"/>
+    <pair key="#ADCS_TRACKER_ID_STATUS_SAVE_STATE_OK_FOUND_4" str="OK_Found_4"/>
+    <pair key="#ADCS_TRACKER_ID_STATUS_SAVE_STATE_IDLE" str="IDLE"/>
+    <pair key="#ADCS_TRACKER_ID_STATUS_SAVE_STATE_INITIALIZE" str="INITIALIZE"/>
+    <pair key="#ADCS_TRACKER_ID_STATUS_SAVE_STATE_NO_MATCH" str="NO_MATCH"/>
+    <pair key="#ADCS_TRACKER_ID_STATUS_SAVE_STATE_WAITING_FOR_IMAGE1" str="WAITING_FOR_IMAGE1"/>
+    <pair key="#ADCS_TRACKER_ID_STATUS_SAVE_STATE_AWAITING_TRISTAR" str="AWAITING_TRISTAR"/>
+    <pair key="#ADCS_TRACKER_ID_STATUS_SAVE_STATE_TIME_OUT" str="TIME_OUT"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_id_status_save_state" endian="LITTLE" name="adcs_tracker_id_status_save_state8L" size="8"/>
+  <typeState dict="adcs_tracker_id_status_save_state" endian="LITTLE" name="adcs_tracker_id_status_save_state16L" size="16"/>
+  <typeState dict="adcs_tracker_id_status_save_state" endian="LITTLE" name="adcs_tracker_id_status_save_state32L" size="32"/>
+  <typeState dict="adcs_tracker_id_status_save_state" endian="BIG" name="adcs_tracker_id_status_save_state8B" size="8"/>
+  <typeState dict="adcs_tracker_id_status_save_state" endian="BIG" name="adcs_tracker_id_status_save_state16B" size="16"/>
+  <typeState dict="adcs_tracker_id_status_save_state" endian="BIG" name="adcs_tracker_id_status_save_state32B" size="32"/>
+  <dictionary name="adcs_tracker_att_status_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_ATT_STATUS_STATE_TOO_FEW_STARS" str="TOO_FEW_STARS"/>
+    <pair key="#ADCS_TRACKER_ATT_STATUS_STATE_QUEST_FAILED" str="QUEST_FAILED"/>
+    <pair key="#ADCS_TRACKER_ATT_STATUS_STATE_RESIDUALS_TOO_HIGH" str="RESIDUALS_TOO_HIGH"/>
+    <pair key="#ADCS_TRACKER_ATT_STATUS_STATE_OK" str="OK"/>
+    <pair key="#ADCS_TRACKER_ATT_STATUS_STATE_PENDING" str="PENDING"/>
+    <pair key="#ADCS_TRACKER_ATT_STATUS_STATE_BAD" str="BAD"/>
+    <pair key="#ADCS_TRACKER_ATT_STATUS_STATE_RATE_TOO_HIGH" str="RATE_TOO_HIGH"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_att_status_state" endian="LITTLE" name="adcs_tracker_att_status_state8L" size="8"/>
+  <typeState dict="adcs_tracker_att_status_state" endian="LITTLE" name="adcs_tracker_att_status_state16L" size="16"/>
+  <typeState dict="adcs_tracker_att_status_state" endian="LITTLE" name="adcs_tracker_att_status_state32L" size="32"/>
+  <typeState dict="adcs_tracker_att_status_state" endian="BIG" name="adcs_tracker_att_status_state8B" size="8"/>
+  <typeState dict="adcs_tracker_att_status_state" endian="BIG" name="adcs_tracker_att_status_state16B" size="16"/>
+  <typeState dict="adcs_tracker_att_status_state" endian="BIG" name="adcs_tracker_att_status_state32B" size="32"/>
+  <dictionary name="adcs_tracker_rate_est_status_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_RATE_EST_STATUS_STATE_BAD" str="BAD"/>
+    <pair key="#ADCS_TRACKER_RATE_EST_STATUS_STATE_OK" str="OK"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_rate_est_status_state" endian="LITTLE" name="adcs_tracker_rate_est_status_state8L" size="8"/>
+  <typeState dict="adcs_tracker_rate_est_status_state" endian="LITTLE" name="adcs_tracker_rate_est_status_state16L" size="16"/>
+  <typeState dict="adcs_tracker_rate_est_status_state" endian="LITTLE" name="adcs_tracker_rate_est_status_state32L" size="32"/>
+  <typeState dict="adcs_tracker_rate_est_status_state" endian="BIG" name="adcs_tracker_rate_est_status_state8B" size="8"/>
+  <typeState dict="adcs_tracker_rate_est_status_state" endian="BIG" name="adcs_tracker_rate_est_status_state16B" size="16"/>
+  <typeState dict="adcs_tracker_rate_est_status_state" endian="BIG" name="adcs_tracker_rate_est_status_state32B" size="32"/>
+  <dictionary name="adcs_tracker_rate_aid_status_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_RATE_AID_STATUS_STATE_BAD" str="BAD"/>
+    <pair key="#ADCS_TRACKER_RATE_AID_STATUS_STATE_OK" str="OK"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_rate_aid_status_state" endian="LITTLE" name="adcs_tracker_rate_aid_status_state8L" size="8"/>
+  <typeState dict="adcs_tracker_rate_aid_status_state" endian="LITTLE" name="adcs_tracker_rate_aid_status_state16L" size="16"/>
+  <typeState dict="adcs_tracker_rate_aid_status_state" endian="LITTLE" name="adcs_tracker_rate_aid_status_state32L" size="32"/>
+  <typeState dict="adcs_tracker_rate_aid_status_state" endian="BIG" name="adcs_tracker_rate_aid_status_state8B" size="8"/>
+  <typeState dict="adcs_tracker_rate_aid_status_state" endian="BIG" name="adcs_tracker_rate_aid_status_state16B" size="16"/>
+  <typeState dict="adcs_tracker_rate_aid_status_state" endian="BIG" name="adcs_tracker_rate_aid_status_state32B" size="32"/>
+  <dictionary name="adcs_tracker_vel_aid_status_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_VEL_AID_STATUS_STATE_BAD" str="BAD"/>
+    <pair key="#ADCS_TRACKER_VEL_AID_STATUS_STATE_OK" str="OK"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_vel_aid_status_state" endian="LITTLE" name="adcs_tracker_vel_aid_status_state8L" size="8"/>
+  <typeState dict="adcs_tracker_vel_aid_status_state" endian="LITTLE" name="adcs_tracker_vel_aid_status_state16L" size="16"/>
+  <typeState dict="adcs_tracker_vel_aid_status_state" endian="LITTLE" name="adcs_tracker_vel_aid_status_state32L" size="32"/>
+  <typeState dict="adcs_tracker_vel_aid_status_state" endian="BIG" name="adcs_tracker_vel_aid_status_state8B" size="8"/>
+  <typeState dict="adcs_tracker_vel_aid_status_state" endian="BIG" name="adcs_tracker_vel_aid_status_state16B" size="16"/>
+  <typeState dict="adcs_tracker_vel_aid_status_state" endian="BIG" name="adcs_tracker_vel_aid_status_state32B" size="32"/>
+  <dictionary name="adcs_tracker_att_aid_status_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_ATT_AID_STATUS_STATE_BAD" str="BAD"/>
+    <pair key="#ADCS_TRACKER_ATT_AID_STATUS_STATE_OK" str="OK"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_att_aid_status_state" endian="LITTLE" name="adcs_tracker_att_aid_status_state8L" size="8"/>
+  <typeState dict="adcs_tracker_att_aid_status_state" endian="LITTLE" name="adcs_tracker_att_aid_status_state16L" size="16"/>
+  <typeState dict="adcs_tracker_att_aid_status_state" endian="LITTLE" name="adcs_tracker_att_aid_status_state32L" size="32"/>
+  <typeState dict="adcs_tracker_att_aid_status_state" endian="BIG" name="adcs_tracker_att_aid_status_state8B" size="8"/>
+  <typeState dict="adcs_tracker_att_aid_status_state" endian="BIG" name="adcs_tracker_att_aid_status_state16B" size="16"/>
+  <typeState dict="adcs_tracker_att_aid_status_state" endian="BIG" name="adcs_tracker_att_aid_status_state32B" size="32"/>
+  <dictionary name="adcs_tracker_auto_black_enable_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_AUTO_BLACK_ENABLE_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TRACKER_AUTO_BLACK_ENABLE_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_auto_black_enable_state" endian="LITTLE" name="adcs_tracker_auto_black_enable_state8L" size="8"/>
+  <typeState dict="adcs_tracker_auto_black_enable_state" endian="LITTLE" name="adcs_tracker_auto_black_enable_state16L" size="16"/>
+  <typeState dict="adcs_tracker_auto_black_enable_state" endian="LITTLE" name="adcs_tracker_auto_black_enable_state32L" size="32"/>
+  <typeState dict="adcs_tracker_auto_black_enable_state" endian="BIG" name="adcs_tracker_auto_black_enable_state8B" size="8"/>
+  <typeState dict="adcs_tracker_auto_black_enable_state" endian="BIG" name="adcs_tracker_auto_black_enable_state16B" size="16"/>
+  <typeState dict="adcs_tracker_auto_black_enable_state" endian="BIG" name="adcs_tracker_auto_black_enable_state32B" size="32"/>
+  <dictionary name="adcs_tracker_auto_track_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_AUTO_TRACK_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TRACKER_AUTO_TRACK_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_auto_track_state" endian="LITTLE" name="adcs_tracker_auto_track_state8L" size="8"/>
+  <typeState dict="adcs_tracker_auto_track_state" endian="LITTLE" name="adcs_tracker_auto_track_state16L" size="16"/>
+  <typeState dict="adcs_tracker_auto_track_state" endian="LITTLE" name="adcs_tracker_auto_track_state32L" size="32"/>
+  <typeState dict="adcs_tracker_auto_track_state" endian="BIG" name="adcs_tracker_auto_track_state8B" size="8"/>
+  <typeState dict="adcs_tracker_auto_track_state" endian="BIG" name="adcs_tracker_auto_track_state16B" size="16"/>
+  <typeState dict="adcs_tracker_auto_track_state" endian="BIG" name="adcs_tracker_auto_track_state32B" size="32"/>
+  <dictionary name="adcs_tracker_auto_integration_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_AUTO_INTEGRATION_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TRACKER_AUTO_INTEGRATION_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_auto_integration_state" endian="LITTLE" name="adcs_tracker_auto_integration_state8L" size="8"/>
+  <typeState dict="adcs_tracker_auto_integration_state" endian="LITTLE" name="adcs_tracker_auto_integration_state16L" size="16"/>
+  <typeState dict="adcs_tracker_auto_integration_state" endian="LITTLE" name="adcs_tracker_auto_integration_state32L" size="32"/>
+  <typeState dict="adcs_tracker_auto_integration_state" endian="BIG" name="adcs_tracker_auto_integration_state8B" size="8"/>
+  <typeState dict="adcs_tracker_auto_integration_state" endian="BIG" name="adcs_tracker_auto_integration_state16B" size="16"/>
+  <typeState dict="adcs_tracker_auto_integration_state" endian="BIG" name="adcs_tracker_auto_integration_state32B" size="32"/>
+  <dictionary name="adcs_tracker_auto_gain_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_AUTO_GAIN_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TRACKER_AUTO_GAIN_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_auto_gain_state" endian="LITTLE" name="adcs_tracker_auto_gain_state8L" size="8"/>
+  <typeState dict="adcs_tracker_auto_gain_state" endian="LITTLE" name="adcs_tracker_auto_gain_state16L" size="16"/>
+  <typeState dict="adcs_tracker_auto_gain_state" endian="LITTLE" name="adcs_tracker_auto_gain_state32L" size="32"/>
+  <typeState dict="adcs_tracker_auto_gain_state" endian="BIG" name="adcs_tracker_auto_gain_state8B" size="8"/>
+  <typeState dict="adcs_tracker_auto_gain_state" endian="BIG" name="adcs_tracker_auto_gain_state16B" size="16"/>
+  <typeState dict="adcs_tracker_auto_gain_state" endian="BIG" name="adcs_tracker_auto_gain_state32B" size="32"/>
+  <dictionary name="adcs_tracker_fpga_det_timeout_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_FPGA_DET_TIMEOUT_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TRACKER_FPGA_DET_TIMEOUT_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_fpga_det_timeout_state" endian="LITTLE" name="adcs_tracker_fpga_det_timeout_state8L" size="8"/>
+  <typeState dict="adcs_tracker_fpga_det_timeout_state" endian="LITTLE" name="adcs_tracker_fpga_det_timeout_state16L" size="16"/>
+  <typeState dict="adcs_tracker_fpga_det_timeout_state" endian="LITTLE" name="adcs_tracker_fpga_det_timeout_state32L" size="32"/>
+  <typeState dict="adcs_tracker_fpga_det_timeout_state" endian="BIG" name="adcs_tracker_fpga_det_timeout_state8B" size="8"/>
+  <typeState dict="adcs_tracker_fpga_det_timeout_state" endian="BIG" name="adcs_tracker_fpga_det_timeout_state16B" size="16"/>
+  <typeState dict="adcs_tracker_fpga_det_timeout_state" endian="BIG" name="adcs_tracker_fpga_det_timeout_state32B" size="32"/>
+  <dictionary name="adcs_tracker_store_seq_images_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_STORE_SEQ_IMAGES_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TRACKER_STORE_SEQ_IMAGES_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_store_seq_images_state" endian="LITTLE" name="adcs_tracker_store_seq_images_state8L" size="8"/>
+  <typeState dict="adcs_tracker_store_seq_images_state" endian="LITTLE" name="adcs_tracker_store_seq_images_state16L" size="16"/>
+  <typeState dict="adcs_tracker_store_seq_images_state" endian="LITTLE" name="adcs_tracker_store_seq_images_state32L" size="32"/>
+  <typeState dict="adcs_tracker_store_seq_images_state" endian="BIG" name="adcs_tracker_store_seq_images_state8B" size="8"/>
+  <typeState dict="adcs_tracker_store_seq_images_state" endian="BIG" name="adcs_tracker_store_seq_images_state16B" size="16"/>
+  <typeState dict="adcs_tracker_store_seq_images_state" endian="BIG" name="adcs_tracker_store_seq_images_state32B" size="32"/>
+  <dictionary name="adcs_tracker_track_ref_available_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_TRACK_REF_AVAILABLE_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TRACKER_TRACK_REF_AVAILABLE_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_track_ref_available_state" endian="LITTLE" name="adcs_tracker_track_ref_available_state8L" size="8"/>
+  <typeState dict="adcs_tracker_track_ref_available_state" endian="LITTLE" name="adcs_tracker_track_ref_available_state16L" size="16"/>
+  <typeState dict="adcs_tracker_track_ref_available_state" endian="LITTLE" name="adcs_tracker_track_ref_available_state32L" size="32"/>
+  <typeState dict="adcs_tracker_track_ref_available_state" endian="BIG" name="adcs_tracker_track_ref_available_state8B" size="8"/>
+  <typeState dict="adcs_tracker_track_ref_available_state" endian="BIG" name="adcs_tracker_track_ref_available_state16B" size="16"/>
+  <typeState dict="adcs_tracker_track_ref_available_state" endian="BIG" name="adcs_tracker_track_ref_available_state32B" size="32"/>
+  <dictionary name="adcs_refs_orbit_method_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_REFS_ORBIT_METHOD_STATE_GRAVITY_HARMONIC" str="GRAVITY_HARMONIC"/>
+    <pair key="#ADCS_REFS_ORBIT_METHOD_STATE_SGP4" str="SGP4"/>
+    <pair key="#ADCS_REFS_ORBIT_METHOD_STATE_EXTERN_ACC_ONLY" str="EXTERN_ACC_ONLY"/>
+    <pair key="#ADCS_REFS_ORBIT_METHOD_STATE_KEPLER" str="KEPLER"/>
+    <pair key="#ADCS_REFS_ORBIT_METHOD_STATE_GRAVITY_POINT" str="GRAVITY_POINT"/>
+    <pair key="#ADCS_REFS_ORBIT_METHOD_STATE_GRAVITY_J2" str="GRAVITY_J2"/>
+    <pair key="#ADCS_REFS_ORBIT_METHOD_STATE_POLYNOMIAL" str="POLYNOMIAL"/>
+  </dictionary>
+  <typeState dict="adcs_refs_orbit_method_state" endian="LITTLE" name="adcs_refs_orbit_method_state8L" size="8"/>
+  <typeState dict="adcs_refs_orbit_method_state" endian="LITTLE" name="adcs_refs_orbit_method_state16L" size="16"/>
+  <typeState dict="adcs_refs_orbit_method_state" endian="LITTLE" name="adcs_refs_orbit_method_state32L" size="32"/>
+  <typeState dict="adcs_refs_orbit_method_state" endian="BIG" name="adcs_refs_orbit_method_state8B" size="8"/>
+  <typeState dict="adcs_refs_orbit_method_state" endian="BIG" name="adcs_refs_orbit_method_state16B" size="16"/>
+  <typeState dict="adcs_refs_orbit_method_state" endian="BIG" name="adcs_refs_orbit_method_state32B" size="32"/>
+  <dictionary name="adcs_refs_refs_valid_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_REFS_REFS_VALID_STATE_YES" str="YES"/>
+    <pair key="#ADCS_REFS_REFS_VALID_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_refs_refs_valid_state" endian="LITTLE" name="adcs_refs_refs_valid_state8L" size="8"/>
+  <typeState dict="adcs_refs_refs_valid_state" endian="LITTLE" name="adcs_refs_refs_valid_state16L" size="16"/>
+  <typeState dict="adcs_refs_refs_valid_state" endian="LITTLE" name="adcs_refs_refs_valid_state32L" size="32"/>
+  <typeState dict="adcs_refs_refs_valid_state" endian="BIG" name="adcs_refs_refs_valid_state8B" size="8"/>
+  <typeState dict="adcs_refs_refs_valid_state" endian="BIG" name="adcs_refs_refs_valid_state16B" size="16"/>
+  <typeState dict="adcs_refs_refs_valid_state" endian="BIG" name="adcs_refs_refs_valid_state32B" size="32"/>
+  <dictionary name="adcs_refs_esm_valid_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_REFS_ESM_VALID_STATE_YES" str="YES"/>
+    <pair key="#ADCS_REFS_ESM_VALID_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_refs_esm_valid_state" endian="LITTLE" name="adcs_refs_esm_valid_state8L" size="8"/>
+  <typeState dict="adcs_refs_esm_valid_state" endian="LITTLE" name="adcs_refs_esm_valid_state16L" size="16"/>
+  <typeState dict="adcs_refs_esm_valid_state" endian="LITTLE" name="adcs_refs_esm_valid_state32L" size="32"/>
+  <typeState dict="adcs_refs_esm_valid_state" endian="BIG" name="adcs_refs_esm_valid_state8B" size="8"/>
+  <typeState dict="adcs_refs_esm_valid_state" endian="BIG" name="adcs_refs_esm_valid_state16B" size="16"/>
+  <typeState dict="adcs_refs_esm_valid_state" endian="BIG" name="adcs_refs_esm_valid_state32B" size="32"/>
+  <dictionary name="adcs_refs_run_low_rate_task_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_REFS_RUN_LOW_RATE_TASK_STATE_YES" str="YES"/>
+    <pair key="#ADCS_REFS_RUN_LOW_RATE_TASK_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_refs_run_low_rate_task_state" endian="LITTLE" name="adcs_refs_run_low_rate_task_state8L" size="8"/>
+  <typeState dict="adcs_refs_run_low_rate_task_state" endian="LITTLE" name="adcs_refs_run_low_rate_task_state16L" size="16"/>
+  <typeState dict="adcs_refs_run_low_rate_task_state" endian="LITTLE" name="adcs_refs_run_low_rate_task_state32L" size="32"/>
+  <typeState dict="adcs_refs_run_low_rate_task_state" endian="BIG" name="adcs_refs_run_low_rate_task_state8B" size="8"/>
+  <typeState dict="adcs_refs_run_low_rate_task_state" endian="BIG" name="adcs_refs_run_low_rate_task_state16B" size="16"/>
+  <typeState dict="adcs_refs_run_low_rate_task_state" endian="BIG" name="adcs_refs_run_low_rate_task_state32B" size="32"/>
+  <dictionary name="adcs_refs_auto_gps_usage_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_REFS_AUTO_GPS_USAGE_STATE_YES" str="YES"/>
+    <pair key="#ADCS_REFS_AUTO_GPS_USAGE_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_refs_auto_gps_usage_state" endian="LITTLE" name="adcs_refs_auto_gps_usage_state8L" size="8"/>
+  <typeState dict="adcs_refs_auto_gps_usage_state" endian="LITTLE" name="adcs_refs_auto_gps_usage_state16L" size="16"/>
+  <typeState dict="adcs_refs_auto_gps_usage_state" endian="LITTLE" name="adcs_refs_auto_gps_usage_state32L" size="32"/>
+  <typeState dict="adcs_refs_auto_gps_usage_state" endian="BIG" name="adcs_refs_auto_gps_usage_state8B" size="8"/>
+  <typeState dict="adcs_refs_auto_gps_usage_state" endian="BIG" name="adcs_refs_auto_gps_usage_state16B" size="16"/>
+  <typeState dict="adcs_refs_auto_gps_usage_state" endian="BIG" name="adcs_refs_auto_gps_usage_state32B" size="32"/>
+  <dictionary name="adcs_time_time_valid_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TIME_TIME_VALID_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TIME_TIME_VALID_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_time_time_valid_state" endian="LITTLE" name="adcs_time_time_valid_state8L" size="8"/>
+  <typeState dict="adcs_time_time_valid_state" endian="LITTLE" name="adcs_time_time_valid_state16L" size="16"/>
+  <typeState dict="adcs_time_time_valid_state" endian="LITTLE" name="adcs_time_time_valid_state32L" size="32"/>
+  <typeState dict="adcs_time_time_valid_state" endian="BIG" name="adcs_time_time_valid_state8B" size="8"/>
+  <typeState dict="adcs_time_time_valid_state" endian="BIG" name="adcs_time_time_valid_state16B" size="16"/>
+  <typeState dict="adcs_time_time_valid_state" endian="BIG" name="adcs_time_time_valid_state32B" size="32"/>
+  <dictionary name="adcs_time_pps_config_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TIME_PPS_CONFIG_STATE_GPS" str="GPS"/>
+    <pair key="#ADCS_TIME_PPS_CONFIG_STATE_INT" str="INT"/>
+    <pair key="#ADCS_TIME_PPS_CONFIG_STATE_DS" str="DS"/>
+  </dictionary>
+  <typeState dict="adcs_time_pps_config_state" endian="LITTLE" name="adcs_time_pps_config_state8L" size="8"/>
+  <typeState dict="adcs_time_pps_config_state" endian="LITTLE" name="adcs_time_pps_config_state16L" size="16"/>
+  <typeState dict="adcs_time_pps_config_state" endian="LITTLE" name="adcs_time_pps_config_state32L" size="32"/>
+  <typeState dict="adcs_time_pps_config_state" endian="BIG" name="adcs_time_pps_config_state8B" size="8"/>
+  <typeState dict="adcs_time_pps_config_state" endian="BIG" name="adcs_time_pps_config_state16B" size="16"/>
+  <typeState dict="adcs_time_pps_config_state" endian="BIG" name="adcs_time_pps_config_state32B" size="32"/>
+  <dictionary name="adcs_imu_imu_vector_valid_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_IMU_IMU_VECTOR_VALID_STATE_YES" str="YES"/>
+    <pair key="#ADCS_IMU_IMU_VECTOR_VALID_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_imu_imu_vector_valid_state" endian="LITTLE" name="adcs_imu_imu_vector_valid_state8L" size="8"/>
+  <typeState dict="adcs_imu_imu_vector_valid_state" endian="LITTLE" name="adcs_imu_imu_vector_valid_state16L" size="16"/>
+  <typeState dict="adcs_imu_imu_vector_valid_state" endian="LITTLE" name="adcs_imu_imu_vector_valid_state32L" size="32"/>
+  <typeState dict="adcs_imu_imu_vector_valid_state" endian="BIG" name="adcs_imu_imu_vector_valid_state8B" size="8"/>
+  <typeState dict="adcs_imu_imu_vector_valid_state" endian="BIG" name="adcs_imu_imu_vector_valid_state16B" size="16"/>
+  <typeState dict="adcs_imu_imu_vector_valid_state" endian="BIG" name="adcs_imu_imu_vector_valid_state32B" size="32"/>
+  <dictionary name="adcs_imu_imu_vector_enabled_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_IMU_IMU_VECTOR_ENABLED_STATE_YES" str="YES"/>
+    <pair key="#ADCS_IMU_IMU_VECTOR_ENABLED_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_imu_imu_vector_enabled_state" endian="LITTLE" name="adcs_imu_imu_vector_enabled_state8L" size="8"/>
+  <typeState dict="adcs_imu_imu_vector_enabled_state" endian="LITTLE" name="adcs_imu_imu_vector_enabled_state16L" size="16"/>
+  <typeState dict="adcs_imu_imu_vector_enabled_state" endian="LITTLE" name="adcs_imu_imu_vector_enabled_state32L" size="32"/>
+  <typeState dict="adcs_imu_imu_vector_enabled_state" endian="BIG" name="adcs_imu_imu_vector_enabled_state8B" size="8"/>
+  <typeState dict="adcs_imu_imu_vector_enabled_state" endian="BIG" name="adcs_imu_imu_vector_enabled_state16B" size="16"/>
+  <typeState dict="adcs_imu_imu_vector_enabled_state" endian="BIG" name="adcs_imu_imu_vector_enabled_state32B" size="32"/>
+  <dictionary name="adcs_imu_imu_test_mode_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_IMU_IMU_TEST_MODE_STATE_YES" str="YES"/>
+    <pair key="#ADCS_IMU_IMU_TEST_MODE_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_imu_imu_test_mode_state" endian="LITTLE" name="adcs_imu_imu_test_mode_state8L" size="8"/>
+  <typeState dict="adcs_imu_imu_test_mode_state" endian="LITTLE" name="adcs_imu_imu_test_mode_state16L" size="16"/>
+  <typeState dict="adcs_imu_imu_test_mode_state" endian="LITTLE" name="adcs_imu_imu_test_mode_state32L" size="32"/>
+  <typeState dict="adcs_imu_imu_test_mode_state" endian="BIG" name="adcs_imu_imu_test_mode_state8B" size="8"/>
+  <typeState dict="adcs_imu_imu_test_mode_state" endian="BIG" name="adcs_imu_imu_test_mode_state16B" size="16"/>
+  <typeState dict="adcs_imu_imu_test_mode_state" endian="BIG" name="adcs_imu_imu_test_mode_state32B" size="32"/>
+  <dictionary name="adcs_cal_tracker_align_method_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_CAL_TRACKER_ALIGN_METHOD_STATE_RUNNING" str="RUNNING"/>
+    <pair key="#ADCS_CAL_TRACKER_ALIGN_METHOD_STATE_BATCH" str="BATCH"/>
+  </dictionary>
+  <typeState dict="adcs_cal_tracker_align_method_state" endian="LITTLE" name="adcs_cal_tracker_align_method_state8L" size="8"/>
+  <typeState dict="adcs_cal_tracker_align_method_state" endian="LITTLE" name="adcs_cal_tracker_align_method_state16L" size="16"/>
+  <typeState dict="adcs_cal_tracker_align_method_state" endian="LITTLE" name="adcs_cal_tracker_align_method_state32L" size="32"/>
+  <typeState dict="adcs_cal_tracker_align_method_state" endian="BIG" name="adcs_cal_tracker_align_method_state8B" size="8"/>
+  <typeState dict="adcs_cal_tracker_align_method_state" endian="BIG" name="adcs_cal_tracker_align_method_state16B" size="16"/>
+  <typeState dict="adcs_cal_tracker_align_method_state" endian="BIG" name="adcs_cal_tracker_align_method_state32B" size="32"/>
+  <dictionary name="adcs_cal_tracker_align_usage_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_CAL_TRACKER_ALIGN_USAGE_STATE_DYN" str="DYN"/>
+    <pair key="#ADCS_CAL_TRACKER_ALIGN_USAGE_STATE_TABLE" str="TABLE"/>
+  </dictionary>
+  <typeState dict="adcs_cal_tracker_align_usage_state" endian="LITTLE" name="adcs_cal_tracker_align_usage_state8L" size="8"/>
+  <typeState dict="adcs_cal_tracker_align_usage_state" endian="LITTLE" name="adcs_cal_tracker_align_usage_state16L" size="16"/>
+  <typeState dict="adcs_cal_tracker_align_usage_state" endian="LITTLE" name="adcs_cal_tracker_align_usage_state32L" size="32"/>
+  <typeState dict="adcs_cal_tracker_align_usage_state" endian="BIG" name="adcs_cal_tracker_align_usage_state8B" size="8"/>
+  <typeState dict="adcs_cal_tracker_align_usage_state" endian="BIG" name="adcs_cal_tracker_align_usage_state16B" size="16"/>
+  <typeState dict="adcs_cal_tracker_align_usage_state" endian="BIG" name="adcs_cal_tracker_align_usage_state32B" size="32"/>
+  <dictionary name="adcs_att_det_attitude_alg_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_ATT_DET_ATTITUDE_ALG_STATE_FIXED_GAIN" str="FIXED_GAIN"/>
+    <pair key="#ADCS_ATT_DET_ATTITUDE_ALG_STATE_RAW" str="RAW"/>
+    <pair key="#ADCS_ATT_DET_ATTITUDE_ALG_STATE_FIXED_GAIN_NO_BIAS" str="FIXED_GAIN_NO_BIAS"/>
+    <pair key="#ADCS_ATT_DET_ATTITUDE_ALG_STATE_MEKF" str="MEKF"/>
+  </dictionary>
+  <typeState dict="adcs_att_det_attitude_alg_state" endian="LITTLE" name="adcs_att_det_attitude_alg_state8L" size="8"/>
+  <typeState dict="adcs_att_det_attitude_alg_state" endian="LITTLE" name="adcs_att_det_attitude_alg_state16L" size="16"/>
+  <typeState dict="adcs_att_det_attitude_alg_state" endian="LITTLE" name="adcs_att_det_attitude_alg_state32L" size="32"/>
+  <typeState dict="adcs_att_det_attitude_alg_state" endian="BIG" name="adcs_att_det_attitude_alg_state8B" size="8"/>
+  <typeState dict="adcs_att_det_attitude_alg_state" endian="BIG" name="adcs_att_det_attitude_alg_state16B" size="16"/>
+  <typeState dict="adcs_att_det_attitude_alg_state" endian="BIG" name="adcs_att_det_attitude_alg_state32B" size="32"/>
+  <dictionary name="adcs_att_det_attitude_valid_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_ATT_DET_ATTITUDE_VALID_STATE_YES" str="YES"/>
+    <pair key="#ADCS_ATT_DET_ATTITUDE_VALID_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_att_det_attitude_valid_state" endian="LITTLE" name="adcs_att_det_attitude_valid_state8L" size="8"/>
+  <typeState dict="adcs_att_det_attitude_valid_state" endian="LITTLE" name="adcs_att_det_attitude_valid_state16L" size="16"/>
+  <typeState dict="adcs_att_det_attitude_valid_state" endian="LITTLE" name="adcs_att_det_attitude_valid_state32L" size="32"/>
+  <typeState dict="adcs_att_det_attitude_valid_state" endian="BIG" name="adcs_att_det_attitude_valid_state8B" size="8"/>
+  <typeState dict="adcs_att_det_attitude_valid_state" endian="BIG" name="adcs_att_det_attitude_valid_state16B" size="16"/>
+  <typeState dict="adcs_att_det_attitude_valid_state" endian="BIG" name="adcs_att_det_attitude_valid_state32B" size="32"/>
+  <dictionary name="adcs_att_det_meas_att_valid_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_ATT_DET_MEAS_ATT_VALID_STATE_YES" str="YES"/>
+    <pair key="#ADCS_ATT_DET_MEAS_ATT_VALID_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_att_det_meas_att_valid_state" endian="LITTLE" name="adcs_att_det_meas_att_valid_state8L" size="8"/>
+  <typeState dict="adcs_att_det_meas_att_valid_state" endian="LITTLE" name="adcs_att_det_meas_att_valid_state16L" size="16"/>
+  <typeState dict="adcs_att_det_meas_att_valid_state" endian="LITTLE" name="adcs_att_det_meas_att_valid_state32L" size="32"/>
+  <typeState dict="adcs_att_det_meas_att_valid_state" endian="BIG" name="adcs_att_det_meas_att_valid_state8B" size="8"/>
+  <typeState dict="adcs_att_det_meas_att_valid_state" endian="BIG" name="adcs_att_det_meas_att_valid_state16B" size="16"/>
+  <typeState dict="adcs_att_det_meas_att_valid_state" endian="BIG" name="adcs_att_det_meas_att_valid_state32B" size="32"/>
+  <dictionary name="adcs_att_det_meas_rate_valid_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_ATT_DET_MEAS_RATE_VALID_STATE_YES" str="YES"/>
+    <pair key="#ADCS_ATT_DET_MEAS_RATE_VALID_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_att_det_meas_rate_valid_state" endian="LITTLE" name="adcs_att_det_meas_rate_valid_state8L" size="8"/>
+  <typeState dict="adcs_att_det_meas_rate_valid_state" endian="LITTLE" name="adcs_att_det_meas_rate_valid_state16L" size="16"/>
+  <typeState dict="adcs_att_det_meas_rate_valid_state" endian="LITTLE" name="adcs_att_det_meas_rate_valid_state32L" size="32"/>
+  <typeState dict="adcs_att_det_meas_rate_valid_state" endian="BIG" name="adcs_att_det_meas_rate_valid_state8B" size="8"/>
+  <typeState dict="adcs_att_det_meas_rate_valid_state" endian="BIG" name="adcs_att_det_meas_rate_valid_state16B" size="16"/>
+  <typeState dict="adcs_att_det_meas_rate_valid_state" endian="BIG" name="adcs_att_det_meas_rate_valid_state32B" size="32"/>
+  <dictionary name="adcs_tracker_ctrl_tracker_att_valid1_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_CTRL_TRACKER_ATT_VALID1_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TRACKER_CTRL_TRACKER_ATT_VALID1_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_ctrl_tracker_att_valid1_state" endian="LITTLE" name="adcs_tracker_ctrl_tracker_att_valid1_state8L" size="8"/>
+  <typeState dict="adcs_tracker_ctrl_tracker_att_valid1_state" endian="LITTLE" name="adcs_tracker_ctrl_tracker_att_valid1_state16L" size="16"/>
+  <typeState dict="adcs_tracker_ctrl_tracker_att_valid1_state" endian="LITTLE" name="adcs_tracker_ctrl_tracker_att_valid1_state32L" size="32"/>
+  <typeState dict="adcs_tracker_ctrl_tracker_att_valid1_state" endian="BIG" name="adcs_tracker_ctrl_tracker_att_valid1_state8B" size="8"/>
+  <typeState dict="adcs_tracker_ctrl_tracker_att_valid1_state" endian="BIG" name="adcs_tracker_ctrl_tracker_att_valid1_state16B" size="16"/>
+  <typeState dict="adcs_tracker_ctrl_tracker_att_valid1_state" endian="BIG" name="adcs_tracker_ctrl_tracker_att_valid1_state32B" size="32"/>
+  <dictionary name="adcs_tracker_ctrl_tracker_att_valid2_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_CTRL_TRACKER_ATT_VALID2_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TRACKER_CTRL_TRACKER_ATT_VALID2_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_ctrl_tracker_att_valid2_state" endian="LITTLE" name="adcs_tracker_ctrl_tracker_att_valid2_state8L" size="8"/>
+  <typeState dict="adcs_tracker_ctrl_tracker_att_valid2_state" endian="LITTLE" name="adcs_tracker_ctrl_tracker_att_valid2_state16L" size="16"/>
+  <typeState dict="adcs_tracker_ctrl_tracker_att_valid2_state" endian="LITTLE" name="adcs_tracker_ctrl_tracker_att_valid2_state32L" size="32"/>
+  <typeState dict="adcs_tracker_ctrl_tracker_att_valid2_state" endian="BIG" name="adcs_tracker_ctrl_tracker_att_valid2_state8B" size="8"/>
+  <typeState dict="adcs_tracker_ctrl_tracker_att_valid2_state" endian="BIG" name="adcs_tracker_ctrl_tracker_att_valid2_state16B" size="16"/>
+  <typeState dict="adcs_tracker_ctrl_tracker_att_valid2_state" endian="BIG" name="adcs_tracker_ctrl_tracker_att_valid2_state32B" size="32"/>
+  <dictionary name="adcs_tracker_ctrl_tracker_usage_enabled1_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_CTRL_TRACKER_USAGE_ENABLED1_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TRACKER_CTRL_TRACKER_USAGE_ENABLED1_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_ctrl_tracker_usage_enabled1_state" endian="LITTLE" name="adcs_tracker_ctrl_tracker_usage_enabled1_state8L" size="8"/>
+  <typeState dict="adcs_tracker_ctrl_tracker_usage_enabled1_state" endian="LITTLE" name="adcs_tracker_ctrl_tracker_usage_enabled1_state16L" size="16"/>
+  <typeState dict="adcs_tracker_ctrl_tracker_usage_enabled1_state" endian="LITTLE" name="adcs_tracker_ctrl_tracker_usage_enabled1_state32L" size="32"/>
+  <typeState dict="adcs_tracker_ctrl_tracker_usage_enabled1_state" endian="BIG" name="adcs_tracker_ctrl_tracker_usage_enabled1_state8B" size="8"/>
+  <typeState dict="adcs_tracker_ctrl_tracker_usage_enabled1_state" endian="BIG" name="adcs_tracker_ctrl_tracker_usage_enabled1_state16B" size="16"/>
+  <typeState dict="adcs_tracker_ctrl_tracker_usage_enabled1_state" endian="BIG" name="adcs_tracker_ctrl_tracker_usage_enabled1_state32B" size="32"/>
+  <dictionary name="adcs_tracker_ctrl_tracker_usage_enabled2_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_CTRL_TRACKER_USAGE_ENABLED2_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TRACKER_CTRL_TRACKER_USAGE_ENABLED2_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_ctrl_tracker_usage_enabled2_state" endian="LITTLE" name="adcs_tracker_ctrl_tracker_usage_enabled2_state8L" size="8"/>
+  <typeState dict="adcs_tracker_ctrl_tracker_usage_enabled2_state" endian="LITTLE" name="adcs_tracker_ctrl_tracker_usage_enabled2_state16L" size="16"/>
+  <typeState dict="adcs_tracker_ctrl_tracker_usage_enabled2_state" endian="LITTLE" name="adcs_tracker_ctrl_tracker_usage_enabled2_state32L" size="32"/>
+  <typeState dict="adcs_tracker_ctrl_tracker_usage_enabled2_state" endian="BIG" name="adcs_tracker_ctrl_tracker_usage_enabled2_state8B" size="8"/>
+  <typeState dict="adcs_tracker_ctrl_tracker_usage_enabled2_state" endian="BIG" name="adcs_tracker_ctrl_tracker_usage_enabled2_state16B" size="16"/>
+  <typeState dict="adcs_tracker_ctrl_tracker_usage_enabled2_state" endian="BIG" name="adcs_tracker_ctrl_tracker_usage_enabled2_state32B" size="32"/>
+  <dictionary name="adcs_tracker_ctrl_max_backgnd_tripped1_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_CTRL_MAX_BACKGND_TRIPPED1_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TRACKER_CTRL_MAX_BACKGND_TRIPPED1_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_ctrl_max_backgnd_tripped1_state" endian="LITTLE" name="adcs_tracker_ctrl_max_backgnd_tripped1_state8L" size="8"/>
+  <typeState dict="adcs_tracker_ctrl_max_backgnd_tripped1_state" endian="LITTLE" name="adcs_tracker_ctrl_max_backgnd_tripped1_state16L" size="16"/>
+  <typeState dict="adcs_tracker_ctrl_max_backgnd_tripped1_state" endian="LITTLE" name="adcs_tracker_ctrl_max_backgnd_tripped1_state32L" size="32"/>
+  <typeState dict="adcs_tracker_ctrl_max_backgnd_tripped1_state" endian="BIG" name="adcs_tracker_ctrl_max_backgnd_tripped1_state8B" size="8"/>
+  <typeState dict="adcs_tracker_ctrl_max_backgnd_tripped1_state" endian="BIG" name="adcs_tracker_ctrl_max_backgnd_tripped1_state16B" size="16"/>
+  <typeState dict="adcs_tracker_ctrl_max_backgnd_tripped1_state" endian="BIG" name="adcs_tracker_ctrl_max_backgnd_tripped1_state32B" size="32"/>
+  <dictionary name="adcs_tracker_ctrl_max_backgnd_tripped2_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_CTRL_MAX_BACKGND_TRIPPED2_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TRACKER_CTRL_MAX_BACKGND_TRIPPED2_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_ctrl_max_backgnd_tripped2_state" endian="LITTLE" name="adcs_tracker_ctrl_max_backgnd_tripped2_state8L" size="8"/>
+  <typeState dict="adcs_tracker_ctrl_max_backgnd_tripped2_state" endian="LITTLE" name="adcs_tracker_ctrl_max_backgnd_tripped2_state16L" size="16"/>
+  <typeState dict="adcs_tracker_ctrl_max_backgnd_tripped2_state" endian="LITTLE" name="adcs_tracker_ctrl_max_backgnd_tripped2_state32L" size="32"/>
+  <typeState dict="adcs_tracker_ctrl_max_backgnd_tripped2_state" endian="BIG" name="adcs_tracker_ctrl_max_backgnd_tripped2_state8B" size="8"/>
+  <typeState dict="adcs_tracker_ctrl_max_backgnd_tripped2_state" endian="BIG" name="adcs_tracker_ctrl_max_backgnd_tripped2_state16B" size="16"/>
+  <typeState dict="adcs_tracker_ctrl_max_backgnd_tripped2_state" endian="BIG" name="adcs_tracker_ctrl_max_backgnd_tripped2_state32B" size="32"/>
+  <dictionary name="adcs_tracker_ctrl_max_rot_rate_tripped1_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_CTRL_MAX_ROT_RATE_TRIPPED1_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TRACKER_CTRL_MAX_ROT_RATE_TRIPPED1_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_ctrl_max_rot_rate_tripped1_state" endian="LITTLE" name="adcs_tracker_ctrl_max_rot_rate_tripped1_state8L" size="8"/>
+  <typeState dict="adcs_tracker_ctrl_max_rot_rate_tripped1_state" endian="LITTLE" name="adcs_tracker_ctrl_max_rot_rate_tripped1_state16L" size="16"/>
+  <typeState dict="adcs_tracker_ctrl_max_rot_rate_tripped1_state" endian="LITTLE" name="adcs_tracker_ctrl_max_rot_rate_tripped1_state32L" size="32"/>
+  <typeState dict="adcs_tracker_ctrl_max_rot_rate_tripped1_state" endian="BIG" name="adcs_tracker_ctrl_max_rot_rate_tripped1_state8B" size="8"/>
+  <typeState dict="adcs_tracker_ctrl_max_rot_rate_tripped1_state" endian="BIG" name="adcs_tracker_ctrl_max_rot_rate_tripped1_state16B" size="16"/>
+  <typeState dict="adcs_tracker_ctrl_max_rot_rate_tripped1_state" endian="BIG" name="adcs_tracker_ctrl_max_rot_rate_tripped1_state32B" size="32"/>
+  <dictionary name="adcs_tracker_ctrl_max_rot_rate_tripped2_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER_CTRL_MAX_ROT_RATE_TRIPPED2_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TRACKER_CTRL_MAX_ROT_RATE_TRIPPED2_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tracker_ctrl_max_rot_rate_tripped2_state" endian="LITTLE" name="adcs_tracker_ctrl_max_rot_rate_tripped2_state8L" size="8"/>
+  <typeState dict="adcs_tracker_ctrl_max_rot_rate_tripped2_state" endian="LITTLE" name="adcs_tracker_ctrl_max_rot_rate_tripped2_state16L" size="16"/>
+  <typeState dict="adcs_tracker_ctrl_max_rot_rate_tripped2_state" endian="LITTLE" name="adcs_tracker_ctrl_max_rot_rate_tripped2_state32L" size="32"/>
+  <typeState dict="adcs_tracker_ctrl_max_rot_rate_tripped2_state" endian="BIG" name="adcs_tracker_ctrl_max_rot_rate_tripped2_state8B" size="8"/>
+  <typeState dict="adcs_tracker_ctrl_max_rot_rate_tripped2_state" endian="BIG" name="adcs_tracker_ctrl_max_rot_rate_tripped2_state16B" size="16"/>
+  <typeState dict="adcs_tracker_ctrl_max_rot_rate_tripped2_state" endian="BIG" name="adcs_tracker_ctrl_max_rot_rate_tripped2_state32B" size="32"/>
+  <dictionary name="adcs_att_ctrl_sun_point_state_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_ATT_CTRL_SUN_POINT_STATE_STATE_SEARCHING" str="SEARCHING"/>
+    <pair key="#ADCS_ATT_CTRL_SUN_POINT_STATE_STATE_WAITING" str="WAITING"/>
+    <pair key="#ADCS_ATT_CTRL_SUN_POINT_STATE_STATE_CONVERGING" str="CONVERGING"/>
+    <pair key="#ADCS_ATT_CTRL_SUN_POINT_STATE_STATE_NOT_ACTIVE" str="NOT_ACTIVE"/>
+    <pair key="#ADCS_ATT_CTRL_SUN_POINT_STATE_STATE_ON_SUN" str="ON_SUN"/>
+    <pair key="#ADCS_ATT_CTRL_SUN_POINT_STATE_STATE_SEARCH_INIT" str="SEARCH_INIT"/>
+  </dictionary>
+  <typeState dict="adcs_att_ctrl_sun_point_state_state" endian="LITTLE" name="adcs_att_ctrl_sun_point_state_state8L" size="8"/>
+  <typeState dict="adcs_att_ctrl_sun_point_state_state" endian="LITTLE" name="adcs_att_ctrl_sun_point_state_state16L" size="16"/>
+  <typeState dict="adcs_att_ctrl_sun_point_state_state" endian="LITTLE" name="adcs_att_ctrl_sun_point_state_state32L" size="32"/>
+  <typeState dict="adcs_att_ctrl_sun_point_state_state" endian="BIG" name="adcs_att_ctrl_sun_point_state_state8B" size="8"/>
+  <typeState dict="adcs_att_ctrl_sun_point_state_state" endian="BIG" name="adcs_att_ctrl_sun_point_state_state16B" size="16"/>
+  <typeState dict="adcs_att_ctrl_sun_point_state_state" endian="BIG" name="adcs_att_ctrl_sun_point_state_state32B" size="32"/>
+  <dictionary name="adcs_att_ctrl_momentum_too_high_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_ATT_CTRL_MOMENTUM_TOO_HIGH_STATE_YES" str="YES"/>
+    <pair key="#ADCS_ATT_CTRL_MOMENTUM_TOO_HIGH_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_att_ctrl_momentum_too_high_state" endian="LITTLE" name="adcs_att_ctrl_momentum_too_high_state8L" size="8"/>
+  <typeState dict="adcs_att_ctrl_momentum_too_high_state" endian="LITTLE" name="adcs_att_ctrl_momentum_too_high_state16L" size="16"/>
+  <typeState dict="adcs_att_ctrl_momentum_too_high_state" endian="LITTLE" name="adcs_att_ctrl_momentum_too_high_state32L" size="32"/>
+  <typeState dict="adcs_att_ctrl_momentum_too_high_state" endian="BIG" name="adcs_att_ctrl_momentum_too_high_state8B" size="8"/>
+  <typeState dict="adcs_att_ctrl_momentum_too_high_state" endian="BIG" name="adcs_att_ctrl_momentum_too_high_state16B" size="16"/>
+  <typeState dict="adcs_att_ctrl_momentum_too_high_state" endian="BIG" name="adcs_att_ctrl_momentum_too_high_state32B" size="32"/>
+  <dictionary name="adcs_tables_table_upload_status_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TABLES_TABLE_UPLOAD_STATUS_STATE_EXTRACTING" str="EXTRACTING"/>
+    <pair key="#ADCS_TABLES_TABLE_UPLOAD_STATUS_STATE_IDLE" str="IDLE"/>
+    <pair key="#ADCS_TABLES_TABLE_UPLOAD_STATUS_STATE_CALCULATING_CRC" str="CALCULATING_CRC"/>
+    <pair key="#ADCS_TABLES_TABLE_UPLOAD_STATUS_STATE_INVALID_TABLE" str="INVALID_TABLE"/>
+    <pair key="#ADCS_TABLES_TABLE_UPLOAD_STATUS_STATE_FLASH_BURN_DONE" str="FLASH_BURN_DONE"/>
+    <pair key="#ADCS_TABLES_TABLE_UPLOAD_STATUS_STATE_COMMITTING" str="COMMITTING"/>
+    <pair key="#ADCS_TABLES_TABLE_UPLOAD_STATUS_STATE_FLASH_BURN_DIRECT" str="FLASH_BURN_DIRECT"/>
+    <pair key="#ADCS_TABLES_TABLE_UPLOAD_STATUS_STATE_COMMITTED" str="COMMITTED"/>
+    <pair key="#ADCS_TABLES_TABLE_UPLOAD_STATUS_STATE_FLASH_BURN_COPY" str="FLASH_BURN_COPY"/>
+    <pair key="#ADCS_TABLES_TABLE_UPLOAD_STATUS_STATE_EXTRACTED" str="EXTRACTED"/>
+    <pair key="#ADCS_TABLES_TABLE_UPLOAD_STATUS_STATE_FLASH_EXTRACT_DONE" str="FLASH_EXTRACT_DONE"/>
+    <pair key="#ADCS_TABLES_TABLE_UPLOAD_STATUS_STATE_NEW_DATA_IN" str="NEW_DATA_IN"/>
+    <pair key="#ADCS_TABLES_TABLE_UPLOAD_STATUS_STATE_FLASH_EXTRACT" str="FLASH_EXTRACT"/>
+    <pair key="#ADCS_TABLES_TABLE_UPLOAD_STATUS_STATE_CRC_READY" str="CRC_READY"/>
+  </dictionary>
+  <typeState dict="adcs_tables_table_upload_status_state" endian="LITTLE" name="adcs_tables_table_upload_status_state8L" size="8"/>
+  <typeState dict="adcs_tables_table_upload_status_state" endian="LITTLE" name="adcs_tables_table_upload_status_state16L" size="16"/>
+  <typeState dict="adcs_tables_table_upload_status_state" endian="LITTLE" name="adcs_tables_table_upload_status_state32L" size="32"/>
+  <typeState dict="adcs_tables_table_upload_status_state" endian="BIG" name="adcs_tables_table_upload_status_state8B" size="8"/>
+  <typeState dict="adcs_tables_table_upload_status_state" endian="BIG" name="adcs_tables_table_upload_status_state16B" size="16"/>
+  <typeState dict="adcs_tables_table_upload_status_state" endian="BIG" name="adcs_tables_table_upload_status_state32B" size="32"/>
+  <dictionary name="adcs_tables_flash_burn_armed_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TABLES_FLASH_BURN_ARMED_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TABLES_FLASH_BURN_ARMED_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tables_flash_burn_armed_state" endian="LITTLE" name="adcs_tables_flash_burn_armed_state8L" size="8"/>
+  <typeState dict="adcs_tables_flash_burn_armed_state" endian="LITTLE" name="adcs_tables_flash_burn_armed_state16L" size="16"/>
+  <typeState dict="adcs_tables_flash_burn_armed_state" endian="LITTLE" name="adcs_tables_flash_burn_armed_state32L" size="32"/>
+  <typeState dict="adcs_tables_flash_burn_armed_state" endian="BIG" name="adcs_tables_flash_burn_armed_state8B" size="8"/>
+  <typeState dict="adcs_tables_flash_burn_armed_state" endian="BIG" name="adcs_tables_flash_burn_armed_state16B" size="16"/>
+  <typeState dict="adcs_tables_flash_burn_armed_state" endian="BIG" name="adcs_tables_flash_burn_armed_state32B" size="32"/>
+  <dictionary name="adcs_att_cmd_adcs_mode_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_ATT_CMD_ADCS_MODE_STATE_FINE_REF_POINT" str="FINE_REF_POINT"/>
+    <pair key="#ADCS_ATT_CMD_ADCS_MODE_STATE_SUN_POINT" str="SUN_POINT"/>
+  </dictionary>
+  <typeState dict="adcs_att_cmd_adcs_mode_state" endian="LITTLE" name="adcs_att_cmd_adcs_mode_state8L" size="8"/>
+  <typeState dict="adcs_att_cmd_adcs_mode_state" endian="LITTLE" name="adcs_att_cmd_adcs_mode_state16L" size="16"/>
+  <typeState dict="adcs_att_cmd_adcs_mode_state" endian="LITTLE" name="adcs_att_cmd_adcs_mode_state32L" size="32"/>
+  <typeState dict="adcs_att_cmd_adcs_mode_state" endian="BIG" name="adcs_att_cmd_adcs_mode_state8B" size="8"/>
+  <typeState dict="adcs_att_cmd_adcs_mode_state" endian="BIG" name="adcs_att_cmd_adcs_mode_state16B" size="16"/>
+  <typeState dict="adcs_att_cmd_adcs_mode_state" endian="BIG" name="adcs_att_cmd_adcs_mode_state32B" size="32"/>
+  <dictionary name="adcs_att_cmd_safe_mode_reason_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_ATT_CMD_SAFE_MODE_REASON_STATE_ATTITUDE_INVALID" str="ATTITUDE_INVALID"/>
+    <pair key="#ADCS_ATT_CMD_SAFE_MODE_REASON_STATE_TIME_INVALID" str="TIME_INVALID"/>
+    <pair key="#ADCS_ATT_CMD_SAFE_MODE_REASON_STATE_REFS_INVALID" str="REFS_INVALID"/>
+    <pair key="#ADCS_ATT_CMD_SAFE_MODE_REASON_STATE_ATTITUDE_TIME_INVALID" str="ATTITUDE_TIME_INVALID"/>
+    <pair key="#ADCS_ATT_CMD_SAFE_MODE_REASON_STATE_BOOT" str="BOOT"/>
+    <pair key="#ADCS_ATT_CMD_SAFE_MODE_REASON_STATE_COMMAND" str="COMMAND"/>
+  </dictionary>
+  <typeState dict="adcs_att_cmd_safe_mode_reason_state" endian="LITTLE" name="adcs_att_cmd_safe_mode_reason_state8L" size="8"/>
+  <typeState dict="adcs_att_cmd_safe_mode_reason_state" endian="LITTLE" name="adcs_att_cmd_safe_mode_reason_state16L" size="16"/>
+  <typeState dict="adcs_att_cmd_safe_mode_reason_state" endian="LITTLE" name="adcs_att_cmd_safe_mode_reason_state32L" size="32"/>
+  <typeState dict="adcs_att_cmd_safe_mode_reason_state" endian="BIG" name="adcs_att_cmd_safe_mode_reason_state8B" size="8"/>
+  <typeState dict="adcs_att_cmd_safe_mode_reason_state" endian="BIG" name="adcs_att_cmd_safe_mode_reason_state16B" size="16"/>
+  <typeState dict="adcs_att_cmd_safe_mode_reason_state" endian="BIG" name="adcs_att_cmd_safe_mode_reason_state32B" size="32"/>
+  <dictionary name="adcs_att_cmd_recommend_sun_point_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_ATT_CMD_RECOMMEND_SUN_POINT_STATE_YES" str="YES"/>
+    <pair key="#ADCS_ATT_CMD_RECOMMEND_SUN_POINT_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_att_cmd_recommend_sun_point_state" endian="LITTLE" name="adcs_att_cmd_recommend_sun_point_state8L" size="8"/>
+  <typeState dict="adcs_att_cmd_recommend_sun_point_state" endian="LITTLE" name="adcs_att_cmd_recommend_sun_point_state16L" size="16"/>
+  <typeState dict="adcs_att_cmd_recommend_sun_point_state" endian="LITTLE" name="adcs_att_cmd_recommend_sun_point_state32L" size="32"/>
+  <typeState dict="adcs_att_cmd_recommend_sun_point_state" endian="BIG" name="adcs_att_cmd_recommend_sun_point_state8B" size="8"/>
+  <typeState dict="adcs_att_cmd_recommend_sun_point_state" endian="BIG" name="adcs_att_cmd_recommend_sun_point_state16B" size="16"/>
+  <typeState dict="adcs_att_cmd_recommend_sun_point_state" endian="BIG" name="adcs_att_cmd_recommend_sun_point_state32B" size="32"/>
+  <dictionary name="adcs_tracker2_operating_mode_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER2_OPERATING_MODE_STATE_TRACK" str="TRACK"/>
+    <pair key="#ADCS_TRACKER2_OPERATING_MODE_STATE_PHOTO" str="PHOTO"/>
+    <pair key="#ADCS_TRACKER2_OPERATING_MODE_STATE_CAL" str="CAL"/>
+    <pair key="#ADCS_TRACKER2_OPERATING_MODE_STATE_IDLE" str="IDLE"/>
+    <pair key="#ADCS_TRACKER2_OPERATING_MODE_STATE_INITIALIZE" str="INITIALIZE"/>
+    <pair key="#ADCS_TRACKER2_OPERATING_MODE_STATE_STARID" str="STARID"/>
+  </dictionary>
+  <typeState dict="adcs_tracker2_operating_mode_state" endian="LITTLE" name="adcs_tracker2_operating_mode_state8L" size="8"/>
+  <typeState dict="adcs_tracker2_operating_mode_state" endian="LITTLE" name="adcs_tracker2_operating_mode_state16L" size="16"/>
+  <typeState dict="adcs_tracker2_operating_mode_state" endian="LITTLE" name="adcs_tracker2_operating_mode_state32L" size="32"/>
+  <typeState dict="adcs_tracker2_operating_mode_state" endian="BIG" name="adcs_tracker2_operating_mode_state8B" size="8"/>
+  <typeState dict="adcs_tracker2_operating_mode_state" endian="BIG" name="adcs_tracker2_operating_mode_state16B" size="16"/>
+  <typeState dict="adcs_tracker2_operating_mode_state" endian="BIG" name="adcs_tracker2_operating_mode_state32B" size="32"/>
+  <dictionary name="adcs_tracker2_star_id_step_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER2_STAR_ID_STEP_STATE_WAITING_FOR_IMAGE2" str="WAITING_FOR_IMAGE2"/>
+    <pair key="#ADCS_TRACKER2_STAR_ID_STEP_STATE_CALCULATE_RATE" str="CALCULATE_RATE"/>
+    <pair key="#ADCS_TRACKER2_STAR_ID_STEP_STATE_MAKE_UNIT_VECTORS" str="MAKE_UNIT_VECTORS"/>
+    <pair key="#ADCS_TRACKER2_STAR_ID_STEP_STATE_OK_FOUND_3" str="OK_Found_3"/>
+    <pair key="#ADCS_TRACKER2_STAR_ID_STEP_STATE_OK_FOUND_4" str="OK_Found_4"/>
+    <pair key="#ADCS_TRACKER2_STAR_ID_STEP_STATE_IDLE" str="IDLE"/>
+    <pair key="#ADCS_TRACKER2_STAR_ID_STEP_STATE_INITIALIZE" str="INITIALIZE"/>
+    <pair key="#ADCS_TRACKER2_STAR_ID_STEP_STATE_NO_MATCH" str="NO_MATCH"/>
+    <pair key="#ADCS_TRACKER2_STAR_ID_STEP_STATE_WAITING_FOR_IMAGE1" str="WAITING_FOR_IMAGE1"/>
+    <pair key="#ADCS_TRACKER2_STAR_ID_STEP_STATE_AWAITING_TRISTAR" str="AWAITING_TRISTAR"/>
+    <pair key="#ADCS_TRACKER2_STAR_ID_STEP_STATE_TIME_OUT" str="TIME_OUT"/>
+  </dictionary>
+  <typeState dict="adcs_tracker2_star_id_step_state" endian="LITTLE" name="adcs_tracker2_star_id_step_state8L" size="8"/>
+  <typeState dict="adcs_tracker2_star_id_step_state" endian="LITTLE" name="adcs_tracker2_star_id_step_state16L" size="16"/>
+  <typeState dict="adcs_tracker2_star_id_step_state" endian="LITTLE" name="adcs_tracker2_star_id_step_state32L" size="32"/>
+  <typeState dict="adcs_tracker2_star_id_step_state" endian="BIG" name="adcs_tracker2_star_id_step_state8B" size="8"/>
+  <typeState dict="adcs_tracker2_star_id_step_state" endian="BIG" name="adcs_tracker2_star_id_step_state16B" size="16"/>
+  <typeState dict="adcs_tracker2_star_id_step_state" endian="BIG" name="adcs_tracker2_star_id_step_state32B" size="32"/>
+  <dictionary name="adcs_tracker2_id_status_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER2_ID_STATUS_STATE_WAITING_FOR_IMAGE2" str="WAITING_FOR_IMAGE2"/>
+    <pair key="#ADCS_TRACKER2_ID_STATUS_STATE_CALCULATE_RATE" str="CALCULATE_RATE"/>
+    <pair key="#ADCS_TRACKER2_ID_STATUS_STATE_MAKE_UNIT_VECTORS" str="MAKE_UNIT_VECTORS"/>
+    <pair key="#ADCS_TRACKER2_ID_STATUS_STATE_OK_FOUND_3" str="OK_Found_3"/>
+    <pair key="#ADCS_TRACKER2_ID_STATUS_STATE_OK_FOUND_4" str="OK_Found_4"/>
+    <pair key="#ADCS_TRACKER2_ID_STATUS_STATE_IDLE" str="IDLE"/>
+    <pair key="#ADCS_TRACKER2_ID_STATUS_STATE_INITIALIZE" str="INITIALIZE"/>
+    <pair key="#ADCS_TRACKER2_ID_STATUS_STATE_NO_MATCH" str="NO_MATCH"/>
+    <pair key="#ADCS_TRACKER2_ID_STATUS_STATE_WAITING_FOR_IMAGE1" str="WAITING_FOR_IMAGE1"/>
+    <pair key="#ADCS_TRACKER2_ID_STATUS_STATE_AWAITING_TRISTAR" str="AWAITING_TRISTAR"/>
+    <pair key="#ADCS_TRACKER2_ID_STATUS_STATE_TIME_OUT" str="TIME_OUT"/>
+  </dictionary>
+  <typeState dict="adcs_tracker2_id_status_state" endian="LITTLE" name="adcs_tracker2_id_status_state8L" size="8"/>
+  <typeState dict="adcs_tracker2_id_status_state" endian="LITTLE" name="adcs_tracker2_id_status_state16L" size="16"/>
+  <typeState dict="adcs_tracker2_id_status_state" endian="LITTLE" name="adcs_tracker2_id_status_state32L" size="32"/>
+  <typeState dict="adcs_tracker2_id_status_state" endian="BIG" name="adcs_tracker2_id_status_state8B" size="8"/>
+  <typeState dict="adcs_tracker2_id_status_state" endian="BIG" name="adcs_tracker2_id_status_state16B" size="16"/>
+  <typeState dict="adcs_tracker2_id_status_state" endian="BIG" name="adcs_tracker2_id_status_state32B" size="32"/>
+  <dictionary name="adcs_tracker2_id_status_save_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER2_ID_STATUS_SAVE_STATE_WAITING_FOR_IMAGE2" str="WAITING_FOR_IMAGE2"/>
+    <pair key="#ADCS_TRACKER2_ID_STATUS_SAVE_STATE_CALCULATE_RATE" str="CALCULATE_RATE"/>
+    <pair key="#ADCS_TRACKER2_ID_STATUS_SAVE_STATE_MAKE_UNIT_VECTORS" str="MAKE_UNIT_VECTORS"/>
+    <pair key="#ADCS_TRACKER2_ID_STATUS_SAVE_STATE_OK_FOUND_3" str="OK_Found_3"/>
+    <pair key="#ADCS_TRACKER2_ID_STATUS_SAVE_STATE_OK_FOUND_4" str="OK_Found_4"/>
+    <pair key="#ADCS_TRACKER2_ID_STATUS_SAVE_STATE_IDLE" str="IDLE"/>
+    <pair key="#ADCS_TRACKER2_ID_STATUS_SAVE_STATE_INITIALIZE" str="INITIALIZE"/>
+    <pair key="#ADCS_TRACKER2_ID_STATUS_SAVE_STATE_NO_MATCH" str="NO_MATCH"/>
+    <pair key="#ADCS_TRACKER2_ID_STATUS_SAVE_STATE_WAITING_FOR_IMAGE1" str="WAITING_FOR_IMAGE1"/>
+    <pair key="#ADCS_TRACKER2_ID_STATUS_SAVE_STATE_AWAITING_TRISTAR" str="AWAITING_TRISTAR"/>
+    <pair key="#ADCS_TRACKER2_ID_STATUS_SAVE_STATE_TIME_OUT" str="TIME_OUT"/>
+  </dictionary>
+  <typeState dict="adcs_tracker2_id_status_save_state" endian="LITTLE" name="adcs_tracker2_id_status_save_state8L" size="8"/>
+  <typeState dict="adcs_tracker2_id_status_save_state" endian="LITTLE" name="adcs_tracker2_id_status_save_state16L" size="16"/>
+  <typeState dict="adcs_tracker2_id_status_save_state" endian="LITTLE" name="adcs_tracker2_id_status_save_state32L" size="32"/>
+  <typeState dict="adcs_tracker2_id_status_save_state" endian="BIG" name="adcs_tracker2_id_status_save_state8B" size="8"/>
+  <typeState dict="adcs_tracker2_id_status_save_state" endian="BIG" name="adcs_tracker2_id_status_save_state16B" size="16"/>
+  <typeState dict="adcs_tracker2_id_status_save_state" endian="BIG" name="adcs_tracker2_id_status_save_state32B" size="32"/>
+  <dictionary name="adcs_tracker2_att_status_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER2_ATT_STATUS_STATE_TOO_FEW_STARS" str="TOO_FEW_STARS"/>
+    <pair key="#ADCS_TRACKER2_ATT_STATUS_STATE_QUEST_FAILED" str="QUEST_FAILED"/>
+    <pair key="#ADCS_TRACKER2_ATT_STATUS_STATE_RESIDUALS_TOO_HIGH" str="RESIDUALS_TOO_HIGH"/>
+    <pair key="#ADCS_TRACKER2_ATT_STATUS_STATE_OK" str="OK"/>
+    <pair key="#ADCS_TRACKER2_ATT_STATUS_STATE_PENDING" str="PENDING"/>
+    <pair key="#ADCS_TRACKER2_ATT_STATUS_STATE_BAD" str="BAD"/>
+    <pair key="#ADCS_TRACKER2_ATT_STATUS_STATE_RATE_TOO_HIGH" str="RATE_TOO_HIGH"/>
+  </dictionary>
+  <typeState dict="adcs_tracker2_att_status_state" endian="LITTLE" name="adcs_tracker2_att_status_state8L" size="8"/>
+  <typeState dict="adcs_tracker2_att_status_state" endian="LITTLE" name="adcs_tracker2_att_status_state16L" size="16"/>
+  <typeState dict="adcs_tracker2_att_status_state" endian="LITTLE" name="adcs_tracker2_att_status_state32L" size="32"/>
+  <typeState dict="adcs_tracker2_att_status_state" endian="BIG" name="adcs_tracker2_att_status_state8B" size="8"/>
+  <typeState dict="adcs_tracker2_att_status_state" endian="BIG" name="adcs_tracker2_att_status_state16B" size="16"/>
+  <typeState dict="adcs_tracker2_att_status_state" endian="BIG" name="adcs_tracker2_att_status_state32B" size="32"/>
+  <dictionary name="adcs_tracker2_rate_est_status_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER2_RATE_EST_STATUS_STATE_BAD" str="BAD"/>
+    <pair key="#ADCS_TRACKER2_RATE_EST_STATUS_STATE_OK" str="OK"/>
+  </dictionary>
+  <typeState dict="adcs_tracker2_rate_est_status_state" endian="LITTLE" name="adcs_tracker2_rate_est_status_state8L" size="8"/>
+  <typeState dict="adcs_tracker2_rate_est_status_state" endian="LITTLE" name="adcs_tracker2_rate_est_status_state16L" size="16"/>
+  <typeState dict="adcs_tracker2_rate_est_status_state" endian="LITTLE" name="adcs_tracker2_rate_est_status_state32L" size="32"/>
+  <typeState dict="adcs_tracker2_rate_est_status_state" endian="BIG" name="adcs_tracker2_rate_est_status_state8B" size="8"/>
+  <typeState dict="adcs_tracker2_rate_est_status_state" endian="BIG" name="adcs_tracker2_rate_est_status_state16B" size="16"/>
+  <typeState dict="adcs_tracker2_rate_est_status_state" endian="BIG" name="adcs_tracker2_rate_est_status_state32B" size="32"/>
+  <dictionary name="adcs_tracker2_rate_aid_status_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER2_RATE_AID_STATUS_STATE_BAD" str="BAD"/>
+    <pair key="#ADCS_TRACKER2_RATE_AID_STATUS_STATE_OK" str="OK"/>
+  </dictionary>
+  <typeState dict="adcs_tracker2_rate_aid_status_state" endian="LITTLE" name="adcs_tracker2_rate_aid_status_state8L" size="8"/>
+  <typeState dict="adcs_tracker2_rate_aid_status_state" endian="LITTLE" name="adcs_tracker2_rate_aid_status_state16L" size="16"/>
+  <typeState dict="adcs_tracker2_rate_aid_status_state" endian="LITTLE" name="adcs_tracker2_rate_aid_status_state32L" size="32"/>
+  <typeState dict="adcs_tracker2_rate_aid_status_state" endian="BIG" name="adcs_tracker2_rate_aid_status_state8B" size="8"/>
+  <typeState dict="adcs_tracker2_rate_aid_status_state" endian="BIG" name="adcs_tracker2_rate_aid_status_state16B" size="16"/>
+  <typeState dict="adcs_tracker2_rate_aid_status_state" endian="BIG" name="adcs_tracker2_rate_aid_status_state32B" size="32"/>
+  <dictionary name="adcs_tracker2_vel_aid_status_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER2_VEL_AID_STATUS_STATE_BAD" str="BAD"/>
+    <pair key="#ADCS_TRACKER2_VEL_AID_STATUS_STATE_OK" str="OK"/>
+  </dictionary>
+  <typeState dict="adcs_tracker2_vel_aid_status_state" endian="LITTLE" name="adcs_tracker2_vel_aid_status_state8L" size="8"/>
+  <typeState dict="adcs_tracker2_vel_aid_status_state" endian="LITTLE" name="adcs_tracker2_vel_aid_status_state16L" size="16"/>
+  <typeState dict="adcs_tracker2_vel_aid_status_state" endian="LITTLE" name="adcs_tracker2_vel_aid_status_state32L" size="32"/>
+  <typeState dict="adcs_tracker2_vel_aid_status_state" endian="BIG" name="adcs_tracker2_vel_aid_status_state8B" size="8"/>
+  <typeState dict="adcs_tracker2_vel_aid_status_state" endian="BIG" name="adcs_tracker2_vel_aid_status_state16B" size="16"/>
+  <typeState dict="adcs_tracker2_vel_aid_status_state" endian="BIG" name="adcs_tracker2_vel_aid_status_state32B" size="32"/>
+  <dictionary name="adcs_tracker2_att_aid_status_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER2_ATT_AID_STATUS_STATE_BAD" str="BAD"/>
+    <pair key="#ADCS_TRACKER2_ATT_AID_STATUS_STATE_OK" str="OK"/>
+  </dictionary>
+  <typeState dict="adcs_tracker2_att_aid_status_state" endian="LITTLE" name="adcs_tracker2_att_aid_status_state8L" size="8"/>
+  <typeState dict="adcs_tracker2_att_aid_status_state" endian="LITTLE" name="adcs_tracker2_att_aid_status_state16L" size="16"/>
+  <typeState dict="adcs_tracker2_att_aid_status_state" endian="LITTLE" name="adcs_tracker2_att_aid_status_state32L" size="32"/>
+  <typeState dict="adcs_tracker2_att_aid_status_state" endian="BIG" name="adcs_tracker2_att_aid_status_state8B" size="8"/>
+  <typeState dict="adcs_tracker2_att_aid_status_state" endian="BIG" name="adcs_tracker2_att_aid_status_state16B" size="16"/>
+  <typeState dict="adcs_tracker2_att_aid_status_state" endian="BIG" name="adcs_tracker2_att_aid_status_state32B" size="32"/>
+  <dictionary name="adcs_tracker2_auto_black_enable_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER2_AUTO_BLACK_ENABLE_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TRACKER2_AUTO_BLACK_ENABLE_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tracker2_auto_black_enable_state" endian="LITTLE" name="adcs_tracker2_auto_black_enable_state8L" size="8"/>
+  <typeState dict="adcs_tracker2_auto_black_enable_state" endian="LITTLE" name="adcs_tracker2_auto_black_enable_state16L" size="16"/>
+  <typeState dict="adcs_tracker2_auto_black_enable_state" endian="LITTLE" name="adcs_tracker2_auto_black_enable_state32L" size="32"/>
+  <typeState dict="adcs_tracker2_auto_black_enable_state" endian="BIG" name="adcs_tracker2_auto_black_enable_state8B" size="8"/>
+  <typeState dict="adcs_tracker2_auto_black_enable_state" endian="BIG" name="adcs_tracker2_auto_black_enable_state16B" size="16"/>
+  <typeState dict="adcs_tracker2_auto_black_enable_state" endian="BIG" name="adcs_tracker2_auto_black_enable_state32B" size="32"/>
+  <dictionary name="adcs_tracker2_auto_track_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER2_AUTO_TRACK_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TRACKER2_AUTO_TRACK_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tracker2_auto_track_state" endian="LITTLE" name="adcs_tracker2_auto_track_state8L" size="8"/>
+  <typeState dict="adcs_tracker2_auto_track_state" endian="LITTLE" name="adcs_tracker2_auto_track_state16L" size="16"/>
+  <typeState dict="adcs_tracker2_auto_track_state" endian="LITTLE" name="adcs_tracker2_auto_track_state32L" size="32"/>
+  <typeState dict="adcs_tracker2_auto_track_state" endian="BIG" name="adcs_tracker2_auto_track_state8B" size="8"/>
+  <typeState dict="adcs_tracker2_auto_track_state" endian="BIG" name="adcs_tracker2_auto_track_state16B" size="16"/>
+  <typeState dict="adcs_tracker2_auto_track_state" endian="BIG" name="adcs_tracker2_auto_track_state32B" size="32"/>
+  <dictionary name="adcs_tracker2_auto_integration_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER2_AUTO_INTEGRATION_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TRACKER2_AUTO_INTEGRATION_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tracker2_auto_integration_state" endian="LITTLE" name="adcs_tracker2_auto_integration_state8L" size="8"/>
+  <typeState dict="adcs_tracker2_auto_integration_state" endian="LITTLE" name="adcs_tracker2_auto_integration_state16L" size="16"/>
+  <typeState dict="adcs_tracker2_auto_integration_state" endian="LITTLE" name="adcs_tracker2_auto_integration_state32L" size="32"/>
+  <typeState dict="adcs_tracker2_auto_integration_state" endian="BIG" name="adcs_tracker2_auto_integration_state8B" size="8"/>
+  <typeState dict="adcs_tracker2_auto_integration_state" endian="BIG" name="adcs_tracker2_auto_integration_state16B" size="16"/>
+  <typeState dict="adcs_tracker2_auto_integration_state" endian="BIG" name="adcs_tracker2_auto_integration_state32B" size="32"/>
+  <dictionary name="adcs_tracker2_auto_gain_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER2_AUTO_GAIN_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TRACKER2_AUTO_GAIN_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tracker2_auto_gain_state" endian="LITTLE" name="adcs_tracker2_auto_gain_state8L" size="8"/>
+  <typeState dict="adcs_tracker2_auto_gain_state" endian="LITTLE" name="adcs_tracker2_auto_gain_state16L" size="16"/>
+  <typeState dict="adcs_tracker2_auto_gain_state" endian="LITTLE" name="adcs_tracker2_auto_gain_state32L" size="32"/>
+  <typeState dict="adcs_tracker2_auto_gain_state" endian="BIG" name="adcs_tracker2_auto_gain_state8B" size="8"/>
+  <typeState dict="adcs_tracker2_auto_gain_state" endian="BIG" name="adcs_tracker2_auto_gain_state16B" size="16"/>
+  <typeState dict="adcs_tracker2_auto_gain_state" endian="BIG" name="adcs_tracker2_auto_gain_state32B" size="32"/>
+  <dictionary name="adcs_tracker2_fpga_det_timeout_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER2_FPGA_DET_TIMEOUT_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TRACKER2_FPGA_DET_TIMEOUT_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tracker2_fpga_det_timeout_state" endian="LITTLE" name="adcs_tracker2_fpga_det_timeout_state8L" size="8"/>
+  <typeState dict="adcs_tracker2_fpga_det_timeout_state" endian="LITTLE" name="adcs_tracker2_fpga_det_timeout_state16L" size="16"/>
+  <typeState dict="adcs_tracker2_fpga_det_timeout_state" endian="LITTLE" name="adcs_tracker2_fpga_det_timeout_state32L" size="32"/>
+  <typeState dict="adcs_tracker2_fpga_det_timeout_state" endian="BIG" name="adcs_tracker2_fpga_det_timeout_state8B" size="8"/>
+  <typeState dict="adcs_tracker2_fpga_det_timeout_state" endian="BIG" name="adcs_tracker2_fpga_det_timeout_state16B" size="16"/>
+  <typeState dict="adcs_tracker2_fpga_det_timeout_state" endian="BIG" name="adcs_tracker2_fpga_det_timeout_state32B" size="32"/>
+  <dictionary name="adcs_tracker2_store_seq_images_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER2_STORE_SEQ_IMAGES_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TRACKER2_STORE_SEQ_IMAGES_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tracker2_store_seq_images_state" endian="LITTLE" name="adcs_tracker2_store_seq_images_state8L" size="8"/>
+  <typeState dict="adcs_tracker2_store_seq_images_state" endian="LITTLE" name="adcs_tracker2_store_seq_images_state16L" size="16"/>
+  <typeState dict="adcs_tracker2_store_seq_images_state" endian="LITTLE" name="adcs_tracker2_store_seq_images_state32L" size="32"/>
+  <typeState dict="adcs_tracker2_store_seq_images_state" endian="BIG" name="adcs_tracker2_store_seq_images_state8B" size="8"/>
+  <typeState dict="adcs_tracker2_store_seq_images_state" endian="BIG" name="adcs_tracker2_store_seq_images_state16B" size="16"/>
+  <typeState dict="adcs_tracker2_store_seq_images_state" endian="BIG" name="adcs_tracker2_store_seq_images_state32B" size="32"/>
+  <dictionary name="adcs_tracker2_track_ref_available_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TRACKER2_TRACK_REF_AVAILABLE_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TRACKER2_TRACK_REF_AVAILABLE_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tracker2_track_ref_available_state" endian="LITTLE" name="adcs_tracker2_track_ref_available_state8L" size="8"/>
+  <typeState dict="adcs_tracker2_track_ref_available_state" endian="LITTLE" name="adcs_tracker2_track_ref_available_state16L" size="16"/>
+  <typeState dict="adcs_tracker2_track_ref_available_state" endian="LITTLE" name="adcs_tracker2_track_ref_available_state32L" size="32"/>
+  <typeState dict="adcs_tracker2_track_ref_available_state" endian="BIG" name="adcs_tracker2_track_ref_available_state8B" size="8"/>
+  <typeState dict="adcs_tracker2_track_ref_available_state" endian="BIG" name="adcs_tracker2_track_ref_available_state16B" size="16"/>
+  <typeState dict="adcs_tracker2_track_ref_available_state" endian="BIG" name="adcs_tracker2_track_ref_available_state32B" size="32"/>
+  <dictionary name="adcs_tlm_proc_streaming_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_TLM_PROC_STREAMING_STATE_YES" str="YES"/>
+    <pair key="#ADCS_TLM_PROC_STREAMING_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_tlm_proc_streaming_state" endian="LITTLE" name="adcs_tlm_proc_streaming_state8L" size="8"/>
+  <typeState dict="adcs_tlm_proc_streaming_state" endian="LITTLE" name="adcs_tlm_proc_streaming_state16L" size="16"/>
+  <typeState dict="adcs_tlm_proc_streaming_state" endian="LITTLE" name="adcs_tlm_proc_streaming_state32L" size="32"/>
+  <typeState dict="adcs_tlm_proc_streaming_state" endian="BIG" name="adcs_tlm_proc_streaming_state8B" size="8"/>
+  <typeState dict="adcs_tlm_proc_streaming_state" endian="BIG" name="adcs_tlm_proc_streaming_state16B" size="16"/>
+  <typeState dict="adcs_tlm_proc_streaming_state" endian="BIG" name="adcs_tlm_proc_streaming_state32B" size="32"/>
+  <dictionary name="adcs_ext_tracker2_cmd_status_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_EXT_TRACKER2_CMD_STATUS_STATE_BAD_DATA" str="BAD_DATA"/>
+    <pair key="#ADCS_EXT_TRACKER2_CMD_STATUS_STATE_ATT_ERR_TOO_HIGH" str="ATT_ERR_TOO_HIGH"/>
+    <pair key="#ADCS_EXT_TRACKER2_CMD_STATUS_STATE_THRUSTERS_DISABLED" str="THRUSTERS_DISABLED"/>
+    <pair key="#ADCS_EXT_TRACKER2_CMD_STATUS_STATE_ASYNC_REFUSED" str="ASYNC_REFUSED"/>
+    <pair key="#ADCS_EXT_TRACKER2_CMD_STATUS_STATE_NO_CMD_DATA" str="NO_CMD_DATA"/>
+    <pair key="#ADCS_EXT_TRACKER2_CMD_STATUS_STATE_TABLES_BUSY" str="TABLES_BUSY"/>
+    <pair key="#ADCS_EXT_TRACKER2_CMD_STATUS_STATE_BAD_APID" str="BAD_APID"/>
+    <pair key="#ADCS_EXT_TRACKER2_CMD_STATUS_STATE_BAD_OPCODE" str="BAD_OPCODE"/>
+    <pair key="#ADCS_EXT_TRACKER2_CMD_STATUS_STATE_CMD_APID_OVERRUN" str="CMD_APID_OVERRUN"/>
+    <pair key="#ADCS_EXT_TRACKER2_CMD_STATUS_STATE_CMD_SRVC_OVERRUN" str="CMD_SRVC_OVERRUN"/>
+    <pair key="#ADCS_EXT_TRACKER2_CMD_STATUS_STATE_FLASH_NOT_ARMED" str="FLASH_NOT_ARMED"/>
+    <pair key="#ADCS_EXT_TRACKER2_CMD_STATUS_STATE_OK" str="OK"/>
+  </dictionary>
+  <typeState dict="adcs_ext_tracker2_cmd_status_state" endian="LITTLE" name="adcs_ext_tracker2_cmd_status_state8L" size="8"/>
+  <typeState dict="adcs_ext_tracker2_cmd_status_state" endian="LITTLE" name="adcs_ext_tracker2_cmd_status_state16L" size="16"/>
+  <typeState dict="adcs_ext_tracker2_cmd_status_state" endian="LITTLE" name="adcs_ext_tracker2_cmd_status_state32L" size="32"/>
+  <typeState dict="adcs_ext_tracker2_cmd_status_state" endian="BIG" name="adcs_ext_tracker2_cmd_status_state8B" size="8"/>
+  <typeState dict="adcs_ext_tracker2_cmd_status_state" endian="BIG" name="adcs_ext_tracker2_cmd_status_state16B" size="16"/>
+  <typeState dict="adcs_ext_tracker2_cmd_status_state" endian="BIG" name="adcs_ext_tracker2_cmd_status_state32B" size="32"/>
+  <dictionary name="adcs_ext_tracker2_cmd_reject_status_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_EXT_TRACKER2_CMD_REJECT_STATUS_STATE_BAD_DATA" str="BAD_DATA"/>
+    <pair key="#ADCS_EXT_TRACKER2_CMD_REJECT_STATUS_STATE_ATT_ERR_TOO_HIGH" str="ATT_ERR_TOO_HIGH"/>
+    <pair key="#ADCS_EXT_TRACKER2_CMD_REJECT_STATUS_STATE_THRUSTERS_DISABLED" str="THRUSTERS_DISABLED"/>
+    <pair key="#ADCS_EXT_TRACKER2_CMD_REJECT_STATUS_STATE_ASYNC_REFUSED" str="ASYNC_REFUSED"/>
+    <pair key="#ADCS_EXT_TRACKER2_CMD_REJECT_STATUS_STATE_NO_CMD_DATA" str="NO_CMD_DATA"/>
+    <pair key="#ADCS_EXT_TRACKER2_CMD_REJECT_STATUS_STATE_TABLES_BUSY" str="TABLES_BUSY"/>
+    <pair key="#ADCS_EXT_TRACKER2_CMD_REJECT_STATUS_STATE_BAD_APID" str="BAD_APID"/>
+    <pair key="#ADCS_EXT_TRACKER2_CMD_REJECT_STATUS_STATE_BAD_OPCODE" str="BAD_OPCODE"/>
+    <pair key="#ADCS_EXT_TRACKER2_CMD_REJECT_STATUS_STATE_CMD_APID_OVERRUN" str="CMD_APID_OVERRUN"/>
+    <pair key="#ADCS_EXT_TRACKER2_CMD_REJECT_STATUS_STATE_CMD_SRVC_OVERRUN" str="CMD_SRVC_OVERRUN"/>
+    <pair key="#ADCS_EXT_TRACKER2_CMD_REJECT_STATUS_STATE_FLASH_NOT_ARMED" str="FLASH_NOT_ARMED"/>
+    <pair key="#ADCS_EXT_TRACKER2_CMD_REJECT_STATUS_STATE_OK" str="OK"/>
+  </dictionary>
+  <typeState dict="adcs_ext_tracker2_cmd_reject_status_state" endian="LITTLE" name="adcs_ext_tracker2_cmd_reject_status_state8L" size="8"/>
+  <typeState dict="adcs_ext_tracker2_cmd_reject_status_state" endian="LITTLE" name="adcs_ext_tracker2_cmd_reject_status_state16L" size="16"/>
+  <typeState dict="adcs_ext_tracker2_cmd_reject_status_state" endian="LITTLE" name="adcs_ext_tracker2_cmd_reject_status_state32L" size="32"/>
+  <typeState dict="adcs_ext_tracker2_cmd_reject_status_state" endian="BIG" name="adcs_ext_tracker2_cmd_reject_status_state8B" size="8"/>
+  <typeState dict="adcs_ext_tracker2_cmd_reject_status_state" endian="BIG" name="adcs_ext_tracker2_cmd_reject_status_state16B" size="16"/>
+  <typeState dict="adcs_ext_tracker2_cmd_reject_status_state" endian="BIG" name="adcs_ext_tracker2_cmd_reject_status_state32B" size="32"/>
+  <dictionary name="adcs_ext_tracker2_table_upload_status_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_EXT_TRACKER2_TABLE_UPLOAD_STATUS_STATE_EXTRACTING" str="EXTRACTING"/>
+    <pair key="#ADCS_EXT_TRACKER2_TABLE_UPLOAD_STATUS_STATE_IDLE" str="IDLE"/>
+    <pair key="#ADCS_EXT_TRACKER2_TABLE_UPLOAD_STATUS_STATE_CALCULATING_CRC" str="CALCULATING_CRC"/>
+    <pair key="#ADCS_EXT_TRACKER2_TABLE_UPLOAD_STATUS_STATE_INVALID_TABLE" str="INVALID_TABLE"/>
+    <pair key="#ADCS_EXT_TRACKER2_TABLE_UPLOAD_STATUS_STATE_FLASH_BURN_DONE" str="FLASH_BURN_DONE"/>
+    <pair key="#ADCS_EXT_TRACKER2_TABLE_UPLOAD_STATUS_STATE_COMMITTING" str="COMMITTING"/>
+    <pair key="#ADCS_EXT_TRACKER2_TABLE_UPLOAD_STATUS_STATE_FLASH_BURN_DIRECT" str="FLASH_BURN_DIRECT"/>
+    <pair key="#ADCS_EXT_TRACKER2_TABLE_UPLOAD_STATUS_STATE_COMMITTED" str="COMMITTED"/>
+    <pair key="#ADCS_EXT_TRACKER2_TABLE_UPLOAD_STATUS_STATE_FLASH_BURN_COPY" str="FLASH_BURN_COPY"/>
+    <pair key="#ADCS_EXT_TRACKER2_TABLE_UPLOAD_STATUS_STATE_EXTRACTED" str="EXTRACTED"/>
+    <pair key="#ADCS_EXT_TRACKER2_TABLE_UPLOAD_STATUS_STATE_FLASH_EXTRACT_DONE" str="FLASH_EXTRACT_DONE"/>
+    <pair key="#ADCS_EXT_TRACKER2_TABLE_UPLOAD_STATUS_STATE_NEW_DATA_IN" str="NEW_DATA_IN"/>
+    <pair key="#ADCS_EXT_TRACKER2_TABLE_UPLOAD_STATUS_STATE_FLASH_EXTRACT" str="FLASH_EXTRACT"/>
+    <pair key="#ADCS_EXT_TRACKER2_TABLE_UPLOAD_STATUS_STATE_CRC_READY" str="CRC_READY"/>
+  </dictionary>
+  <typeState dict="adcs_ext_tracker2_table_upload_status_state" endian="LITTLE" name="adcs_ext_tracker2_table_upload_status_state8L" size="8"/>
+  <typeState dict="adcs_ext_tracker2_table_upload_status_state" endian="LITTLE" name="adcs_ext_tracker2_table_upload_status_state16L" size="16"/>
+  <typeState dict="adcs_ext_tracker2_table_upload_status_state" endian="LITTLE" name="adcs_ext_tracker2_table_upload_status_state32L" size="32"/>
+  <typeState dict="adcs_ext_tracker2_table_upload_status_state" endian="BIG" name="adcs_ext_tracker2_table_upload_status_state8B" size="8"/>
+  <typeState dict="adcs_ext_tracker2_table_upload_status_state" endian="BIG" name="adcs_ext_tracker2_table_upload_status_state16B" size="16"/>
+  <typeState dict="adcs_ext_tracker2_table_upload_status_state" endian="BIG" name="adcs_ext_tracker2_table_upload_status_state32B" size="32"/>
+  <dictionary name="adcs_rw_drive_operating_mode1_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_RW_DRIVE_OPERATING_MODE1_STATE_INT" str="INT"/>
+    <pair key="#ADCS_RW_DRIVE_OPERATING_MODE1_STATE_EXT" str="EXT"/>
+    <pair key="#ADCS_RW_DRIVE_OPERATING_MODE1_STATE_IDLE" str="IDLE"/>
+  </dictionary>
+  <typeState dict="adcs_rw_drive_operating_mode1_state" endian="LITTLE" name="adcs_rw_drive_operating_mode1_state8L" size="8"/>
+  <typeState dict="adcs_rw_drive_operating_mode1_state" endian="LITTLE" name="adcs_rw_drive_operating_mode1_state16L" size="16"/>
+  <typeState dict="adcs_rw_drive_operating_mode1_state" endian="LITTLE" name="adcs_rw_drive_operating_mode1_state32L" size="32"/>
+  <typeState dict="adcs_rw_drive_operating_mode1_state" endian="BIG" name="adcs_rw_drive_operating_mode1_state8B" size="8"/>
+  <typeState dict="adcs_rw_drive_operating_mode1_state" endian="BIG" name="adcs_rw_drive_operating_mode1_state16B" size="16"/>
+  <typeState dict="adcs_rw_drive_operating_mode1_state" endian="BIG" name="adcs_rw_drive_operating_mode1_state32B" size="32"/>
+  <dictionary name="adcs_rw_drive_operating_mode2_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_RW_DRIVE_OPERATING_MODE2_STATE_INT" str="INT"/>
+    <pair key="#ADCS_RW_DRIVE_OPERATING_MODE2_STATE_EXT" str="EXT"/>
+    <pair key="#ADCS_RW_DRIVE_OPERATING_MODE2_STATE_IDLE" str="IDLE"/>
+  </dictionary>
+  <typeState dict="adcs_rw_drive_operating_mode2_state" endian="LITTLE" name="adcs_rw_drive_operating_mode2_state8L" size="8"/>
+  <typeState dict="adcs_rw_drive_operating_mode2_state" endian="LITTLE" name="adcs_rw_drive_operating_mode2_state16L" size="16"/>
+  <typeState dict="adcs_rw_drive_operating_mode2_state" endian="LITTLE" name="adcs_rw_drive_operating_mode2_state32L" size="32"/>
+  <typeState dict="adcs_rw_drive_operating_mode2_state" endian="BIG" name="adcs_rw_drive_operating_mode2_state8B" size="8"/>
+  <typeState dict="adcs_rw_drive_operating_mode2_state" endian="BIG" name="adcs_rw_drive_operating_mode2_state16B" size="16"/>
+  <typeState dict="adcs_rw_drive_operating_mode2_state" endian="BIG" name="adcs_rw_drive_operating_mode2_state32B" size="32"/>
+  <dictionary name="adcs_rw_drive_operating_mode3_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_RW_DRIVE_OPERATING_MODE3_STATE_INT" str="INT"/>
+    <pair key="#ADCS_RW_DRIVE_OPERATING_MODE3_STATE_EXT" str="EXT"/>
+    <pair key="#ADCS_RW_DRIVE_OPERATING_MODE3_STATE_IDLE" str="IDLE"/>
+  </dictionary>
+  <typeState dict="adcs_rw_drive_operating_mode3_state" endian="LITTLE" name="adcs_rw_drive_operating_mode3_state8L" size="8"/>
+  <typeState dict="adcs_rw_drive_operating_mode3_state" endian="LITTLE" name="adcs_rw_drive_operating_mode3_state16L" size="16"/>
+  <typeState dict="adcs_rw_drive_operating_mode3_state" endian="LITTLE" name="adcs_rw_drive_operating_mode3_state32L" size="32"/>
+  <typeState dict="adcs_rw_drive_operating_mode3_state" endian="BIG" name="adcs_rw_drive_operating_mode3_state8B" size="8"/>
+  <typeState dict="adcs_rw_drive_operating_mode3_state" endian="BIG" name="adcs_rw_drive_operating_mode3_state16B" size="16"/>
+  <typeState dict="adcs_rw_drive_operating_mode3_state" endian="BIG" name="adcs_rw_drive_operating_mode3_state32B" size="32"/>
+  <dictionary name="adcs_rw_drive_operating_mode4_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_RW_DRIVE_OPERATING_MODE4_STATE_INT" str="INT"/>
+    <pair key="#ADCS_RW_DRIVE_OPERATING_MODE4_STATE_EXT" str="EXT"/>
+    <pair key="#ADCS_RW_DRIVE_OPERATING_MODE4_STATE_IDLE" str="IDLE"/>
+  </dictionary>
+  <typeState dict="adcs_rw_drive_operating_mode4_state" endian="LITTLE" name="adcs_rw_drive_operating_mode4_state8L" size="8"/>
+  <typeState dict="adcs_rw_drive_operating_mode4_state" endian="LITTLE" name="adcs_rw_drive_operating_mode4_state16L" size="16"/>
+  <typeState dict="adcs_rw_drive_operating_mode4_state" endian="LITTLE" name="adcs_rw_drive_operating_mode4_state32L" size="32"/>
+  <typeState dict="adcs_rw_drive_operating_mode4_state" endian="BIG" name="adcs_rw_drive_operating_mode4_state8B" size="8"/>
+  <typeState dict="adcs_rw_drive_operating_mode4_state" endian="BIG" name="adcs_rw_drive_operating_mode4_state16B" size="16"/>
+  <typeState dict="adcs_rw_drive_operating_mode4_state" endian="BIG" name="adcs_rw_drive_operating_mode4_state32B" size="32"/>
+  <dictionary name="adcs_rw_drive_control_mode1_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_RW_DRIVE_CONTROL_MODE1_STATE_SPD" str="SPD"/>
+    <pair key="#ADCS_RW_DRIVE_CONTROL_MODE1_STATE_PWM" str="PWM"/>
+    <pair key="#ADCS_RW_DRIVE_CONTROL_MODE1_STATE_TRQ" str="TRQ"/>
+  </dictionary>
+  <typeState dict="adcs_rw_drive_control_mode1_state" endian="LITTLE" name="adcs_rw_drive_control_mode1_state8L" size="8"/>
+  <typeState dict="adcs_rw_drive_control_mode1_state" endian="LITTLE" name="adcs_rw_drive_control_mode1_state16L" size="16"/>
+  <typeState dict="adcs_rw_drive_control_mode1_state" endian="LITTLE" name="adcs_rw_drive_control_mode1_state32L" size="32"/>
+  <typeState dict="adcs_rw_drive_control_mode1_state" endian="BIG" name="adcs_rw_drive_control_mode1_state8B" size="8"/>
+  <typeState dict="adcs_rw_drive_control_mode1_state" endian="BIG" name="adcs_rw_drive_control_mode1_state16B" size="16"/>
+  <typeState dict="adcs_rw_drive_control_mode1_state" endian="BIG" name="adcs_rw_drive_control_mode1_state32B" size="32"/>
+  <dictionary name="adcs_rw_drive_control_mode2_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_RW_DRIVE_CONTROL_MODE2_STATE_SPD" str="SPD"/>
+    <pair key="#ADCS_RW_DRIVE_CONTROL_MODE2_STATE_PWM" str="PWM"/>
+    <pair key="#ADCS_RW_DRIVE_CONTROL_MODE2_STATE_TRQ" str="TRQ"/>
+  </dictionary>
+  <typeState dict="adcs_rw_drive_control_mode2_state" endian="LITTLE" name="adcs_rw_drive_control_mode2_state8L" size="8"/>
+  <typeState dict="adcs_rw_drive_control_mode2_state" endian="LITTLE" name="adcs_rw_drive_control_mode2_state16L" size="16"/>
+  <typeState dict="adcs_rw_drive_control_mode2_state" endian="LITTLE" name="adcs_rw_drive_control_mode2_state32L" size="32"/>
+  <typeState dict="adcs_rw_drive_control_mode2_state" endian="BIG" name="adcs_rw_drive_control_mode2_state8B" size="8"/>
+  <typeState dict="adcs_rw_drive_control_mode2_state" endian="BIG" name="adcs_rw_drive_control_mode2_state16B" size="16"/>
+  <typeState dict="adcs_rw_drive_control_mode2_state" endian="BIG" name="adcs_rw_drive_control_mode2_state32B" size="32"/>
+  <dictionary name="adcs_rw_drive_control_mode3_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_RW_DRIVE_CONTROL_MODE3_STATE_SPD" str="SPD"/>
+    <pair key="#ADCS_RW_DRIVE_CONTROL_MODE3_STATE_PWM" str="PWM"/>
+    <pair key="#ADCS_RW_DRIVE_CONTROL_MODE3_STATE_TRQ" str="TRQ"/>
+  </dictionary>
+  <typeState dict="adcs_rw_drive_control_mode3_state" endian="LITTLE" name="adcs_rw_drive_control_mode3_state8L" size="8"/>
+  <typeState dict="adcs_rw_drive_control_mode3_state" endian="LITTLE" name="adcs_rw_drive_control_mode3_state16L" size="16"/>
+  <typeState dict="adcs_rw_drive_control_mode3_state" endian="LITTLE" name="adcs_rw_drive_control_mode3_state32L" size="32"/>
+  <typeState dict="adcs_rw_drive_control_mode3_state" endian="BIG" name="adcs_rw_drive_control_mode3_state8B" size="8"/>
+  <typeState dict="adcs_rw_drive_control_mode3_state" endian="BIG" name="adcs_rw_drive_control_mode3_state16B" size="16"/>
+  <typeState dict="adcs_rw_drive_control_mode3_state" endian="BIG" name="adcs_rw_drive_control_mode3_state32B" size="32"/>
+  <dictionary name="adcs_rw_drive_control_mode4_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_RW_DRIVE_CONTROL_MODE4_STATE_SPD" str="SPD"/>
+    <pair key="#ADCS_RW_DRIVE_CONTROL_MODE4_STATE_PWM" str="PWM"/>
+    <pair key="#ADCS_RW_DRIVE_CONTROL_MODE4_STATE_TRQ" str="TRQ"/>
+  </dictionary>
+  <typeState dict="adcs_rw_drive_control_mode4_state" endian="LITTLE" name="adcs_rw_drive_control_mode4_state8L" size="8"/>
+  <typeState dict="adcs_rw_drive_control_mode4_state" endian="LITTLE" name="adcs_rw_drive_control_mode4_state16L" size="16"/>
+  <typeState dict="adcs_rw_drive_control_mode4_state" endian="LITTLE" name="adcs_rw_drive_control_mode4_state32L" size="32"/>
+  <typeState dict="adcs_rw_drive_control_mode4_state" endian="BIG" name="adcs_rw_drive_control_mode4_state8B" size="8"/>
+  <typeState dict="adcs_rw_drive_control_mode4_state" endian="BIG" name="adcs_rw_drive_control_mode4_state16B" size="16"/>
+  <typeState dict="adcs_rw_drive_control_mode4_state" endian="BIG" name="adcs_rw_drive_control_mode4_state32B" size="32"/>
+  <dictionary name="adcs_rw_drive_pw_menable1_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_RW_DRIVE_PW_MENABLE1_STATE_YES" str="YES"/>
+    <pair key="#ADCS_RW_DRIVE_PW_MENABLE1_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_rw_drive_pw_menable1_state" endian="LITTLE" name="adcs_rw_drive_pw_menable1_state8L" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_menable1_state" endian="LITTLE" name="adcs_rw_drive_pw_menable1_state16L" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_menable1_state" endian="LITTLE" name="adcs_rw_drive_pw_menable1_state32L" size="32"/>
+  <typeState dict="adcs_rw_drive_pw_menable1_state" endian="BIG" name="adcs_rw_drive_pw_menable1_state8B" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_menable1_state" endian="BIG" name="adcs_rw_drive_pw_menable1_state16B" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_menable1_state" endian="BIG" name="adcs_rw_drive_pw_menable1_state32B" size="32"/>
+  <dictionary name="adcs_rw_drive_pw_menable2_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_RW_DRIVE_PW_MENABLE2_STATE_YES" str="YES"/>
+    <pair key="#ADCS_RW_DRIVE_PW_MENABLE2_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_rw_drive_pw_menable2_state" endian="LITTLE" name="adcs_rw_drive_pw_menable2_state8L" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_menable2_state" endian="LITTLE" name="adcs_rw_drive_pw_menable2_state16L" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_menable2_state" endian="LITTLE" name="adcs_rw_drive_pw_menable2_state32L" size="32"/>
+  <typeState dict="adcs_rw_drive_pw_menable2_state" endian="BIG" name="adcs_rw_drive_pw_menable2_state8B" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_menable2_state" endian="BIG" name="adcs_rw_drive_pw_menable2_state16B" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_menable2_state" endian="BIG" name="adcs_rw_drive_pw_menable2_state32B" size="32"/>
+  <dictionary name="adcs_rw_drive_pw_menable3_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_RW_DRIVE_PW_MENABLE3_STATE_YES" str="YES"/>
+    <pair key="#ADCS_RW_DRIVE_PW_MENABLE3_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_rw_drive_pw_menable3_state" endian="LITTLE" name="adcs_rw_drive_pw_menable3_state8L" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_menable3_state" endian="LITTLE" name="adcs_rw_drive_pw_menable3_state16L" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_menable3_state" endian="LITTLE" name="adcs_rw_drive_pw_menable3_state32L" size="32"/>
+  <typeState dict="adcs_rw_drive_pw_menable3_state" endian="BIG" name="adcs_rw_drive_pw_menable3_state8B" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_menable3_state" endian="BIG" name="adcs_rw_drive_pw_menable3_state16B" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_menable3_state" endian="BIG" name="adcs_rw_drive_pw_menable3_state32B" size="32"/>
+  <dictionary name="adcs_rw_drive_pw_menable4_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_RW_DRIVE_PW_MENABLE4_STATE_YES" str="YES"/>
+    <pair key="#ADCS_RW_DRIVE_PW_MENABLE4_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_rw_drive_pw_menable4_state" endian="LITTLE" name="adcs_rw_drive_pw_menable4_state8L" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_menable4_state" endian="LITTLE" name="adcs_rw_drive_pw_menable4_state16L" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_menable4_state" endian="LITTLE" name="adcs_rw_drive_pw_menable4_state32L" size="32"/>
+  <typeState dict="adcs_rw_drive_pw_menable4_state" endian="BIG" name="adcs_rw_drive_pw_menable4_state8B" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_menable4_state" endian="BIG" name="adcs_rw_drive_pw_menable4_state16B" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_menable4_state" endian="BIG" name="adcs_rw_drive_pw_menable4_state32B" size="32"/>
+  <dictionary name="adcs_rw_drive_pw_mdirection1_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_RW_DRIVE_PW_MDIRECTION1_STATE_NEG" str="NEG"/>
+    <pair key="#ADCS_RW_DRIVE_PW_MDIRECTION1_STATE_POS" str="POS"/>
+  </dictionary>
+  <typeState dict="adcs_rw_drive_pw_mdirection1_state" endian="LITTLE" name="adcs_rw_drive_pw_mdirection1_state8L" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_mdirection1_state" endian="LITTLE" name="adcs_rw_drive_pw_mdirection1_state16L" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_mdirection1_state" endian="LITTLE" name="adcs_rw_drive_pw_mdirection1_state32L" size="32"/>
+  <typeState dict="adcs_rw_drive_pw_mdirection1_state" endian="BIG" name="adcs_rw_drive_pw_mdirection1_state8B" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_mdirection1_state" endian="BIG" name="adcs_rw_drive_pw_mdirection1_state16B" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_mdirection1_state" endian="BIG" name="adcs_rw_drive_pw_mdirection1_state32B" size="32"/>
+  <dictionary name="adcs_rw_drive_pw_mdirection2_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_RW_DRIVE_PW_MDIRECTION2_STATE_NEG" str="NEG"/>
+    <pair key="#ADCS_RW_DRIVE_PW_MDIRECTION2_STATE_POS" str="POS"/>
+  </dictionary>
+  <typeState dict="adcs_rw_drive_pw_mdirection2_state" endian="LITTLE" name="adcs_rw_drive_pw_mdirection2_state8L" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_mdirection2_state" endian="LITTLE" name="adcs_rw_drive_pw_mdirection2_state16L" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_mdirection2_state" endian="LITTLE" name="adcs_rw_drive_pw_mdirection2_state32L" size="32"/>
+  <typeState dict="adcs_rw_drive_pw_mdirection2_state" endian="BIG" name="adcs_rw_drive_pw_mdirection2_state8B" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_mdirection2_state" endian="BIG" name="adcs_rw_drive_pw_mdirection2_state16B" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_mdirection2_state" endian="BIG" name="adcs_rw_drive_pw_mdirection2_state32B" size="32"/>
+  <dictionary name="adcs_rw_drive_pw_mdirection3_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_RW_DRIVE_PW_MDIRECTION3_STATE_NEG" str="NEG"/>
+    <pair key="#ADCS_RW_DRIVE_PW_MDIRECTION3_STATE_POS" str="POS"/>
+  </dictionary>
+  <typeState dict="adcs_rw_drive_pw_mdirection3_state" endian="LITTLE" name="adcs_rw_drive_pw_mdirection3_state8L" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_mdirection3_state" endian="LITTLE" name="adcs_rw_drive_pw_mdirection3_state16L" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_mdirection3_state" endian="LITTLE" name="adcs_rw_drive_pw_mdirection3_state32L" size="32"/>
+  <typeState dict="adcs_rw_drive_pw_mdirection3_state" endian="BIG" name="adcs_rw_drive_pw_mdirection3_state8B" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_mdirection3_state" endian="BIG" name="adcs_rw_drive_pw_mdirection3_state16B" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_mdirection3_state" endian="BIG" name="adcs_rw_drive_pw_mdirection3_state32B" size="32"/>
+  <dictionary name="adcs_rw_drive_pw_mdirection4_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_RW_DRIVE_PW_MDIRECTION4_STATE_NEG" str="NEG"/>
+    <pair key="#ADCS_RW_DRIVE_PW_MDIRECTION4_STATE_POS" str="POS"/>
+  </dictionary>
+  <typeState dict="adcs_rw_drive_pw_mdirection4_state" endian="LITTLE" name="adcs_rw_drive_pw_mdirection4_state8L" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_mdirection4_state" endian="LITTLE" name="adcs_rw_drive_pw_mdirection4_state16L" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_mdirection4_state" endian="LITTLE" name="adcs_rw_drive_pw_mdirection4_state32L" size="32"/>
+  <typeState dict="adcs_rw_drive_pw_mdirection4_state" endian="BIG" name="adcs_rw_drive_pw_mdirection4_state8B" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_mdirection4_state" endian="BIG" name="adcs_rw_drive_pw_mdirection4_state16B" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_mdirection4_state" endian="BIG" name="adcs_rw_drive_pw_mdirection4_state32B" size="32"/>
+  <dictionary name="adcs_rw_drive_pw_mcmd_dir1_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_RW_DRIVE_PW_MCMD_DIR1_STATE_NEG" str="NEG"/>
+    <pair key="#ADCS_RW_DRIVE_PW_MCMD_DIR1_STATE_POS" str="POS"/>
+  </dictionary>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir1_state" endian="LITTLE" name="adcs_rw_drive_pw_mcmd_dir1_state8L" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir1_state" endian="LITTLE" name="adcs_rw_drive_pw_mcmd_dir1_state16L" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir1_state" endian="LITTLE" name="adcs_rw_drive_pw_mcmd_dir1_state32L" size="32"/>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir1_state" endian="BIG" name="adcs_rw_drive_pw_mcmd_dir1_state8B" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir1_state" endian="BIG" name="adcs_rw_drive_pw_mcmd_dir1_state16B" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir1_state" endian="BIG" name="adcs_rw_drive_pw_mcmd_dir1_state32B" size="32"/>
+  <dictionary name="adcs_rw_drive_pw_mcmd_dir2_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_RW_DRIVE_PW_MCMD_DIR2_STATE_NEG" str="NEG"/>
+    <pair key="#ADCS_RW_DRIVE_PW_MCMD_DIR2_STATE_POS" str="POS"/>
+  </dictionary>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir2_state" endian="LITTLE" name="adcs_rw_drive_pw_mcmd_dir2_state8L" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir2_state" endian="LITTLE" name="adcs_rw_drive_pw_mcmd_dir2_state16L" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir2_state" endian="LITTLE" name="adcs_rw_drive_pw_mcmd_dir2_state32L" size="32"/>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir2_state" endian="BIG" name="adcs_rw_drive_pw_mcmd_dir2_state8B" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir2_state" endian="BIG" name="adcs_rw_drive_pw_mcmd_dir2_state16B" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir2_state" endian="BIG" name="adcs_rw_drive_pw_mcmd_dir2_state32B" size="32"/>
+  <dictionary name="adcs_rw_drive_pw_mcmd_dir3_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_RW_DRIVE_PW_MCMD_DIR3_STATE_NEG" str="NEG"/>
+    <pair key="#ADCS_RW_DRIVE_PW_MCMD_DIR3_STATE_POS" str="POS"/>
+  </dictionary>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir3_state" endian="LITTLE" name="adcs_rw_drive_pw_mcmd_dir3_state8L" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir3_state" endian="LITTLE" name="adcs_rw_drive_pw_mcmd_dir3_state16L" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir3_state" endian="LITTLE" name="adcs_rw_drive_pw_mcmd_dir3_state32L" size="32"/>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir3_state" endian="BIG" name="adcs_rw_drive_pw_mcmd_dir3_state8B" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir3_state" endian="BIG" name="adcs_rw_drive_pw_mcmd_dir3_state16B" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir3_state" endian="BIG" name="adcs_rw_drive_pw_mcmd_dir3_state32B" size="32"/>
+  <dictionary name="adcs_rw_drive_pw_mcmd_dir4_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_RW_DRIVE_PW_MCMD_DIR4_STATE_NEG" str="NEG"/>
+    <pair key="#ADCS_RW_DRIVE_PW_MCMD_DIR4_STATE_POS" str="POS"/>
+  </dictionary>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir4_state" endian="LITTLE" name="adcs_rw_drive_pw_mcmd_dir4_state8L" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir4_state" endian="LITTLE" name="adcs_rw_drive_pw_mcmd_dir4_state16L" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir4_state" endian="LITTLE" name="adcs_rw_drive_pw_mcmd_dir4_state32L" size="32"/>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir4_state" endian="BIG" name="adcs_rw_drive_pw_mcmd_dir4_state8B" size="8"/>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir4_state" endian="BIG" name="adcs_rw_drive_pw_mcmd_dir4_state16B" size="16"/>
+  <typeState dict="adcs_rw_drive_pw_mcmd_dir4_state" endian="BIG" name="adcs_rw_drive_pw_mcmd_dir4_state32B" size="32"/>
+  <dictionary name="adcs_rw_drive_rw_test_mode_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_RW_DRIVE_RW_TEST_MODE_STATE_ON" str="ON"/>
+    <pair key="#ADCS_RW_DRIVE_RW_TEST_MODE_STATE_OFF" str="OFF"/>
+  </dictionary>
+  <typeState dict="adcs_rw_drive_rw_test_mode_state" endian="LITTLE" name="adcs_rw_drive_rw_test_mode_state8L" size="8"/>
+  <typeState dict="adcs_rw_drive_rw_test_mode_state" endian="LITTLE" name="adcs_rw_drive_rw_test_mode_state16L" size="16"/>
+  <typeState dict="adcs_rw_drive_rw_test_mode_state" endian="LITTLE" name="adcs_rw_drive_rw_test_mode_state32L" size="32"/>
+  <typeState dict="adcs_rw_drive_rw_test_mode_state" endian="BIG" name="adcs_rw_drive_rw_test_mode_state8B" size="8"/>
+  <typeState dict="adcs_rw_drive_rw_test_mode_state" endian="BIG" name="adcs_rw_drive_rw_test_mode_state16B" size="16"/>
+  <typeState dict="adcs_rw_drive_rw_test_mode_state" endian="BIG" name="adcs_rw_drive_rw_test_mode_state32B" size="32"/>
+  <dictionary name="adcs_momentum_torque_rod_mode1_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_MODE1_STATE_AUTO" str="AUTO"/>
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_MODE1_STATE_ON_POS" str="ON_POS"/>
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_MODE1_STATE_ON_NEG" str="ON_NEG"/>
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_MODE1_STATE_DELAYED_AUTO" str="DELAYED_AUTO"/>
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_MODE1_STATE_OFF" str="OFF"/>
+  </dictionary>
+  <typeState dict="adcs_momentum_torque_rod_mode1_state" endian="LITTLE" name="adcs_momentum_torque_rod_mode1_state8L" size="8"/>
+  <typeState dict="adcs_momentum_torque_rod_mode1_state" endian="LITTLE" name="adcs_momentum_torque_rod_mode1_state16L" size="16"/>
+  <typeState dict="adcs_momentum_torque_rod_mode1_state" endian="LITTLE" name="adcs_momentum_torque_rod_mode1_state32L" size="32"/>
+  <typeState dict="adcs_momentum_torque_rod_mode1_state" endian="BIG" name="adcs_momentum_torque_rod_mode1_state8B" size="8"/>
+  <typeState dict="adcs_momentum_torque_rod_mode1_state" endian="BIG" name="adcs_momentum_torque_rod_mode1_state16B" size="16"/>
+  <typeState dict="adcs_momentum_torque_rod_mode1_state" endian="BIG" name="adcs_momentum_torque_rod_mode1_state32B" size="32"/>
+  <dictionary name="adcs_momentum_torque_rod_mode2_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_MODE2_STATE_AUTO" str="AUTO"/>
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_MODE2_STATE_ON_POS" str="ON_POS"/>
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_MODE2_STATE_ON_NEG" str="ON_NEG"/>
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_MODE2_STATE_DELAYED_AUTO" str="DELAYED_AUTO"/>
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_MODE2_STATE_OFF" str="OFF"/>
+  </dictionary>
+  <typeState dict="adcs_momentum_torque_rod_mode2_state" endian="LITTLE" name="adcs_momentum_torque_rod_mode2_state8L" size="8"/>
+  <typeState dict="adcs_momentum_torque_rod_mode2_state" endian="LITTLE" name="adcs_momentum_torque_rod_mode2_state16L" size="16"/>
+  <typeState dict="adcs_momentum_torque_rod_mode2_state" endian="LITTLE" name="adcs_momentum_torque_rod_mode2_state32L" size="32"/>
+  <typeState dict="adcs_momentum_torque_rod_mode2_state" endian="BIG" name="adcs_momentum_torque_rod_mode2_state8B" size="8"/>
+  <typeState dict="adcs_momentum_torque_rod_mode2_state" endian="BIG" name="adcs_momentum_torque_rod_mode2_state16B" size="16"/>
+  <typeState dict="adcs_momentum_torque_rod_mode2_state" endian="BIG" name="adcs_momentum_torque_rod_mode2_state32B" size="32"/>
+  <dictionary name="adcs_momentum_torque_rod_mode3_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_MODE3_STATE_AUTO" str="AUTO"/>
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_MODE3_STATE_ON_POS" str="ON_POS"/>
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_MODE3_STATE_ON_NEG" str="ON_NEG"/>
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_MODE3_STATE_DELAYED_AUTO" str="DELAYED_AUTO"/>
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_MODE3_STATE_OFF" str="OFF"/>
+  </dictionary>
+  <typeState dict="adcs_momentum_torque_rod_mode3_state" endian="LITTLE" name="adcs_momentum_torque_rod_mode3_state8L" size="8"/>
+  <typeState dict="adcs_momentum_torque_rod_mode3_state" endian="LITTLE" name="adcs_momentum_torque_rod_mode3_state16L" size="16"/>
+  <typeState dict="adcs_momentum_torque_rod_mode3_state" endian="LITTLE" name="adcs_momentum_torque_rod_mode3_state32L" size="32"/>
+  <typeState dict="adcs_momentum_torque_rod_mode3_state" endian="BIG" name="adcs_momentum_torque_rod_mode3_state8B" size="8"/>
+  <typeState dict="adcs_momentum_torque_rod_mode3_state" endian="BIG" name="adcs_momentum_torque_rod_mode3_state16B" size="16"/>
+  <typeState dict="adcs_momentum_torque_rod_mode3_state" endian="BIG" name="adcs_momentum_torque_rod_mode3_state32B" size="32"/>
+  <dictionary name="adcs_momentum_mag_source_setting_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_MOMENTUM_MAG_SOURCE_SETTING_STATE_MEASURED" str="MEASURED"/>
+    <pair key="#ADCS_MOMENTUM_MAG_SOURCE_SETTING_STATE_MODELED" str="MODELED"/>
+  </dictionary>
+  <typeState dict="adcs_momentum_mag_source_setting_state" endian="LITTLE" name="adcs_momentum_mag_source_setting_state8L" size="8"/>
+  <typeState dict="adcs_momentum_mag_source_setting_state" endian="LITTLE" name="adcs_momentum_mag_source_setting_state16L" size="16"/>
+  <typeState dict="adcs_momentum_mag_source_setting_state" endian="LITTLE" name="adcs_momentum_mag_source_setting_state32L" size="32"/>
+  <typeState dict="adcs_momentum_mag_source_setting_state" endian="BIG" name="adcs_momentum_mag_source_setting_state8B" size="8"/>
+  <typeState dict="adcs_momentum_mag_source_setting_state" endian="BIG" name="adcs_momentum_mag_source_setting_state16B" size="16"/>
+  <typeState dict="adcs_momentum_mag_source_setting_state" endian="BIG" name="adcs_momentum_mag_source_setting_state32B" size="32"/>
+  <dictionary name="adcs_momentum_mag_source_used_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_MOMENTUM_MAG_SOURCE_USED_STATE_MEASURED" str="MEASURED"/>
+    <pair key="#ADCS_MOMENTUM_MAG_SOURCE_USED_STATE_MODELED" str="MODELED"/>
+    <pair key="#ADCS_MOMENTUM_MAG_SOURCE_USED_STATE_NO_FIELD_VALID" str="NO_FIELD_VALID"/>
+  </dictionary>
+  <typeState dict="adcs_momentum_mag_source_used_state" endian="LITTLE" name="adcs_momentum_mag_source_used_state8L" size="8"/>
+  <typeState dict="adcs_momentum_mag_source_used_state" endian="LITTLE" name="adcs_momentum_mag_source_used_state16L" size="16"/>
+  <typeState dict="adcs_momentum_mag_source_used_state" endian="LITTLE" name="adcs_momentum_mag_source_used_state32L" size="32"/>
+  <typeState dict="adcs_momentum_mag_source_used_state" endian="BIG" name="adcs_momentum_mag_source_used_state8B" size="8"/>
+  <typeState dict="adcs_momentum_mag_source_used_state" endian="BIG" name="adcs_momentum_mag_source_used_state16B" size="16"/>
+  <typeState dict="adcs_momentum_mag_source_used_state" endian="BIG" name="adcs_momentum_mag_source_used_state32B" size="32"/>
+  <dictionary name="adcs_momentum_momentum_vector_valid_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_MOMENTUM_MOMENTUM_VECTOR_VALID_STATE_YES" str="YES"/>
+    <pair key="#ADCS_MOMENTUM_MOMENTUM_VECTOR_VALID_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_momentum_momentum_vector_valid_state" endian="LITTLE" name="adcs_momentum_momentum_vector_valid_state8L" size="8"/>
+  <typeState dict="adcs_momentum_momentum_vector_valid_state" endian="LITTLE" name="adcs_momentum_momentum_vector_valid_state16L" size="16"/>
+  <typeState dict="adcs_momentum_momentum_vector_valid_state" endian="LITTLE" name="adcs_momentum_momentum_vector_valid_state32L" size="32"/>
+  <typeState dict="adcs_momentum_momentum_vector_valid_state" endian="BIG" name="adcs_momentum_momentum_vector_valid_state8B" size="8"/>
+  <typeState dict="adcs_momentum_momentum_vector_valid_state" endian="BIG" name="adcs_momentum_momentum_vector_valid_state16B" size="16"/>
+  <typeState dict="adcs_momentum_momentum_vector_valid_state" endian="BIG" name="adcs_momentum_momentum_vector_valid_state32B" size="32"/>
+  <dictionary name="adcs_momentum_momentum_vector_enabled_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_MOMENTUM_MOMENTUM_VECTOR_ENABLED_STATE_YES" str="YES"/>
+    <pair key="#ADCS_MOMENTUM_MOMENTUM_VECTOR_ENABLED_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_momentum_momentum_vector_enabled_state" endian="LITTLE" name="adcs_momentum_momentum_vector_enabled_state8L" size="8"/>
+  <typeState dict="adcs_momentum_momentum_vector_enabled_state" endian="LITTLE" name="adcs_momentum_momentum_vector_enabled_state16L" size="16"/>
+  <typeState dict="adcs_momentum_momentum_vector_enabled_state" endian="LITTLE" name="adcs_momentum_momentum_vector_enabled_state32L" size="32"/>
+  <typeState dict="adcs_momentum_momentum_vector_enabled_state" endian="BIG" name="adcs_momentum_momentum_vector_enabled_state8B" size="8"/>
+  <typeState dict="adcs_momentum_momentum_vector_enabled_state" endian="BIG" name="adcs_momentum_momentum_vector_enabled_state16B" size="16"/>
+  <typeState dict="adcs_momentum_momentum_vector_enabled_state" endian="BIG" name="adcs_momentum_momentum_vector_enabled_state32B" size="32"/>
+  <dictionary name="adcs_momentum_use_wheel_momenta_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_MOMENTUM_USE_WHEEL_MOMENTA_STATE_YES" str="YES"/>
+    <pair key="#ADCS_MOMENTUM_USE_WHEEL_MOMENTA_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_momentum_use_wheel_momenta_state" endian="LITTLE" name="adcs_momentum_use_wheel_momenta_state8L" size="8"/>
+  <typeState dict="adcs_momentum_use_wheel_momenta_state" endian="LITTLE" name="adcs_momentum_use_wheel_momenta_state16L" size="16"/>
+  <typeState dict="adcs_momentum_use_wheel_momenta_state" endian="LITTLE" name="adcs_momentum_use_wheel_momenta_state32L" size="32"/>
+  <typeState dict="adcs_momentum_use_wheel_momenta_state" endian="BIG" name="adcs_momentum_use_wheel_momenta_state8B" size="8"/>
+  <typeState dict="adcs_momentum_use_wheel_momenta_state" endian="BIG" name="adcs_momentum_use_wheel_momenta_state16B" size="16"/>
+  <typeState dict="adcs_momentum_use_wheel_momenta_state" endian="BIG" name="adcs_momentum_use_wheel_momenta_state32B" size="32"/>
+  <dictionary name="adcs_momentum_torque_rod_enable1_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_ENABLE1_STATE_EN" str="EN"/>
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_ENABLE1_STATE_DS" str="DS"/>
+  </dictionary>
+  <typeState dict="adcs_momentum_torque_rod_enable1_state" endian="LITTLE" name="adcs_momentum_torque_rod_enable1_state8L" size="8"/>
+  <typeState dict="adcs_momentum_torque_rod_enable1_state" endian="LITTLE" name="adcs_momentum_torque_rod_enable1_state16L" size="16"/>
+  <typeState dict="adcs_momentum_torque_rod_enable1_state" endian="LITTLE" name="adcs_momentum_torque_rod_enable1_state32L" size="32"/>
+  <typeState dict="adcs_momentum_torque_rod_enable1_state" endian="BIG" name="adcs_momentum_torque_rod_enable1_state8B" size="8"/>
+  <typeState dict="adcs_momentum_torque_rod_enable1_state" endian="BIG" name="adcs_momentum_torque_rod_enable1_state16B" size="16"/>
+  <typeState dict="adcs_momentum_torque_rod_enable1_state" endian="BIG" name="adcs_momentum_torque_rod_enable1_state32B" size="32"/>
+  <dictionary name="adcs_momentum_torque_rod_enable2_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_ENABLE2_STATE_EN" str="EN"/>
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_ENABLE2_STATE_DS" str="DS"/>
+  </dictionary>
+  <typeState dict="adcs_momentum_torque_rod_enable2_state" endian="LITTLE" name="adcs_momentum_torque_rod_enable2_state8L" size="8"/>
+  <typeState dict="adcs_momentum_torque_rod_enable2_state" endian="LITTLE" name="adcs_momentum_torque_rod_enable2_state16L" size="16"/>
+  <typeState dict="adcs_momentum_torque_rod_enable2_state" endian="LITTLE" name="adcs_momentum_torque_rod_enable2_state32L" size="32"/>
+  <typeState dict="adcs_momentum_torque_rod_enable2_state" endian="BIG" name="adcs_momentum_torque_rod_enable2_state8B" size="8"/>
+  <typeState dict="adcs_momentum_torque_rod_enable2_state" endian="BIG" name="adcs_momentum_torque_rod_enable2_state16B" size="16"/>
+  <typeState dict="adcs_momentum_torque_rod_enable2_state" endian="BIG" name="adcs_momentum_torque_rod_enable2_state32B" size="32"/>
+  <dictionary name="adcs_momentum_torque_rod_enable3_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_ENABLE3_STATE_EN" str="EN"/>
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_ENABLE3_STATE_DS" str="DS"/>
+  </dictionary>
+  <typeState dict="adcs_momentum_torque_rod_enable3_state" endian="LITTLE" name="adcs_momentum_torque_rod_enable3_state8L" size="8"/>
+  <typeState dict="adcs_momentum_torque_rod_enable3_state" endian="LITTLE" name="adcs_momentum_torque_rod_enable3_state16L" size="16"/>
+  <typeState dict="adcs_momentum_torque_rod_enable3_state" endian="LITTLE" name="adcs_momentum_torque_rod_enable3_state32L" size="32"/>
+  <typeState dict="adcs_momentum_torque_rod_enable3_state" endian="BIG" name="adcs_momentum_torque_rod_enable3_state8B" size="8"/>
+  <typeState dict="adcs_momentum_torque_rod_enable3_state" endian="BIG" name="adcs_momentum_torque_rod_enable3_state16B" size="16"/>
+  <typeState dict="adcs_momentum_torque_rod_enable3_state" endian="BIG" name="adcs_momentum_torque_rod_enable3_state32B" size="32"/>
+  <dictionary name="adcs_momentum_torque_rod_direction1_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_DIRECTION1_STATE_NEG" str="NEG"/>
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_DIRECTION1_STATE_POS" str="POS"/>
+  </dictionary>
+  <typeState dict="adcs_momentum_torque_rod_direction1_state" endian="LITTLE" name="adcs_momentum_torque_rod_direction1_state8L" size="8"/>
+  <typeState dict="adcs_momentum_torque_rod_direction1_state" endian="LITTLE" name="adcs_momentum_torque_rod_direction1_state16L" size="16"/>
+  <typeState dict="adcs_momentum_torque_rod_direction1_state" endian="LITTLE" name="adcs_momentum_torque_rod_direction1_state32L" size="32"/>
+  <typeState dict="adcs_momentum_torque_rod_direction1_state" endian="BIG" name="adcs_momentum_torque_rod_direction1_state8B" size="8"/>
+  <typeState dict="adcs_momentum_torque_rod_direction1_state" endian="BIG" name="adcs_momentum_torque_rod_direction1_state16B" size="16"/>
+  <typeState dict="adcs_momentum_torque_rod_direction1_state" endian="BIG" name="adcs_momentum_torque_rod_direction1_state32B" size="32"/>
+  <dictionary name="adcs_momentum_torque_rod_direction2_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_DIRECTION2_STATE_NEG" str="NEG"/>
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_DIRECTION2_STATE_POS" str="POS"/>
+  </dictionary>
+  <typeState dict="adcs_momentum_torque_rod_direction2_state" endian="LITTLE" name="adcs_momentum_torque_rod_direction2_state8L" size="8"/>
+  <typeState dict="adcs_momentum_torque_rod_direction2_state" endian="LITTLE" name="adcs_momentum_torque_rod_direction2_state16L" size="16"/>
+  <typeState dict="adcs_momentum_torque_rod_direction2_state" endian="LITTLE" name="adcs_momentum_torque_rod_direction2_state32L" size="32"/>
+  <typeState dict="adcs_momentum_torque_rod_direction2_state" endian="BIG" name="adcs_momentum_torque_rod_direction2_state8B" size="8"/>
+  <typeState dict="adcs_momentum_torque_rod_direction2_state" endian="BIG" name="adcs_momentum_torque_rod_direction2_state16B" size="16"/>
+  <typeState dict="adcs_momentum_torque_rod_direction2_state" endian="BIG" name="adcs_momentum_torque_rod_direction2_state32B" size="32"/>
+  <dictionary name="adcs_momentum_torque_rod_direction3_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_DIRECTION3_STATE_NEG" str="NEG"/>
+    <pair key="#ADCS_MOMENTUM_TORQUE_ROD_DIRECTION3_STATE_POS" str="POS"/>
+  </dictionary>
+  <typeState dict="adcs_momentum_torque_rod_direction3_state" endian="LITTLE" name="adcs_momentum_torque_rod_direction3_state8L" size="8"/>
+  <typeState dict="adcs_momentum_torque_rod_direction3_state" endian="LITTLE" name="adcs_momentum_torque_rod_direction3_state16L" size="16"/>
+  <typeState dict="adcs_momentum_torque_rod_direction3_state" endian="LITTLE" name="adcs_momentum_torque_rod_direction3_state32L" size="32"/>
+  <typeState dict="adcs_momentum_torque_rod_direction3_state" endian="BIG" name="adcs_momentum_torque_rod_direction3_state8B" size="8"/>
+  <typeState dict="adcs_momentum_torque_rod_direction3_state" endian="BIG" name="adcs_momentum_torque_rod_direction3_state16B" size="16"/>
+  <typeState dict="adcs_momentum_torque_rod_direction3_state" endian="BIG" name="adcs_momentum_torque_rod_direction3_state32B" size="32"/>
+  <dictionary name="adcs_css_sun_vector_status_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_CSS_SUN_VECTOR_STATUS_STATE_COARSE" str="COARSE"/>
+    <pair key="#ADCS_CSS_SUN_VECTOR_STATUS_STATE_BAD" str="BAD"/>
+    <pair key="#ADCS_CSS_SUN_VECTOR_STATUS_STATE_GOOD" str="GOOD"/>
+  </dictionary>
+  <typeState dict="adcs_css_sun_vector_status_state" endian="LITTLE" name="adcs_css_sun_vector_status_state8L" size="8"/>
+  <typeState dict="adcs_css_sun_vector_status_state" endian="LITTLE" name="adcs_css_sun_vector_status_state16L" size="16"/>
+  <typeState dict="adcs_css_sun_vector_status_state" endian="LITTLE" name="adcs_css_sun_vector_status_state32L" size="32"/>
+  <typeState dict="adcs_css_sun_vector_status_state" endian="BIG" name="adcs_css_sun_vector_status_state8B" size="8"/>
+  <typeState dict="adcs_css_sun_vector_status_state" endian="BIG" name="adcs_css_sun_vector_status_state16B" size="16"/>
+  <typeState dict="adcs_css_sun_vector_status_state" endian="BIG" name="adcs_css_sun_vector_status_state32B" size="32"/>
+  <dictionary name="adcs_css_sun_vector_enabled_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_CSS_SUN_VECTOR_ENABLED_STATE_YES" str="YES"/>
+    <pair key="#ADCS_CSS_SUN_VECTOR_ENABLED_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_css_sun_vector_enabled_state" endian="LITTLE" name="adcs_css_sun_vector_enabled_state8L" size="8"/>
+  <typeState dict="adcs_css_sun_vector_enabled_state" endian="LITTLE" name="adcs_css_sun_vector_enabled_state16L" size="16"/>
+  <typeState dict="adcs_css_sun_vector_enabled_state" endian="LITTLE" name="adcs_css_sun_vector_enabled_state32L" size="32"/>
+  <typeState dict="adcs_css_sun_vector_enabled_state" endian="BIG" name="adcs_css_sun_vector_enabled_state8B" size="8"/>
+  <typeState dict="adcs_css_sun_vector_enabled_state" endian="BIG" name="adcs_css_sun_vector_enabled_state16B" size="16"/>
+  <typeState dict="adcs_css_sun_vector_enabled_state" endian="BIG" name="adcs_css_sun_vector_enabled_state32B" size="32"/>
+  <dictionary name="adcs_css_css_test_mode_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_CSS_CSS_TEST_MODE_STATE_YES" str="YES"/>
+    <pair key="#ADCS_CSS_CSS_TEST_MODE_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_css_css_test_mode_state" endian="LITTLE" name="adcs_css_css_test_mode_state8L" size="8"/>
+  <typeState dict="adcs_css_css_test_mode_state" endian="LITTLE" name="adcs_css_css_test_mode_state16L" size="16"/>
+  <typeState dict="adcs_css_css_test_mode_state" endian="LITTLE" name="adcs_css_css_test_mode_state32L" size="32"/>
+  <typeState dict="adcs_css_css_test_mode_state" endian="BIG" name="adcs_css_css_test_mode_state8B" size="8"/>
+  <typeState dict="adcs_css_css_test_mode_state" endian="BIG" name="adcs_css_css_test_mode_state16B" size="16"/>
+  <typeState dict="adcs_css_css_test_mode_state" endian="BIG" name="adcs_css_css_test_mode_state32B" size="32"/>
+  <dictionary name="adcs_mag_mag_vector_valid_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_MAG_MAG_VECTOR_VALID_STATE_YES" str="YES"/>
+    <pair key="#ADCS_MAG_MAG_VECTOR_VALID_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_mag_mag_vector_valid_state" endian="LITTLE" name="adcs_mag_mag_vector_valid_state8L" size="8"/>
+  <typeState dict="adcs_mag_mag_vector_valid_state" endian="LITTLE" name="adcs_mag_mag_vector_valid_state16L" size="16"/>
+  <typeState dict="adcs_mag_mag_vector_valid_state" endian="LITTLE" name="adcs_mag_mag_vector_valid_state32L" size="32"/>
+  <typeState dict="adcs_mag_mag_vector_valid_state" endian="BIG" name="adcs_mag_mag_vector_valid_state8B" size="8"/>
+  <typeState dict="adcs_mag_mag_vector_valid_state" endian="BIG" name="adcs_mag_mag_vector_valid_state16B" size="16"/>
+  <typeState dict="adcs_mag_mag_vector_valid_state" endian="BIG" name="adcs_mag_mag_vector_valid_state32B" size="32"/>
+  <dictionary name="adcs_mag_mag_test_mode_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_MAG_MAG_TEST_MODE_STATE_YES" str="YES"/>
+    <pair key="#ADCS_MAG_MAG_TEST_MODE_STATE_NO" str="NO"/>
+  </dictionary>
+  <typeState dict="adcs_mag_mag_test_mode_state" endian="LITTLE" name="adcs_mag_mag_test_mode_state8L" size="8"/>
+  <typeState dict="adcs_mag_mag_test_mode_state" endian="LITTLE" name="adcs_mag_mag_test_mode_state16L" size="16"/>
+  <typeState dict="adcs_mag_mag_test_mode_state" endian="LITTLE" name="adcs_mag_mag_test_mode_state32L" size="32"/>
+  <typeState dict="adcs_mag_mag_test_mode_state" endian="BIG" name="adcs_mag_mag_test_mode_state8B" size="8"/>
+  <typeState dict="adcs_mag_mag_test_mode_state" endian="BIG" name="adcs_mag_mag_test_mode_state16B" size="16"/>
+  <typeState dict="adcs_mag_mag_test_mode_state" endian="BIG" name="adcs_mag_mag_test_mode_state32B" size="32"/>
+  <dictionary name="adcs_command_tlm_cmd_status_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_COMMAND_TLM_CMD_STATUS_STATE_BAD_DATA" str="BAD_DATA"/>
+    <pair key="#ADCS_COMMAND_TLM_CMD_STATUS_STATE_ATT_ERR_TOO_HIGH" str="ATT_ERR_TOO_HIGH"/>
+    <pair key="#ADCS_COMMAND_TLM_CMD_STATUS_STATE_THRUSTERS_DISABLED" str="THRUSTERS_DISABLED"/>
+    <pair key="#ADCS_COMMAND_TLM_CMD_STATUS_STATE_ASYNC_REFUSED" str="ASYNC_REFUSED"/>
+    <pair key="#ADCS_COMMAND_TLM_CMD_STATUS_STATE_NO_CMD_DATA" str="NO_CMD_DATA"/>
+    <pair key="#ADCS_COMMAND_TLM_CMD_STATUS_STATE_TABLES_BUSY" str="TABLES_BUSY"/>
+    <pair key="#ADCS_COMMAND_TLM_CMD_STATUS_STATE_BAD_APID" str="BAD_APID"/>
+    <pair key="#ADCS_COMMAND_TLM_CMD_STATUS_STATE_BAD_OPCODE" str="BAD_OPCODE"/>
+    <pair key="#ADCS_COMMAND_TLM_CMD_STATUS_STATE_CMD_APID_OVERRUN" str="CMD_APID_OVERRUN"/>
+    <pair key="#ADCS_COMMAND_TLM_CMD_STATUS_STATE_CMD_SRVC_OVERRUN" str="CMD_SRVC_OVERRUN"/>
+    <pair key="#ADCS_COMMAND_TLM_CMD_STATUS_STATE_FLASH_NOT_ARMED" str="FLASH_NOT_ARMED"/>
+    <pair key="#ADCS_COMMAND_TLM_CMD_STATUS_STATE_OK" str="OK"/>
+  </dictionary>
+  <typeState dict="adcs_command_tlm_cmd_status_state" endian="LITTLE" name="adcs_command_tlm_cmd_status_state8L" size="8"/>
+  <typeState dict="adcs_command_tlm_cmd_status_state" endian="LITTLE" name="adcs_command_tlm_cmd_status_state16L" size="16"/>
+  <typeState dict="adcs_command_tlm_cmd_status_state" endian="LITTLE" name="adcs_command_tlm_cmd_status_state32L" size="32"/>
+  <typeState dict="adcs_command_tlm_cmd_status_state" endian="BIG" name="adcs_command_tlm_cmd_status_state8B" size="8"/>
+  <typeState dict="adcs_command_tlm_cmd_status_state" endian="BIG" name="adcs_command_tlm_cmd_status_state16B" size="16"/>
+  <typeState dict="adcs_command_tlm_cmd_status_state" endian="BIG" name="adcs_command_tlm_cmd_status_state32B" size="32"/>
+  <dictionary name="adcs_command_tlm_cmd_reject_status_state">
+    <!--From file apps/adcs/ADCSGenPkt.h-->
+    <pair key="#ADCS_COMMAND_TLM_CMD_REJECT_STATUS_STATE_BAD_DATA" str="BAD_DATA"/>
+    <pair key="#ADCS_COMMAND_TLM_CMD_REJECT_STATUS_STATE_ATT_ERR_TOO_HIGH" str="ATT_ERR_TOO_HIGH"/>
+    <pair key="#ADCS_COMMAND_TLM_CMD_REJECT_STATUS_STATE_THRUSTERS_DISABLED" str="THRUSTERS_DISABLED"/>
+    <pair key="#ADCS_COMMAND_TLM_CMD_REJECT_STATUS_STATE_ASYNC_REFUSED" str="ASYNC_REFUSED"/>
+    <pair key="#ADCS_COMMAND_TLM_CMD_REJECT_STATUS_STATE_NO_CMD_DATA" str="NO_CMD_DATA"/>
+    <pair key="#ADCS_COMMAND_TLM_CMD_REJECT_STATUS_STATE_TABLES_BUSY" str="TABLES_BUSY"/>
+    <pair key="#ADCS_COMMAND_TLM_CMD_REJECT_STATUS_STATE_BAD_APID" str="BAD_APID"/>
+    <pair key="#ADCS_COMMAND_TLM_CMD_REJECT_STATUS_STATE_BAD_OPCODE" str="BAD_OPCODE"/>
+    <pair key="#ADCS_COMMAND_TLM_CMD_REJECT_STATUS_STATE_CMD_APID_OVERRUN" str="CMD_APID_OVERRUN"/>
+    <pair key="#ADCS_COMMAND_TLM_CMD_REJECT_STATUS_STATE_CMD_SRVC_OVERRUN" str="CMD_SRVC_OVERRUN"/>
+    <pair key="#ADCS_COMMAND_TLM_CMD_REJECT_STATUS_STATE_FLASH_NOT_ARMED" str="FLASH_NOT_ARMED"/>
+    <pair key="#ADCS_COMMAND_TLM_CMD_REJECT_STATUS_STATE_OK" str="OK"/>
+  </dictionary>
+  <typeState dict="adcs_command_tlm_cmd_reject_status_state" endian="LITTLE" name="adcs_command_tlm_cmd_reject_status_state8L" size="8"/>
+  <typeState dict="adcs_command_tlm_cmd_reject_status_state" endian="LITTLE" name="adcs_command_tlm_cmd_reject_status_state16L" size="16"/>
+  <typeState dict="adcs_command_tlm_cmd_reject_status_state" endian="LITTLE" name="adcs_command_tlm_cmd_reject_status_state32L" size="32"/>
+  <typeState dict="adcs_command_tlm_cmd_reject_status_state" endian="BIG" name="adcs_command_tlm_cmd_reject_status_state8B" size="8"/>
+  <typeState dict="adcs_command_tlm_cmd_reject_status_state" endian="BIG" name="adcs_command_tlm_cmd_reject_status_state16B" size="16"/>
+  <typeState dict="adcs_command_tlm_cmd_reject_status_state" endian="BIG" name="adcs_command_tlm_cmd_reject_status_state32B" size="32"/>
+  <dictionary name="CmdOpcodesHydra">
+    <!--From file apps/adcs/ADCSCmds.h-->
+    <pair key="#CMD_OPCODE_ADCS_PASS" str="CMD_OPCODE_ADCS_PASS"/>
+    <pair key="#CMD_OPCODE_ADCS_RESET" str="CMD_OPCODE_ADCS_RESET"/>
+    <pair key="#CMD_OPCODE_ADCS_READ" str="CMD_OPCODE_ADCS_READ"/>
+    <pair key="#CMD_OPCODE_ADCS_COARSE_POINT" str="CMD_OPCODE_ADCS_COARSE_POINT"/>
+    <pair key="#CMD_OPCODE_ADCS_FINE_POINT" str="CMD_OPCODE_ADCS_FINE_POINT"/>
+    <pair key="#CMD_OPCODE_ADCS_RAM_POINT" str="CMD_OPCODE_ADCS_RAM_POINT"/>
+    <pair key="#CMD_OPCODE_ADCS_FINE_UPDATE" str="CMD_OPCODE_ADCS_FINE_UPDATE"/>
+    <pair key="#CMD_OPCODE_ADCS_RAM_UPDATE" str="CMD_OPCODE_ADCS_RAM_UPDATE"/>
+    <pair key="#CMD_OPCODE_ADCS_ECLIPSE_CHECK" str="CMD_OPCODE_ADCS_ECLIPSE_CHECK"/>
+  </dictionary>
+  <dictionary name="CmdSimOpcodes">
+    <!--From file ../../common/src/linux/hal/SimCmds.h-->
+    <pair key="#CMD_OPCODE_SIM_KILL" str="CMD_OPCODE_SIM_KILL"/>
+  </dictionary>
+  <typeState dict="CmdSimOpcodes" endian="LITTLE" name="CmdSimOpcodes8L" size="8"/>
+  <typeState dict="CmdSimOpcodes" endian="LITTLE" name="CmdSimOpcodes16L" size="16"/>
+  <typeState dict="CmdSimOpcodes" endian="LITTLE" name="CmdSimOpcodes32L" size="32"/>
+  <typeState dict="CmdSimOpcodes" endian="BIG" name="CmdSimOpcodes8B" size="8"/>
+  <typeState dict="CmdSimOpcodes" endian="BIG" name="CmdSimOpcodes16B" size="16"/>
+  <typeState dict="CmdSimOpcodes" endian="BIG" name="CmdSimOpcodes32B" size="32"/>
+</hydraDef>
+

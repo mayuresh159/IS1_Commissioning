@@ -1,0 +1,84 @@
+<pageDef>
+
+	<size width="1200" height="700"/>
+	<background color="Page_Background"/>
+	<text color="BLACK"/>
+	<font name="Times_New_Roman" size="10"/>
+
+    <page title="ADCS ">
+       
+		<column>
+        	<section name="ADCS Packet">
+        		<row item = "beacon_adcs_mode" label ="ADCS Mode"/>
+        		<row item = "beacon_adcs_sun_pt_state" label ="ADCS Sun Point State"/>
+        		<row item = "beacon_adcs_wheel_temp1" label ="Wheel 1 Temp" units="C"/>
+        		<row item = "beacon_adcs_wheel_temp2" label ="Wheel 2 Temp" units="C"/>
+        		<row item = "beacon_adcs_wheel_temp3" label ="Wheel 3 Temp" units="C"/>
+        		<row item = "beacon_adcs_star_temp" label ="Star Tracker Temp" units="C"/>
+				<row item = "beacon_adcs_sun_vec1" label ="Sun Vector 1"/>
+				<row item = "beacon_adcs_sun_vec2" label ="Sun Vector 2"/>
+				<row item = "beacon_adcs_sun_vec3" label ="Sun Vector 3"/>
+				<row item = "beacon_adcs_wheel_sp1" label ="Wheel Speed 1" units="rpm"/>
+				<row item = "beacon_adcs_wheel_sp2" label ="Wheel Speed 2" units="rpm"/>
+				<row item = "beacon_adcs_wheel_sp3" label ="Wheel Speed 3" units="rpm"/>
+				<row item = "beacon_adcs_body_rt1" label ="Body Frame Rate 1" />
+				<row item = "beacon_adcs_body_rt2" label ="Body Frame Rate 2" />
+				<row item = "beacon_adcs_body_rt3" label ="Body Frame Rate 3" />
+				<row item = "beacon_adcs_body_quat1" label ="Body Quat 1" />
+				<row item = "beacon_adcs_body_quat2" label ="Body Quat 2" />
+				<row item = "beacon_adcs_body_quat3" label ="Body Quat 3" />
+				<row item = "beacon_adcs_body_quat4" label ="Body Quat 4" />
+
+			</section>
+
+	</column>
+			<column>
+        	
+        	<section name="ADCS CSS">	
+				<row item = "adcs_css_raw_sun_sensor_data1" label ="CSS 1" />
+				<row item = "adcs_css_raw_sun_sensor_data2" label ="CSS 2" />
+				<row item = "adcs_css_raw_sun_sensor_data3" label ="CSS 3" />
+				<row item = "adcs_css_raw_sun_sensor_data4" label ="CSS 4" />
+				<row item = "adcs_css_raw_sun_sensor_data5" label ="CSS 5" />
+				<row item = "adcs_css_raw_sun_sensor_data6" label ="CSS 6" />
+				<row item = "adcs_css_raw_sun_sensor_data7" label ="CSS 7" />
+				<row item = "adcs_css_raw_sun_sensor_data8" label ="CSS 8" />
+				<row item = "adcs_css_sun_vector_status" label ="Sun Vector status" />
+				<row item = "adcs_css_sun_vector_body1" label ="CSS Sun Vector 1" />
+				<row item = "adcs_css_sun_vector_body2" label ="CSS Sun Vector 2" />
+				<row item = "adcs_css_sun_vector_body3" label ="CSS Sun Vector 3" />
+
+			</section>
+			<section name="ADCS Tracker">	
+				<row item = "adcs_tracker_num_stars_on_fov" label ="Number Stars on FOV" />
+				<row item = "adcs_tracker_num_track_stars" label ="Number Tracked Stars" />
+				<row item = "adcs_tracker_num_attitude_stars" label ="Number Stars used in Attitude" />
+				<row item = "adcs_tracker_num_id_stars" label ="Number ID Stars" />
+				<row item = "adcs_tracker_num_bright_stars" label ="Number Bright Stars" />
+				<row item = "adcs_tracker_att_status" label ="Tracker Attitude Staus" />
+				<row item = "adcs_tracker_declination" label ="Tracker Declination" Units="Deg" />
+				<row item = "adcs_tracker_right_asc" label ="Tracker Right Ascension" Units="Deg" />
+				<row item = "adcs_tracker_roll" label ="Tracker Roll" Units="Deg" />
+			</section>
+		</column>
+			<column>
+        	
+        	<section name="ADCS GPS">	
+				<row item = "adcs_gps_ms_gtracked_satellites" label ="Number Tracked Satellites" />
+				<row item = "adcs_gps_gused_satellites" label ="Number Used Satellites" />
+				<row item = "adcs_gps_gps_valid" label ="GPS Valid" />
+				<row item = "adcs_gps_cycles_since_latest_data" label ="Cycles Since Latest Data" />
+				<row item = "adcs_gps_position_ecef1" label ="GPS Position ECEF1" />
+				<row item = "adcs_gps_position_ecef2" label ="GPS Position ECEF2" />
+				<row item = "adcs_gps_position_ecef3" label ="GPS Position ECEF3" />
+				<row item = "adcs_gps_velocity_ecef1" label ="GPS Velocity ECEF1" />
+				<row item = "adcs_gps_velocity_ecef1" label ="GPS Velocity ECEF1" />
+				<row item = "adcs_gps_velocity_ecef1" label ="GPS Velocity ECEF1" />
+				<row item = "adcs_gps_time" label ="GPS Time" />
+			</section>
+		</column>	
+
+
+    </page>
+</pageDef>
+

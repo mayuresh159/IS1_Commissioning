@@ -1,0 +1,507 @@
+﻿<hydraDef>
+  
+  <euPoly name="CDH_V">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.00163818"/><!--6.71/4096-->
+  </euPoly>
+  
+  <euPoly name="CDH_Batt_V1">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.0163818"/><!--67.1/4096-->
+  </euPoly>
+  
+  <euPoly name="CDH_Batt_V2">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.0081909"/><!--33.55/4096-->
+  </euPoly>
+  
+  <euPoly name="CDH_Temp">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.00390625"/><!--1/256-->
+  </euPoly>
+  
+  <euPoly name="SA_Temp">
+    <coeff index="0" value="-216"/>
+    <coeff index="1" value="0.1744"/>
+  </euPoly>
+  
+  <euPoly name="EPS_FG_V">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="1.558846e-4"/><!--1/6415-->
+  </euPoly>
+  
+  <euPoly name="EPS_SA_I">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.4998779"/><!--163.8/327.68-->
+  </euPoly>
+  
+  <euPoly name="EPS_SA_I5">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.1"/><!--163.8/327.68-->
+  </euPoly>
+  
+  <euPoly name="EPS_SA_V">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.000999756"/><!--32.76/32768-->
+  </euPoly>
+  
+  <euPoly name="EPS_Batt_V">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.00400"/><!--14.1/4096 adjusted -->
+  </euPoly>
+  
+  <euPoly name="EPS_Batt_Charge">
+    <coeff index="0" value="-61.7"/>
+    <coeff index="1" value="3.5568"/><!--14.0/4.096 adjusted -->
+  </euPoly>
+ 
+  <euPoly name="EPS_Batt_Discharge">
+    <coeff index="0" value="-61.6"/>
+    <coeff index="1" value="3.5568"/><!--14.0/4.096 adjusted -->
+  </euPoly>
+ 
+  <!--  OLD VALUES for 10kOhm thermistors on older battery packs
+  <euPoly name="EPS_Batt_Temp1">
+    <coeff index="0" value="-250.2"/>
+    <coeff index="1" value="0.18766"/>
+  </euPoly>
+  -->
+  <!--  NEW VALUES 7/15/2018 for 1.0kOhm thermistors -->
+  <euPoly name="EPS_Batt_Temp1">
+    <coeff index="0" value="-373.0"/>
+    <coeff index="1" value="0.3070"/>
+  </euPoly>
+  
+  <euPoly name="SPS_Pwr_3V">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.0068356"/><!--7.0/1024-->
+  </euPoly>
+  
+  <euPoly name="SPS_Pwr_Temp_Pos">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.25"/><!--1/4-->
+  </euPoly>
+  
+  <euPoly name="SPS_Pwr_Temp_Neg">
+    <coeff index="0" value="-256"/>
+    <coeff index="1" value="0.25"/><!--1/4-->
+  </euPoly>
+  
+  <euSegmented name="SPS_Pwr_Temp">
+    <segment low="0" high="512" eu="SPS_Pwr_Temp_Pos"/><!-- 0-511 -->
+    <segment low="512" high="1024" eu="SPS_Pwr_Temp_Neg"/><!-- 512-1023-->
+  </euSegmented>
+  
+  <euPoly name="SPS_Det_Temp">
+    <coeff index="0" value="-250.0"/>
+    <coeff index="1" value="0.8064"/><!--1/4-->
+  </euPoly>
+  
+  <euPoly name="SPS_Pwr_5V">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.0085840"/><!--8.79/1024-->
+  </euPoly>
+  
+  <euPoly name="SPS_DAC">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.00055664"/><!--2.28/4096-->
+  </euPoly>
+
+  <euPoly name="SPS_POS">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="1"/><!---->
+  </euPoly>
+  
+  <euPoly name="X123_Det_Temp">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.1"/><!---->
+  </euPoly>
+  
+  <euPoly name="X123_High_V">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.5"/><!---->
+  </euPoly>
+  
+  <!-- XACT Conversions -->
+
+  <euPoly name="XACT_TAI_Sec" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.2"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Orbit_Time" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.2"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Q_ECEF_wrt_ECI" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="1.00E-09"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Orbit_Position_ECI" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="2.00E-05"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Orbit_Position_ECEF" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="2.00E-05"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Orbit_Velocity_ECI" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="5.00E-09"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Orbit_Velocity_ECEF" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="5.00E-09"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Mag_Model_Vector_ECI" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="5.00E-09"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Mag_Model_Vector_Body" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="5.00E-09"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Sun_Model_Vector_ECI" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="4.00E-05"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Sun_Model_Vector_Body" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="4.00E-05"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Moon_Model_Vector_ECI" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="4.00E-05"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Moon_Model_Vector_Body" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="4.00E-05"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Attitude_Quaternion" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="5.00E-10"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Attitude_Filter_Residual" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="5.00E-10"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Body_Frame_Rate" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="5.00E-09"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Body_Frame_Rate_HK" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.00016384"/><!--5.00E-9*32768 = 0.00016384 -->
+  </euPoly>
+
+  <euPoly name="XACT_Est_Gyro_Bias" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="5.00E-07"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Commanded_Att_Quat" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="5.00E-10"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Commanded_Rate" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="5.00E-09"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Commanded_Accel" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="5.00E-09"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Desired_Sun_Vect" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="4.00E-05"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Desired_Sun_Rot_Rate" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="4.00E-05"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Wheel_Est_Drag" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.01"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Wheel_Angle_Residual" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.00025"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Wheel_Meas_Speed" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.025"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Cmd_Wheel_Speed" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.025"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Cmd_Wheel_Torque" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="1.00E-07"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Meas_Wheel_Current">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.001"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Tracker_Attitude" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="4.88E-10"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Tracker_Rate" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="2.50E-06"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Tracker_Right_Ascension" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.0055"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Tracker_Declination" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.0055"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Tracker_Roll" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.0055"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Tracker_Detector_Temp">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.80000001"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Tracker_Covariance_Amplitude" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.0032"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Tracker_Covariance_Matrix" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="3.20E-05"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Analog_Gain" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.5"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Magnitude_Correction" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.01"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Dectector_Temp_Cmd">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.80000001"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Bright_Magnitude_Limit" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.039999999"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Dim_Magnitude_Limit" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.039999999"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_TEC_Duty_Cycle" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.004"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Peak_Mean_Bkgd_and_Noise" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="4"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Median_Mean_Bkgd_and_Noise" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="4"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Attitude_Error" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="2.00E-09"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Rate_Error" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="5.00E-09"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Integral_Error" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="1.00E-05"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Commanded_Rate_Lim" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.0002"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Commanded_Accel_Lim" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.0002"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Feedback_Ctrl_Torque" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="2.00E-07"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Total_Torque_Cmd" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="2.00E-07"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Sun_Point_Error" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.003"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_System_Momentum" displayFormat="%7.3f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.2"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Wheel_Momentum_Body" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.0002"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Body_Only_Momentum_Body" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.0002"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Torque_Rod_Torque" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="2.00E-08"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Meas_Sun_Body_Vect" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="1.00E-04"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Meas_Mag_Field_Body" displayFormat="%8.3f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="5.00E-03"/><!---->
+  </euPoly>
+  
+<euPoly name="XACT_Mag_Compensation_Temp">
+	<coeff index="0" value="0"/>
+    <coeff index="1" value="0.005"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_IMU_Channel_Rate" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="1.00E-05"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_IMU_Body_Rate" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="1.00E-05"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Payload_Fine_Sun_Vec_Body" displayFormat="%10.5f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="1.00E-04"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Voltage_5p0">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.025"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Voltage_3p3">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.015000001"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Voltage_2p5">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.015000001"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Voltage_1p8">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.015000001"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Voltage_1p0">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.015000001"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Wheel_Temp">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.005"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_12V_Bus_Voltage">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.001"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_Q_Tracker_wrt_Body" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="1.00E-09"/><!---->
+  </euPoly>
+
+  <euPoly name="XACT_12V_Bus_Voltage_HK">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.256"/><!---->
+  </euPoly>
+  
+  <euPoly name="XACT_Meas_Sun_Body_Vector_HK" displayFormat="%10.6f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.0256"/><!--1.00E-4*256-->
+  </euPoly>
+  
+  <euPoly name="XACT_Wheel_Temp_HK">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="1.28"/><!--0.005*256-->
+  </euPoly>
+
+  <euPoly name="XACT_Level0_Volt" displayFormat="%5.3f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.000805"/><!--3.3V/4096counts-->
+  </euPoly>
+  
+  <euPoly name="XACT_Level0_Volt2" displayFormat="%5.3f">
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.00161"/><!--2 * 3.3V/4096counts-->
+  </euPoly>
+ 
+</hydraDef>

@@ -1,0 +1,145 @@
+<hydraDef>
+
+    <!-- Socket connections for simulation -->
+    <hwServer name="ccsdsTlmServer" mode="read" port="40052"/>
+    <hwServer name="ccsdsCmdServer" mode="write" port="40053"/>
+    <hwServer name="ccsdsSimServer" mode="write" port="40055"/>
+
+    <!-- Socket connections for external program -->
+    <hwServer name="ccsdsOutTlm" mode="write" port="30000"/>
+    <hwServer name="ccsdsInCmd" mode="read" port="30001"/>
+    <hwServer name="hydraInCmd" mode="read" port="30002"/>
+   
+    <!-- Physical serial connection -->
+    <hwSerial name="usb" port="#COMM_USB_PORT" baud="115200" parity="NONE" stopbits="1"/>
+
+    <hwOutFile name="ccsdsOutFile" prefix="ccsds" maxSize="2000000"/>
+
+    <!-- Receives memory dump packets and decodes -->
+    <decoderDef name="memDumpDecoder" updateDB="enabled">
+      <frameString start="12" length="64"/>
+    </decoderDef>
+    
+    <!-- Receives CCSDS telemetry packets and decodes -->    
+    <decoderDef name="ccsdsDecoder" updateDB="enabled">
+        <frameID name="ccsdsTlmHeader.ccsdsTlmHeader_apid"/>
+        <outputDevice name="ccsdsOutTlm"/>
+		<outputDevice name="ccsdsOutFile"/>
+		<!--<outputDevice name="ccsdsOutFile" frameID="#APID_TLM_SW_STAT_PKT"/>-->
+	<outputDevice name="memDumpDecoder" frameID="#APID_TLM_MEM_PKT"/>
+        <outputDevice name="ccsdsOutFile" enabled="false"/>
+    </decoderDef>
+
+    <alias name="ccsds_file_enable" command="set_dec_output">
+        <argument id="0" value="ccsdsDecoder"/>
+        <argument id="1" value="ccsdsOutFile"/>
+        <argument id="2" value="ALL"/>
+        <argument id="3" value="enable"/>
+    </alias>
+
+    <alias name="ccsds_file_disable" command="set_dec_output">
+        <argument id="0" value="ccsdsDecoder"/>
+        <argument id="1" value="ccsdsOutFile"/>
+        <argument id="2" value="ALL"/>
+        <argument id="3" value="enable"/>
+    </alias>
+
+    <alias name="ccsds_file_rollover" command="cmd_hw">
+        <argument id="0" value="ccsdsOutFile"/>
+        <argument id="1" value="rollover"/>
+    </alias>
+
+    <!-- Remove 4 byte sync pattern from packet --> 
+    <decoderHdr name="syncDecoder" length="4">
+        <outputDevice name="ccsdsDecoder"/>
+    </decoderHdr>
+
+    <readerHeader name="ccsdsCmdReader" hw="ccsdsInCmd" decoder="cmdDecoder" maxSize="1024" headerSize="6"
+		  lengthField="4:0:dn16b" offset="1" autoStart="true">
+      <description text="Reads CCSDS commands from external port"/>
+    </readerHeader>
+
+    <decoderCmd name="hydraCmdDecoder"/>
+    <readerTCP name="hydraCmdReader" maxSize="1024" hw="hydraInCmd"
+               decoder="hydraCmdDecoder" autoStart="true">
+        <description text="Reads Hydra string commands from external port"/>
+    </readerTCP>
+    
+    <!-- Read CCSDS packets + sync from telemetry socket --> 
+    <readerHeader name="tlmReader" hw="ccsdsTlmServer" decoder="syncDecoder" maxSize="1024" headerSize="10"
+		  lengthField="8:0:dn16b" offset="1" autoStart="true">
+        <sync length="4" minSize="1" pattern="0x35 0x2E 0xF8 0x53"/>
+    </readerHeader>
+
+    <!-- Read CCSDS packets + sync from hardware interface --> 
+    <readerHeader name="usbReader" hw="usb" decoder="syncDecoder" maxSize="1024" headerSize="10"
+        lengthField="8:0:dn16b" offset="1" autoStart="true">
+        <sync length="4" minSize="1" pattern="0x35 0x2E 0xF8 0x53"/>
+    </readerHeader>
+
+    <decoderDef name="simDecoder">
+        <description text="Send commands to simulator back-door connection"/>
+        <outBuffer size="1024"/>
+        <outputDevice name="ccsdsSimServer"/>
+	<frameHeader type="dn8" num="4" value="0x35 0x2E 0xF8 0x53"/>
+    </decoderDef>
+
+    <!-- Send commands with sync pattern to output connections -->
+    <decoderDef name="cmdOutput">
+        <outputDevice name="ccsdsCmdServer"/>
+	    <outputDevice name="usb"/>
+        <frameHeader type="dn8" num="4" value="0x35 0x2E 0xF8 0x53"/>
+    </decoderDef>
+    
+    <!-- Route commands to output connections or sequence -->
+    <decoderDef name="cmdDecoder">
+        <outBuffer size="1024"/>
+        <outputDevice name="cmdOutput" enabled="true"/>
+        <outputDevice name="seqContainer_data" enabled="false"/>
+    </decoderDef>
+
+    <alias name="cmd_sync_disable" command="cmd_dec">
+        <description text="Disable command output sync pattern"/>
+        <argument id="0" value="cmdOutput"/>
+        <argument id="1" value="disable_header"/>
+    </alias>
+
+    <alias name="cmd_sync_enable" command="cmd_dec">
+        <description text="Enable command output sync pattern"/>
+        <argument id="0" value="cmdOutput"/>
+        <argument id="1" value="enable_header"/>
+    </alias>
+
+    <alias name="hydra_seq_output_enable" command="set_dec_output">
+        <description text="Enable commands to sequence file"/>
+        <argument id="0" value="cmdDecoder"/>
+        <argument id="1" value="seqContainer_data"/>
+        <argument id="2" value="ALL"/>
+        <argument id="3" value="enable"/>
+    </alias>
+
+    <alias name="hydra_seq_output_disable" command="set_dec_output">
+        <description text="Disable commands to sequence"/>
+        <argument id="0" value="cmdDecoder"/>
+        <argument id="1" value="seqContainer_data"/>
+        <argument id="2" value="ALL"/>
+        <argument id="3" value="disable"/>
+    </alias>
+
+    <alias name="hydra_cmd_output_enable" command="set_dec_output">
+        <description text="Enable commands to output"/>
+        <argument id="0" value="cmdDecoder"/>
+        <argument id="1" value="cmdOutput"/>
+        <argument id="2" value="ALL"/>
+        <argument id="3" value="enable"/>
+    </alias>
+
+    <alias name="hydra_cmd_output_disable" command="set_dec_output">
+        <description text="Disable commands to output"/>
+        <argument id="0" value="cmdDecoder"/>
+        <argument id="1" value="cmdOutput"/>
+        <argument id="2" value="ALL"/>
+        <argument id="3" value="disable"/>
+    </alias>
+        
+</hydraDef>

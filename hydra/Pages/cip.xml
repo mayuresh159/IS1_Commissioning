@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<pageDef>
+  <page title="cip">
+    <column>
+      <frame name="cip_sci1"/>
+      <frame name="cip_sci2"/>
+      <frame name="cip_soh"/>
+    </column>
+  </page>
+</pageDef>

@@ -1,0 +1,2304 @@
+<?xml version="1.0" ?>
+<hydraDef>
+  <frameDef decoder="cmdDecoder" name="adcsCmdHeader">
+    <field>
+      <itemDef name="adcsCmdHeader_flags" type="dn5" value="0x03"/>
+      <itemDef name="adcsCmdHeader_apid" type="dn11b" value="#APID_CMD_ADCS"/>
+      <itemDef name="adcsCmdHeader_count" type="dn16B" value="0"/>
+      <itemDef name="adcsCmdHeader_len" type="dn16B" value="0"/>
+      <itemDef name="adcsCmdHeader_payloadApid" type="dn8" value="0"/>
+      <itemDef name="adcsCmdHeader_payloadOpcode" type="dn8" value="0"/>
+      <placeholder/>
+    </field>
+    <input item="adcsCmdHeader_payloadApid" name="payloadApid"/>
+    <input item="adcsCmdHeader_payloadOpcode" name="payloadOpcode"/>
+    <length item="adcsCmdHeader_len" offset="-56"/>
+  </frameDef>
+  <command decoder="cmdDecoder" name="cmd_adcs_L0_select_pri_rom">
+    <description text="Send pulse to relay to select primary boot ROM"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="0"/>
+    <output name="payloadOpcode" value="1"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_L0_select_sec_rom">
+    <description text="Send pulse to relay to select secondary boot ROM"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="0"/>
+    <output name="payloadOpcode" value="2"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_L0_wd_ena">
+    <description text="Enable Watchdog reset"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="0"/>
+    <output name="payloadOpcode" value="3"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_L0_wd_dis">
+    <description text="Disable Watchdog reset"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="0"/>
+    <output name="payloadOpcode" value="4"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_L0_wd_clear">
+    <description text="Clear watchdog reset status"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="0"/>
+    <output name="payloadOpcode" value="5"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_L0_select_tbl_comp">
+    <description text="Select compiled table">
+      Set table select bit to 1 (on software reset, initialize flight tables to compile-time values)"
+    </description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="0"/>
+    <output name="payloadOpcode" value="6"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_L0_select_tbl_flash">
+    <description text="Select flash table">
+      Set table select bit to default value of 0 (on software reset, initialize flight tables to values stored in FLASH tables)
+    </description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="0"/>
+    <output name="payloadOpcode" value="7"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_L0_wd_arm">
+    <description text="Arm watchdog reset"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="0"/>
+    <output name="payloadOpcode" value="0x1C"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_L0_wd_send">
+    <description text="Send watchdog reset"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="0"/>
+    <output name="payloadOpcode" value="0x76"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_MaxBackgndOps">
+    <description text="Maximum allowable background level for tracker operations."/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="32"/>
+    <field>
+      <argument id="MaxLevel" type="uint16B">
+        <description>0 will result in always excluding tracker. 1023 will effectively disable the check.</description>
+      </argument>
+      <argument id="Response" type="uint8B">
+        <description text="0=Disable usage if MaxLevel exceeded, 1=Go to Idle mode if MaxLevel exceeded."/>
+      </argument>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_TEST_TrackerTestMode">
+    <description>Bypass attitude calculation, and use attitude injected via LVDS test port. Not for use with RDP simulation.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="13"/>
+    <field>
+      <argument id="Status" type="uint8B">
+        <description text="0=Disable, Test data ignored. 1=AttData, Only injected attitude is use."/>
+      </argument>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_AttCtrl_AllowSunModel">
+    <description>WARNING: This command alters core sun point mode sensor paths. This command also changes the RAM table value controlling the usage logic. Allows/disallows the usage of the sun model (based on time and attitude knowledge) in sun point mode as a back-up option to the measured sun vector. This usage only has an effect when the preferred sun source is set to MEASURED.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="9"/>
+    <output name="payloadOpcode" value="10"/>
+    <field>
+      <argument id="Setting" type="uint8B">
+        <description>states: 0=disabled, 1=enabled; Enables or disables back-up usage of the time-based sun model when both time and attitude are valid.</description>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_GPS_GpsEnable">
+    <description text="Enables use of GPS data. (Default is enable.)"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="23"/>
+    <output name="payloadOpcode" value="2"/>
+    <field>
+      <argument id="Setting" type="uint8B">
+        <description text="states: 0=disable, 1=enable"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_TEST_DetTestImage">
+    <description text="Take a test image with the detector. TEST ONLY"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="252"/>
+    <field>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Tables_FlashBurnArm">
+    <description>To avoid accidental burns to FLASH, this command must be send to arm FLASH burning capability. When FLASH burn is disarmed (the default), FlashBurnDirect and FlashBurnCopy will be rejected.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="19"/>
+    <output name="payloadOpcode" value="8"/>
+    <field>
+      <argument id="Setting" type="uint8B">
+        <description text="states: 0=DISARM, 1=ARM"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Wheel_TEST_RwTestMode">
+    <description>Sets RW module in test mode. Idle's physical wheels if present and uses the wheel speed read from the RDP for attitude control loop closure. NOTE: This is not required for closed loop simulations that have physical wheels. This is used for closed loop sim in the absence of wheels.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="7"/>
+    <output name="payloadOpcode" value="255"/>
+    <field>
+      <argument id="Status" type="uint8B">
+        <description text="states: 0=disable, 1=enable; Enable or disable test mode for closed loop testing"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Tables_HoldingTableCRC">
+    <description text="CRC words in holding table"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="19"/>
+    <output name="payloadOpcode" value="4"/>
+    <field>
+      <argument id="WordOffset" type="uint32B">
+        <description text="0 based"/>
+      </argument>
+      <argument id="WordLength" type="uint32B">
+        <description text="Number of words to include in CRC"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_ExtNstSwReadTime">
+    <description>Adjusts when control FSW reads external tracker telemetry from controller FPGA (value should be ~15 ms greater than FpgaReadTime)</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="54"/>
+    <field>
+      <argument id="ReadTime" type="uint8B">
+        <description>Milliseconds after the start of the frame flag when FSW reads the FPGA for the external tracker telemetry</description>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Wheel_NoOp">
+    <description text="No operation (for testing command interface)"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="7"/>
+    <output name="payloadOpcode" value="1"/>
+    <field/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_SoftReinit">
+    <description text="Re-initialize subset of key software variables."/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="40"/>
+    <field>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_GoToTrack">
+    <description text="Go to track mode. Uses previously calculated tracker attitude."/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="12"/>
+    <field>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_ReadImageLine">
+    <description text="Place the specified line of specified image in Video Line Buffer for downlink."/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="16"/>
+    <field>
+      <argument id="spare" type="uint8B">
+        <description text="spare"/>
+      </argument>
+      <argument id="ImageNum" type="uint8B">
+        <description text="Photo image number"/>
+      </argument>
+      <argument id="LineNum" type="uint16B">
+        <description text="Line number of specified image"/>
+      </argument>
+      <argument id="Trknum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_Exclusion_List">
+    <description text="Add star catalog IDs to exclusion list, so they won't be used."/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="23"/>
+    <field>
+      <argument id="spare" type="uint8B">
+        <description text="spare"/>
+      </argument>
+      <argument id="Index" type="uint8B">
+        <description text="0=Clear entire list."/>
+      </argument>
+      <argument id="CatId" type="uint16B">
+        <description text="Catalog Id of star to be excluded"/>
+      </argument>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_AttCmd_SunAxisSelect">
+    <description text="Select table-value sun-point axis at which to point when in Sun Point mode"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="6"/>
+    <output name="payloadOpcode" value="6"/>
+    <field>
+      <argument id="Axis" type="uint8B">
+        <description text="states: 0=pre_deploy, 1=post_deploy"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_Auto_Black_Ctrl">
+    <description text="Modify detector black level control. Do not send without coordinating with BCT."/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="27"/>
+    <field>
+      <argument id="Status" type="uint8B">
+        <description text="1=true: enable Auto Black Control by detector. 0=false: disable Auto Black."/>
+      </argument>
+      <argument id="BlackLevel" type="uint8B">
+        <description>Manual offset if Auto black disabled. If Auto Black enabled, the value is interpreted by detector as 2's complement: i.e. 255 = -1 in detector.</description>
+      </argument>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_TEST_UseTestModel">
+    <description>Bypass full tracker code, and use simplified tracker code. FOR CLOSED-LOOP TEST ONLY.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="255"/>
+    <field>
+      <argument id="Status" type="uint8B">
+        <description text="states: 1=true, 0=false; true: enable test mode, false: use full code"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Momentum_SetWheelMomentaUse">
+    <description>Select whether to include wheel momenta in total momentum calculation (TEST ONLY)</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="10"/>
+    <output name="payloadOpcode" value="3"/>
+    <field>
+      <argument id="Enable" type="uint8B">
+        <description>states: 0=don't use, 1=use; Wheel momenta should always be included except in certain test scenarios</description>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Time_EndProgram">
+    <description>Terminate execution of FSW. Will result in eventual soft reset due to watchdog timeout.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="3"/>
+    <output name="payloadOpcode" value="255"/>
+    <field/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Time_SetClockRef">
+    <description>Set delta-time between reference epoch (1 Jan, 2000 00:00:00 TAI) and zero Cycle time.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="3"/>
+    <output name="payloadOpcode" value="2"/>
+    <field>
+      <argument id="Time" type="uint32B">
+        <description text="Seconds since 1 Jan, 2000 00:00:00 TAI and zero Cycle time."/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Tables_TableCRC">
+    <description text="CRC words in RAM table"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="19"/>
+    <output name="payloadOpcode" value="9"/>
+    <field>
+      <argument id="TableNum" type="uint8B">
+        <description text="Which RAM table to CRC. 0=Holding Table"/>
+      </argument>
+      <argument id="WordOffset" type="uint32B">
+        <description text="0 based"/>
+      </argument>
+      <argument id="WordLength" type="uint32B">
+        <description text="Number of words to include in CRC"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_SetAmpOffset">
+    <description>Set various parameters associated with Amplitude Offset for track blocks. Do not send without coordinating with BCT.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="28"/>
+    <field>
+      <argument id="Method" type="uint8B">
+        <description>0=Indexed 3-Sigma noise, based on 'NoiseIndex'. 1=Median 3-Sigma noise. 2=Constant offset, based on'Constant' below.</description>
+      </argument>
+      <argument id="NoiseIndex" type="uint8B">
+        <description>Which star's noise to use as reference, sorted high to low. Applies when Method=1.</description>
+      </argument>
+      <argument id="Constant" type="uint8B">
+        <description text="Offset value used when Method = 0."/>
+      </argument>
+      <argument id="SetThresholds" type="uint8B">
+        <description>0=false, 1=true. If true, FSW applies changes to the next four parameters in the command.</description>
+      </argument>
+      <argument id="Sum2Ampl" type="float32B">
+        <description text="Minimum sum-to-amplitude ratio."/>
+      </argument>
+      <argument id="Ampl2Noise" type="float32B">
+        <description text="Minimum amplitude-to-noise ratio."/>
+      </argument>
+      <argument id="RefNoise2Amp" type="float32B">
+        <description text="Noise scale factor when Reference is valid."/>
+      </argument>
+      <argument id="RawNoise2Amp" type="float32B">
+        <description text="Noise scale factor when Reference is invalid."/>
+      </argument>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_AttCmd_AttitudeDither">
+    <description>Adds sinusoidal dither about the already-commanded attitude, in each axis. Rejected if ADCS mode is not Fine Reference Point, or if GotoTarget has been commanded with RateInterp = 0. See mission-specific ICD Addendum for recommended settings.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="6"/>
+    <output name="payloadOpcode" value="11"/>
+    <field>
+      <argument id="AngleX" type="uint16B">
+        <description text="X-axis dither magnitude"/>
+      </argument>
+      <argument id="AngleY" type="uint16B">
+        <description text="Y-axis dither magnitude"/>
+      </argument>
+      <argument id="AngleZ" type="uint16B">
+        <description text="Z-axis dither magnitude"/>
+      </argument>
+      <argument id="PeriodX" type="uint16B">
+        <description text="X-axis dither sinusoid period"/>
+      </argument>
+      <argument id="PeriodY" type="uint16B">
+        <description text="Y-axis dither sinusoid period"/>
+      </argument>
+      <argument id="PeriodZ" type="uint16B">
+        <description text="Z-axis dither sinusoid period"/>
+      </argument>
+      <argument id="Duration" type="uint16B">
+        <description text="Dither duration"/>
+      </argument>
+      <argument id="RampTime" type="uint16B">
+        <description text="Duration of smooth ramp-up interval at start and end of dither duration"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_TrackMagLimits">
+    <description text="Set track mode magnitude limits for star selection"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="2"/>
+    <field>
+      <argument id="Mbri" type="uint8B">
+        <description text="Brightest star allowed in track mode"/>
+      </argument>
+      <argument id="Mdim" type="uint8B">
+        <description text="Dimmest star allowed in track mode"/>
+      </argument>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Time_SetCurrentTimeUtc">
+    <description text="Set current spacecraft time using UTC in Gregorian format."/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="3"/>
+    <output name="payloadOpcode" value="3"/>
+    <field>
+      <argument id="year" type="uint8B">
+        <description text="Year since 2000"/>
+      </argument>
+      <argument id="mon" type="uint8B">
+        <description text="Month"/>
+      </argument>
+      <argument id="day" type="uint8B">
+        <description text="Day of month"/>
+      </argument>
+      <argument id="hour" type="uint8B">
+        <description text="Hour since midnight"/>
+      </argument>
+      <argument id="min" type="uint8B">
+        <description text="Minutes"/>
+      </argument>
+      <argument id="sec" type="uint8B">
+        <description text="Seconds (no fractional seconds supported for this command)"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Time_ConfigPpsOut">
+    <description text="Configure 1 PPS output from XACT."/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="3"/>
+    <output name="payloadOpcode" value="5"/>
+    <field>
+      <argument id="Status" type="uint8B">
+        <description text="states: 0=disable, 1=GPS, 2=Internal"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Time_SetCurrentTimeGps">
+    <description>Set spacecraft time using GPS time from receiver. Specify period to repeat process.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="3"/>
+    <output name="payloadOpcode" value="4"/>
+    <field>
+      <argument id="Period" type="uint16B">
+        <description text="Period to repeat: 1-65534 sec. 0='one-shot'. 65535 = disable entirely."/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_SunSensor_CssEnable">
+    <description text="Enable or Disable individual coarse sun sensor usage"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="11"/>
+    <output name="payloadOpcode" value="3"/>
+    <field>
+      <argument id="CssNum" type="uint8B">
+        <description text="Coarse sun sensor package number"/>
+      </argument>
+      <argument id="Status" type="uint8B">
+        <description text="states: 0=disable, 1=enable; Enable or disable individual sun sensor usage"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_GPS_GpsCommand">
+    <description>Send raw bytes to GPS unit (applicable to programs with serial link between XACT and GPS) . Not recommended except for contingencies.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="23"/>
+    <output name="payloadOpcode" value="4"/>
+    <field>
+      <argument id="NumBytes" type="uint16B">
+        <description text="Number of raw bytes in GPS command"/>
+      </argument>
+      <argument id="RawBytes" type="uint8B">
+        <description text="Raw bytes in GPS command"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_AttCmd_GotoLvLhAttitude">
+    <description>Go to LVLH attitude (transitions to Fine Reference Point mode if not already in it). LVLH reference frame has Z axis to nadir and X axis aligned with orbital velocity.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="6"/>
+    <output name="payloadOpcode" value="4"/>
+    <field>
+      <argument id="PriCmdDir" type="uint8B">
+        <description text="+Z command direction (in body): 1-15 (see definition in GotoTarget command)."/>
+      </argument>
+      <argument id="SecCmdDir" type="uint8B">
+        <description text="+X command direction (in body): 1-15 (see definition in GotoTarget command)."/>
+      </argument>
+      <argument id="Q_cmd_wrt_ref_1" type="float32B">
+        <description text="Commanded attitude quaternion_1. Or roll angle (deg) if quaternion_4 &gt;= 2"/>
+      </argument>
+      <argument id="Q_cmd_wrt_ref_2" type="float32B">
+        <description text="Commanded attitude quaternion_2. Or pitch angle (deg) if quaternion_4 &gt;= 2"/>
+      </argument>
+      <argument id="Q_cmd_wrt_ref_3" type="float32B">
+        <description text="Commanded attitude quaternion_3. Or yaw angle (deg) if quaternion_4 &gt;= 2"/>
+      </argument>
+      <argument id="Q_cmd_wrt_ref_4" type="float32B">
+        <description text="Commanded attitude quaternion_4. If &gt;= 2, q_1, q_2, q_3 are roll, pitch, yaw"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_RateAid">
+    <description>Provide on-board estimated rotation rate to assist tracker operation. Do not send without coordinating with BCT.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="5"/>
+    <field>
+      <argument id="Status" type="uint8B">
+        <description text="1=true: enable, 0=false: disable"/>
+      </argument>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TlmProc_ReadFromFile">
+    <description>Place data from telemetry file (residing in one of the image buffers) into the 4K video line buffer</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="16"/>
+    <output name="payloadOpcode" value="3"/>
+
+    <field>
+      <argument id="StartIndex" type="uint8B">
+        <description text="states: 0=read from start, 1=read from end of last read"/>
+      </argument>
+      <argument id="Buffer" type="uint8B">
+        <description text="Index of data buffer to read from"/>
+      </argument>
+      <argument id="Length" type="uint16B">
+        <description text="Number of 32-bit words to read"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Tables_HoldingTableInsert">
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="19"/>
+    <output name="payloadOpcode" value="1"/>
+    <field>
+      <argument id="WordOffset" type="uint32B">
+        <description text="0 based"/>
+      </argument>
+      <argument id="WordLength" type="uint32B">
+        <description text="Number of words to write"/>
+      </argument>
+      <argument id="rawBytes" type="uint8B" num="250">
+        <description>Stream of bytes with size equal to 4*Length; word consisting of rawBytes(1:4) is written to Offset+1.</description>
+      </argument>
+    </field>
+  </command>
+
+<command name="cmd_adcs_Tables_HoldingTableInsert4UINT8" decoder="cmdDecoder" >
+<header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="19"/>
+    <output name="payloadOpcode" value="1"/>
+    <field>
+      <argument id="WordOffset" type="dn32"/>
+      <argument id="WordLengthShouldBe1" type="dn32"/>
+      <argument id="rawByte0" type="dn8"/>
+      <argument id="rawByte1" type="dn8"/>
+      <argument id="rawByte2" type="dn8"/>
+      <argument id="rawByte3" type="dn8"/>
+    </field>
+  </command>
+
+  <command name="cmd_adcs_Tables_HoldingTableInsert4SINT8" decoder="cmdDecoder" >
+  <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="19"/>
+    <output name="payloadOpcode" value="1"/>
+    <field>
+      <argument id="WordOffset" type="dn32"/>
+      <argument id="WordLengthShouldBe1" type="dn32"/>
+      <argument id="rawByte0" type="sn8"/>
+      <argument id="rawByte1" type="sn8"/>
+      <argument id="rawByte2" type="sn8"/>
+      <argument id="rawByte3" type="sn8"/>
+    </field>
+  </command>
+
+  <command name="cmd_adcs_Tables_HoldingTableInsert2UINT16" decoder="cmdDecoder" >
+  <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="19"/>
+    <output name="payloadOpcode" value="1"/>
+    <field>
+      <argument id="WordOffset" type="dn32"/>
+      <argument id="WordLengthShouldBe1" type="dn32"/>
+      <argument id="rawShort0" type="dn16"/>
+      <argument id="rawShort1" type="dn16"/>
+    </field>
+  </command>
+
+  <command name="cmd_adcs_Tables_HoldingTableInsert2SINT16" decoder="cmdDecoder" >
+  <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="19"/>
+    <output name="payloadOpcode" value="1"/>
+    <field>
+      <argument id="WordOffset" type="dn32"/>
+      <argument id="WordLengthShouldBe1" type="dn32"/>
+      <argument id="rawShort0" type="sn16"/>
+      <argument id="rawShort1" type="sn16"/>
+    </field>
+  </command>
+
+  <command name="cmd_adcs_Tables_HoldingTableInsert1UINT32" decoder="cmdDecoder" >
+  <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="19"/>
+    <output name="payloadOpcode" value="1"/>
+    <field>
+      <argument id="WordOffset" type="dn32"/>
+      <argument id="WordLengthShouldBe1" type="dn32"/>
+      <argument id="rawLong0" type="dn32"/>
+    </field>
+  </command>
+
+  <command name="cmd_adcs_Tables_HoldingTableInsert1FLOAT32" decoder="cmdDecoder" >
+  <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="19"/>
+    <output name="payloadOpcode" value="1"/>
+    <field>
+      <argument id="WordOffset" type="dn32"/>
+      <argument id="WordLengthShouldBe1" type="dn32"/>
+      <argument id="rawFloat0" type="float32"/>
+    </field>
+  </command>
+
+  <command name="cmd_adcs_Tables_HoldingTableInsert1DOUBLE64" decoder="cmdDecoder" >
+  <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="19"/>
+    <output name="payloadOpcode" value="1"/>
+    <field>
+      <argument id="WordOffset" type="dn32"/>
+      <argument id="WordLengthShouldBe1" type="dn32"/>
+      <argument id="rawDouble0" type="double64"/>
+    </field>
+  </command>
+
+  <command decoder="cmdDecoder" name="cmd_adcs_General_SetLVDS">
+    <description text="Enable/Disable LVDS interface for testing"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="2"/>
+    <output name="payloadOpcode" value="99"/>
+    <field>
+      <argument id="EnDs" type="uint8B">
+        <description text="states: 0=disable, 1=enable"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Wheel_SetWheelPWM4">
+    <description>(for testing only) Direct commanding of PWM counts. Note 2399 counts is 100% (voltage full ON) and 0 counts is 0% (voltage OFF). A wheel can be in Torque OR Speed OR PWM mode at any given time.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="7"/>
+    <output name="payloadOpcode" value="11"/>
+    <field>
+      <argument id="Wheel" type="uint8B">
+        <description text="Sets which wheel this command applies to (use zero to set all wheels)"/>
+      </argument>
+      <argument id="PWM_1" type="int16B">
+        <description text="Wheel 1 PWM counts times positive or negative direction"/>
+      </argument>
+      <argument id="PWM_2" type="int16B">
+        <description text="Wheel 2 PWM counts times positive or negative direction"/>
+      </argument>
+      <argument id="PWM_3" type="int16B">
+        <description text="Wheel 3 PWM counts times positive or negative direction"/>
+      </argument>
+      <argument id="PWM_4" type="int16B">
+        <description text="Wheel 4 PWM counts times positive or negative direction"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Momentum_TorqRodCode">
+    <description>WARNING: This command can fundamentally alter the momentum control operations of XACT and should not be sent without explicit BCT recommendation. Set control code operations of one or all torque rods.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="10"/>
+    <output name="payloadOpcode" value="8"/>
+    <field>
+      <argument id="RodNum" type="uint8B">
+        <description text="Select which rod to set (zero sets all three rods)"/>
+      </argument>
+      <argument id="CtrlCode" type="uint8B">
+        <description text="states: 10=BIDIRECTIONAL, 11=POS_ONLY, 12=NEG_ONLY"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_ReInit">
+    <description text="Re-initialize key software variables."/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="11"/>
+    <field>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_General_SetPRBS">
+    <description text="Enable/Disable PRBS to calibrate RDP cable"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="2"/>
+    <output name="payloadOpcode" value="98"/>
+    <field>
+      <argument id="EnDs" type="uint8B">
+        <description text="states: 0=disable, 1=enable"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_GoToIdle">
+    <description text="Go to Idle Mode. Only Commands and Telemetry processed."/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="14"/>
+    <field>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TlmProc_StreamToFile">
+    <description>Stream telemetry data to file (using current telemetry map). To stop, use stop command or else let file fill completely. Cannot be performed simultaneously with ReadFromFile operations.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="16"/>
+    <output name="payloadOpcode" value="2"/>
+    <field>
+      <argument id="Start/Stop" type="uint8B">
+        <description text="states: 0=stop, 1=start"/>
+      </argument>
+      <argument id="Buffer" type="uint8B">
+        <description text="Index of data buffer to stream into"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_SunSensor_TEST_CssTestMode">
+    <description text="Enable or disable test mode for closed loop testing"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="11"/>
+    <output name="payloadOpcode" value="255"/>
+    <field>
+      <argument id="Status" type="uint8B">
+        <description text="states: 0=disable, 1=enable; Enable or disable test mode for closed loop testing"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_TakePhoto">
+    <description>Take images with commanded settings, and store for later downlink. Suspends StarId and Track operations until done.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="10"/>
+    <field>
+      <argument id="Gain" type="uint8B">
+        <description>states: 0=one, 1=1.5, 2=2, 3=3, 4=4, 5=six, 6=eight; Analog gain used in Photo mode</description>
+      </argument>
+      <argument id="IntMode" type="uint8B">
+        <description text="Logarithmic reduces saturation and provides better contrast. (0=linear, 1=log)"/>
+      </argument>
+      <argument id="Tint" type="uint16B">
+        <description text="Integration time in micro-seconds"/>
+      </argument>
+      <argument id="NumPhotos" type="uint8B">
+        <description text="Number of consecutive photos to take."/>
+      </argument>
+      <argument id="BufNum" type="uint8B">
+        <description>Video storage buffer in which to place photo image. If Num &gt;1, this is ignored and photos automatically get stored starting at buffer 1.</description>
+      </argument>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Magnetometer_MagResetInvalidCount">
+    <description text="Reset magnetometer invalid count telemetry point"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="12"/>
+    <output name="payloadOpcode" value="7"/>
+    <field/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Tables_TableCommit">
+    <description>Commit holding table words (1:Length) to actual table words (offset plus 1:Length).</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="19"/>
+    <output name="payloadOpcode" value="2"/>
+    <field>
+      <argument id="TableNum" type="uint8B">
+        <description text="Which table to commit to"/>
+      </argument>
+      <argument id="WordOffset" type="uint32B">
+        <description text="0 based"/>
+      </argument>
+      <argument id="WordLength" type="uint32B">
+        <description text="Number of words to commit"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Refs_AutoGpsUsage">
+    <description text="Enable automatic re-initialization of orbit ephemeris,using GPS data."/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="4"/>
+    <output name="payloadOpcode" value="4"/>
+    <field>
+      <argument id="Status" type="uint8B">
+        <description text="states: 0=disable, 1=enable"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Refs_InitKeplerUtcGreg">
+    <description>Initialize spacecraft orbit ephemeris, using Keplerian elements and UTC Gregorian.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="4"/>
+    <output name="payloadOpcode" value="8"/>
+    <field>
+      <argument id="year" type="uint8B">
+        <description text="Year since 2000"/>
+      </argument>
+      <argument id="mon" type="uint8B">
+        <description text="Month"/>
+      </argument>
+      <argument id="day" type="uint8B">
+        <description text="Day of month"/>
+      </argument>
+      <argument id="hour" type="uint8B">
+        <description text="Hour since midnight"/>
+      </argument>
+      <argument id="min" type="uint8B">
+        <description text="Minutes"/>
+      </argument>
+      <argument id="sec" type="uint8B">
+        <description text="Seconds (no fraction)"/>
+      </argument>
+      <argument id="millisec" type="uint16B">
+        <description text="milliseconds"/>
+      </argument>
+      <argument id="RAAN" type="doubleb">
+        <description text="Right Ascension of Ascending Node"/>
+      </argument>
+      <argument id="Incl" type="doubleb">
+        <description text="Inclination"/>
+      </argument>
+      <argument id="ArgP" type="doubleb">
+        <description text="Argument of Perigee"/>
+      </argument>
+      <argument id="TruAnom" type="doubleb">
+        <description text="True Anomaly"/>
+      </argument>
+      <argument id="Alt" type="doubleb">
+        <description text="Altitude"/>
+      </argument>
+      <argument id="Ecc" type="doubleb">
+        <description text="Eccentricity"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_IMU_TEST_ImuTestMode">
+    <description text="Enable or disable test mode for closed loop testing"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="13"/>
+    <output name="payloadOpcode" value="255"/>
+    <field>
+      <argument id="Status" type="uint8B">
+        <description text="states: 0=disable, 1=enable; Enable or disable test mode for closed loop testing"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Magnetometer_SetMagSensor">
+    <description text="Select which magnetometer to use for sensor feedback"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="12"/>
+    <output name="payloadOpcode" value="4"/>
+    <field>
+      <argument id="MagNum" type="uint8B">
+        <description text="Magnetometer number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_General_InertiaSelect">
+    <description>Select spacecraft inertia matrix (default is 1). ONLY APPLICABLE FOR SPECIFIC MISSIONS. SEE PROGRAM SPECIFIC ICD FOR CONFIGURED USAGE</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="2"/>
+    <output name="payloadOpcode" value="4"/>
+    <field>
+      <argument id="Index" type="uint8B">
+        <description text="Inertia Index"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_AttCmd_GotoTarget">
+    <description text="Go to Target (transitions to Fine Reference Point mode if not already in it)"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="6"/>
+    <output name="payloadOpcode" value="3"/>
+    <field>
+      <argument id="VelAber" type="uint8B">
+        <description>states: 0=Disable, 1=Enable; Apply velocity aberration correction to PriRefDir (if Sun or TargECEF is selected)</description>
+      </argument>
+      <argument id="PriRefDir" type="uint8B">
+        <description>states: 0=ECIx, 1=ECIy, 2=ECIz, 3=Sun, 4=Mag, 5=Moon, 6=Pos, 7=Vel, 8=TargECI, 9=TargECEF, 10=Bearing, 11=Heading, 12=OrbitNorm, 13=GcNadir, 14=GdNadir; REFERENCE frame +Z direction</description>
+      </argument>
+      <argument id="SecRefDir" type="uint8B">
+        <description>states: 0=ECIx, 1=ECIy, 2=ECIz, 3=Sun, 4=Mag, 5=Moon, 6=Pos, 7=Vel, 8=TargECI, 9=TargECEF, 10=Bearing, 11=Heading, 12=OrbitNorm, 13=GcNadir, 14=GdNadir; REFERENCE frame +X desired direction</description>
+      </argument>
+      <argument id="TargX" type="float32B">
+        <description>TargECI or TargECEF X (geocentric ECEF position in kilometers, or ECI unit vector direction)</description>
+      </argument>
+      <argument id="TargY" type="float32B">
+        <description>TargECI or TargECEF Y (geocentric ECEF position in kilometers, or ECI unit vector direction)</description>
+      </argument>
+      <argument id="TargZ" type="float32B">
+        <description>TargECI or TargECEF Z (geocentric ECEF position in kilometers, or ECI unit vector direction)</description>
+      </argument>
+      <argument id="spare" type="float32B">
+        <description text="spare"/>
+      </argument>
+      <argument id="PriCmdDir" type="uint8B">
+        <description text="Body-fixed COMMAND frame +Z direction: 1-15 (see definition below)."/>
+      </argument>
+      <argument id="SecCmdDir" type="uint8B">
+        <description text="Body-fixed COMMAND frame +X direction: 1-15 (see definition below)."/>
+      </argument>
+      <argument id="AttInterp" type="uint8B">
+        <description>TARGET frame attitude interpretation with respect to REFERENCE frame: 0=Yaw, Pitch, Roll sequence (deg), 1=Quaternion, 2=Do not change existing attitude of TARGET frame with respect to REFERENCE frame.</description>
+      </argument>
+      <argument id="qTARGETwrtREF1" type="float32B">
+        <description text="Quaternion element 1 if AttInterp = 1. Roll angle (deg) if AttInterp = 0."/>
+      </argument>
+      <argument id="qTARGETwrtREF2" type="float32B">
+        <description text="Quaternion element 2 if AttInterp = 1. Pitch angle (deg) if AttInterp = 0"/>
+      </argument>
+      <argument id="qTARGETwrtREF3" type="float32B">
+        <description text="Quaternion element 3 if AttInterp = 1. Yaw angle (deg) if AttInterp = 0"/>
+      </argument>
+      <argument id="qTARGETwrtREF4" type="float32B">
+        <description>Quaternion element 4 if AttInterp = 1. This is the scalar element of the quaternion.</description>
+      </argument>
+      <argument id="RateInterp" type="uint8B">
+        <description>TARGET frame rate interpretation (with rotation angle zero at the time defined below): 0=rate is of TARGET frame with respect to ECI, 1=rate is of TARGET frame with respect to REFERENCE frame.</description>
+      </argument>
+      <argument id="CmdRate_X" type="float32B">
+        <description text="X axis rate (degrees/sec)"/>
+      </argument>
+      <argument id="CmdRate_Y" type="float32B">
+        <description text="Y axis rate (degrees/sec)"/>
+      </argument>
+      <argument id="CmdRate_Z" type="float32B">
+        <description text="Z axis rate (degrees/sec)"/>
+      </argument>
+      <argument id="Time" type="uint32B">
+        <description>TAI time (in seconds since J2000) at which zero rotation angle is desired for any nonzero rate defined in CmdRate. For finer resolution, use EndCycle below to specify this time at 0.2 second intervals.</description>
+      </argument>
+      <argument id="EndCycle" type="uint8B">
+        <description text="5 Hz ADCS cycle within the 1 second interval defined by Time above."/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Refs_EarthRotParam">
+    <description text="Load earth rotation parameters"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="4"/>
+    <output name="payloadOpcode" value="1"/>
+    <field>
+      <argument id="UtcToUt1" type="float32B">
+        <description text="UT1 minus UTC"/>
+      </argument>
+      <argument id="Xpolar" type="float32B">
+        <description text="X polar motion"/>
+      </argument>
+      <argument id="Ypolar" type="float32B">
+        <description text="X polar motion"/>
+      </argument>
+      <argument id="LOD" type="float32B">
+        <description text="Excess length of day"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_AttCtrl_SetFFTorqueWheels">
+    <description>Defines a feedforward body-frame torque to add to feedback torque commands going to wheels (in INTERNAL mode) from XACT's internal attitude control system. Each SetFFTorqueWheels command overrides any previously accepted one.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="9"/>
+    <output name="payloadOpcode" value="5"/>
+    <field>
+      <argument id="Duration" type="uint32B">
+        <description text="Time interval to apply desired torque"/>
+      </argument>
+      <argument id="FF_Torque_X" type="float32B">
+        <description text="Body frame X axis feedforward torque"/>
+      </argument>
+      <argument id="FF_Torque_Y" type="float32B">
+        <description text="Body frame Y axis feedforward torque"/>
+      </argument>
+      <argument id="FF_Torque_Z" type="float32B">
+        <description text="Body frame Z axis feedforward torque"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Wheel_Calibrate">
+    <description>Calibration occurs for the prescribed number of seconds, after which the new calibration parameters are put into a holding buffer and prior calibration parameters immediately restored.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="7"/>
+    <output name="payloadOpcode" value="7"/>
+    <field>
+      <argument id="Wheel" type="uint8B">
+        <description text="Sets which wheel this command applies to"/>
+      </argument>
+      <argument id="Action" type="uint8B">
+        <description>1/Reset parameters to zero 2/Calibrate starting from current parameters 3/Calibrate starting from zero parameters 4/Apply parameters from the holding buffer</description>
+      </argument>
+      <argument id="Cal_Time" type="uint8B">
+        <description text="Number of seconds to perform calibration (if Action byte is 2 or 3)"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_AttCtrl_RateLimit">
+    <description>Limit body rates during Fine Reference Point. Resets to default on either a GainSelect command or a transition to Sun Point mode.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="9"/>
+    <output name="payloadOpcode" value="3"/>
+    <field>
+      <argument id="RateLimit_X" type="float32B">
+        <description text="Max allowable rate, X axis (deg/s)"/>
+      </argument>
+      <argument id="RateLimit_Y" type="float32B">
+        <description text="Max allowable rate, Y axis (deg/s)"/>
+      </argument>
+      <argument id="RateLimit_Z" type="float32B">
+        <description text="Max allowable rate, Z axis (deg/s)"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Tables_FlashBurnCopy">
+    <description>Copy and burn bytes from RAM table into its corresponding FLASH table. Offset and Length apply to RAM and FLASH table. Do not burn across 64K boundaries.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="19"/>
+    <output name="payloadOpcode" value="5"/>
+    <field>
+      <argument id="TableNum" type="uint8B">
+        <description text="Which table to burn"/>
+      </argument>
+      <argument id="Image" type="uint8B">
+        <description text="states: 0=Primary, 1=Redundant"/>
+      </argument>
+      <argument id="ByteOffset" type="uint32B">
+        <description text="0-based byte offset"/>
+      </argument>
+      <argument id="ByteLength" type="uint32B">
+        <description text="Number of bytes to burn (starting at Offset)"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Momentum_TorqRodCtrl">
+    <description text="Set operation state of one or all torque rods"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="10"/>
+    <output name="payloadOpcode" value="1"/>
+    <field>
+      <argument id="RodNum" type="uint8B">
+        <description text="Select which rod to set (zero sets all three rods)"/>
+      </argument>
+      <argument id="Ctrl_Code" type="uint8B">
+        <description text="states: 0=OFF, 1=ON_POS, 2=ON_NEG, 3=AUTO"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Refs_InitPosVelTaiSec">
+    <description>Initialize spacecraft orbit ephemeris, using position, velocity and time in TAI seconds.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="4"/>
+    <output name="payloadOpcode" value="5"/>
+    <field>
+      <argument id="Time" type="doubleb">
+        <description text="Seconds since 1 Jan, 2000 00:00:00 TAI"/>
+      </argument>
+      <argument id="PosX" type="doubleb">
+        <description text="X component of J2000 ECI position vector (km)"/>
+      </argument>
+      <argument id="PosY" type="doubleb">
+        <description text="Y component of J2000 ECI position vector (km)"/>
+      </argument>
+      <argument id="PosZ" type="doubleb">
+        <description text="Z component of J2000 ECI position vector (km)"/>
+      </argument>
+      <argument id="VelX" type="doubleb">
+        <description text="X component of J2000 ECI velocity vector (km/s)"/>
+      </argument>
+      <argument id="VelY" type="doubleb">
+        <description text="Y component of J2000 ECI velocity vector (km/s)"/>
+      </argument>
+      <argument id="VelZ" type="doubleb">
+        <description text="Z component of J2000 ECI velocity vector (km/s)"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_ExtNstSendRawBytes">
+    <description text="Sends raw bytes as a command to the specified tracker. EXTERNAL TRACKER ONLY"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="50"/>
+    <field>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+      <argument id="Length" type="uint8B">
+        <description text="Length of raw bytes"/>
+      </argument>
+      <argument id="RawBytes" type="uint8B">
+        <description text="Raw bytes"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Momentum_MagFieldSource">
+    <description text="Select which magnetic field to use in momentum control"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="10"/>
+    <output name="payloadOpcode" value="2"/>
+    <field>
+      <argument id="Source" type="uint8B">
+        <description text="states: 0=Model, 1=Measured"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_AttCmd_GotoSunPoint">
+    <description text="Go to Sun Point mode"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="6"/>
+    <output name="payloadOpcode" value="1"/>
+    <field/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_AttDet_SetAttDetFilter">
+    <description>Set attitude determination filter. Kalman filter is recommended for normal operations.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="5"/>
+    <output name="payloadOpcode" value="3"/>
+    <field>
+      <argument id="Setting" type="uint8B">
+        <description>0=trackerJam (one time jam, filter selection remains unchanged), 1=noFilter (use raw data), 2=fixedGain without IMU bias estimation, 3=fixedGain, 4=Kalman</description>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_IMU_ImuReinit">
+    <description text="Re-initialize IMU (potential solution to unexpected fault conditions)"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="13"/>
+    <output name="payloadOpcode" value="3"/>
+    <field/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Tables_FlashExtract">
+    <description>Read from FLASH table into Holding Table. Offset field applies ONLY TO FLASH TABLE; zero offset is used for Holding Table. Do not read across 64K boundaries.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="19"/>
+    <output name="payloadOpcode" value="7"/>
+    <field>
+      <argument id="TableNum" type="uint8B">
+        <description text="Which FLASH table to read from"/>
+      </argument>
+      <argument id="Image" type="uint8B">
+        <description text="states: 0=Primary, 1=Redundant"/>
+      </argument>
+      <argument id="ByteOffset" type="uint32B">
+        <description>0-based byte offset, applies only to FLASH (zero offset is used for Holding Table)</description>
+      </argument>
+      <argument id="ByteLength" type="uint32B">
+        <description text="Number of bytes to read"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_IMU_JamBiasEst">
+    <description>Jam values for IMU bias estimation. The value entered will be subtracted from IMU rate.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="13"/>
+    <output name="payloadOpcode" value="2"/>
+    <field>
+      <argument id="Source" type="uint8B">
+        <description text="states: 0=Restore default table value, 1=use values in this command"/>
+      </argument>
+      <argument id="Bias_est_X" type="float32B">
+        <description text="Bias estimate, X axis (deg/s)"/>
+      </argument>
+      <argument id="Bias_est_Y" type="float32B">
+        <description text="Bias estimate, Y axis (deg/s)"/>
+      </argument>
+      <argument id="Bias_est_Z" type="float32B">
+        <description text="Bias estimate, Z axis (deg/s)"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Refs_SetAccel">
+    <description text="Set acceleration level. No gravity used."/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="4"/>
+    <output name="payloadOpcode" value="9"/>
+    <field>
+      <argument id="Xaccel_eci" type="float32B">
+        <description text="X component of acceleration wrt ECI frame"/>
+      </argument>
+      <argument id="Yaccel_eci" type="float32B">
+        <description text="Y component of acceleration wrt ECI frame"/>
+      </argument>
+      <argument id="Zaccel_eci" type="float32B">
+        <description text="Z component of acceleration wrt ECI frame"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Cal_TrackerAlignMethod">
+    <description>Sets method for dynamic estimation of Tracker 2 alignment with respect to Tracker 1. This dynamic estimate is maintained separately from the TrackerCtrl table in RAM.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="34"/>
+    <output name="payloadOpcode" value="1"/>
+    <field>
+      <argument id="Method" type="uint8B">
+        <description text="states: 0=One-time batch, 1=Running filter"/>
+      </argument>
+      <argument id="N" type="uint16B">
+        <description>Batch algorithm uses N samples (then holds indefinitely). Running filter gain is 1/N.</description>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Tables_TableExtract">
+    <description text="Read bytes from table into data/video buffer"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="19"/>
+    <output name="payloadOpcode" value="3"/>
+    <field>
+      <argument id="TableNum" type="uint8B">
+        <description text="Which table to read from. 0 reads the holding table."/>
+      </argument>
+      <argument id="WordOffset" type="uint32B">
+        <description text="0 based"/>
+      </argument>
+      <argument id="WordLength" type="uint32B">
+        <description text="Number of words to extract"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Refs_InitSGP4All">
+    <description>Initializes SGP4 propagator using TLE data. SGP4 should not be used when GPS is available and being used.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="4"/>
+    <output name="payloadOpcode" value="19"/>
+    <field>
+      <argument id="Year" type="uint8B">
+        <description text="Year since 2000"/>
+      </argument>
+      <argument id="Day" type="doubleb">
+        <description text="Decimal day since year start"/>
+      </argument>
+      <argument id="Bstar" type="doubleb">
+        <description text="Bstar drag term"/>
+      </argument>
+      <argument id="Incl" type="doubleb">
+        <description text="Orbital Inclination in degrees"/>
+      </argument>
+      <argument id="RAAN" type="doubleb">
+        <description text="Right ascension of the ascending node in degrees"/>
+      </argument>
+      <argument id="Ecc" type="doubleb">
+        <description text="Orbital Eccentricity"/>
+      </argument>
+      <argument id="ArgP" type="doubleb">
+        <description text="Argument of perigee in degrees"/>
+      </argument>
+      <argument id="MeanAnom" type="doubleb">
+        <description text="Orbital mean anomaly in degrees"/>
+      </argument>
+      <argument id="MeanMotion" type="doubleb">
+        <description text="Orbital mean motion in revolutions per day"/>
+      </argument>
+      <argument id="Config" type="uint8B">
+        <description text="This config byte must be set to 1"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Tables_FlashBurnDirect">
+    <description>Burn bytes from Holding Table into a FLASH table. Offset field applies ONLY TO FLASH TABLE; zero offset is used for Holding Table. Do not burn across 64K boundaries.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="19"/>
+    <output name="payloadOpcode" value="6"/>
+    <field>
+      <argument id="TableNum" type="uint8B">
+        <description text="Which FLASH table to burn into"/>
+      </argument>
+      <argument id="Image" type="uint8B">
+        <description text="states: 0=Primary, 1=Redundant"/>
+      </argument>
+      <argument id="ByteOffset" type="uint32B">
+        <description>0-based byte offset, applies only to FLASH (zero offset is used for Holding Table)</description>
+      </argument>
+      <argument id="ByteLength" type="uint32B">
+        <description text="Number of bytes to burn"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_AnalogGain">
+    <description text="Analog gain used in Track mode"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="7"/>
+    <field>
+      <argument id="Gain" type="uint8B">
+        <description text="0=one, 1=1.5, 2=2, 3=3, 4=4, 5=six, 6=eight; Analog gain used in Track mode"/>
+      </argument>
+      <argument id="AutoGain" type="uint8B">
+        <description>states: 0=false, 1=true; True means the specified Gain is the maximum allowable gain used by FSW auto select logic. 'false' means the gain is fixed, and will not be changed by FSW.</description>
+      </argument>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_DetectorPower">
+    <description text="Controls power to star tracker detectors"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="29"/>
+    <field>
+      <argument id="State" type="uint8B">
+        <description text="states: 0=off, 1=on"/>
+      </argument>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Refs_InitFromGps">
+    <description text="Initialize spacecraft orbit ephemeris, using GPS data."/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="4"/>
+    <output name="payloadOpcode" value="3"/>
+    <field/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_ResetDetTimeoutCount">
+    <description text="Resets the Tracker DetectorTimeoutCount telemetry point"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="46"/>
+    <field>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_MaxRateOps">
+    <description text="Maximum allowable rotation rate for tracker operations."/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="33"/>
+    <field>
+      <argument id="MaxRate" type="uint8B">
+        <description>0 will result in always excluding tracker. 5.1 will effectively disable the check.</description>
+      </argument>
+      <argument id="Response" type="uint8B">
+        <description text="0=Disable usage if MaxRate exceeded, 1=Go to Idle mode if MaxRate exceeded."/>
+      </argument>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Refs_TEST_SetPosVel">
+    <description text="Initialize spacecraft orbit ephemeris, using test data received via test port."/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="4"/>
+    <output name="payloadOpcode" value="255"/>
+    <field/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Cal_TrackerAlignUsage">
+    <description>Configures usage of the dynamic estimate of Tracker 2 alignment with respect to Tracker 1. Sending this command with UseConfig=2 updates the TrackerCtrl table (in RAM only) and therefore is effectively a table load operation--do not perform simultaneous to any other table operations.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="34"/>
+    <output name="payloadOpcode" value="2"/>
+    <field>
+      <argument id="UseConfig" type="uint8B">
+        <description>states: 0=Use RAM table alignment on each cycle, 1=Use dynamic estimate on each cycle, 2=Jam dynamic estimate into RAM table once then switch to UseConfig 0</description>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Wheel_SetWheelSpeed4">
+    <description>Desired wheel speed (only in EXTERNAL mode). A wheel can be in Torque OR Speed OR PWM mode at any given time.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="7"/>
+    <output name="payloadOpcode" value="10"/>
+    <field>
+      <argument id="Wheel" type="uint8B">
+        <description text="Sets which wheel this command applies to (use zero to set all wheels)"/>
+      </argument>
+      <argument id="Speed_1" type="int16B">
+        <description text="Wheel 1 desired speed (RPM)"/>
+      </argument>
+      <argument id="Speed_2" type="int16B">
+        <description text="Wheel 2 desired speed (RPM)"/>
+      </argument>
+      <argument id="Speed_3" type="int16B">
+        <description text="Wheel 3 desired speed (RPM)"/>
+      </argument>
+      <argument id="Speed_4" type="int16B">
+        <description text="Wheel 4 desired speed (RPM)"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_SunSensor_CssUsage">
+    <description text="Enable or Disable coare sun sensor usage"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="11"/>
+    <output name="payloadOpcode" value="1"/>
+    <field>
+      <argument id="Status" type="uint8B">
+        <description text="states: 0=disable, 1=enable; Enable or disable sun sensor usage"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_AttDet_TEST_SetAttitude">
+    <description>Set FSW attitude to uploaded values (TEST ONLY). Also sets attitude valid and resets gyro-only ride timer.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="5"/>
+    <output name="payloadOpcode" value="2"/>
+    <field>
+      <argument id="Q_b_wrt_i_1" type="float32B">
+        <description text="Quaternion of body wrt J2000 ECI, element 1"/>
+      </argument>
+      <argument id="Q_b_wrt_i_2" type="float32B">
+        <description text="Quaternion of body wrt J2000 ECI, element 2"/>
+      </argument>
+      <argument id="Q_b_wrt_i_3" type="float32B">
+        <description text="Quaternion of body wrt J2000 ECI, element 3"/>
+      </argument>
+      <argument id="Q_b_wrt_i_4" type="float32B">
+        <description text="Quaternion of body wrt J2000 ECI, element 4 (the scalar quaternion element)"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Refs_InitPosVelUtcGreg">
+    <description>Initialize spacecraft orbit ephemeris, using position, velocity and UTC Gregorian.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="4"/>
+    <output name="payloadOpcode" value="6"/>
+    <field>
+      <argument id="year" type="uint8B">
+        <description text="Year since 2000"/>
+      </argument>
+      <argument id="mon" type="uint8B">
+        <description text="Month"/>
+      </argument>
+      <argument id="day" type="uint8B">
+        <description text="Day of month"/>
+      </argument>
+      <argument id="hour" type="uint8B">
+        <description text="Hour since midnight"/>
+      </argument>
+      <argument id="min" type="uint8B">
+        <description text="Minutes"/>
+      </argument>
+      <argument id="sec" type="uint8B">
+        <description text="Seconds (no fraction)"/>
+      </argument>
+      <argument id="millisec" type="uint16B">
+        <description text="milliseconds"/>
+      </argument>
+      <argument id="PosX" type="doubleb">
+        <description text="X component of J2000 ECI position vector (km)"/>
+      </argument>
+      <argument id="PosY" type="doubleb">
+        <description text="Y component of J2000 ECI position vector (km)"/>
+      </argument>
+      <argument id="PosZ" type="doubleb">
+        <description text="Z component of J2000 ECI position vector (km)"/>
+      </argument>
+      <argument id="VelX" type="doubleb">
+        <description text="X component of J2000 ECI velocity vector (km/s)"/>
+      </argument>
+      <argument id="VelY" type="doubleb">
+        <description text="Y component of J2000 ECI velocity vector (km/s)"/>
+      </argument>
+      <argument id="VelZ" type="doubleb">
+        <description text="Z component of J2000 ECI velocity vector (km/s)"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Time_ClockSyncEnable">
+    <description>Enables/disables syncing of clock to external PPS (normally from GPS). Disable resets clock slope to nominal default. Clock syncing is nominally enabled.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="3"/>
+    <output name="payloadOpcode" value="6"/>
+    <field>
+      <argument id="Status" type="uint8B">
+        <description text="states: 0=disable, 1=enable"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_TrackerUsage">
+    <description text="Enable or Disable tracker usage in attitude determination."/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="31"/>
+    <field>
+      <argument id="Status" type="uint8B">
+        <description text="1=true: enable tracker usage. 0=false: disable tracker usage."/>
+      </argument>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_GPS_AcceptTimePosVel">
+    <description>This command is a means to provide XACT with time, position, and velocity (typically from a GPS receiver) valid at the previous PPS. Final byte of command must be transmitted to XACT within 750 ms after most recent PPS. NOTE: The provided solution MUST contain the velocity correction. XACT will use exactly the values commanded without correction.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="23"/>
+    <output name="payloadOpcode" value="6"/>
+    <field>
+      <argument id="GpsWeek" type="uint16B">
+        <description text="Gps week"/>
+      </argument>
+      <argument id="GpsMs" type="uint32B">
+        <description text="Gps millisecond"/>
+      </argument>
+      <argument id="PosX" type="doubleb">
+        <description text="X component of ECEF position vector (km)"/>
+      </argument>
+      <argument id="PosY" type="doubleb">
+        <description text="Y component of ECEF position vector (km)"/>
+      </argument>
+      <argument id="PosZ" type="doubleb">
+        <description text="Z component of ECEF position vector (km)"/>
+      </argument>
+      <argument id="VelX" type="doubleb">
+        <description text="X component of ECEF velocity vector (km/s)"/>
+      </argument>
+      <argument id="VelY" type="doubleb">
+        <description text="Y component of ECEF velocity vector (km/s)"/>
+      </argument>
+      <argument id="VelZ" type="doubleb">
+        <description text="Z component of ECEF velocity vector (km/s)"/>
+      </argument>
+      <argument id="RequirePps" type="uint8B">
+        <description>states: 0=Associate with time of command processing if no recent PPS arrived, 1=Associate only with a recent PPS (otherwise ignore)</description>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_ExtNstFpgaReadTime">
+    <description text="Adjusts when FPGA reads external tracker telemetry"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="53"/>
+    <field>
+      <argument id="ReadTime" type="uint8B">
+        <description>Milliseconds after the start of the frame flag when the FPGA begins to read external tracker telemetry</description>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_IMU_ImuResetInvalidCount">
+    <description text="Resets the IMU invalid count telemetry point"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="13"/>
+    <output name="payloadOpcode" value="4"/>
+    <field/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Momentum_SetCmdMomentum">
+    <description>Sets desired inertial momentum (J2000) to achieve during fine reference pointing mode. Spacecraft continues to maintain inertial momentum until momentum too high, revert to sun point mode, or commanded otherwise</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="10"/>
+    <output name="payloadOpcode" value="5"/>
+    <field>
+      <argument id="CmdMomX" type="float32B">
+        <description text="J2000 X direction commanded momentum"/>
+      </argument>
+      <argument id="CmdMomY" type="float32B">
+        <description text="J2000 Y direction commanded momentum"/>
+      </argument>
+      <argument id="CmdMomZ" type="float32B">
+        <description text="J2000 Z direction commanded momentum"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_VelocityAid">
+    <description text="Correct for velocity aberration using on-board velocity calculation."/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="6"/>
+    <field>
+      <argument id="Status" type="uint8B">
+        <description text="1=true: enable, 0=false: disable"/>
+      </argument>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_AttCtrl_ZeroControlGain">
+    <description text="Temporarily zero attitude control system gains"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="9"/>
+    <output name="payloadOpcode" value="6"/>
+    <field>
+      <argument id="NumCycles" type="uint32B">
+        <description>Number of 5 Hz cycles to zero control gains. After this many cycles normal control will resume.</description>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_AttCmd_GotoFineHold">
+    <description text="Go to Fine Reference Point mode (holds current attitude wrt ECI)"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="6"/>
+    <output name="payloadOpcode" value="2"/>
+    <field/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_Attitude_Aid">
+    <description>Constrain StarID to satisfy attitude provided by on-board estimate. Do not send without coordination with BCT.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="18"/>
+    <field>
+      <argument id="Status" type="uint8B">
+        <description text="1=true: enable, 0=false: disable"/>
+      </argument>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Time_spare">
+    <description text="do not send"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="3"/>
+    <output name="payloadOpcode" value="1"/>
+    <field/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Wheel_SetWheelTorque32">
+    <description>Sets desired wheel torque (only in EXTERNAL mode). A wheel can be in Torque OR Speed OR PWM mode at any given time. Min/max values given here refer to the representable range given the command scaling--for a given wheel this command saturates at the min/max values documented in the wheel-specific ICD.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="7"/>
+    <output name="payloadOpcode" value="13"/>
+    <field>
+      <argument id="Wheel" type="uint8B">
+        <description text="Sets which wheel this command applies to (use zero to set all wheels)"/>
+      </argument>
+      <argument id="Torque_1" type="int32B">
+        <description text="Wheel 1 desired torque (Nm)"/>
+      </argument>
+      <argument id="Torque_2" type="int32B">
+        <description text="Wheel 2 desired torque (Nm)"/>
+      </argument>
+      <argument id="Torque_3" type="int32B">
+        <description text="Wheel 3 desired torque (Nm)"/>
+      </argument>
+      <argument id="Torque_4" type="int32B">
+        <description text="Wheel 4 desired torque (Nm)"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Magnetometer_TEST_MagTestMode">
+    <description text="Enable or disable test mode for closed loop testing"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="12"/>
+    <output name="payloadOpcode" value="255"/>
+    <field>
+      <argument id="Status" type="uint8B">
+        <description text="states: 0=disable, 1=enable; Enable or disable test mode for closed loop testing"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Magnetometer_MagUsage">
+    <description text="Enable or Disable magnetometer usage"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="12"/>
+    <output name="payloadOpcode" value="5"/>
+    <field>
+      <argument id="MagNum" type="uint8B">
+        <description text="Magnetometer number"/>
+      </argument>
+      <argument id="Status" type="uint8B">
+        <description text="states: 0=disable, 1=enable; Enable or Disable magnetometer usage"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_TakePhotoROI">
+    <description>Take images with smaller region of interest (ROI) using commanded settings, and store for later downlink. Suspends StarId and Track operations until done.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="42"/>
+    <field>
+      <argument id="Gain" type="uint8B">
+        <description>states: 0=one, 1=1.5, 2=2, 3=3, 4=4, 5=six, 6=eight; Analog gain used in Photo mode</description>
+      </argument>
+      <argument id="IntMode" type="uint8B">
+        <description text="Logarithmic reduces saturation and provides better contrast. (0=linear, 1=log)"/>
+      </argument>
+      <argument id="Tint" type="uint16B">
+        <description text="Integration time in micro-seconds"/>
+      </argument>
+      <argument id="spare" type="uint8B">
+        <description text="spare"/>
+      </argument>
+      <argument id="BufNum" type="uint8B">
+        <description text="Video storage buffer in which to place photo images."/>
+      </argument>
+      <argument id="RoiNumPhotos" type="uint16B">
+        <description text="Number of ROI images to store. = 512*1024/(row_pix_size*col_pix_size/3)"/>
+      </argument>
+      <argument id="RoiWordStart" type="uint16B">
+        <description>1280 pixels per row, but each word holds 3 pixels. To start on pixel_0, use 0. To start on pixel_3, use 1. To start on pixel_6, use 2. etc.</description>
+      </argument>
+      <argument id="RoiNumWords" type="uint16B">
+        <description text="Minumum width is 9 pixels, therefore minimum value is 9/3 = 3."/>
+      </argument>
+      <argument id="RoiRowStart" type="uint16B">
+        <description>1280 pixels per row, but each word holds 3 pixels. To start on pixel_0, use 0. To start on pixel_3, use 1. To start on pixel_6, use 2. etc.</description>
+      </argument>
+      <argument id="RoiNumRows" type="uint16B">
+        <description text="Minumum rows is 9 pixels."/>
+      </argument>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_AttCmd_ClearEclipseTimer">
+    <description text="Clear timer which is used to delay sky-sweep when in Sun Point mode"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="6"/>
+    <output name="payloadOpcode" value="8"/>
+    <field/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Refs_InitKeplerTaiSec">
+    <description>Initialize spacecraft orbit ephemeris, using Keplerian elements and time in TAI seconds.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="4"/>
+    <output name="payloadOpcode" value="7"/>
+    <field>
+      <argument id="Time" type="doubleb">
+        <description text="Seconds since 1 Jan, 2000 00:00:00 TAI"/>
+      </argument>
+      <argument id="RAAN" type="doubleb">
+        <description text="Right Ascension of Ascending Node"/>
+      </argument>
+      <argument id="Incl" type="doubleb">
+        <description text="Inclination"/>
+      </argument>
+      <argument id="ArgP" type="doubleb">
+        <description text="Argument of Perigee"/>
+      </argument>
+      <argument id="TruAnom" type="doubleb">
+        <description text="True Anomaly"/>
+      </argument>
+      <argument id="Alt" type="doubleb">
+        <description text="Altitude"/>
+      </argument>
+      <argument id="Ecc" type="doubleb">
+        <description text="Eccentricity"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_AttCtrl_SetPreferredSunSource">
+    <description>WARNING: This command alters core sun point mode sensor paths. This command also changes the RAM table value controlling the preferred logic. Sets the preferred sun knowledge as either measured (by CSS) or modeled (via time and attitude knowledge).</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="9"/>
+    <output name="payloadOpcode" value="9"/>
+    <field>
+      <argument id="Setting" type="uint8B">
+        <description>states: 0=measured, 1=modeled; Measured prefers to utilize the measured feedback from the coarse sun sensors, modeled prefers to utilize the time-based sun model when both time and attitude are valid</description>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_ExtNstPower">
+    <description text="Turns power on/off for the external trackers"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="51"/>
+    <field>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+      <argument id="State" type="uint8B">
+        <description text="states: 0=off, 1=on"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_AttCmd_SunRotationRate">
+    <description text="Specify rotisserie rate while in Sun Point mode"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="6"/>
+    <output name="payloadOpcode" value="7"/>
+    <field>
+      <argument id="Rate" type="float32B">
+        <description text="Rate about sun-line in deg/s"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_ExtNstCopyVidBuf">
+    <description>Copies the data video buffer from the external tracker into the data video buffer of XACT</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="55"/>
+    <field>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+      <argument id="NumBytes" type="uint16B">
+        <description text="Number of bytes to copy to data video buffer"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_AttCtrl_AccelLimit">
+    <description>Limit body acceleration during Fine Reference Point. Resets to default on either a GainSelect command or a transition to Sun Point mode.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="9"/>
+    <output name="payloadOpcode" value="4"/>
+    <field>
+      <argument id="AccelLimit_X" type="float32B">
+        <description text="Max allowable accel, X axis (deg/s/s)"/>
+      </argument>
+      <argument id="AccelLimit_Y" type="float32B">
+        <description text="Max allowable accel, Y axis (deg/s/s)"/>
+      </argument>
+      <argument id="AccelLimit_Z" type="float32B">
+        <description text="Max allowable accel, Z axis (deg/s/s)"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_CalMode">
+    <description text="Initiate Calibration Mode. Returns to previous mode after 1 sec"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="21"/>
+    <field>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_SunSensor_CssClearLightFound">
+    <description>Clears CssLightFound&quot; bitpack telemetry point &quot;&quot;lears &quot;CssLightFound&quot; bitpack telemetry&quot;&quot;ears &quot;CssLightFound&quot; bitpack tel&quot;&quot;ars &quot;CssLightFound&quot; bitpac&quot;&quot;rs &quot;CssLightFound&quot; bi&quot;&quot;s &quot;CssLightFound&quot;&quot;&quot; &quot;CssLightFoun&quot;&quot;&quot;CssLightFou&quot;&quot;CssLightFou&quot;</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="11"/>
+    <output name="payloadOpcode" value="4"/>
+    <field>
+      <argument id="CssNum" type="uint8B">
+        <description text="Coarse sun sensor package number (0=all)"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_AttCmd_GotoEcefPoint">
+    <description>Slews to stare at an ECEF target defined by relative SlewEndTime (also transitions to Fine Reference Point mode if not already in it).</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="6"/>
+    <output name="payloadOpcode" value="10"/>
+    <field>
+      <argument id="VelAber" type="uint8B">
+        <description text="states: 0=Disable, 1=Enable; Apply velocity aberration correction to ECEF target"/>
+      </argument>
+      <argument id="SecRefDir" type="uint8B">
+        <description>states: 0=ECIx, 1=ECIy, 2=ECIz, 3=Sun, 4=Mag, 5=Moon, 6=Pos, 7=Vel, 8=TargECI, 9=TargECEF, 10=Bearing, 11=Heading, 12=OrbitNorm, 13=GcNadir, 14=GdNadir</description>
+      </argument>
+      <argument id="TargX" type="float32B">
+        <description text="Target ECEF geocentric X position"/>
+      </argument>
+      <argument id="TargY" type="float32B">
+        <description text="Target ECEF geocentric Y position"/>
+      </argument>
+      <argument id="TargZ" type="float32B">
+        <description text="Target ECEF geocentric Z position"/>
+      </argument>
+      <argument id="spare" type="float32B">
+        <description text="spare"/>
+      </argument>
+      <argument id="PriCmdDir" type="uint8B">
+        <description>+Z command direction (in body): 1-15 (see definition in GotoTarget command). Points at ECEF target.</description>
+      </argument>
+      <argument id="SecCmdDir" type="uint8B">
+        <description>+X command direction (in body): 1-15 (see definition in GotoTarget command). Points toward SecCmdDir.</description>
+      </argument>
+      <argument id="SlewEndTime" type="uint16B">
+        <description>Relative time (from time at which command is accepted) at which the maneuver is planned to begin pointing at the ECEF target.</description>
+      </argument>
+      <argument id="TransitionTime" type="uint16B">
+        <description>Maneuver smoothing interval. Select smaller than SlewEndTime. Larger values give more smoothing but less agility. Recommend 5 seconds for general use. Less than 1 second is not recommended.</description>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TlmProc_MapSelect">
+    <description text="Select telemetry map"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="16"/>
+    <output name="payloadOpcode" value="1"/>
+    <field>
+      <argument id="Map_Number" type="uint8B">
+        <description text="Telemetry map index to be used"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_Table_Insert">
+    <description>Insert new values for table parameters. This is an alternate RAM table change method. Do not send without coordinating with BCT.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="25"/>
+    <field>
+      <argument id="TableElement" type="uint8B">
+        <description text="Which element in table structure to modify."/>
+      </argument>
+      <argument id="Index" type="uint8B">
+        <description text="Which index if the element is an array."/>
+      </argument>
+      <argument id="rawByte_1" type="uint8B">
+        <description text="Raw byte number 1"/>
+      </argument>
+      <argument id="rawByte_2" type="uint8B">
+        <description text="Raw byte number 2"/>
+      </argument>
+      <argument id="rawByte_3" type="uint8B">
+        <description text="Raw byte number 3"/>
+      </argument>
+      <argument id="rawByte_4" type="uint8B">
+        <description text="Raw byte number 4"/>
+      </argument>
+      <argument id="rawByte_5" type="uint8B">
+        <description text="Raw byte number 5"/>
+      </argument>
+      <argument id="rawByte_6" type="uint8B">
+        <description text="Raw byte number 6"/>
+      </argument>
+      <argument id="rawByte_7" type="uint8B">
+        <description text="Raw byte number 7"/>
+      </argument>
+      <argument id="rawByte_8" type="uint8B">
+        <description text="Raw byte number 8"/>
+      </argument>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_AttCmd_GotoFineSunPoint">
+    <description>NOTE: THIS IS A MISSION MODE, NOT A FAULT/SAFE MODE. Go to fine reference sun point (transitions to Fine Reference Point mode if not already in it) with primary reference frame +Z on sun and secondary +X defined by parameter. Flag for payload assist (if available).</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="6"/>
+    <output name="payloadOpcode" value="9"/>
+    <field>
+      <argument id="VelAber" type="uint8B">
+        <description text="states: 0=Disable, 1=Enable; Apply velocity aberration correction to Sun vector"/>
+      </argument>
+      <argument id="SecRefDir" type="uint8B">
+        <description>states: 0=ECIx, 1=ECIy, 2=ECIz, 3=Sun, 4=Mag, 5=Moon, 6=Pos, 7=Vel, 8=spare, 9=spare, 10=spare, 11=spare, 12=OrbitNorm, 13=GcNadir, 14=GdNadir; Secondary reference direction</description>
+      </argument>
+      <argument id="PriCmdDir" type="uint8B">
+        <description text="+Z command direction (in body): 1-15 (see definition in GotoTarget command)."/>
+      </argument>
+      <argument id="SecCmdDir" type="uint8B">
+        <description text="+X command direction (in body): 1-15 (see definition in GotoTarget command)."/>
+      </argument>
+      <argument id="Yaw_angle" type="float32B">
+        <description text="Yaw angle of target frame about reference frame sun vector (+Z)"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_AttCmd_GotoEciAttitude">
+    <description>Go to ECI attitude (transitions to Fine Reference Point mode if not already in it)</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="6"/>
+    <output name="payloadOpcode" value="5"/>
+    <field>
+      <argument id="PriCmdDir" type="uint8B">
+        <description text="+Z command direction (in body): 1-15 (see definition in GotoTarget command)."/>
+      </argument>
+      <argument id="SecCmdDir" type="uint8B">
+        <description text="+X command direction (in body): 1-15 (see definition in GotoTarget command)."/>
+      </argument>
+      <argument id="Q_cmd_wrt_ref_1" type="float32B">
+        <description text="Commanded attitude quaternion_1. Or roll angle (deg) if quaternion_4 &gt;= 2"/>
+      </argument>
+      <argument id="Q_cmd_wrt_ref_2" type="float32B">
+        <description text="Commanded attitude quaternion_2. Or pitch angle (deg) if quaternion_4 &gt;= 2"/>
+      </argument>
+      <argument id="Q_cmd_wrt_ref_3" type="float32B">
+        <description text="Commanded attitude quaternion_3. Or yaw angle (deg) if quaternion_4 &gt;= 2"/>
+      </argument>
+      <argument id="Q_cmd_wrt_ref_4" type="float32B">
+        <description text="Commanded attitude quaternion_4. If &gt;= 2, q_1, q_2, q_3 are roll, pitch, yaw"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_AttCtrl_GainSelect">
+    <description>Select desired set of table-defined attitude control gains. Note Index 1 is reserved for Sun Point gains, and Index 2 is reserved for nominal Fine Reference Point gains.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="9"/>
+    <output name="payloadOpcode" value="1"/>
+    <field>
+      <argument id="Index" type="uint8B">
+        <description text="Five sets of gains from which to choose: 1-5."/>
+      </argument>
+      <argument id="PreserveLimits" type="uint8B">
+        <description>states: 0=Reinitialize, 1=Leave; reinitialize means reinitialize accel and rate limits to values corresponding to selected gain index accel, leave means leave rate limits at current values</description>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_Store_Images">
+    <description>Store sequential images in memory for later downlink. Used existing StarId or Track image settings.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="24"/>
+    <field>
+      <argument id="spare" type="uint8B">
+        <description text="spare"/>
+      </argument>
+      <argument id="NumImages" type="uint8B">
+        <description text="Number of images to store"/>
+      </argument>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Refs_InitChebyshevSun">
+    <description>Initialize Chebyshev polynomial coefficients for spacecraft trajectory with respect to sun-centered inertial (J2000) coordinates</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="4"/>
+    <output name="payloadOpcode" value="10"/>
+    <field>
+      <argument id="Start_Time" type="doubleb">
+        <description text="Start of polynomial - TAI seconds since Jan 1, 2000 00:00:00"/>
+      </argument>
+      <argument id="End_Time" type="doubleb">
+        <description text="End of polynomial - TAI seconds since Jan 1, 2000 00:00:00"/>
+      </argument>
+      <argument id="C0_X" type="doubleb">
+        <description text="C0 coefficient for the X position"/>
+      </argument>
+      <argument id="C1_X" type="doubleb">
+        <description text="C1 coefficient for the X position"/>
+      </argument>
+      <argument id="C2_X" type="doubleb">
+        <description text="C2 coefficient for the X position"/>
+      </argument>
+      <argument id="C3_X" type="doubleb">
+        <description text="C3 coefficient for the X position"/>
+      </argument>
+      <argument id="C4_X" type="doubleb">
+        <description text="C4 coefficient for the X position"/>
+      </argument>
+      <argument id="C5_X" type="doubleb">
+        <description text="C5 coefficient for the X position"/>
+      </argument>
+      <argument id="C6_X" type="doubleb">
+        <description text="C6 coefficient for the X position"/>
+      </argument>
+      <argument id="C7_X" type="doubleb">
+        <description text="C7 coefficient for the X position"/>
+      </argument>
+      <argument id="C0_Y" type="doubleb">
+        <description text="C0 coefficient for the Y position"/>
+      </argument>
+      <argument id="C1_Y" type="doubleb">
+        <description text="C1 coefficient for the Y position"/>
+      </argument>
+      <argument id="C2_Y" type="doubleb">
+        <description text="C2 coefficient for the Y position"/>
+      </argument>
+      <argument id="C3_Y" type="doubleb">
+        <description text="C3 coefficient for the Y position"/>
+      </argument>
+      <argument id="C4_Y" type="doubleb">
+        <description text="C4 coefficient for the Y position"/>
+      </argument>
+      <argument id="C5_Y" type="doubleb">
+        <description text="C5 coefficient for the Y position"/>
+      </argument>
+      <argument id="C6_Y" type="doubleb">
+        <description text="C6 coefficient for the Y position"/>
+      </argument>
+      <argument id="C7_Y" type="doubleb">
+        <description text="C7 coefficient for the Y position"/>
+      </argument>
+      <argument id="C0_Z" type="doubleb">
+        <description text="C0 coefficient for the Z position"/>
+      </argument>
+      <argument id="C1_Z" type="doubleb">
+        <description text="C1 coefficient for the Z position"/>
+      </argument>
+      <argument id="C2_Z" type="doubleb">
+        <description text="C2 coefficient for the Z position"/>
+      </argument>
+      <argument id="C3_Z" type="doubleb">
+        <description text="C3 coefficient for the Z position"/>
+      </argument>
+      <argument id="C4_Z" type="doubleb">
+        <description text="C4 coefficient for the Z position"/>
+      </argument>
+      <argument id="C5_Z" type="doubleb">
+        <description text="C5 coefficient for the Z position"/>
+      </argument>
+      <argument id="C6_Z" type="doubleb">
+        <description text="C6 coefficient for the Z position"/>
+      </argument>
+      <argument id="C7_Z" type="doubleb">
+        <description text="C7 coefficient for the Z position"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Time_SetCurrentTimeTai">
+    <description text="Set current time in TAI seconds since 1 Jan, 2000 00:00:00."/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="3"/>
+    <output name="payloadOpcode" value="7"/>
+    <field>
+      <argument id="Time" type="uint32B">
+        <description text="Number of seconds"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_StarID">
+    <description text="Begin star ID process. Transition to Track mode if enabled."/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="9"/>
+    <field>
+      <argument id="AutoTrack" type="uint8B">
+        <description>0=false, 1=true. ''True' means allow automatic transition to track mode. 'false' means stay in StarID mode -- do not transition to track.</description>
+      </argument>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_AttCmd_TempSunRotationRate">
+    <description>Specify rotisserie rate while in Sun Point mode. Only valid for X seconds, at which point it will revert to previous value</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="6"/>
+    <output name="payloadOpcode" value="12"/>
+    <field>
+      <argument id="Rate" type="float32B">
+        <description text="Rate about sun-line in deg/sec"/>
+      </argument>
+      <argument id="Time" type="uint16B">
+        <description text="Seconds to use temporary rotation rate"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Refs_DisablePropagation">
+    <description text="Disables orbit propagation"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="4"/>
+    <output name="payloadOpcode" value="18"/>
+    <field>
+      <argument id="ObjNum" type="uint8B">
+        <description text="Config byte must be set to 1"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_IMU_ImuUsage">
+    <description text="Enable or Disable IMU usage"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="13"/>
+    <output name="payloadOpcode" value="1"/>
+    <field>
+      <argument id="Status" type="uint8B">
+        <description text="states: 0=disable, 1=enable; Enable or Disable IMU usage"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Refs_OrbitMethod">
+    <description>Method for orbit propagation. Kepler is recommended only for test. SGP4 should not be used when GPS is available and being used.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="4"/>
+    <output name="payloadOpcode" value="2"/>
+    <field>
+      <argument id="Method" type="uint8B">
+        <description>states: 0=Kepler elements, 1=Point gravity, 2=J2 , 3=Spherical harmonic, 4=SGP4, 5=External Accel, 6=Polynomial</description>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Command_NoOp">
+    <description text="No operation. Increments command accept counter by 1."/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="1"/>
+    <output name="payloadOpcode" value="1"/>
+    <field/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_AttDet_SetPreferredTracker">
+    <description>Sets preferred tracker usage configuration. Preference is used for attitude determination when available; otherwise only the highest-numbered available tracker is used.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="5"/>
+    <output name="payloadOpcode" value="4"/>
+    <field>
+      <argument id="Preference" type="uint8B">
+        <description text="states: 0=Both Trackers, 1=Tracker 1, 2=Tracker 2"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Wheel_SetWheelMode">
+    <description>IDLE mode isolates windings. In INTERNAL mode commands come from internal software and the only direct external commands accepted are SetWheelMode and Calibrate. In EXTERNAL mode the wheel commands coming from XACT's internal attitude control system are ignored. For 3-wheel products, commands to 4th wheel are ignored.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="7"/>
+    <output name="payloadOpcode" value="2"/>
+    <field>
+      <argument id="Wheel" type="uint8B">
+        <description text="Sets which wheel this command applies to (use zero to set all wheels)"/>
+      </argument>
+      <argument id="Mode" type="uint8B">
+        <description text="states: 0=IDLE, 1=INTERNAL, 2=EXTERNAL"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_VelocityAidDirect">
+    <description>Correct for velocity aberration using on-board velocity calculation with commanded velocity. DOES NOT require valid time/ephemeris on XACT, instead uses the commanded velocity for correction.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="38"/>
+    <field>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+      <argument id="Status" type="uint8B">
+        <description text="states: 1=enable, 0=disable"/>
+      </argument>
+      <argument id="VelSciX" type="float32B">
+        <description text="Spacecraft velocity with respect to sun-centered inertial frame, X-direction"/>
+      </argument>
+      <argument id="VelSciY" type="float32B">
+        <description text="Spacecraft velocity with respect to sun-centered inertial frame, Y-direction"/>
+      </argument>
+      <argument id="VelSciZ" type="float32B">
+        <description text="Spacecraft velocity with respect to sun-centered inertial frame, Z-direction"/>
+      </argument>
+      <argument id="NumCycles" type="uint32B">
+        <description text="Number of 5 Hz cycles to consider commanded data valid"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_Exposure">
+    <description text="Integration time used in Track mode"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="8"/>
+    <field>
+      <argument id="TintIndex" type="uint8B">
+        <description>states: 1=50ms, 2=75ms, 3=100ms, 4=125ms, 5=150ms; Integration time used in Track mode</description>
+      </argument>
+      <argument id="AutoInt" type="uint8B">
+        <description>states: 0=false, 1=true; True means the specified Tint is the maximum allowable time used by FSW auto select logic. 'false' means the time is fixed, and will not be changed by FSW.</description>
+      </argument>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_Time_TEST_SetCurrentTimeTai">
+    <description text="Set time using data from Realtime Dynamics Processor (sent via test port)."/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="3"/>
+    <output name="payloadOpcode" value="254"/>
+    <field/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_ExtNstSettings">
+    <description text="Adjusts settings for external tracker interface"/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="52"/>
+    <field>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+      <argument id="Setting" type="uint8B">
+        <description>states: 0=only allow NST solution when synced, 1=allow NST solution when not synced</description>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_GPS_GpsReinit">
+    <description>Re-configure GPS unit to output data packets expected by XACT (applicable to programs with serial link between XACT and GPS) . This command is necessary after any GPS reboot that is not followed by an XACT reboot.</description>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="23"/>
+    <output name="payloadOpcode" value="3"/>
+    <field/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_TrackerCtrl_AutoSoftReinit">
+    <description text="Re-initialize subset of key software variables every Period."/>
+    <header frame="adcsCmdHeader"/>
+    <output name="payloadApid" value="38"/>
+    <output name="payloadOpcode" value="41"/>
+    <field>
+      <argument id="Period" type="uint32B">
+        <description text="Nnumber of software cycles between re-inits."/>
+      </argument>
+      <argument id="TrkNum" type="uint8B">
+        <description text="Tracker number"/>
+      </argument>
+    </field>
+  </command>
+</hydraDef>
+

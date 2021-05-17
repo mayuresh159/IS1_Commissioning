@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<pageDef>
+  <page title="cmd_hk">
+    <column>
+      <frame name="cmd_hk"/>
+    </column>
+  </page>
+</pageDef>
+

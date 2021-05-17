@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<pageDef>
+  <page title="adcs_att_ctrl">
+    <column>
+      <frame name="adcs_att_ctrl"/>
+    </column>
+  </page>
+</pageDef>
+

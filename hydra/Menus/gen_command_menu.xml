@@ -1,0 +1,143 @@
+<?xml version="1.0" ?>
+<hydraMenu>
+  <menu name="Commands">
+    <menu name="des">
+      <cmd name="cmd_set_perf_mon"/>
+      <cmd name="cmd_des_reset"/>
+      <cmd name="cmd_des_add_task"/>
+      <cmd name="cmd_des_sub_task"/>
+      <cmd name="cmd_des_add_back"/>
+      <cmd name="cmd_des_sub_back"/>
+      <cmd name="cmd_des_set_time"/>
+    </menu>
+    <menu name="mem">
+      <cmd name="cmd_mem_dump"/>
+      <cmd name="cmd_mem_load"/>
+      <cmd name="cmd_mem_load_dword"/>
+      <cmd name="cmd_mem_load_word"/>
+      <cmd name="cmd_mem_load_byte"/>
+      <cmd name="cmd_mem_erase"/>
+      <cmd name="cmd_mem_xsum_section"/>
+      <cmd name="cmd_mem_abort"/>
+      <cmd name="cmd_mem_reset"/>
+    </menu>
+    <menu name="fp">
+      <cmd name="cmd_fp_reset"/>
+      <cmd name="cmd_fp_reset_results"/>
+      <cmd name="cmd_fp_validate"/>
+      <cmd name="cmd_fp_set_task_state"/>
+      <cmd name="cmd_fp_set_watch_state"/>
+      <cmd name="cmd_fp_dump_watch"/>
+      <cmd name="cmd_fp_dump_results"/>
+      <cmd name="cmd_fp_set_watch_values"/>
+      <cmd name="cmd_fp_set_watch_threshold"/>
+      <cmd name="cmd_fp_set_watch_response"/>
+    </menu>
+    <menu name="log">
+      <cmd name="cmd_log_set_evt_group"/>
+      <cmd name="cmd_log_set_state"/>
+      <cmd name="cmd_log_reset"/>
+      <cmd name="cmd_log_set_mask_state"/>
+      <cmd name="cmd_log_reset_log"/>
+      <cmd name="cmd_log_issue"/>
+    </menu>
+    <menu name="pkt">
+      <cmd name="cmd_set_pkt_rate"/>
+      <cmd name="cmd_issue_pkt"/>
+      <cmd name="cmd_pkt_stream_set"/>
+      <cmd name="cmd_set_pkt_priority"/>
+    </menu>
+    <menu name="seq">
+      <cmd name="cmd_seq_load"/>
+      <cmd name="cmd_seq_init"/>
+      <cmd name="cmd_seq_set_state"/>
+      <cmd name="cmd_seq_verify"/>
+      <cmd name="cmd_seq_halt"/>
+      <cmd name="cmd_seq_find"/>
+      <cmd name="cmd_seq_info"/>
+      <cmd name="cmd_seq_dump"/>
+    </menu>
+    <menu name="seqint">
+      <cmd name="cmd_seq_start"/>
+      <cmd name="cmd_seq_suspend_abs"/>
+      <cmd name="cmd_seq_suspend_rel"/>
+      <cmd name="cmd_seq_call"/>
+    </menu>
+    <menu name="cmd">
+      <cmd name="cmd_noop"/>
+      <cmd name="cmd_cmd_reset"/>
+    </menu>
+    <menu name="sband">
+      <cmd name="cmd_sband_set_pa"/>
+      <cmd name="cmd_sband_set_mode"/>
+      <cmd name="cmd_sband_set_pa_level"/>
+      <cmd name="cmd_sband_set_synth"/>
+      <cmd name="cmd_sband_reset"/>
+      <cmd name="cmd_sband_debug"/>
+      <cmd name="cmd_sband_set_encoder"/>
+      <cmd name="cmd_sband_sync_on"/>
+      <cmd name="cmd_sband_sync_off"/>
+    </menu>
+    <menu name="sd">
+      <cmd name="cmd_sd_write_state"/>
+      <cmd name="cmd_sd_read"/>
+      <cmd name="cmd_sd_read_halt"/>
+      <cmd name="cmd_sd_playback"/>
+      <cmd name="cmd_sd_select"/>
+      <cmd name="cmd_sd_init"/>
+      <cmd name="cmd_sd_set_partition"/>
+      <cmd name="cmd_sd_update_partition"/>
+      <cmd name="cmd_sd_pwr_off"/>
+      <cmd name="cmd_sd_fdri_reset"/>
+      <cmd name="cmd_sd_fdri_limit"/>
+      <cmd name="cmd_sd_table_reset"/>
+    </menu>
+    <menu name="eps">
+      <cmd name="cmd_eps_pwr_on"/>
+      <cmd name="cmd_eps_pwr_off"/>
+      <cmd name="cmd_eps_pwr_cycle"/>
+      <cmd name="cmd_eps_deploy"/>
+      <cmd name="cmd_eps_htr_setpoint"/>
+      <cmd name="cmd_eps_htr_samples"/>
+      <cmd name="cmd_eps_eclipse_thresh"/>
+    </menu>
+    <menu name="uhf">
+      <cmd name="cmd_uhf_pass"/>
+      <cmd name="cmd_uhf_init"/>
+      <cmd name="cmd_uhf_set_resp_state"/>
+      <cmd name="cmd_uhf_set_tx_gap"/>
+    </menu>
+    <menu name="cip">
+      <cmd name="cmd_cip_sci_fast"/>
+    </menu>
+    <menu name="mode">
+      <cmd name="cmd_mode_set"/>
+      <cmd name="cmd_mode_avoid"/>
+      <cmd name="cmd_mode_set_threshold"/>
+      <cmd name="cmd_clt_clear"/>
+      <cmd name="cmd_clt_threshold"/>
+      <cmd name="cmd_mode_launch_delay"/>
+      <cmd name="cmd_mode_launch_set_flag"/>
+      <cmd name="cmd_mode_deploy_interval"/>
+      <cmd name="cmd_mode_deploy_flag"/>
+      <cmd name="cmd_mode_reset_sc"/>
+      <cmd name="cmd_mode_avoid_clear"/>
+      <cmd name="cmd_mode_eclipse_method"/>
+      <cmd name="cmd_mode_auto_dis"/>
+      <cmd name="cmd_mode_auto_ena"/>
+    </menu>
+    <menu name="adcs">
+      <cmd name="cmd_adcs_pass"/>
+      <cmd name="cmd_adcs_reset"/>
+      <cmd name="cmd_adcs_read"/>
+      <cmd name="cmd_adcs_coarse_point"/>
+      <cmd name="cmd_adcs_fine_point"/>
+      <cmd name="cmd_adcs_ram_point"/>
+      <cmd name="cmd_adcs_fine_update"/>
+      <cmd name="cmd_adcs_ram_update"/>
+      <cmd name="cmd_adcs_eclipse_update"/>
+    </menu>
+    <cmd name="sim_kill"/>
+  </menu>
+</hydraMenu>
+

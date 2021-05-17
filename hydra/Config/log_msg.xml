@@ -1,0 +1,63 @@
+<hydraDef>
+
+  <frameDef name="log_msg_frame_evt1">
+    <field>
+      <frameCopy name="log_msg_frame" suffix="_evt"/>
+    </field>
+  </frameDef>
+  
+  <frameDef name="log_msg_evt" id="#APID_TLM_EVT_PKT">
+    <field>
+      <frameCopy name="ccsdsTlmheader" suffix="_evt"/>
+      <item name="log_msg_frame_evt1" subfield="length"
+	    control="ccsdsTlmHeader_len_evt" offset="-5"/>
+    </field>
+  </frameDef>
+
+  <msgDef name="Events" frame="log_msg_frame_evt" mainWindow="true">
+    <item name="log_time_sec_evt"/>
+    <const str=" "/>
+    <item name="log_time_sub_evt"/>
+    <const str=" "/>
+    <item name="log_slice_evt"/>
+    <const str=" "/>
+    <item name="log_msgid_evt" conversion="Events"
+	  param0="log_params_evt[0]"
+	  param1="log_params_evt[1]"
+	  param2="log_params_evt[2]"
+	  param3="log_params_evt[3]"/>
+  </msgDef>
+
+  <dictionary name="Events"/>
+  
+  <frameDef name="log_msg_frame_pm1">
+    <field>
+      <frameCopy name="log_msg_frame" suffix="_pm"/>
+    </field>
+  </frameDef>
+  
+  <frameDef name="log_msg_pm" id="#APID_TLM_PM_PKT">
+    <field>
+      <frameCopy name="ccsdsTlmheader" suffix="_pm"/>
+      <item name="log_msg_frame_pm" subfield="length"
+	    control="ccsdsTlmHeader_len_pm" offset="-5"/>
+    </field>
+  </frameDef>
+
+  <msgDef name="PM" frame="log_msg_frame_pm" mainWindow="true">
+    <item name="log_time_sec_pm"/>
+    <const str=" "/>
+    <item name="log_time_sub_pm"/>
+    <const str=" "/>
+    <item name="log_slice_pm"/>
+    <const str=" "/>
+    <item name="log_msgid_pm" conversion="PostMortem"
+	  param0="log_params_pm[0]"
+	  param1="log_params_pm[1]"
+	  param2="log_params_pm[2]"
+	  param3="log_params_pm[3]"/>
+  </msgDef>
+
+  <dictionary name="PostMortem"/>
+  
+</hydraDef>

@@ -1,0 +1,1329 @@
+<?xml version="1.0" ?>
+<hydraDef>
+  <command decoder="cmdDecoder" name="cmd_set_perf_mon">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SET_PERF_MON_STATE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set Performance Monitor State"/>
+    <field>
+      <argument id="state" type="PerfMonState8L">
+        <description text="New state for perf mon"/>
+      </argument>
+      <item name="pad8"/>
+      <item name="pad8"/>
+      <item name="pad8"/>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_des_reset">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_DES_RESET_STATS"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Reset DES Statistics"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_des_add_task">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_DES_ADD_TASK"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Add a task to the DES schedule"/>
+    <field>
+      <argument id="taskID" type="desTaskID32L">
+        <description text="Task ID"/>
+      </argument>
+      <argument id="slice" type="uint32L">
+        <description text="Slice to add task to"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_des_sub_task">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_DES_SUB_TASK"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Remove a task from the DES schedule"/>
+    <field>
+      <argument id="slice" type="uint32L">
+        <description text="Slice to remove task"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_des_add_back">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_DES_ADD_BACK"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Add a background task to the DES"/>
+    <field>
+      <argument id="taskID" type="uint32L">
+        <description text="Task ID"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_des_sub_back">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_DES_SUB_BACK"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Remove a background task from the DES"/>
+    <field>
+      <argument id="taskID" type="uint32L">
+        <description text="Task ID"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_des_set_time">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_DES_SET_TIME"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set the current time (seconds)"/>
+    <field>
+      <argument id="time" type="uint32L">
+        <description text="New time (seconds)"/>
+      </argument>
+      <argument default="0" id="effective" type="uint32L">
+        <description text="Old time at which new time becomes effective (zero if immediate)"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_mem_dump">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_MEM_DUMP_SECTION"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Dump Memory Section"/>
+    <field>
+      <argument id="section" type="memSection32L">
+        <description text="Section to dump"/>
+      </argument>
+      <argument id="offset" type="uint32L">
+        <description text="Offset within section"/>
+      </argument>
+      <argument id="length" type="uint32L">
+        <description text="Number of bytes to dump"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_mem_load">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_MEM_LOAD_SECTION"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Load Memory Section"/>
+    <field>
+      <argument id="section" type="memSection32L">
+        <description text="Section to load"/>
+      </argument>
+      <argument id="offset" type="uint32L">
+        <description text="Offset within section"/>
+      </argument>
+      <argument id="length" type="uint32L">
+        <description text="Number of bytes to load"/>
+      </argument>
+      <argument id="buffer" num="#MAX_MEM_XFER_SIZE" type="uint8L">
+        <description text="Data to load"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_mem_load_dword">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_MEM_LOAD_DWORD"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Write DWORD to memory section"/>
+    <field>
+      <argument id="section" type="memSection32L">
+        <description text="Section to load"/>
+      </argument>
+      <argument id="offset" type="uint32L">
+        <description text="Offset within section"/>
+      </argument>
+      <argument id="data" type="uint32L">
+        <description text="Data to write"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_mem_load_word">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_MEM_LOAD_WORD"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Write WORD to memory section"/>
+    <field>
+      <argument id="section" type="memSection32L">
+        <description text="Section to load"/>
+      </argument>
+      <argument id="offset" type="uint32L">
+        <description text="Offset within section"/>
+      </argument>
+      <argument id="data" type="uint16L">
+        <description text="Data to write"/>
+      </argument>
+      <item name="pad16"/>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_mem_load_byte">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_MEM_LOAD_BYTE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Write BYTE to memory section"/>
+    <field>
+      <argument id="section" type="memSection32L">
+        <description text="Section to load"/>
+      </argument>
+      <argument id="offset" type="uint32L">
+        <description text="Offset within section"/>
+      </argument>
+      <argument id="data" type="uint8L">
+        <description text="Data to write"/>
+      </argument>
+      <item name="pad8"/>
+      <item name="pad8"/>
+      <item name="pad8"/>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_mem_erase">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_MEM_ERASE_SECTION"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Erase Memory Section"/>
+    <field>
+      <argument id="section" type="memSection32L">
+        <description text="Section to erase"/>
+      </argument>
+      <argument id="offset" type="uint32L">
+        <description text="Offset within section"/>
+      </argument>
+      <argument id="length" type="uint32L">
+        <description text="Number of bytes to erase"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_mem_xsum_section">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_MEM_XSUM_SECTION"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Checksum Memory Section"/>
+    <field>
+      <argument id="section" type="memSection32L">
+        <description text="Section to checksum"/>
+      </argument>
+      <argument id="offset" type="uint32L">
+        <description text="Offset within section"/>
+      </argument>
+      <argument id="length" type="uint32L">
+        <description text="Number of bytes to checksum"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_mem_abort">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_MEM_ABORT"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Abort Memory Operation"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_mem_reset">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_MEM_RESET_FLASH"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Reset Flash"/>
+    <field>
+      <argument id="chip" type="uint32L">
+        <description text=""/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_fp_reset">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_FP_RESET"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Reset counters"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_fp_reset_results">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_FP_RESET_RESULTS"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Reset result counters"/>
+    <field>
+      <argument id="id" type="uint32L">
+        <description text="ID of watch to reset, max if all"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_fp_validate">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_FP_VALIDATE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Validate watch table"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_fp_set_task_state">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_FP_SET_TASK_STATE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set Task state"/>
+    <field>
+      <argument id="state" type="FpWatchState32L">
+        <description text="New state of task"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_fp_set_watch_state">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_FP_SET_WATCH_STATE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set Watch state"/>
+    <field>
+      <argument id="id" type="uint32L">
+        <description text="Id of watch to set"/>
+      </argument>
+      <argument id="state" type="FpWatchState32L">
+        <description text="New state of watch"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_fp_dump_watch">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_FP_DUMP_WATCH"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Dump Watch table"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_fp_dump_results">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_FP_DUMP_RESULTS"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Dump Results table"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_fp_set_watch_values">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_FP_SET_WATCH_VALUES"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set Watch values"/>
+    <field>
+      <argument id="id" type="uint32L">
+        <description text="Id of watch to set"/>
+      </argument>
+      <argument id="mask" type="uint32L">
+        <description text="Value mask"/>
+      </argument>
+      <argument id="threshold" type="uint32L">
+        <description text="Watchpoint threshold"/>
+      </argument>
+      <argument id="msgId" type="PktApids16L">
+        <description text="Watchpoint messageID"/>
+      </argument>
+      <argument id="offset" type="uint16L">
+        <description text="Watchpoint offset"/>
+      </argument>
+      <argument id="response" type="uint16L">
+        <description text="Watchpoint response"/>
+      </argument>
+      <argument id="persistence" type="uint16L">
+        <description text="Watchpoint persistence"/>
+      </argument>
+      <item name="pad16"/>
+      <argument id="state" type="FpWatchState8L">
+        <description text="Watchpoint state"/>
+      </argument>
+      <argument id="size" type="uint8L">
+        <description text="Watchpoint size (in bytes)"/>
+      </argument>
+      <argument id="op" type="FpWatchOperator8L">
+        <description text="Watchpoint operator"/>
+      </argument>
+      <item name="pad8"/>
+      <item name="pad8"/>
+      <item name="pad8"/>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_fp_set_watch_threshold">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_FP_SET_WATCH_THRESH"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set Watch threshold"/>
+    <field>
+      <argument id="id" type="uint32L">
+        <description text="Id of watch to set"/>
+      </argument>
+      <argument id="threshold" type="uint32L">
+        <description text="New watchpoint threshold"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_fp_set_watch_response">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_FP_SET_WATCH_RESPONSE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set Watch response"/>
+    <field>
+      <argument id="id" type="uint32L">
+        <description text="Id of watch to set"/>
+      </argument>
+      <argument id="response" type="uint32L">
+        <description text="New watchpoint response"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_log_set_evt_group">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SET_EVT_GROUP"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set Event Group"/>
+    <field>
+      <argument id="logId" type="evtLogTypes32L">
+        <description text="ID of log to change"/>
+      </argument>
+      <argument id="group" type="evtLogGroups32L">
+        <description text="Group to enable/disable"/>
+      </argument>
+      <argument id="state" type="evtLogGroupState32L">
+        <description text="New state for group"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_log_set_state">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SET_EVT_LOG"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set Event Log State"/>
+    <field>
+      <argument id="logId" type="evtLogTypes32L">
+        <description text="ID of log to change"/>
+      </argument>
+      <argument id="state" type="evtLogState32L">
+        <description text="New state for log"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_log_reset">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_LOG_RESET_STATS"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Reset log statistics"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_log_set_mask_state">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_LOG_SET_MASK_STATE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set Mask state for log"/>
+    <field>
+      <argument id="logId" type="evtLogTypes32L">
+        <description text="ID of log to set state"/>
+      </argument>
+      <argument id="state" type="evtLogGroupState32L">
+        <description text="New state for masking"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_log_reset_log">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_LOG_RESET_LOG"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Reset Log Read Pointer"/>
+    <field>
+      <argument id="logId" type="evtLogTypes32L">
+        <description text="ID of log to set state"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_log_issue">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_LOG_ISSUE_LOG"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Issue Log Packet"/>
+    <field>
+      <argument id="logId" type="evtLogTypes32L">
+        <description text="ID of log to set state"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_set_pkt_rate">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SET_TLM_RATE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set Telemetry Packet Rate"/>
+    <field>
+      <argument id="apid" type="PktApids16L">
+        <description text="APID of packet to set rate"/>
+      </argument>
+      <argument default="1" id="rate" max="255" min="0" type="uint8L">
+        <description text="New rate for packet (in seconds)"/>
+      </argument>
+      <argument default="0" id="stream" type="PktStream8L">
+        <description text="Stream to change"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_issue_pkt">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_ISSUE_TLM_PKT"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Issue Telemetry Packet"/>
+    <field>
+      <argument id="apid" type="PktApids16L">
+        <description text="APID of packet to issue"/>
+      </argument>
+      <argument default="0" id="stream" type="PktStream16L">
+        <description text="Stream to change"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_pkt_stream_set">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SET_STREAM_STATE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set state of stream"/>
+    <field>
+      <argument default="0" id="stream" type="PktStream32L">
+        <description text="Stream to change"/>
+      </argument>
+      <argument id="state" type="EnableDisable32L">
+        <description text="New state"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_set_pkt_priority">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_PKT_SET_PRIORITY"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set Telemetry Packet Priority"/>
+    <field>
+      <argument id="apid" type="PktApids32L">
+        <description text="APID of packet to set rate"/>
+      </argument>
+      <argument id="priority" type="StreamPriority32L">
+        <description text="New priority for packet"/>
+      </argument>
+      <argument default="0" id="stream" type="PktStream32L">
+        <description text="Stream to change"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_seq_load">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_LOAD_SEQUENCE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Load Sequence Data"/>
+    <field>
+      <argument id="buffId" type="uint32L">
+        <description text="Buffer to load"/>
+      </argument>
+      <argument id="buffOffset" type="uint32L">
+        <description text="Offset within buffer to write"/>
+      </argument>
+      <argument id="buffLength" type="uint32L">
+        <description text="Number of bytes in load"/>
+      </argument>
+      <argument id="data" num="#SEQ_MAX_LOAD_CMD_DATA" type="uint8L">
+        <description text="Data to write"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_seq_init">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_INIT_SEQUENCE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Initialize Sequence"/>
+    <field>
+      <argument id="engineId" type="uint32L">
+        <description text="ID of engine"/>
+      </argument>
+      <argument id="buffId" type="uint32L">
+        <description text="Buffer to run"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_seq_set_state">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SET_SEQUENCE_STATE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set Sequence State"/>
+    <field>
+      <argument id="engineId" type="uint32L">
+        <description text="Engine to set"/>
+      </argument>
+      <argument id="state" type="uint32L">
+        <description text="New state of engine"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_seq_verify">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_VERIFY_SEQUENCE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Verify Sequence"/>
+    <field>
+      <argument id="buffId" type="uint32L">
+        <description text="Buffer to verify"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_seq_halt">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_STOP_SEQUENCE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Terminate Sequence"/>
+    <field>
+      <argument id="engineId" type="uint32L">
+        <description text="ID of engine"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_seq_find">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_FIND_SEQUENCE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Find Sequence"/>
+    <field>
+      <argument id="seqId" type="uint32L">
+        <description text="ID of sequence to find"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_seq_info">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_INFO_SEQUENCE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Info Sequence"/>
+    <field>
+      <argument id="buffId" type="uint32L">
+        <description text="ID of buffer"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_seq_dump">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_DUMP_SEQUENCE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Dump Sequence"/>
+    <field>
+      <argument id="buffId" type="uint32L">
+        <description text="ID of buffer"/>
+      </argument>
+      <argument id="offset" type="uint32L">
+        <description text="Offset within buffer to start"/>
+      </argument>
+      <argument id="length" type="uint32L">
+        <description text="Number of bytes to dump, 0 if entire buffer"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_seq_start">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_START_SEQUENCE"/>
+    <output name="apid" value="#APID_CMD_SEQ"/>
+    <description text="Start Sequence"/>
+    <field>
+      <argument id="buffId" type="uint32L">
+        <description text="Buffer to start"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_seq_suspend_abs">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SEQ_SUSPEND_ABS"/>
+    <output name="apid" value="#APID_CMD_SEQ"/>
+    <description text="Suspend Sequence Execution - Absolute Time"/>
+    <field>
+      <argument id="time" type="uint32L">
+        <description text="Time at which to resume execution"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_seq_suspend_rel">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SEQ_SUSPEND_REL"/>
+    <output name="apid" value="#APID_CMD_SEQ"/>
+    <description text="Suspend Sequence Execution - Relative Time"/>
+    <field>
+      <argument id="time" type="uint32L">
+        <description text="Number of seconds to pause"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_seq_call">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_CALL_SEQUENCE"/>
+    <output name="apid" value="#APID_CMD_SEQ"/>
+    <description text="Call Subsequence"/>
+    <field>
+      <argument id="buffId" type="uint32L">
+        <description text="Buffer to call"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_noop">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_NOOP"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="No-op"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_cmd_reset">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_RESET_STATS"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Reset Command statistics"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_sband_set_pa">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SBAND_SET_PA"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set the state of the power amplifier"/>
+    <field>
+      <argument id="state" type="EnableDisable32L">
+        <description text="PA State"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_sband_set_mode">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SBAND_SET_MODE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set the mode of the radio"/>
+    <field>
+      <argument id="mode" type="SbandRadioMode32L">
+        <description text="Radio Mode"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_sband_set_pa_level">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SBAND_SET_PA_LEVEL"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set the PA Level"/>
+    <field>
+      <argument id="level" type="SBANDPAPower8L">
+        <description text="Level"/>
+      </argument>
+      <item name="pad8"/>
+      <item name="pad8"/>
+      <item name="pad8"/>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_sband_set_synth">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SBAND_SET_SYNTH"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set the synth offset register"/>
+    <field>
+      <argument id="value" type="uint8L">
+        <description text="Value"/>
+      </argument>
+      <item name="pad8"/>
+      <item name="pad8"/>
+      <item name="pad8"/>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_sband_reset">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SBAND_RESET"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Soft reset radio"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_sband_debug">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SBAND_DEBUG"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Write to debug register"/>
+    <field>
+      <argument id="value" type="uint8L">
+        <description text="Value"/>
+      </argument>
+      <item name="pad8"/>
+      <item name="pad8"/>
+      <item name="pad8"/>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_sband_set_encoder">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SBAND_SET_ENCODER"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set encoder register values"/>
+    <field>
+      <argument id="dr" type="uint8L">
+        <description text="DR field"/>
+      </argument>
+      <argument id="qpsk" type="uint8L">
+        <description text="O/QPSK field"/>
+      </argument>
+      <argument id="filter" type="SBANDDisEn8L">
+        <description text="nFILTER field"/>
+      </argument>
+      <argument id="scram" type="SBANDDisEn8L">
+        <description text="nSCRAM field"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_sband_sync_on">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SBAND_SYNC_ON"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Turn sync mode on to prepare for downlink"/>
+    <field>
+      <argument id="timeout" type="uint32L">
+        <description text="Timeout (in seconds)"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_sband_sync_off">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SBAND_SYNC_OFF"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Turn sync mode off"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_sd_write_state">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SD_WRITE_STATE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set writing state for SD Card"/>
+    <field>
+      <argument id="state" type="EnableDisable32L">
+        <description text="New state for writing"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_sd_read">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SD_READ"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Start reading from read pointer location"/>
+    <field>
+      <argument id="stream" type="PktStream32L">
+        <description text="Stream to write data to"/>
+      </argument>
+      <argument id="timeout" type="uint32L">
+        <description text="Max amount of time to read, in seconds"/>
+      </argument>
+      <argument id="partition" type="SDPartitions32L">
+        <description text="Partition to read from"/>
+      </argument>
+      <argument default="1" id="decimation" type="uint32L">
+        <description text="Decimation rate for packets"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_sd_read_halt">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SD_READ_HALT"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Stop any in progress read operation"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_sd_playback">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SD_PLAYBACK"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Playback data from custom page pointers"/>
+    <field>
+      <argument id="stream" type="PktStream32L">
+        <description text="Stream to write data to"/>
+      </argument>
+      <argument id="start" type="uint32L">
+        <description text="Page to start read operation"/>
+      </argument>
+      <argument id="num" type="uint32L">
+        <description text="Number of pages to read"/>
+      </argument>
+      <argument id="timeout" type="uint32L">
+        <description text="Max amount of time to read, in seconds"/>
+      </argument>
+      <argument id="partition" type="SDPartitions32L">
+        <description text="Partition to read from"/>
+      </argument>
+      <argument default="0" id="decimation" type="uint32L">
+        <description text="Decimation rate for packets"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_sd_select">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SD_SELECT"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Select active storage device"/>
+    <field>
+      <argument id="card" type="StorageId32L">
+        <description text="Card number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_sd_init">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SD_INIT"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Initialize SD Card"/>
+    <field>
+      <argument id="card" type="SDCardId32L">
+        <description text="Card number"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_sd_set_partition">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SD_SET_PARTITION"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Assign an apid to a partition"/>
+    <field>
+      <argument id="apid" type="PktApids32L">
+        <description text="ApID"/>
+      </argument>
+      <argument id="partition" type="SDPartitions32L">
+        <description text="Sector for this apid"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_sd_update_partition">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SD_UPDATE_PARTITION"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Resize/relocate a partition"/>
+    <field>
+      <argument id="partition" type="SDPartitions32L">
+        <description text="Partition to modify"/>
+      </argument>
+      <argument id="addr" type="uint32L">
+        <description text="New start address for partition"/>
+      </argument>
+      <argument id="size" type="uint32L">
+        <description text="New size for partition"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_sd_pwr_off">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SD_PWR_OFF"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Power off a card"/>
+    <field>
+      <argument id="card" type="SDCardId32L">
+        <description text="Card to power off"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_sd_fdri_reset">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SD_RESET_FDRI"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Reset FDRI attempts"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_sd_fdri_limit">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SD_SET_FDRI_LIMT"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set FDRI Attempt Limit"/>
+    <field>
+      <argument id="limit" type="uint32L">
+        <description text="Number of FDRI attempts"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_sd_table_reset">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SD_TABLE_DEFAULT"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Restore table defaults"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_eps_pwr_on">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_EPS_PWR_ON"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Power on EPS component"/>
+    <field>
+      <argument id="component" type="PwrComponentCmd32L">
+        <description text="Component to power"/>
+      </argument>
+      <argument default="0" id="override" type="uint32L">
+        <description text="Override flag"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_eps_pwr_off">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_EPS_PWR_OFF"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Power on EPS component"/>
+    <field>
+      <argument id="component" type="PwrComponentCmd32L">
+        <description text="Component to power"/>
+      </argument>
+      <argument default="0" id="override" type="uint32L">
+        <description text="Override flag"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_eps_pwr_cycle">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_EPS_PWR_CYCLE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Power cycle EPS component"/>
+    <field>
+      <argument id="component" type="PwrComponentCmd32L">
+        <description text="Component to power"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_eps_deploy">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_EPS_DEPLOY"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Deploy a component"/>
+    <field>
+      <argument id="component" type="DeployComponent32L">
+        <description text="Component to deploy"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_eps_htr_setpoint">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_EPS_HEATER_SETPOINT"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set heater setpoints"/>
+    <field>
+      <argument id="low" type="floatL">
+        <description text="Low setpoint (degrees C)"/>
+      </argument>
+      <argument id="high" type="floatL">
+        <description text="High setpoint (degrees C)"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_eps_htr_samples">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_EPS_HEATER_THRESH"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set heater sample threshold"/>
+    <field>
+      <argument id="samples" type="uint8L">
+        <description text="Number of consecutive samples"/>
+      </argument>
+      <item name="pad8"/>
+      <item name="pad8"/>
+      <item name="pad8"/>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_eps_eclipse_thresh">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_EPS_ECLIPSE_THRESH"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set solar array eclipse threshold"/>
+    <field>
+      <argument id="threshold" type="uint16L">
+        <description text="Threshold for solar array voltage"/>
+      </argument>
+      <item name="pad16"/>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_uhf_pass">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_UHF_PASS"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Pass command to UHF radio"/>
+    <field>
+      <argument id="len" type="uint32L">
+        <description text="Size of command payload"/>
+      </argument>
+      <argument id="data" num="#UHF_CMD_PASS_MAX_SIZE" type="charL">
+        <description text="Command payload"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_uhf_init">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_UHF_INIT"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Send initialization command to radio"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_uhf_set_resp_state">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_UHF_RESP_STATE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set state of response packets"/>
+    <field>
+      <argument id="state" type="EnableDisable32L">
+        <description text="New state"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_uhf_set_tx_gap">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_UHF_SET_TX_GAP"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set min time between transmits"/>
+    <field>
+      <argument id="time" type="uint32L">
+        <description text="Time (in ms)"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_cip_sci_fast">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_CIP_SCI_MODE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="CIP Fast Science Mode"/>
+    <field>
+      <argument id="count" type="uint32L">
+        <description text="Number of orbits to stay in fast mode"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_mode_set">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_MODE_SET"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set system mode"/>
+    <field>
+      <argument id="mode" type="SystemMode32L">
+        <description text="New mode"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_mode_avoid">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_MODE_AVOID"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set mode to avoid"/>
+    <field>
+      <argument id="mode" type="SystemMode32L">
+        <description text="Mode to avoid"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_mode_set_threshold">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_MODE_SET_THRESHOLD"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set mode change threshold"/>
+    <field>
+      <argument id="threshold" type="ModeThreshold32L">
+        <description text="Threshold to change"/>
+      </argument>
+      <argument id="value" type="uint32L">
+        <description text="New threshold value"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_clt_clear">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_MODE_CLEAR_CLT"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Clear command loss timer flag"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_clt_threshold">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_MODE_SET_CLT_THRESHOLD"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set command loss timer threshold"/>
+    <field>
+      <argument id="value" type="uint32L">
+        <description text="New threshold value (seconds)"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_mode_launch_delay">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_MODE_SET_LAUNCH_DELAY"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set launch delay time"/>
+    <field>
+      <argument id="value" type="uint32L">
+        <description text="New value (seconds)"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_mode_launch_set_flag">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_MODE_SET_LAUNCH_DELAY_STATE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set launch delay state flag"/>
+    <field>
+      <argument id="state" type="uint32L">
+        <description text="State of flag"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_mode_deploy_interval">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_MODE_SET_DEPLOY_INT"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set deployment interval"/>
+    <field>
+      <argument id="value" type="uint32L">
+        <description text="New value (seconds)"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_mode_deploy_flag">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_MODE_SET_DEPLOY_FLAG"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set deployment flag"/>
+    <field>
+      <argument id="component" type="DeployComponent32L">
+        <description text="Component"/>
+      </argument>
+      <argument id="state" type="uint32L">
+        <description text="State"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_mode_reset_sc">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_MODE_RESET_SC"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Reset spacecraft"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_mode_avoid_clear">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_MODE_AVOID_CLEAR"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Clear mode avoidance flag"/>
+    <field>
+      <argument id="mode" type="SystemMode32L">
+        <description text="Mode to clear"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_mode_eclipse_method">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_MODE_ECLIPSE_METHOD"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Set eclipse method for mode changes"/>
+    <field>
+      <argument id="method" type="EclipseMethod8L">
+        <description text="Method for eclipse determination"/>
+      </argument>
+      <item name="pad8"/>
+      <item name="pad8"/>
+      <item name="pad8"/>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_mode_auto_dis">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_MODE_AUTO_DIS"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Disable autonomous mode transitions"/>
+    <field>
+      <argument id="timeout" type="uint32L">
+        <description text="Number of second to leave auto mode disabled"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_mode_auto_ena">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_MODE_AUTO_ENA"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Enable autonomous mode transitions"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_pass">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_ADCS_PASS"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="ADCS Pass Through command"/>
+    <field>
+      <argument id="len" type="uint32L">
+        <description text="Number of valid bytes in data field"/>
+      </argument>
+      <argument id="data" num="#ADCS_PASS_CMD_MAX_SIZE" type="uint8L">
+        <description text="Data to pass as command"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_reset">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_ADCS_RESET"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="ADCS Reset Counters"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_read">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_ADCS_READ"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="ADCS Read Buffer"/>
+    <field>
+      <argument id="addr" type="uint16L">
+        <description text="Address to read"/>
+      </argument>
+      <argument id="length" type="uint16L">
+        <description text="Number of bytes to read"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_coarse_point">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_ADCS_COARSE_POINT"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="ADCS Goto Coarse Point"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_fine_point">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_ADCS_FINE_POINT"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="ADCS Goto Fine Sun Point"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_ram_point">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_ADCS_RAM_POINT"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="ADCS Goto RAM Point"/>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_fine_update">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_ADCS_FINE_UPDATE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="ADCS Update Fine Point Parameters"/>
+    <field>
+      <argument id="velAber" type="uint8L">
+        <description text="Velocity Aberration"/>
+      </argument>
+      <argument id="secRefDir" type="uint8L">
+        <description text="Secondary Reference Dir"/>
+      </argument>
+      <argument id="priCmdDir" type="uint8L">
+        <description text="Primary Command Dir"/>
+      </argument>
+      <argument id="secCmdDir" type="uint8L">
+        <description text="Secondary Command Dir"/>
+      </argument>
+      <argument id="yawAngle" type="floatL">
+        <description text="Yaw Angle"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_ram_update">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_ADCS_RAM_UPDATE"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="ADCS Update RAM Point Parameters"/>
+    <field>
+      <argument id="priCmdDir" type="uint8L">
+        <description text="Primary Command Dir"/>
+      </argument>
+      <argument id="secCmdDir" type="uint8L">
+        <description text="Secondary Command Dir"/>
+      </argument>
+      <item name="pad8"/>
+      <item name="pad8"/>
+      <argument id="roll" type="floatL">
+        <description text="Roll"/>
+      </argument>
+      <argument id="pitch" type="floatL">
+        <description text="Pitch"/>
+      </argument>
+      <argument id="yaw" type="floatL">
+        <description text="Yaw"/>
+      </argument>
+      <argument id="ref4" type="floatL">
+        <description text="Ref4"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="cmd_adcs_eclipse_update">
+    <header frame="ccsdsCmdHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_ADCS_ECLIPSE_CHECK"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="ADCS Update Eclipse Checking thresholds"/>
+    <field>
+      <argument id="threshold" type="uint16L">
+        <description text="Threshold for raw CSS data"/>
+      </argument>
+      <argument id="count" type="uint16L">
+        <description text="Number of sensors to be below threshold for eclipse"/>
+      </argument>
+    </field>
+  </command>
+  <command decoder="cmdDecoder" name="sim_kill">
+    <header frame="ccsdsSimHeader"/>
+    <output name="opcode" value="#CMD_OPCODE_SIM_KILL"/>
+    <output name="apid" value="#APID_CMD_COMMON"/>
+    <description text="Kill pc simulation"/>
+  </command>
+</hydraDef>
+

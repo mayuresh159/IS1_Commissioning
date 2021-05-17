@@ -1,0 +1,162 @@
+<hydraXTCE>
+    <cmd>
+        <name>cmd_adcs_Command_NoOp</name>
+
+        <name>cmd_adcs_TrackerCtrl_MaxBackgndOps</name>
+        <name>cmd_adcs_TrackerCtrl_TEST_TrackerTestMode</name>
+        <name>cmd_adcs_TrackerCtrl_TEST_DetTestImage</name>
+        <name>cmd_adcs_TrackerCtrl_ExtNstSwReadTime</name>
+        <name>cmd_adcs_TrackerCtrl_SoftReinit</name>
+        <name>cmd_adcs_TrackerCtrl_GoToTrack</name>
+        <name>cmd_adcs_TrackerCtrl_ReadImageLine</name>
+        <name>cmd_adcs_TrackerCtrl_Exclusion_List</name>
+        <name>cmd_adcs_TrackerCtrl_Auto_Black_Ctrl</name>
+        <name>cmd_adcs_TrackerCtrl_TEST_UseTestModel</name>
+        <name>cmd_adcs_TrackerCtrl_SetAmpOffset</name>
+        <name>cmd_adcs_TrackerCtrl_TrackMagLimits</name>
+        <name>cmd_adcs_TrackerCtrl_RateAid</name>
+        <name>cmd_adcs_TrackerCtrl_GoToIdle</name>
+        <name>cmd_adcs_TrackerCtrl_ReInit</name>
+        <name>cmd_adcs_TrackerCtrl_TakePhoto</name>
+        <name>cmd_adcs_TrackerCtrl_ExtNstSendRawBytes</name>
+        <name>cmd_adcs_TrackerCtrl_AnalogGain</name>
+        <name>cmd_adcs_TrackerCtrl_DetectorPower</name>
+        <name>cmd_adcs_TrackerCtrl_ResetDetTimeoutCount</name>
+        <name>cmd_adcs_TrackerCtrl_MaxRateOps</name>
+        <name>cmd_adcs_TrackerCtrl_ExtNstFpgaReadTime</name>
+        <name>cmd_adcs_TrackerCtrl_TrackerUsage</name>
+        <name>cmd_adcs_TrackerCtrl_VelocityAid</name>
+        <name>cmd_adcs_TrackerCtrl_Attitude_Aid</name>
+        <name>cmd_adcs_TrackerCtrl_TakePhotoROI</name>
+        <name>cmd_adcs_TrackerCtrl_ExtNstPower</name>
+        <name>cmd_adcs_TrackerCtrl_ExtNstCopyVidBuf</name>
+        <name>cmd_adcs_TrackerCtrl_CalMode</name>
+        <name>cmd_adcs_TrackerCtrl_Table_Insert</name>
+        <name>cmd_adcs_TrackerCtrl_Store_Images</name>
+        <name>cmd_adcs_TrackerCtrl_StarID</name>
+        <name>cmd_adcs_TrackerCtrl_VelocityAidDirect</name>
+        <name>cmd_adcs_TrackerCtrl_Exposure</name>
+        <name>cmd_adcs_TrackerCtrl_ExtNstSettings</name>
+        <name>cmd_adcs_TrackerCtrl_AutoSoftReinit</name>
+
+        <name>cmd_adcs_AttCtrl_AllowSunModel</name>
+        <name>cmd_adcs_AttCtrl_SetFFTorqueWheels</name>
+        <name>cmd_adcs_AttCtrl_RateLimit</name>
+        <name>cmd_adcs_AttCtrl_ZeroControlGain</name>
+        <name>cmd_adcs_AttCtrl_SetPreferredSunSource</name>
+        <name>cmd_adcs_AttCtrl_AccelLimit</name>
+        <name>cmd_adcs_AttCtrl_GainSelect</name>
+
+        <name>cmd_adcs_GPS_GpsEnable</name>
+        <name>cmd_adcs_GPS_GpsCommand</name>
+        <name>cmd_adcs_GPS_AcceptTimePosVel</name>
+        <name>cmd_adcs_GPS_GpsReinit</name>
+
+        <name>cmd_adcs_Tables_FlashBurnArm</name>
+        <name>cmd_adcs_Tables_HoldingTableCRC</name>
+        <name>cmd_adcs_Tables_TableCRC</name>
+        <name>cmd_adcs_Tables_HoldingTableInsert</name>
+        <name>cmd_adcs_Tables_TableCommit</name>
+        <name>cmd_adcs_Tables_FlashBurnCopy</name>
+        <name>cmd_adcs_Tables_FlashExtract</name>
+        <name>cmd_adcs_Tables_TableExtract</name>
+        <name>cmd_adcs_Tables_FlashBurnDirect</name>
+
+        <name>cmd_adcs_Wheel_TEST_RwTestMode</name>
+        <name>cmd_adcs_Wheel_NoOp</name>
+        <name>cmd_adcs_Wheel_SetWheelPWM4</name>
+        <name>cmd_adcs_Wheel_Calibrate</name>
+        <name>cmd_adcs_Wheel_SetWheelSpeed4</name>
+        <name>cmd_adcs_Wheel_SetWheelTorque32</name>
+        <name>cmd_adcs_Wheel_SetWheelMode</name>
+
+        <name>cmd_adcs_AttCmd_SunAxisSelect</name>
+        <name>cmd_adcs_AttCmd_AttitudeDither</name>
+        <name>cmd_adcs_AttCmd_GotoLvLhAttitude</name>
+        <name>cmd_adcs_AttCmd_GotoTarget</name>
+        <name>cmd_adcs_AttCmd_GotoSunPoint</name>
+        <name>cmd_adcs_AttCmd_GotoFineHold</name>
+        <name>cmd_adcs_AttCmd_ClearEclipseTimer</name>
+        <name>cmd_adcs_AttCmd_SunRotationRate</name>
+        <name>cmd_adcs_AttCmd_GotoEcefPoint</name>
+        <name>cmd_adcs_AttCmd_GotoFineSunPoint</name>
+        <name>cmd_adcs_AttCmd_GotoEciAttitude</name>
+        <name>cmd_adcs_AttCmd_TempSunRotationRate</name>
+
+        <name>cmd_adcs_Momentum_SetWheelMomentaUse</name>
+        <name>cmd_adcs_Momentum_TorqRodCode</name>
+        <name>cmd_adcs_Momentum_TorqRodCtrl</name>
+        <name>cmd_adcs_Momentum_MagFieldSource</name>
+        <name>cmd_adcs_Momentum_SetCmdMomentum</name>
+
+        <name>cmd_adcs_Time_EndProgram</name>
+        <name>cmd_adcs_Time_SetClockRef</name>
+        <name>cmd_adcs_Time_SetCurrentTimeUtc</name>
+        <name>cmd_adcs_Time_ConfigPpsOut</name>
+        <name>cmd_adcs_Time_SetCurrentTimeGps</name>
+        <name>cmd_adcs_Time_ClockSyncEnable</name>
+        <name>cmd_adcs_Time_spare</name>
+        <name>cmd_adcs_Time_SetCurrentTimeTai</name>
+        <name>cmd_adcs_Time_TEST_SetCurrentTimeTai</name>
+
+        <name>cmd_adcs_SunSensor_CssEnable</name>
+        <name>cmd_adcs_SunSensor_TEST_CssTestMode</name>
+        <name>cmd_adcs_SunSensor_CssUsage</name>
+        <name>cmd_adcs_SunSensor_CssClearLightFound</name>
+
+        <name>cmd_adcs_TlmProc_ReadFromFile</name>
+        <name>cmd_adcs_TlmProc_StreamToFile</name>
+        <name>cmd_adcs_TlmProc_MapSelect</name>
+
+        <name>cmd_adcs_General_SetLVDS</name>
+        <name>cmd_adcs_General_SetPRBS</name>
+        <name>cmd_adcs_General_InertiaSelect</name>
+
+        <name>cmd_adcs_Magnetometer_MagResetInvalidCount</name>
+        <name>cmd_adcs_Magnetometer_SetMagSensor</name>
+        <name>cmd_adcs_Magnetometer_TEST_MagTestMode</name>
+        <name>cmd_adcs_Magnetometer_MagUsage</name>
+
+        <name>cmd_adcs_Refs_AutoGpsUsage</name>
+        <name>cmd_adcs_Refs_InitKeplerUtcGreg</name>
+        <name>cmd_adcs_Refs_EarthRotParam</name>
+        <name>cmd_adcs_Refs_InitPosVelTaiSec</name>
+        <name>cmd_adcs_Refs_SetAccel</name>
+        <name>cmd_adcs_Refs_InitSGP4All</name>
+        <name>cmd_adcs_Refs_InitFromGps</name>
+        <name>cmd_adcs_Refs_TEST_SetPosVel</name>
+        <name>cmd_adcs_Refs_InitPosVelUtcGreg</name>
+        <name>cmd_adcs_Refs_InitKeplerTaiSec</name>
+        <name>cmd_adcs_Refs_InitChebyshevSun</name>
+        <name>cmd_adcs_Refs_DisablePropagation</name>
+        <name>cmd_adcs_Refs_OrbitMethod</name>
+
+        <name>cmd_adcs_IMU_TEST_ImuTestMode</name>
+        <name>cmd_adcs_IMU_ImuReinit</name>
+        <name>cmd_adcs_IMU_JamBiasEst</name>
+        <name>cmd_adcs_IMU_ImuResetInvalidCount</name>
+        <name>cmd_adcs_IMU_ImuUsage</name>
+
+        <name>cmd_adcs_AttDet_SetAttDetFilter</name>
+        <name>cmd_adcs_AttDet_TEST_SetAttitude</name>
+        <name>cmd_adcs_AttDet_SetPreferredTracker</name>
+
+        <name>cmd_adcs_Cal_TrackerAlignMethod</name>
+        <name>cmd_adcs_Cal_TrackerAlignUsage</name>
+
+        <name>cmd_adcs_L0_select_pri_rom</name>
+        <name>cmd_adcs_L0_select_sec_rom</name>
+        <name>cmd_adcs_L0_wd_ena</name>
+        <name>cmd_adcs_L0_wd_dis</name>
+        <name>cmd_adcs_L0_wd_clear</name>
+        <name>cmd_adcs_L0_select_tbl_comp</name>
+        <name>cmd_adcs_L0_select_tbl_flash</name>
+        <name>cmd_adcs_L0_wd_arm</name>
+        <name>cmd_adcs_L0_wd_send</name>
+    </cmd>
+
+    <tlm header="ccsdsHeader">
+        <packet>adcs_l0.adcs_l0_frame</packet>
+    </tlm>
+
+</hydraXTCE>

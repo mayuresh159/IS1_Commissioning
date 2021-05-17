@@ -1,0 +1,446 @@
+﻿<hydraDef>
+  <!--  Cmd status for MINXSS -->
+    
+  <dictionary name="CommInterface">
+		<pair key="0" str="NONE"/>
+		<pair key="1" str="CDI"/>
+		<pair key="2" str="AX25"/>
+		<pair key="3" str="BCT"/>
+	</dictionary>
+	
+  <dictionary name="ModeStatus">
+    <pair key="0" str="UNKNOWN"/>
+    <pair key="1" str="PHOENIX"/>
+    <pair key="2" str="SAFE"/>
+    <pair key="4" str="SCIENCE"/>
+  </dictionary>
+  
+  <dictionary name="CDHState">
+    <pair key="0" str="NOMINAL"/>
+    <pair key="1" str="PLAYBACK"/>
+    <pair key="2" str="LED1"/>
+    <pair key="3" str="LED2"/>
+    <pair key="4" str="ANT_DEPLOY"/>
+    <pair key="5" str="SA_DEPLOY"/>
+    <pair key="6" str="undefined"/>
+    <pair key="7" str="undefined"/>
+    <pair key="8" str="LOCKOUT"/>
+    <pair key="9" str="RETRY"/>
+    <pair key="10" str="DUAL_ARMED"/>
+    <pair key="11" str="STORE_READY"/>
+    <pair key="12" str="undefined"/>
+    <pair key="13" str="undefined"/>
+    <pair key="14" str="undefined"/>
+    <pair key="15" str="undefined"/>
+  </dictionary>
+  
+  <dictionary name="CmdStatus">
+    <pair key="0" str="CMD_SUCCESS"/>
+    <pair key="1" str="CMD_FAIL_LENGTH"/>
+    <pair key="2" str="CMD_FAIL_APID"/>
+    <pair key="3" str="CMD_FAIL_OPCODE"/>
+    <pair key="4" str="CMD_FAIL_CHECKSUM"/>
+    <pair key="5" str="CMD_FAIL_SAFE_MODE"/>
+    <pair key="6" str="CMD_FAIL_DUAL_CMD"/>
+    <pair key="7" str="CMD_FAIL_PARAMETER"/>
+    <pair key="8" str="CMD_FAIL_STATE"/>
+    <pair key="9" str="CMD_FAIL"/>
+	<pair key="10" str="CMD_FAIL_DUPLICATE"/>
+  </dictionary>
+  
+  <dictionary name="ADCSSunPointStatus">
+    <pair key="0" str="ERROR_0"/>
+    <pair key="1" str="ERROR_1"/>
+    <pair key="2" str="SEARCH_INIT"/>
+    <pair key="3" str="SEARCHING"/>
+    <pair key="4" str="WAITING"/>
+    <pair key="5" str="CONVERGING"/>
+    <pair key="6" str="ON_SUN"/>
+    <pair key="7" str="NOT_ACTIVE"/>
+  </dictionary>
+  
+  <dictionary name="ADCSCmdStatus">
+    <pair key="0" str="OK"/>
+    <pair key="1" str="BAD_APID"/>
+    <pair key="2" str="BAD_OPCODE"/>
+    <pair key="3" str="BAD_DATA"/>
+    <pair key="4" str="ERROR4"/>
+    <pair key="5" str="ERROR5"/>
+    <pair key="6" str="ERROR6"/>
+    <pair key="7" str="ERROR7"/>
+    <pair key="8" str="CMD_SRVC_OVERRUN"/>
+    <pair key="9" str="CMD_APID_OVERRUN"/>
+  </dictionary>
+  
+  <dictionary name="routingCmd">
+    <pair key="0" str="NONE"/>
+    <pair key="1" str="SD_CARD"/>
+    <pair key="2" str="COMM_GSE"/>
+    <pair key="3" str="BOTH"/>
+    <pair key="4" str="BEACON"/>
+    <pair key="5" str="CARD_BEACON"/>
+  </dictionary>
+  
+  <dictionary name="MinXSSRouting">
+    <pair key="0" str="NONE"/>
+    <pair key="1" str="SD_CARD"/>
+    <pair key="2" str="COMM_GSE"/>
+    <pair key="3" str="SD_CARD | COMM_GSE"/>
+    <pair key="4" str="BEACON"/>
+    <pair key="5" str="SD_CARD| BEACON"/>
+    <pair key="6" str="COMM_GSE | BEACON"/>
+    <pair key="7" str="SD_CARD | COMM_GSE | BEACON"/>
+    <pair key="8" str="ADCS"/>
+    <pair key="9" str="SD_CARD | ADCS"/>
+    <pair key="10" str="COMM_GSE | ADCS"/>
+    <pair key="11" str="SD_CARD | COMM_GSE | ADCS"/>
+    <pair key="12" str="BEACON | ADCS"/>
+    <pair key="13" str="SD_CARD | BEACON | ADCS"/>
+    <pair key="14" str="COMM_GSE | BEACON | ADCS"/>
+    <pair key="15" str="SD_CARD | COMM_GSE | BEACON | ADCS"/>
+  </dictionary>
+  
+  <dictionary name="ParamTableStatus">
+    <pair key="1" str="RESTORED"/>
+    <pair key="2" str="SAVED"/>
+    <pair key="4" str="MODIFIED"/>
+    <pair key="8" str="DEFAULT_VAL"/>
+    <pair key="16" str="EEPVAL1_CHKSUM_ERR"/>
+    <pair key="17" str="EEPVAL1_CHKSUM_ERR | RESTORED"/>
+    <pair key="18" str="EEPVAL1_CHKSUM_ERR | SAVED"/>
+    <pair key="20" str="EEPVAL1_CHKSUM_ERR | MODIFIED"/>
+    <pair key="24" str="EEPVAL1_CHKSUM_ERR | DEFAULT_VAL"/>
+    <pair key="32" str="EEPVAL2_CHKSUM_ERR"/>
+    <pair key="33" str="EEPVAL2_CHKSUM_ERR | RESTORED"/>
+    <pair key="34" str="EEPVAL2_CHKSUM_ERR | SAVED"/>
+    <pair key="36" str="EEPVAL2_CHKSUM_ERR | MODIFIED"/>
+    <pair key="40" str="EEPVAL2_CHKSUM_ERR | DEFAULT_VAL"/>
+    <pair key="64" str="EEPMIN_CHKSUM_ERR"/>
+    <pair key="65" str="EEPMIN_CHKSUM_ERR | RESTORED"/>
+    <pair key="66" str="EEPMIN_CHKSUM_ERR | SAVED"/>
+    <pair key="68" str="EEPMIN_CHKSUM_ERR | MODIFIED"/>
+    <pair key="72" str="EEPMIN_CHKSUM_ERR | DEFAULT_VAL"/>
+    <pair key="128" str="EEPMAX_CHKSUM_ERR"/>
+    <pair key="129" str="EEPMAX_CHKSUM_ERR | RESTORED"/>
+    <pair key="130" str="EEPMAX_CHKSUM_ERR | SAVED"/>
+    <pair key="132" str="EEPMAX_CHKSUM_ERR | MODIFIED"/>
+    <pair key="136" str="EEPMAX_CHKSUM_ERR | DEFAULT_VAL"/>
+    <pair key="255" str="BOOT"/>
+  </dictionary>
+  
+  <dictionary name="ParamTableValue">
+    <pair key="0" str="RAMVAL"/>
+    <pair key="1" str="RAMDEF"/>
+    <pair key="2" str="RAMMIN"/>
+    <pair key="4" str="RAMMAX"/>
+    <pair key="8" str="EEPVAL1"/>
+    <pair key="16" str="EEPVAL2"/>
+    <pair key="32" str="EEPMIN"/>
+    <pair key="64" str="EEPMAX"/>
+  </dictionary>
+
+  <dictionary name="eclipseStatus">
+    <pair key="0" str="DAYLIGHT"/>
+    <pair key="1" str="ECLIPSE"/>
+  </dictionary>
+
+  <dictionary name="CDHEnablesNibble2">
+    <pair key="0" str="OFF"/>
+    <pair key="1" str="SPS"/>
+    <pair key="2" str="X123"/>
+    <pair key="3" str="X123 | SPS"/>
+    <pair key="4" str="ADCS"/>
+    <pair key="5" str="ADCS | SPS"/>
+    <pair key="6" str="ADCS | X123"/>
+    <pair key="7" str="ADCS | X123 | SPS "/>
+    <pair key="8" str="COMM_OFF"/>
+    <pair key="9" str="COMM_OFF | SPS"/>
+    <pair key="10" str="COMM_OFF | X123"/>
+    <pair key="11" str="COMM_OFF | X123 | SPS"/>
+    <pair key="12" str="COMM_OFF | ADCS"/>
+    <pair key="13" str="COMM_OFF | ADCS | SPS"/>
+    <pair key="14" str="COMM_OFF | ADCS | X123"/>
+    <pair key="15" str="COMM_OFF | ADCS | X123 | SPS"/>
+  </dictionary>
+  
+  <dictionary name="CDHEnablesNibble1">
+    <pair key="0" str="OFF"/>
+    <pair key="1" str="SD_CARD"/>
+    <pair key="2" str="ANT_DEP"/>
+    <pair key="3" str="ANT_DEP | SD_CARD"/>
+    <pair key="4" str="SA_DEP"/>
+    <pair key="5" str="SA_DEP | SD_CARD"/>
+    <pair key="6" str="SA_DEP | ANT_DEP"/>
+    <pair key="7" str="SA_DEP | ANT_DEP | SD_CARD"/>
+    <pair key="8" str="BATT_HTR"/>
+    <pair key="9" str="BATT_HTR | SD_CARD"/>
+    <pair key="10" str="BATT_HTR | ANT_DEP"/>
+    <pair key="11" str="BATT_HTR | ANT_DEP | SD_CARD"/>
+    <pair key="12" str="BATT_HTR | SA_DEP"/>
+    <pair key="13" str="BATT_HTR | SA_DEP | SD_CARD"/>
+    <pair key="14" str="BATT_HTR | SA_DEP | ANT_DEP"/>
+    <pair key="15" str="BATT_HTR | SA_DEP | ANT_DEP | SD_CARD"/>
+  </dictionary>
+  
+  <dictionary name="CDHEnablesNibble3">
+    <pair key="0" str="OFF"/>
+    <pair key="1" str="SPARE_ON"/>
+    <pair key="2" str="PAYLOAD_HTR"/>
+    <pair key="3" str="PAYLOAD_HTR | SPARE_ON"/>
+  </dictionary>
+  
+  <dictionary name="attDetFilter">
+    <pair key="0" str="trackerJam"/>
+    <pair key="1" str="noFilter"/>
+    <pair key="2" str="fixedGain w/o IMU bias est"/>
+    <pair key="3" str="fixedGail"/>
+    <pair key="4" str="Kalman"/>
+  </dictionary>
+  
+  <dictionary name="frameAxis">
+    <pair key="1" str="plusX"/>
+    <pair key="2" str="plusY"/>
+    <pair key="3" str="plusZ"/>
+    <pair key="4" str="minusX"/>
+    <pair key="5" str="minusY"/>
+    <pair key="6" str="minusZ"/>
+  </dictionary>
+  
+  <dictionary name="refDir">
+    <pair key="0" str="0:ECIx"/>
+    <pair key="1" str="1:ECIy"/>
+    <pair key="2" str="2:ECIz"/>
+    <pair key="3" str="3:Sun"/>
+    <pair key="4" str="4:Mag"/>
+    <pair key="5" str="5:Moon"/>
+    <pair key="6" str="6:Pos"/>
+    <pair key="7" str="7:Vel"/>
+    <pair key="8" str="8:TargECI"/>
+    <pair key="9" str="9:TargECEF"/>
+    <pair key="10" str="10:Bearing"/>
+    <pair key="11" str="11:Heading"/>
+    <pair key="12" str="12:OrbitNorm"/>
+    <pair key="13" str="13:GcNadir"/>
+    <pair key="14" str="14:GdNadir"/>
+    <pair key="15" str="15:spare1"/>
+    <pair key="16" str="16:spare2"/>
+  </dictionary>
+  
+  <dictionary name="rstGrp">
+    <pair key="0" str="Command"/>
+    <pair key="1" str="Persistance"/>
+    <pair key="2" str="Phoenix2Safe"/>
+    <pair key="3" str="Lockout"/>
+    <pair key="4" str="Contact"/>
+  </dictionary>
+  
+  <dictionary name="cmdDir">
+    <pair key="1" str="1:[1,0,0]"/>
+    <pair key="2" str="2:[0,1,0]"/>
+    <pair key="3" str="3:[0,0,1]"/>
+    <pair key="4" str="4:[-1,0,0]"/>
+    <pair key="5" str="5:[0,-1,0]"/>
+    <pair key="6" str="6:[0,0,-1]"/>
+    <pair key="7" str="7:TrackerZenith"/>
+    <pair key="8" str="8:[1,0,0]"/>
+    <pair key="9" str="9:[1,0,0]"/>
+    <pair key="10" str="10:[1,0,0]"/>
+    <pair key="11" str="11:[1,0,0]"/>
+    <pair key="12" str="12:[1,0,0]"/>
+    <pair key="13" str="13:[1,0,0]"/>
+    <pair key="14" str="14:[1,0,0]"/>
+    <pair key="15" str="15:[1,0,0]"/>
+    <pair key="16" str="16:[1,0,0]"/>
+  </dictionary>
+  
+  <dictionary name="attInterp">
+    <pair key="0" str="YPRsequence"/>
+    <pair key="1" str="Quaternion"/>
+    <pair key="2" str="HoldAttFixed"/>
+  </dictionary>
+  
+  <dictionary name="rateInterp">
+    <pair key="0" str="ECI"/>
+    <pair key="1" str="RefFrame"/>
+  </dictionary>
+  
+  <dictionary name="ctrlCode">
+    <pair key="0" str="OFF"/>
+    <pair key="1" str="ON_POS"/>
+    <pair key="2" str="ON_NEG"/>
+    <pair key="3" str="AUTO"/>
+  </dictionary>
+  
+  <dictionary name="wheelMode">
+    <pair key="0" str="IDLE"/>
+    <pair key="1" str="INTERNAL"/>
+    <pair key="2" str="EXTERNAL"/>
+  </dictionary>
+  
+  <dictionary name="testModeStatus">
+    <pair key="0" str="Disable"/>
+    <pair key="1" str="AttData"/>
+    <pair key="2" str="MetaData"/>
+    <pair key="3" str="PixelData"/>
+  </dictionary>
+  
+  <dictionary name="setAmpOffsetMethod">
+    <pair key="0" str="Constant"/>
+    <pair key="1" str="Indexed3Sig"/>
+    <pair key="2" str="Median3Sig"/>
+  </dictionary>
+  
+  <dictionary name="trueFalse">
+    <pair key="0" str="FALSE"/>
+    <pair key="1" str="TRUE"/>
+  </dictionary>
+  
+  <dictionary name="falseTrue">
+    <pair key="0" str="TRUE"/>
+    <pair key="1" str="FALSE"/>
+  </dictionary>
+
+  <dictionary name="orbitMethod">
+    <pair key="0" str="Kepler elements"/>
+    <pair key="1" str="Point gravity"/>
+    <pair key="2" str="J2"/>
+    <pair key="3" str="Spherical harmonic"/>
+    <pair key="4" str="SGP4"/>
+    <pair key="5" str="External"/>
+  </dictionary>
+
+  <dictionary name="sunAxis">
+    <pair key="0" str="pre_deploy"/>
+    <pair key="1" str="post_deploy"/>
+  </dictionary>
+
+  <dictionary name="trackerOpsResponse">
+    <pair key="0" str="Disable USE if exceeded"/>
+    <pair key="1" str="Goto IDLE if exceeded"/>
+  </dictionary>
+
+  <dictionary name="ADCSCommandStatus">
+    <pair key="0" str="OK"/>
+    <pair key="1" str="BAD_APID"/>
+    <pair key="2" str="BAD_OPCODE"/>
+    <pair key="3" str="BAD_DATA"/>
+    <pair key="8" str="CMD_SRVC_OVERRUN"/>
+    <pair key="9" str="CMD_APID_OVERRUN"/>
+  </dictionary>
+
+  <dictionary name="attitudeFilterAlgo">
+    <pair key="1" str="RAW"/>
+    <pair key="2" str="FIXED_GAIN_NO_BIAS"/>
+    <pair key="3" str="FIXED_GAIN"/>
+    <pair key="4" str="KALMAN(MEKF)"/>
+  </dictionary>
+
+  <dictionary name="wheelOperatingMode">
+    <pair key="0" str="IDLE"/>
+    <pair key="1" str="INT"/>
+    <pair key="2" str="EXT"/>
+  </dictionary>
+
+  <dictionary name="wheelCtrlMode">
+    <pair key="0" str="TRQ"/>
+    <pair key="1" str="SPD"/>
+    <pair key="2" str="PWM"/>
+  </dictionary>
+  
+  <dictionary name="baudOptions">
+    <pair key="0" str="9600"/>
+    <pair key="1" str="19200"/>
+  </dictionary>
+
+  <dictionary name="fault">
+    <pair key="0" str="FAULT"/>
+    <pair key="1" str="OK"/>
+  </dictionary>
+
+  <dictionary name="posNeg">
+    <pair key="0" str="POS"/>
+    <pair key="1" str="NEG"/>
+  </dictionary>
+
+  <dictionary name="okBad">
+    <pair key="0" str="OK"/>
+    <pair key="2" str="BAD"/>
+  </dictionary>
+
+  <dictionary name="trackerOperMode">
+    <pair key="0" str="IDLE"/>
+    <pair key="1" str="INITIALIZE"/>
+    <pair key="2" str="STARID"/>
+    <pair key="3" str="TRACK"/>
+    <pair key="4" str="PHOTO"/>
+    <pair key="5" str="CAL"/>
+  </dictionary>
+
+  <dictionary name="starIDStepStatus">
+    <pair key="0" str="IDLE"/>
+    <pair key="1" str="INITIALIZE"/>
+    <pair key="2" str="WAITING_FOR_IMAGE1"/>
+    <pair key="3" str="WAITING_FOR_IMAGE2"/>
+    <pair key="4" str="CALCULATE_RATE"/>
+    <pair key="5" str="MAKE_UNIT_VECTORS"/>
+    <pair key="6" str="AWAITING_TRISTAR"/>
+    <pair key="7" str="OK_FOUND_4"/>
+    <pair key="8" str="OK_FOUND_3"/>
+    <pair key="9" str="TIME_OUT"/>
+    <pair key="10" str="BAD"/>
+    <pair key="11" str="NO_MATCH"/>
+  </dictionary>
+
+
+<dictionary name="trackerAttStatus">
+    <pair key="0" str="OK"/>
+    <pair key="2" str="BAD"/>
+    <pair key="3" str="TOO_FEW_STARS"/>
+    <pair key="4" str="QUEST_FAILED"/>
+    <pair key="5" str="RESIDUALS_TOO_HIGH"/>
+  </dictionary>
+
+  <dictionary name="sunPointState">
+    <pair key="2" str="SEARCH_INIT"/>
+    <pair key="3" str="SEARCHING"/>
+    <pair key="4" str="WAITING"/>
+    <pair key="5" str="CONVERGING"/>
+    <pair key="6" str="ON_SUN"/>
+    <pair key="7" str="NOT_ACTIVE"/>
+  </dictionary>
+
+  <dictionary name="magFieldSource">
+    <pair key="4" str="MEASURED"/>
+    <pair key="5" str="MODELED"/>
+  </dictionary>
+
+  <dictionary name="dsEn">
+    <pair key="0" str="DS"/>
+    <pair key="1" str="EN"/>
+  </dictionary>
+
+  <dictionary name="sunBodyVectorStatus">
+    <pair key="0" str="GOOD"/>
+    <pair key="1" str="COARSE"/>
+    <pair key="2" str="BAD"/>
+  </dictionary>
+
+  <dictionary name="XACTTableUploadStatus">
+    <pair key="0" str="NEW_DATA_IN"/>
+    <pair key="1" str="COMMITTING"/>
+    <pair key="2" str="COMMITTED"/>
+    <pair key="3" str="EXTRACTING"/>
+    <pair key="4" str="EXTRACTED"/>
+    <pair key="5" str="CALCULATING_CRC"/>
+    <pair key="6" str="CRC_READY"/>
+    <pair key="7" str="INVALID_TABLE"/>
+    <pair key="8" str="IDLE"/>
+    <pair key="9" str="FLASH_BURN_COPY"/>
+    <pair key="10" str="FLASH_BURN_DIRECT"/>
+    <pair key="11" str="FLASH_EXTRACT"/>
+    <pair key="12" str="FLASH_BURN_DONE"/>
+    <pair key="13" str="FLASH_EXTRACT_DONE"/>
+  </dictionary>
+
+
+</hydraDef>

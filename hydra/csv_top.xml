@@ -1,0 +1,49 @@
+<hydraCSV>
+
+    <config>
+
+        <cmd>
+            <apid   startByte="0" length="2" mask="0x7FF"/>
+            <opcode startByte="6" length="1" mask="0xFF"/>
+
+            <subfield offset="64"/>
+
+            <units>none</units>
+            <!--<ExternalElement>inspire</ExternalElement>-->
+        </cmd>
+
+        <tlm>
+            <pktHeader name="ccsdsHeader">
+                <entry element="SC_FSW_#APID" itemName="VERSION" type="U3"/>
+                <entry element="SC_FSW_#APID" itemName="TYPE" type="U1"/>
+                <entry element="SC_FSW_#APID" itemName="SEC_HDR_FLAG" type="U1"/>
+                <entry element="SC_FSW_#APID" itemName="PKT_APID" type="U11"/>
+                <entry element="SC_FSW_#APID" itemName="SEQ_FLGS" type="U2"/>
+                <entry element="SC_FSW_#APID" itemName="SRC_SEQ_CTR" type="U14"/>
+                <entry element="SC_FSW_#APID" itemName="PKT_LEN" type="U16"/>
+                <entry element="SC_FSW_#APID" itemName="SHCOARSE" type="U32" units="dn" shortDescription="Seconds count"/>
+                <entry element="SC_FSW_#APID" itemName="SHFINE" type="U16" units="dn" shortDescription="Subsecond count"/>
+            </pktHeader>
+
+            <source>FSW</source>
+        </tlm>
+
+        <pkt>
+            <streamName>myStream</streamName>
+        </pkt>
+    </config>
+
+    <tlm header="ccsdsHeader">
+        <packet>beacon.beacon_frame</packet>
+    </tlm>
+
+    <file name="Config/csv_tlm.xml"/>
+    <file name="Config/csv_cmd.xml"/>
+
+    <file name="Config/csv_cip.xml"/>
+    <file name="Config/csv_daxss.xml"/>
+    <file name="Config/csv_adcs.xml"/>
+
+
+
+</hydraCSV>

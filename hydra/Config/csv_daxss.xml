@@ -1,0 +1,56 @@
+<hydraXTCE>
+    <cmd>
+        <name>cmd_daxss_noop</name>
+        <name>cmd_daxss_reset_count</name>
+        <name>cmd_daxss_set_time</name>
+        <name>cmd_daxss_set_rtc_sync</name>
+        <name>cmd_daxss_copy_param</name>
+        <name>cmd_daxss_dump_param</name>
+        <name>cmd_daxss_set_mode_persist</name>
+        <name>cmd_daxss_set_eclipse_calc</name>
+        <name>cmd_daxss_set_eclipse_opt</name>
+        <name>cmd_daxss_set_eclipse_out_volt</name>
+        <name>cmd_daxss_set_eclipse_out_curr</name>
+        <name>cmd_daxss_set_eclipse_out_end</name>
+        <name>cmd_daxss_set_eclipse_in_volt</name>
+        <name>cmd_daxss_issue_hk_pkt</name>
+        <name>cmd_daxss_set_eclipse_in_curr</name>
+        <name>cmd_daxss_set_eclipse_in_start</name>
+        <name>cmd_daxss_set_sci_pkt_rate</name>
+        <name>cmd_daxss_route_log_pkt</name>
+        <name>cmd_daxss_route_sci_pkt</name>
+        <name>cmd_daxss_set_log_pbk</name>
+        <name>cmd_daxss_set_sci_pbk</name>
+        <name>cmd_daxss_pwr_sps</name>
+        <name>cmd_daxss_pwr_x123</name>
+        <name>cmd_daxss_set_i2c_timeout</name>
+        <name>cmd_daxss_write_cdh</name>
+        <name>cmd_daxss_read_cdh</name>
+        <name>cmd_daxss_write_ee</name>
+        <name>cmd_daxss_read_ee</name>
+        <name>cmd_daxss_set_sps_offset</name>
+        <name>cmd_daxss_set_stored_cmd_timeout</name>
+        <name>cmd_daxss_get_stored_cmd_report</name>
+        <name>cmd_daxss_clear_stored</name>
+        <name>cmd_daxss_add_stored</name>
+        <name>cmd_daxss_set_pico_gain</name>
+        <name>cmd_daxss_set_pico_int_time</name>
+        <name>cmd_daxss_set_sps_adc</name>
+        <name>cmd_daxss_set_sps_xact_offset</name>
+        <name>cmd_daxss_set_x123_compress</name>
+        <name>cmd_daxss_send_x123</name>
+        <name>cmd_daxss_query_x123</name>
+        <name>cmd_daxss_arm</name>
+        <name>cmd_daxss_set_x123_offset</name>
+        <name>cmd_daxss_set_x123_thresh</name>
+        <name>cmd_daxss_set_sps_sum</name>
+        <name>cmd_daxss_watchdog</name>
+        <name>cmd_daxss_set_last_cmd_timeout</name>
+    </cmd>
+
+    <tlm header="ccsdsHeader">
+        <packet>daxss_log.daxss_log_frame</packet>
+        <packet>daxss_sci.daxss_sci_frame</packet>
+    </tlm>
+
+</hydraXTCE>

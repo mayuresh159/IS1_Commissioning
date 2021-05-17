@@ -1,0 +1,189 @@
+<hydraDef>
+
+    <frameDef decoder="cmdDecoder" name="cipCmdHeader">
+        <field>
+            <itemDef name="cipCmdHeader_flags" type="dn5" value="0x03"/>
+            <itemDef name="cipCmdHeader_apid" type="dn11b" value="#APID_CMD_CIP"/>
+            <itemDef name="cipCmdHeader_count" type="dn16b" value="0"/>
+            <itemDef name="cipCmdHeader_len" type="dn16b" value="0"/>
+            <itemDef name="cipCmdHeader_functionCode" type="dn8" value="0x0"/>
+            <placeholder/>
+            <itemDef name="cipCmdHeader_crc" type="dn8" value="0"/>
+        </field>
+        <input item="cipCmdHeader_functionCode" name="function"/>
+        <length item="cipCmdHeader_len" offset="-56"/>
+        <checksum item="cipCmdHeader_crc" start="cipCmdHeader_functionCode"
+                  stop="cipCmdHeader_crc" method="crc" width="8" poly="0x07" seed="0"/>
+    </frameDef>
+
+    <command decoder="cmdDecoder" name="cmd_cip_pass">
+        <description text="CIP Pass through command"/>
+        <header frame="cipCmdHeader"/>
+        <output name="function" value="#CIP_FUNCTION_CODE_SET_COMMAND"/>
+        <field>
+            <argument id="opcode" type="CIPCmdOpcodes8B"/>
+            <itemDef name="cipCmd_reserved" type="dn8" value="0x0" num="3"/>
+        </field>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_cip_set_time_tag">
+        <description text="CIP Set time tag command"/>
+        <header frame="cipCmdHeader"/>
+        <output name="function" value="#CIP_FUNCTION_CODE_SET_TIME_TAG"/>
+        <field>
+            <argument id="time" type="dn32b"/>
+        </field>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_cip_set_sweep_voltage">
+        <description text="CIP Set sweep voltage command"/>
+        <header frame="cipCmdHeader"/>
+        <output name="function" value="#CIP_FUNCTION_CODE_SET_SWEEPING_VOLTAGE"/>
+        <field>
+            <argument id="parameters" type="dn8" num="4"/>
+        </field>
+    </command>
+
+    <dictionary name="cip_sens">
+        <pair key="0" str="SON"/>
+        <pair key="3" str="SPD"/>
+    </dictionary>
+    <typeState name="cip_sens2" size="2" dict="cip_sens"/>
+
+    <dictionary name="cip_mode">
+        <pair key="0" str="SAFE"/>
+        <pair key="1" str="NORMAL"/>
+        <pair key="2" str="FAST"/>
+    </dictionary>
+    <typeState name="cip_mode2" size="2" dict="cip_mode"/>
+
+    <dictionary name="cip_sm">
+        <pair key="1" str="PLP"/>
+        <pair key="2" str="RPA"/>
+        <pair key="0xF" str="IDM"/>
+        <pair key="0x3" str="RPT"/>
+        <pair key="0x4" str="IT"/>
+        <pair key="0xA" str="IDM0"/>
+        <pair key="0xB" str="IDM1"/>
+        <pair key="0xC" str="IDM2"/>
+        <pair key="0xD" str="IDM3"/>
+        <pair key="0x6" str="ISV"/>
+        <pair key="0x7" str="ESV"/>
+        <pair key="0x8" str="PRT"/>
+        <pair key="0x9" str="PRI"/>
+    </dictionary>
+    <typeState name="cip_sm4" size="4" dict="cip_sm"/>
+
+    <dictionary name="cip_ad">
+        <pair key="0" str="AD0"/>
+        <pair key="1" str="AD1"/>
+    </dictionary>
+    <typeState name="cip_ad1" size="1" dict="cip_ad"/>
+
+    <dictionary name="cip_ocd">
+        <pair key="0" str="OFF"/>
+        <pair key="1" str="ON"/>
+    </dictionary>
+    <typeState name="cip_ocd1" size="1" dict="cip_ocd"/>
+
+    <dictionary name="cip_svf">
+        <pair key="0" str="SFF"/>
+        <pair key="1" str="SF0"/>
+        <pair key="2" str="SF1"/>
+        <pair key="3" str="SF2"/>
+        <pair key="4" str="SF3"/>
+    </dictionary>
+    <typeState name="cip_svf3" size="3" dict="cip_svf"/>
+
+    <dictionary name="cip_fpd">
+        <pair key="0" str="OFF"/>
+        <pair key="1" str="ON"/>
+    </dictionary>
+    <typeState name="cip_fpd1" size="1" dict="cip_fpd"/>
+
+    <dictionary name="cip_aver">
+        <pair key="0" str="OFF"/>
+        <pair key="1" str="ON"/>
+    </dictionary>
+    <typeState name="cip_aver1" size="1" dict="cip_aver"/>
+
+    <frameDef name="cip_comstat">
+        <field>
+            <itemDef name="cip_comstat_sens" type="cip_sens2"/>
+            <itemDef name="cip_comstat_mode" type="cip_mode2"/>
+            <itemDef name="cip_comstat_sm" type="cip_sm4"/>
+
+            <itemDef name="cip_comstat_ad" type="cip_ad1"/>
+            <itemDef name="cip_comstat_ocd" type="cip_ocd1"/>
+            <itemDef name="cip_comstat_psvblk" type="dn2"/>
+            <itemDef name="cip_comstat_rsvblk" type="dn2"/>
+            <itemDef name="cip_comstat_ipb" type="dn2"/>
+
+            <itemDef name="cip_comstat_da" type="dn2"/>
+            <itemDef name="cip_comstat_aver" type="cip_aver1"/>
+            <itemDef name="cip_comstat_spare" type="dn2"/>
+            <itemDef name="cip_comstat_svf" type="cip_svf3"/>
+
+            <itemDef name="cip_comstat_spare2" type="dn4"/>
+            <itemDef name="cip_comstat_prt" type="dn3"/>
+            <itemDef name="cip_comstat_fpd" type="cip_fpd1"/>
+        </field>
+    </frameDef>
+    <frameDef name="cip_soh_frame">
+        <field>
+            <itemDef name="cip_soh_fc" type="dn8"/>
+            <itemDef name="cip_soh_time_tag" type="dn32b"/>
+            <itemDef name="cip_soh_counter" type="dn32b"/>
+            <itemDef name="cip_soh_cmd_status" type="dn32b" ignore="true"/>
+            <frameCopy name="cip_comstat" suffix="_soh"/>
+            <itemDef name="cip_soh_err_check" type="dn8"/>
+            <itemDef name="cip_soh_apu_temp" type="CIP_Temp_EU16B"/>
+            <itemDef name="cip_soh_dcu_temp" type="CIP_Temp_EU16B"/>
+            <itemDef name="cip_soh_pmu_temp" type="CIP_Temp_EU16B"/>
+            <itemDef name="cip_soh_reserved" type="dn8"/>
+            <itemDef name="cip_soh_crc" type="dn8"/>
+        </field>
+    </frameDef>
+
+    <frameDef name="cip_soh" id="#APID_TLM_CIP_SOH_PKT">
+        <field>
+            <frameCopy name="ccsdsTlmHeader" suffix="_cip_soh"/>
+            <item name="cip_soh_frame"/>
+        </field>
+    </frameDef>
+
+    <frameDef name="cip_sci1_frame">
+        <field>
+            <itemDef name="cip_sci_fc" type="dn8"/>
+            <itemDef name="cip_sci_time_tag" type="dn32b"/>
+            <itemDef name="cip_sci_counter" type="dn32b"/>
+            <itemDef name="cip_sci_cmd_status" type="dn32b" ignore="true"/>
+            <frameCopy name="cip_comstat" suffix="_sci"/>
+            <itemDef name="cip_sci_err_check" type="dn8"/>
+            <itemDef name="cip_sci_apu_temp" type="CIP_Temp_EU16B"/>
+            <itemDef name="cip_sci_dcu_temp" type="CIP_Temp_EU16B"/>
+            <itemDef name="cip_sci_pmu_temp" type="CIP_Temp_EU16B"/>
+            <itemDef name="cip_sci_reserved" type="dn8"/>
+            <itemDef name="cip_sci_data1" type="dn8" num="209"/>
+        </field>
+    </frameDef>
+    <frameDef name="cip_sci1" id="#APID_TLM_CIP_SCI1_PKT">
+        <field>
+            <frameCopy name="ccsdsTlmHeader" suffix="_cip_sci1"/>
+            <item name="cip_sci1_frame"/>
+        </field>
+    </frameDef>
+
+    <frameDef name="cip_sci2_frame">
+        <field>
+            <itemDef name="cip_sci_data2" type="dn8" num="47"/>
+            <itemDef name="cip_sci_crc" type="dn8"/>
+        </field>
+    </frameDef>
+    <frameDef name="cip_sci2" id="#APID_TLM_CIP_SCI2_PKT">
+        <field>
+            <frameCopy name="ccsdsTlmHeader" suffix="_cip_sci2"/>
+            <item name="cip_sci2_frame"/>
+        </field>
+    </frameDef>
+</hydraDef>

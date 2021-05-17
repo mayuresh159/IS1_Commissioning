@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<pageDef>
+  <page title="des_sched">
+    <column>
+      <frame name="des_sched"/>
+    </column>
+  </page>
+</pageDef>
+

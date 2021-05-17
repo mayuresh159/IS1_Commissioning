@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<pageDef>
+  <page title="adcs_command_tlm">
+    <column>
+      <frame name="adcs_command_tlm"/>
+    </column>
+  </page>
+</pageDef>
+

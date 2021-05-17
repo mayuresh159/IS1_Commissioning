@@ -1,0 +1,67 @@
+<hydraDef>
+
+    <frameDef name="ccsdsTlmHeader">
+        <field>
+            <itemDef name="ccsdsTlmHeader_flags" type="dn5"/>
+            <itemDef name="ccsdsTlmHeader_apid" type="dn11b"/>
+            <itemDef name="ccsdsTlmHeader_count" type="dn16b"/>
+            <itemDef name="ccsdsTlmHeader_len" type="dn16b"/>
+            <itemDef name="ccsdsTlmHeader_sec" type="dn32"/>
+            <itemDef name="ccsdsTlmHeader_sub" type="dn16"/>
+        </field>
+    </frameDef>
+
+    <frameDef name="ccsdsCmdHeader" decoder="cmdDecoder">
+        <field>
+            <itemDef name="ccsdsCmdHeader_flags" type="dn5" value="0x03"/>
+            <itemDef name="ccsdsCmdHeader_apid" type="dn11b" value="0"/>
+            <itemDef name="ccsdsCmdHeader_count" type="dn16b" value="0"/>
+            <itemDef name="ccsdsCmdHeader_len" type="dn16b"/>
+	        <itemDef name="ccsdsCmdOpcode" type="CmdOpcodesHydra8B"/>
+	        <itemDef name="ccsdsCmdChecksum" type="dn8" value="0"/>
+            <placeholder/>
+        </field>
+
+	    <input name="opcode" item="ccsdsCmdOpcode"/>
+	    <input name="apid" item="ccsdsCmdHeader_apid"/>
+	
+        <length item="ccsdsCmdHeader_len" offset="-56"/>
+
+	    <checksum item="ccsdsCmdChecksum" method="xor" seed="#CMD_CHECKSUM_SEED"
+	            start="BEGIN" stop="END"/>
+    </frameDef>
+
+    <frameDef name="ccsdsMsgHeader" decoder="cmdDecoder">
+        <field>
+            <itemDef name="ccsdsMsgHeader_flags" type="dn5" value="0x03"/>
+            <itemDef name="ccsdsMsgHeader_apid" type="dn11b" value="0"/>
+            <itemDef name="ccsdsMsgHeader_count" type="dn16b" value="0"/>
+            <itemDef name="ccsdsMsgHeader_len" type="dn16b"/>
+            <placeholder/>
+        </field>
+
+	<input name="apid" item="ccsdsMsgHeader_apid"/>
+	
+        <length item="ccsdsMsgHeader_len" offset="-56"/>
+    </frameDef>
+
+    <frameDef name="ccsdsSimHeader" decoder="simDecoder">
+        <field>
+            <itemDef name="ccsdsSimHeader_flags" type="dn5" value="0x03"/>
+            <itemDef name="ccsdsSimHeader_apid" type="dn11b" value="0"/>
+            <itemDef name="ccsdsSimHeader_count" type="dn16b" value="0"/>
+            <itemDef name="ccsdsSimHeader_len" type="dn16b"/>
+	        <itemDef name="ccsdsSimOpcode" type="CmdOpcodesHydra8B"/>
+	        <itemDef name="ccsdsSimChecksum" type="dn8" value="0"/>
+            <placeholder/>
+        </field>
+
+	    <input name="opcode" item="ccsdsSimOpcode"/>
+	    <input name="apid" item="ccsdsSimHeader_apid"/>
+	
+        <length item="ccsdsSimHeader_len" offset="-56"/>
+
+    </frameDef>
+
+</hydraDef>
+

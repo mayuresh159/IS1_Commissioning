@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<pageDef>
+  <page title="adcs_analogs">
+    <column>
+      <frame name="adcs_analogs"/>
+    </column>
+  </page>
+</pageDef>
+

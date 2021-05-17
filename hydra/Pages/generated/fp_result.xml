@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<pageDef>
+  <page title="fp_result">
+    <column>
+      <frame name="fp_result"/>
+    </column>
+  </page>
+</pageDef>
+

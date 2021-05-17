@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<pageDef>
+  <page title="beacon">
+    <column>
+      <frame name="beacon"/>
+    </column>
+  </page>
+</pageDef>
+

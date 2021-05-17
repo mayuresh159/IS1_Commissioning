@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<pageDef>
+  <page title="adcs_hk">
+    <column>
+      <frame name="adcs_hk"/>
+    </column>
+  </page>
+</pageDef>
+

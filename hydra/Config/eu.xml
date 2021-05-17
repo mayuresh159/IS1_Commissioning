@@ -1,0 +1,213 @@
+﻿<hydraDef>
+
+    <!--IS0-EPS Telemetry EUs-->
+
+
+    <typeEU name="EPS_SA_V16L" size="16" eu="EPS_SA_V"/>
+
+    <typeEU name="EPS_SA_I16L" size="16" eu="EPS_SA_I"/>
+
+    <euPoly name="EPS_SoC">
+        <coeff index="0" value="0"/>
+        <!-- Refer MAX17049 Datasheet Page 10, Register Summary Table 
+        => SoC is stored as a 16 bit number 
+        => Conversion factor is (1/256) = 0.00390625 %
+        => Value shown on beacon page is in percentage -->
+        <coeff index="1" value="0.00390625"/>
+    </euPoly>
+
+    <typeEU name="EPS_SoC16L" size="16" eu="EPS_SoC"/>
+
+    <euPoly name="EPS_ADC">
+        <coeff index="0" value="0"/>
+        <!-- Refer AD7998 Datasheet Page 20, Conversion Result Register 
+        => ADC value is stored as a 16 bit number 
+        => First four bits contain alert flag and chanel identifier, these are removed in the FSW
+        => The remaining 12 bits are converted to Voltage by the conversion factor 
+        => The conversion factor is (3.3V/2^12) = 0.0008056640625
+        => Value shown on beacon page is in Volts
+        => In order to convert this voltage into temperature the curve provided by Vishay 
+        => Should be used.  -->
+        <!-- <coeff index="1" value="0.0008056"/> -->
+		<coeff index="0" value="102.58"/>
+		<coeff index="1" value="-0.14098"/>
+		<coeff index="2" value="0.000103229"/>
+		<coeff index="3" value="-3.94374e-8"/>
+		<coeff index="4" value="5.5934e-12"/>
+    </euPoly>
+
+    <typeEU name="EPS_ADC16L" size="16" eu="EPS_ADC"/>
+
+    <euPoly name="SBAND_Board_Temp" signed="True">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.0625"/>
+    </euPoly>
+
+    <typeEU name="SBAND_Board_Temp16L" size="16" eu="SBAND_Board_Temp"/>
+
+    <dictionary name="SBANDDisEn">
+        <pair key="0" str="ENA"/>
+        <pair key="1" str="DIS"/>
+    </dictionary>
+    <typeState name="SBANDDisEn8L" size="8" dict="SBANDDisEn"/>
+
+    <dictionary name="SBANDStatus">
+        <pair key="0" str="NOLOCK_PWRBAD"/>
+        <pair key="1" str="LOCK_PWRBAD"/>
+        <pair key="2" str="NOLOCK_PWRGD"/>
+        <pair key="3" str="LOCK_PWRGD"/>
+    </dictionary>
+    <typeState name="SBANDStatus8L" size="8" dict="SBANDStatus"/>
+
+    <euPoly name="SBAND_RF_Pwr">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.001139322916667"/>
+
+    </euPoly>
+    <typeEU name="SBAND_RF_Pwr16L" size="16" eu="SBAND_RF_Pwr"/>
+
+    <euPoly name="SBAND_PA_Temp">
+        <coeff index="0" value="50"/>
+        <coeff index="1" value="0.0732421875"/>
+
+    </euPoly>
+    <typeEU name="SBAND_PA_Temp16L" size="16" eu="SBAND_PA_Temp"/>
+
+    <euPoly name="SBAND_Bat_Curr">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.00004"/>
+
+    </euPoly>
+    <typeEU name="SBAND_Bat_Curr16L" size="16" eu="SBAND_Bat_Curr"/>
+
+    <euPoly name="SBAND_Bat_Volt">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.004"/>
+
+    </euPoly>
+    <typeEU name="SBAND_Bat_Volt16L" size="16" eu="SBAND_Bat_Volt"/>
+
+    <euPoly name="SBAND_PA_Curr">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.00004"/>
+
+    </euPoly>
+    <typeEU name="SBAND_PA_Curr16L" size="16" eu="SBAND_PA_Curr"/>
+
+    <euPoly name="SBAND_PA_Volt">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.004"/>
+
+    </euPoly>
+    <typeEU name="SBAND_PA_Volt16L" size="16" eu="SBAND_PA_Volt"/>
+
+    <euPoly name="ADCS_Digi_V" signed="True">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.00125"/>
+
+    </euPoly>
+    <typeEU name="ADCS_Digi_V16L" size="16" eu="ADCS_Digi_V"/>
+
+    <euPoly name="ADCS_Wheel_Temp" signed="True">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.005"/>
+
+    </euPoly>
+    <typeEU name="ADCS_Wheel_Temp16L" size="16" eu="ADCS_Wheel_Temp"/>
+
+    <euPoly name="ADCS_Wheel_Speed" signed="True">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.4"/>
+
+    </euPoly>
+    <typeEU name="ADCS_Wheel_Speed16L" size="16" eu="ADCS_Wheel_Speed"/>
+
+    <euPoly name="ADCS_Sun_Vector" signed="True">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="4e-5"/>
+
+    </euPoly>
+    <typeEU name="ADCS_Sun_Vector16L" size="16" eu="ADCS_Sun_Vector"/>
+
+    <euPoly name="ADCS_Body_Rate" signed="True">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="5e-9"/>
+
+    </euPoly>
+    <typeEU name="ADCS_Body_Rate32L" size="32" eu="ADCS_Body_Rate"/>
+
+    <euPoly name="ADCS_Body_Quat" signed="True">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="5e-10"/>
+
+    </euPoly>
+    <typeEU name="ADCS_Body_Quat32L" size="32" eu="ADCS_Body_Quat"/>
+
+    <euPoly name="ADCS_Star_temp">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value=".8"/>
+
+    </euPoly>
+    <typeEU name="ADCS_Star_temp8L" size="8" eu="ADCS_Star_temp"/>
+
+    <euPoly name="DAXSS_CDH_Temp">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.00390625"/><!--1/256-->
+    </euPoly>
+    <typeEU name="DAXSS_CDH_Temp16L" size="16" eu="DAXSS_CDH_Temp"/>
+
+    <euPoly name="DAXSS_BatV_EU">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.01638"/>
+    </euPoly>
+    <typeEU name="DAXSS_BatV_EU16L" size="16" eu="DAXSS_BatV_EU"/>
+
+    <euPoly name="DAXSS_BatV2_EU">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.0081909"/>
+    </euPoly>
+    <typeEU name="DAXSS_BatV2_EU16L" size="16" eu="DAXSS_BatV2_EU"/>
+
+    <euPoly name="DAXSS_5V_EU">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.001638"/>
+    </euPoly>
+    <typeEU name="DAXSS_5V_EU16L" size="16" eu="DAXSS_5V_EU"/>
+
+    <euPoly name="DAXSS_BatCurr_EU">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.499877"/>
+    </euPoly>
+    <typeEU name="DAXSS_BatCurr_EU16L" size="16" eu="DAXSS_BatCurr_EU"/>
+
+    <euPoly name="DAXSS_BatLoadV_EU">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.000999755859375"/>
+    </euPoly>
+    <typeEU name="DAXSS_BatLoadV_EU16L" size="16" eu="DAXSS_BatLoadV_EU"/>
+
+    <euPoly name="DAXSS_IntTime_EU">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="2.8"/>
+    </euPoly>
+    <typeEU name="DAXSS_IntTime_EU16L" size="16" eu="DAXSS_IntTime_EU"/>
+
+    <euPoly name="DAXSS_HV_EU">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.5"/>
+    </euPoly>
+    <typeEU name="DAXSS_HV_EU16L" size="16" eu="DAXSS_HV_EU"/>
+
+    <euPoly name="DAXSS_DetTemp_EU">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.1"/>
+    </euPoly>
+    <typeEU name="DAXSS_DetTemp_EU16L" size="16" endian="LITTLE" eu="DAXSS_DetTemp_EU"/>
+
+    <euPoly name="CIP_Temp_EU">
+        <coeff index="0" value="0"/>
+        <coeff index="1" value="0.0078125"/>
+    </euPoly>
+    <typeEU name="CIP_Temp_EU16B" size="16" eu="CIP_Temp_EU" endian="BIG"/>
+    <typeEU name="CIP_Temp_EU16L" size="16" eu="CIP_Temp_EU" endian="LITTLE"/>
+</hydraDef>

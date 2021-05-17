@@ -1,0 +1,44 @@
+<hydraDef>
+
+    <scriptDir name="Scripts"/>
+
+    <import>../common/hydra</import>
+
+    <!--<include>Config/eu.xml</include>-->
+
+    <include>Config/generated/gen_keywords.xml</include>
+    <include>Config/generated/gen_types.xml</include>
+    <include>Config/generated/gen_states.xml</include>
+    <include>Config/generated/gen_eu.xml</include>
+    <include>Config/generated/gen_log.xml</include>
+    <include>Config/generated/gen_tlm.xml</include>
+    <include>Config/generated/gen_cmds.xml</include>
+    <include>Config/generated/gen_mem.xml</include>
+
+    <include>Config/log_msg.xml</include>
+    <include>Config/uhf.xml</include>
+
+
+    <include>Config/adcs_cmd_details.xml</include>
+    <include>Config/daxss_cmd_details.xml</include>
+    <include>Config/daxss_types.xml</include>
+    <include>Config/cip_cmd_details.xml</include>
+	  <include>Config/beacon_tlm.xml</include>
+
+    <testing>
+        <archiveDirectory path="../test"/>
+        <resultFile name="../test/results.csv"/>
+        <reportFile name="../test/report.xml"/>
+
+        <version cmd="bash git_version.sh"/>
+        <setup>
+            <!--    <script name="busyTest"/>-->
+        </setup>
+
+        <teardown>
+            <!--<script name="busyTest"/>-->
+        </teardown>
+
+    </testing>
+
+</hydraDef>

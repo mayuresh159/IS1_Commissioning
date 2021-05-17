@@ -1,0 +1,232 @@
+<?xml version="1.0" ?>
+<hydraMenu>
+    <menu name="Instruments">
+        <menu name="cip">
+            <cmd name="cmd_cip_pass"/>
+            <cmd name="cmd_cip_set_time_tag"/>
+            <cmd name="cmd_cip_set_sweep_voltage"/>
+        </menu>
+        <menu name="daxss">
+            <cmd name="cmd_daxss_noop"/>
+            <cmd name="cmd_daxss_reset_count"/>
+            <cmd name="cmd_daxss_set_time"/>
+            <cmd name="cmd_daxss_set_rtc_sync"/>
+            <cmd name="cmd_daxss_copy_param"/>
+            <cmd name="cmd_daxss_dump_param"/>
+            <cmd name="cmd_daxss_set_mode_persist"/>
+            <cmd name="cmd_daxss_set_eclipse_calc"/>
+            <cmd name="cmd_daxss_set_eclipse_opt"/>
+            <cmd name="cmd_daxss_set_eclipse_out_volt"/>
+            <cmd name="cmd_daxss_set_eclipse_out_curr"/>
+            <cmd name="cmd_daxss_set_eclipse_out_end"/>
+            <cmd name="cmd_daxss_set_eclipse_in_volt"/>
+            <cmd name="cmd_daxss_issue_hk_pkt"/>
+            <cmd name="cmd_daxss_set_eclipse_in_curr"/>
+            <cmd name="cmd_daxss_set_eclipse_in_start"/>
+            <cmd name="cmd_daxss_set_sci_pkt_rate"/>
+            <cmd name="cmd_daxss_route_log_pkt"/>
+            <cmd name="cmd_daxss_route_sci_pkt"/>
+            <cmd name="cmd_daxss_set_log_pbk"/>
+            <cmd name="cmd_daxss_set_sci_pbk"/>
+            <cmd name="cmd_daxss_pwr_sps"/>
+            <cmd name="cmd_daxss_pwr_x123"/>
+            <cmd name="cmd_daxss_set_i2c_timeout"/>
+            <cmd name="cmd_daxss_write_cdh"/>
+            <cmd name="cmd_daxss_read_cdh"/>
+            <cmd name="cmd_daxss_write_ee"/>
+            <cmd name="cmd_daxss_read_ee"/>
+            <cmd name="cmd_daxss_set_sps_offset"/>
+            <cmd name="cmd_daxss_set_stored_cmd_timeout"/>
+            <cmd name="cmd_daxss_get_stored_cmd_report"/>
+            <cmd name="cmd_daxss_clear_stored"/>
+            <cmd name="cmd_daxss_add_stored"/>
+            <cmd name="cmd_daxss_set_pico_gain"/>
+            <cmd name="cmd_daxss_set_pico_int_time"/>
+            <cmd name="cmd_daxss_set_sps_adc"/>
+            <cmd name="cmd_daxss_set_sps_xact_offset"/>
+            <cmd name="cmd_daxss_set_x123_compress"/>
+            <cmd name="cmd_daxss_send_x123"/>
+            <cmd name="cmd_daxss_query_x123"/>
+            <cmd name="cmd_daxss_arm"/>
+            <cmd name="cmd_daxss_set_x123_offset"/>
+            <cmd name="cmd_daxss_set_x123_thresh"/>
+            <cmd name="cmd_daxss_set_sps_sum"/>
+            <cmd name="cmd_daxss_watchdog"/>
+            <cmd name="cmd_daxss_set_last_cmd_timeout"/>
+        </menu>
+        <menu name="adcs">
+            <menu name="L0">
+                <cmd name="cmd_adcs_L0_select_pri_rom"/>
+                <cmd name="cmd_adcs_L0_select_sec_rom"/>
+                <cmd name="cmd_adcs_L0_wd_ena"/>
+                <cmd name="cmd_adcs_L0_wd_dis"/>
+                <cmd name="cmd_adcs_L0_wd_clear"/>
+                <cmd name="cmd_adcs_L0_select_tbl_comp"/>
+                <cmd name="cmd_adcs_L0_select_tbl_flash"/>
+                <cmd name="cmd_adcs_L0_wd_arm"/>
+                <cmd name="cmd_adcs_L0_wd_send"/>
+            </menu>
+            <menu name="command">
+                <cmd name="cmd_adcs_Command_NoOp"/>
+            </menu>
+            <menu name="tracker_ctrl">
+            <cmd name="cmd_adcs_TrackerCtrl_MaxBackgndOps"/>
+            <cmd name="cmd_adcs_TrackerCtrl_TEST_TrackerTestMode"/>
+            <cmd name="cmd_adcs_TrackerCtrl_TEST_DetTestImage"/>
+            <cmd name="cmd_adcs_TrackerCtrl_ExtNstSwReadTime"/>
+            <cmd name="cmd_adcs_TrackerCtrl_SoftReinit"/>
+            <cmd name="cmd_adcs_TrackerCtrl_GoToTrack"/>
+            <cmd name="cmd_adcs_TrackerCtrl_ReadImageLine"/>
+            <cmd name="cmd_adcs_TrackerCtrl_Exclusion_List"/>
+            <cmd name="cmd_adcs_TrackerCtrl_Auto_Black_Ctrl"/>
+            <cmd name="cmd_adcs_TrackerCtrl_TEST_UseTestModel"/>
+            <cmd name="cmd_adcs_TrackerCtrl_SetAmpOffset"/>
+            <cmd name="cmd_adcs_TrackerCtrl_TrackMagLimits"/>
+            <cmd name="cmd_adcs_TrackerCtrl_RateAid"/>
+            <cmd name="cmd_adcs_TrackerCtrl_GoToIdle"/>
+            <cmd name="cmd_adcs_TrackerCtrl_ReInit"/>
+            <cmd name="cmd_adcs_TrackerCtrl_TakePhoto"/>
+            <cmd name="cmd_adcs_TrackerCtrl_ExtNstSendRawBytes"/>
+            <cmd name="cmd_adcs_TrackerCtrl_AnalogGain"/>
+            <cmd name="cmd_adcs_TrackerCtrl_DetectorPower"/>
+            <cmd name="cmd_adcs_TrackerCtrl_ResetDetTimeoutCount"/>
+            <cmd name="cmd_adcs_TrackerCtrl_MaxRateOps"/>
+            <cmd name="cmd_adcs_TrackerCtrl_ExtNstFpgaReadTime"/>
+            <cmd name="cmd_adcs_TrackerCtrl_TrackerUsage"/>
+            <cmd name="cmd_adcs_TrackerCtrl_VelocityAid"/>
+            <cmd name="cmd_adcs_TrackerCtrl_Attitude_Aid"/>
+            <cmd name="cmd_adcs_TrackerCtrl_TakePhotoROI"/>
+            <cmd name="cmd_adcs_TrackerCtrl_ExtNstPower"/>
+            <cmd name="cmd_adcs_TrackerCtrl_ExtNstCopyVidBuf"/>
+            <cmd name="cmd_adcs_TrackerCtrl_CalMode"/>
+            <cmd name="cmd_adcs_TrackerCtrl_Table_Insert"/>
+            <cmd name="cmd_adcs_TrackerCtrl_Store_Images"/>
+            <cmd name="cmd_adcs_TrackerCtrl_StarID"/>
+            <cmd name="cmd_adcs_TrackerCtrl_VelocityAidDirect"/>
+            <cmd name="cmd_adcs_TrackerCtrl_Exposure"/>
+            <cmd name="cmd_adcs_TrackerCtrl_ExtNstSettings"/>
+            <cmd name="cmd_adcs_TrackerCtrl_AutoSoftReinit"/>
+            </menu>
+            <menu name="att_ctrl">
+            <cmd name="cmd_adcs_AttCtrl_AllowSunModel"/>
+            <cmd name="cmd_adcs_AttCtrl_SetFFTorqueWheels"/>
+            <cmd name="cmd_adcs_AttCtrl_RateLimit"/>
+            <cmd name="cmd_adcs_AttCtrl_ZeroControlGain"/>
+            <cmd name="cmd_adcs_AttCtrl_SetPreferredSunSource"/>
+            <cmd name="cmd_adcs_AttCtrl_AccelLimit"/>
+            <cmd name="cmd_adcs_AttCtrl_GainSelect"/>
+            </menu>
+            <menu name="gps">
+            <cmd name="cmd_adcs_GPS_GpsEnable"/>
+            <cmd name="cmd_adcs_GPS_GpsCommand"/>
+            <cmd name="cmd_adcs_GPS_AcceptTimePosVel"/>
+            <cmd name="cmd_adcs_GPS_GpsReinit"/>
+            </menu>
+            <menu name="tables">
+            <cmd name="cmd_adcs_Tables_FlashBurnArm"/>
+            <cmd name="cmd_adcs_Tables_HoldingTableCRC"/>
+            <cmd name="cmd_adcs_Tables_TableCRC"/>
+            <cmd name="cmd_adcs_Tables_HoldingTableInsert"/>
+            <cmd name="cmd_adcs_Tables_TableCommit"/>
+            <cmd name="cmd_adcs_Tables_FlashBurnCopy"/>
+            <cmd name="cmd_adcs_Tables_FlashExtract"/>
+            <cmd name="cmd_adcs_Tables_TableExtract"/>
+            <cmd name="cmd_adcs_Tables_FlashBurnDirect"/>
+            </menu>
+            <menu name="wheel">
+            <cmd name="cmd_adcs_Wheel_TEST_RwTestMode"/>
+            <cmd name="cmd_adcs_Wheel_NoOp"/>
+            <cmd name="cmd_adcs_Wheel_SetWheelPWM4"/>
+            <cmd name="cmd_adcs_Wheel_Calibrate"/>
+            <cmd name="cmd_adcs_Wheel_SetWheelSpeed4"/>
+            <cmd name="cmd_adcs_Wheel_SetWheelTorque32"/>
+            <cmd name="cmd_adcs_Wheel_SetWheelMode"/>
+            </menu>
+            <menu name="att_cmd">
+            <cmd name="cmd_adcs_AttCmd_SunAxisSelect"/>
+            <cmd name="cmd_adcs_AttCmd_AttitudeDither"/>
+            <cmd name="cmd_adcs_AttCmd_GotoLvLhAttitude"/>
+            <cmd name="cmd_adcs_AttCmd_GotoTarget"/>
+            <cmd name="cmd_adcs_AttCmd_GotoSunPoint"/>
+            <cmd name="cmd_adcs_AttCmd_GotoFineHold"/>
+            <cmd name="cmd_adcs_AttCmd_ClearEclipseTimer"/>
+            <cmd name="cmd_adcs_AttCmd_SunRotationRate"/>
+            <cmd name="cmd_adcs_AttCmd_GotoEcefPoint"/>
+            <cmd name="cmd_adcs_AttCmd_GotoFineSunPoint"/>
+            <cmd name="cmd_adcs_AttCmd_GotoEciAttitude"/>
+            <cmd name="cmd_adcs_AttCmd_TempSunRotationRate"/>
+            </menu>
+            <menu name="momentum">
+            <cmd name="cmd_adcs_Momentum_SetWheelMomentaUse"/>
+            <cmd name="cmd_adcs_Momentum_TorqRodCode"/>
+            <cmd name="cmd_adcs_Momentum_TorqRodCtrl"/>
+            <cmd name="cmd_adcs_Momentum_MagFieldSource"/>
+            <cmd name="cmd_adcs_Momentum_SetCmdMomentum"/>
+            </menu>
+            <menu name="time">
+            <cmd name="cmd_adcs_Time_EndProgram"/>
+            <cmd name="cmd_adcs_Time_SetClockRef"/>
+            <cmd name="cmd_adcs_Time_SetCurrentTimeUtc"/>
+            <cmd name="cmd_adcs_Time_ConfigPpsOut"/>
+            <cmd name="cmd_adcs_Time_SetCurrentTimeGps"/>
+            <cmd name="cmd_adcs_Time_ClockSyncEnable"/>
+            <cmd name="cmd_adcs_Time_spare"/>
+            <cmd name="cmd_adcs_Time_SetCurrentTimeTai"/>
+            <cmd name="cmd_adcs_Time_TEST_SetCurrentTimeTai"/>
+            </menu>
+            <menu name="sun_sensor">
+            <cmd name="cmd_adcs_SunSensor_CssEnable"/>
+            <cmd name="cmd_adcs_SunSensor_TEST_CssTestMode"/>
+            <cmd name="cmd_adcs_SunSensor_CssUsage"/>
+            <cmd name="cmd_adcs_SunSensor_CssClearLightFound"/>
+            </menu>
+            <menu name="tlm_proc">
+            <cmd name="cmd_adcs_TlmProc_ReadFromFile"/>
+            <cmd name="cmd_adcs_TlmProc_StreamToFile"/>
+            <cmd name="cmd_adcs_TlmProc_MapSelect"/>
+            </menu>
+            <menu name="general">
+            <cmd name="cmd_adcs_General_SetLVDS"/>
+            <cmd name="cmd_adcs_General_SetPRBS"/>
+            <cmd name="cmd_adcs_General_InertiaSelect"/>
+            </menu>
+            <menu name="magnetometer">
+            <cmd name="cmd_adcs_Magnetometer_MagResetInvalidCount"/>
+            <cmd name="cmd_adcs_Magnetometer_SetMagSensor"/>
+            <cmd name="cmd_adcs_Magnetometer_TEST_MagTestMode"/>
+            <cmd name="cmd_adcs_Magnetometer_MagUsage"/>
+            </menu>
+            <menu name="refs">
+            <cmd name="cmd_adcs_Refs_AutoGpsUsage"/>
+            <cmd name="cmd_adcs_Refs_InitKeplerUtcGreg"/>
+            <cmd name="cmd_adcs_Refs_EarthRotParam"/>
+            <cmd name="cmd_adcs_Refs_InitPosVelTaiSec"/>
+            <cmd name="cmd_adcs_Refs_SetAccel"/>
+            <cmd name="cmd_adcs_Refs_InitSGP4All"/>
+            <cmd name="cmd_adcs_Refs_InitFromGps"/>
+            <cmd name="cmd_adcs_Refs_TEST_SetPosVel"/>
+            <cmd name="cmd_adcs_Refs_InitPosVelUtcGreg"/>
+            <cmd name="cmd_adcs_Refs_InitKeplerTaiSec"/>
+            <cmd name="cmd_adcs_Refs_InitChebyshevSun"/>
+            <cmd name="cmd_adcs_Refs_DisablePropagation"/>
+            <cmd name="cmd_adcs_Refs_OrbitMethod"/>
+            </menu>
+            <menu name="imu">
+            <cmd name="cmd_adcs_IMU_TEST_ImuTestMode"/>
+            <cmd name="cmd_adcs_IMU_ImuReinit"/>
+            <cmd name="cmd_adcs_IMU_JamBiasEst"/>
+            <cmd name="cmd_adcs_IMU_ImuResetInvalidCount"/>
+            <cmd name="cmd_adcs_IMU_ImuUsage"/>
+            </menu>
+            <menu name="att_det">
+            <cmd name="cmd_adcs_AttDet_SetAttDetFilter"/>
+            <cmd name="cmd_adcs_AttDet_TEST_SetAttitude"/>
+            <cmd name="cmd_adcs_AttDet_SetPreferredTracker"/>
+            </menu>
+            <menu name="cal">
+            <cmd name="cmd_adcs_Cal_TrackerAlignMethod"/>
+            <cmd name="cmd_adcs_Cal_TrackerAlignUsage"/>
+            </menu>
+        </menu>
+    </menu>
+</hydraMenu>

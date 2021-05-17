@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<pageDef>
+  <page title="fp_watch">
+    <column>
+      <frame name="fp_watch"/>
+    </column>
+  </page>
+</pageDef>
+

@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<pageDef>
+  <page title="adcs_msg_hk">
+    <column>
+      <frame name="adcs_msg_hk"/>
+    </column>
+  </page>
+</pageDef>
+

@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<pageDef>
+  <page title="time_hk">
+    <column>
+      <frame name="time_hk"/>
+    </column>
+  </page>
+</pageDef>
+

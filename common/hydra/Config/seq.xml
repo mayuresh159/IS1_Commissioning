@@ -1,0 +1,55 @@
+<hydraDef>
+
+    <hwOutFile name="seqOutFile" prefix="seq"/>
+
+    <alias name="hydra_seq_close_file" command="cmd_hw">
+      <description text="Rollover sequence output file"/>
+      <argument id="0" value="seqOutFile"/>
+      <argument id="1" value="rollover"/>
+    </alias>
+    
+    <decoderDef name="seqDecoder">
+        <outBuffer size="65536"/>
+        <outputDevice name="seqOutFile"/>
+    </decoderDef>
+
+    <itemBuffer name="seqContainer_data" type="dn8" num="1024"/>
+    
+    <command name="seqContainer" decoder="seqDecoder">
+        <field>
+            <itemDef name="seqContainer_id" type="dn32"/>
+	        <itemDef name="seqContainer_length" type="dn32"/>
+	        <itemDef name="seqContainer_checksum" type="dn32"/>
+	        <item name="seqContainer_data"/>
+        </field>
+
+        <length item="seqContainer_length"/>
+        <checksum item="seqContainer_checksum" method="xor" seed="#SEQ_CHECKSUM_SEED"
+		    start="seqContainer_data" stop="END"/>
+    </command>
+
+    <alias name="hydra_seq_set_id" command="set">
+      <description text="Set ID of sequence"/>
+      <argument id="0" value="seqContainer_id"/>
+      <argument id="1" value="="/>
+    </alias>
+
+    <alias name="hydra_seq_write_file" command="seqContainer">
+      <description text="Write sequence contents to file"/>
+    </alias>
+
+    <alias name="hydra_seq_load_file" command="start_sender">
+      <description text="Load sequence in output file to flight"/>
+      <argument id="0" value="seqSender"/>
+      <argument id="1" value="buffLength 128"/>
+      <argument id="2" value="buffOffset 0"/>
+      <argument id="3" value="filename seqOutFile"/>
+    </alias>
+    
+    <senderFile fileType="bin" name="seqSender" frame="cmd_seq_load"
+	    	buffer="data" interval="1000">
+        <defaults chunk="128" start="0" offset="0" total="65536"
+	    	filename="seqOutFile"/>
+    </senderFile>
+
+</hydraDef>

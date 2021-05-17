@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<pageDef>
+  <page title="mem_dump">
+    <column>
+      <frame name="mem_dump"/>
+    </column>
+  </page>
+</pageDef>
+

@@ -1,0 +1,580 @@
+<hydraDef>
+
+    <dictionary name="OnOff">
+        <pair key="0" str="OFF"/>
+        <pair key="1" str="ON"/>
+    </dictionary>
+    <typeState name="OnOff1" size="1" dict="OnOff"/>
+
+    <dictionary name="AliveDead">
+        <pair key="0" str="DEAD"/>
+        <pair key="1" str="ALIVE"/>
+    </dictionary>
+    <typeState name="AliveDead1" size="1" dict="AliveDead"/>
+
+    <dictionary name="UHFReadback">
+        <pair key="0" str="N"/>
+        <pair key="1" str="B"/>
+        <pair key="2" str="T"/>
+    </dictionary>
+    <typeState name="UHFReadback2" size="2" dict="UHFReadback"/>
+
+    <dictionary name="UHFChannel">
+        <pair key="0" str="A"/>
+        <pair key="1" str="B"/>
+        <pair key="2" str="D"/>
+    </dictionary>
+    <typeState name="UHFChannel2" size="2" dict="UHFChannel"/>
+
+    <dictionary name="ADCSMode">
+        <pair key="0" str="SUN"/>
+        <pair key="1" str="FINE"/>
+    </dictionary>
+    <typeState name="ADCSMode1" size="1" dict="ADCSMode"/>
+
+    <dictionary name="ADCSEclipse">
+        <pair key="0" str="SUN"/>
+        <pair key="1" str="ECLIPSE"/>
+    </dictionary>
+    <typeState name="ADCSEclipse1" size="1" dict="ADCSEclipse"/>
+
+    <dictionary name="YesNo">
+        <pair key="0" str="NO"/>
+        <pair key="1" str="YES"/>
+    </dictionary>
+    <typeState name="YesNo1" size="1" dict="YesNo"/>
+
+    <dictionary name="ADCSSunPointState">
+        <pair key="0" str="UNDEF"/>
+        <pair key="1" str="UNDEF"/>
+        <pair key="2" str="SEARCH_INIT"/>
+        <pair key="3" str="SEARCHING"/>
+        <pair key="4" str="WAITING"/>
+        <pair key="5" str="CONVERGING"/>
+        <pair key="6" str="ON_SUN"/>
+        <pair key="7" str="NOT_ACTIVE"/>
+    </dictionary>
+    <typeState name="ADCSSunPointState3" size="3" dict="ADCSSunPointState"/>
+
+    <frameDef name="beacon_frame">
+        <field>
+            <itemDef name="beacon_cmd_recv_count" type="uint8L">
+                <description text="Command receive count"/>
+            </itemDef>
+            <itemDef name="beacon_cmd_fail_count" type="uint8L">
+                <description text="Command reject count"/>
+            </itemDef>
+            <itemDef name="beacon_cmd_succ_count" type="uint8L">
+                <description text="Command success count"/>
+            </itemDef>
+            <itemDef name="beacon_cmd_succ_op" type="CmdOpcodesHydra8L">
+                <description text="Command successful opcode"/>
+            </itemDef>
+            <itemDef name="beacon_cmd_fail_op" type="CmdOpcodesHydra8L">
+                <description text="Command failed opcode"/>
+            </itemDef>
+            <itemDef name="beacon_cmd_fail_code" type="CmdFailCodes8L">
+                <description text="Command fail code"/>
+            </itemDef>
+            <itemDef name="beacon_pwr_status" type="uint8L" ignore="true">
+                <description text="Power status flags"/>
+            </itemDef>
+            <itemDef name="beacon_eclipse_state" type="ADCSEclipse1">
+                <description text="Eclipse State of ADCS"/>
+            </itemDef>
+            <itemDef name="beacon_pwr_status_sd1" type="OnOff1">
+                <description text="SD Card 1 Power State"/>
+            </itemDef>
+            <itemDef name="beacon_pwr_status_sd0" type="OnOff1">
+                <description text="SD Card 0 Power State"/>
+            </itemDef>
+            <itemDef name="beacon_pwr_status_htr" type="OnOff1">
+                <description text="Battery Heater Power State"/>
+            </itemDef>
+            <itemDef name="beacon_pwr_status_sband" type="OnOff1">
+                <description text="SBAND Power State"/>
+            </itemDef>
+            <itemDef name="beacon_pwr_status_adcs" type="OnOff1">
+                <description text="ADCS Power State"/>
+            </itemDef>
+            <itemDef name="beacon_pwr_status_cip" type="OnOff1">
+                <description text="CIP Power State"/>
+            </itemDef>
+            <itemDef name="beacon_pwr_status_daxss" type="OnOff1">
+                <description text="DAXSS Power State"/>
+            </itemDef>
+            <itemDef name="beacon_sd_read_misc" type="uint32L">
+                <description text="Partition read pointer - misc"/>
+            </itemDef>
+            <itemDef name="beacon_sd_read_scic" type="uint32L">
+                <description text="Partition read pointer - scic"/>
+            </itemDef>
+            <itemDef name="beacon_sd_read_scid" type="uint32L">
+                <description text="Partition read pointer - scid"/>
+            </itemDef>
+            <itemDef name="beacon_sd_read_adcs" type="uint32L">
+                <description text="Partition read pointer - adcs"/>
+            </itemDef>
+            <itemDef name="beacon_sd_read_beacon" type="uint32L">
+                <description text="Partition read pointer - beacon"/>
+            </itemDef>
+            <itemDef name="beacon_sd_read_log" type="uint32L">
+                <description text="Partition read pointer - log"/>
+            </itemDef>
+            <itemDef name="beacon_sd_write_misc" type="uint32L">
+                <description text="Partition write pointer - misc"/>
+            </itemDef>
+            <itemDef name="beacon_sd_write_scic" type="uint32L">
+                <description text="Partition write pointer - scic"/>
+            </itemDef>
+            <itemDef name="beacon_sd_write_scid" type="uint32L">
+                <description text="Partition write pointer - scid"/>
+            </itemDef>
+            <itemDef name="beacon_sd_write_adcs" type="uint32L">
+                <description text="Partition write pointer - adcs"/>
+            </itemDef>
+            <itemDef name="beacon_sd_write_beacon" type="uint32L">
+                <description text="Partition write pointer - beacon"/>
+            </itemDef>
+            <itemDef name="beacon_sd_write_log" type="uint32L">
+                <description text="Partition write pointer - log"/>
+            </itemDef>
+            <itemDef name="beacon_cmd_loss_timer" type="uint32L">
+                <description text="Seconds until command loss timer"/>
+            </itemDef>
+            <itemDef name="beacon_alive_flags" type="uint8L" ignore="true">
+                <description text="Subsytem aliveness flags"/>
+            </itemDef>
+            <itemDef name="beacon_clt_state" type="OnOff1">
+                <description text="State of CLT Fault"/>
+            </itemDef>
+            <itemDef name="beacon_alive_daxss" type="AliveDead1">
+                <description text="DAXSS Aliveness State"/>
+            </itemDef>
+            <itemDef name="beacon_alive_cip" type="AliveDead1">
+                <description text="CIP Aliveness State"/>
+            </itemDef>
+            <itemDef name="beacon_alive_adcs" type="AliveDead1">
+                <description text="ADCS Aliveness State"/>
+            </itemDef>
+            <itemDef name="beacon_alive_sband" type="AliveDead1">
+                <description text="SBAND Aliveness State"/>
+            </itemDef>
+            <itemDef name="beacon_alive_uhf" type="AliveDead1">
+                <description text="UHF Aliveness State"/>
+            </itemDef>
+            <itemDef name="beacon_alive_sd1" type="AliveDead1">
+                <description text="SD Card 1 Aliveness State"/>
+            </itemDef>
+            <itemDef name="beacon_alive_sd0" type="AliveDead1">
+                <description text="SD Card 0 Aliveness State"/>
+            </itemDef>
+            <itemDef name="beacon_cip_comstat" type="uint32L" ignore="true">
+                <description text="CIP com stat field"/>
+            </itemDef>
+            <frameCopy name="cip_comstat" suffix="_beacon"/>
+            <itemDef name="beacon_cip_temp1" type="CIP_Temp_EU16LS">
+                <description text="CIP temp 1"/>
+            </itemDef>
+            <itemDef name="beacon_cip_temp2" type="CIP_Temp_EU16LS">
+                <description text="CIP temp 2"/>
+            </itemDef>
+            <itemDef name="beacon_cip_temp3" type="CIP_Temp_EU16LS">
+                <description text="CIP temp 3"/>
+            </itemDef>
+            <itemDef name="beacon_uhf_temp_buff" type="dn2">
+                <description text="UHF Temp"/>
+            </itemDef>
+            <itemDef name="beacon_uhf_temp" type="sn6l">
+                <description text="UHF Temp"/>
+            </itemDef>
+            <itemDef name="beacon_uhf_config" type="uint8L" ignore="true">
+                <description text="UHF Temp"/>
+            </itemDef>
+            <itemDef name="beacon_uhf_locked" type="OnOff1">
+                <description text="UHF Locked Mode"/>
+            </itemDef>
+            <itemDef name="beacon_uhf_readback" type="UHFReadback2">
+                <description text="UHF Readback Mode"/>
+            </itemDef>
+            <itemDef name="beacon_uhf_swd" type="OnOff1">
+                <description text="UHF SWD Mode"/>
+            </itemDef>
+            <itemDef name="beacon_uhf_afc" type="OnOff1">
+                <description text="UHF AFC Mode"/>
+            </itemDef>
+            <itemDef name="beacon_uhf_echo" type="OnOff1">
+                <description text="UHF Echo Mode"/>
+            </itemDef>
+            <itemDef name="beacon_uhf_channel" type="UHFChannel2">
+                <description text="UHF Channel"/>
+            </itemDef>
+            <itemDef name="beacon_sband_pa_curr" type="SBAND_PA_Curr16L">
+                <description text="SBand Power Amplifier Current"/>
+            </itemDef>
+            <itemDef name="beacon_sband_pa_volt" type="SBAND_PA_Volt16L">
+                <description text="SBand Power Amplifier Voltage"/>
+            </itemDef>
+            <itemDef name="beacon_sband_rf_pwr" type="SBAND_RF_Pwr16L">
+                <description text="SBand RF Power"/>
+            </itemDef>
+            <itemDef name="beacon_sband_pa_temp" type="SBAND_PA_Temp16L">
+                <description text="SBand Power Amplifier Temp"/>
+            </itemDef>
+            <itemDef name="beacon_sband_top_temp" type="SBAND_Board_Temp16L">
+                <description text="SBAND Board Top Temperature"/>
+            </itemDef>
+            <itemDef name="beacon_sband_bottom_temp" type="SBAND_Board_Temp16L">
+                <description text="SBAND Board Bottom Temperature"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_cmd_acpt" type="uint8L">
+                <description text="ADCS Command Accept Count"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_cmd_fail" type="uint8L">
+                <description text="ADCS Command Reject Count"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_time" type="int32L">
+                <description text="ADCS GPS Time"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_info" type="uint8L" ignore="true">
+                <description text="ADCS Info"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_att_valid" type="dn1">
+                <description text="ADCS Attitude Valid"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_refs_valid" type="dn1">
+                <description text="ADCS Refs Valid"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_time_valid" type="dn1">
+                <description text="ADCS Time Valid"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_mode" type="ADCSMode1">
+                <description text="ADCS Mode"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_recom_sun_pt" type="YesNo1">
+                <description text="ADCS Recommed Sun Point"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_sun_pt_state" type="ADCSSunPointState3">
+                <description text="ADCS Sun Point State"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_star_temp" type="adcs_analogs_det_temp_eu8LS">
+                <description text="ADCS Star Track Temp"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_wheel_temp1" type="adcs_analogs_motor1_temp_eu16LS">
+                <description text="ADCS Wheel Temp 1"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_wheel_temp2" type="adcs_analogs_motor2_temp_eu16LS">
+                <description text="ADCS Wheel Temp 2"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_wheel_temp3" type="adcs_analogs_motor3_temp_eu16LS">
+                <description text="ADCS Wheel Temp 3"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_digi_bus_volt" type="adcs_analogs_digital_bus_v_eu16LS">
+                <description text="ADCS Digi Bus Voltage"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_sun_vec1" type="adcs_css_sun_vector_body1_eu16LS">
+                <description text="ADCS Sun Vector 1"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_sun_vec2" type="adcs_css_sun_vector_body2_eu16LS">
+                <description text="ADCS Sun Vector 2"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_sun_vec3" type="adcs_css_sun_vector_body3_eu16LS">
+                <description text="ADCS Sun Vector 3"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_wheel_sp1" type="adcs_rw_drive_filtered_speed_rpm_161_eu16LS">
+                <description text="ADCS Wheel Speed 1"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_wheel_sp2" type="adcs_rw_drive_filtered_speed_rpm_162_eu16LS">
+                <description text="ADCS Wheel Speed 2"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_wheel_sp3" type="adcs_rw_drive_filtered_speed_rpm_163_eu16LS">
+                <description text="ADCS Wheel Speed 3"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_body_rt1" type="adcs_att_det_body_rate1_eu32LS">
+                <description text="ADCS Body Frame Rate 1"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_body_rt2" type="adcs_att_det_body_rate2_eu32LS">
+                <description text="ADCS Body Frame Rate 2"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_body_rt3" type="adcs_att_det_body_rate2_eu32LS">
+                <description text="ADCS Body Frame Rate 3"/>
+            </itemDef>
+            <itemDef name="beacon_pad1" type="uint32L">
+            </itemDef>
+            <itemDef name="beacon_pad2" type="uint32L">
+            </itemDef>
+            <itemDef name="beacon_pad3" type="uint32L">>
+            </itemDef>
+            <itemDef name="beacon_daxss_time_sec" type="uint32L">
+                <description text="DAXSS Time Stamp (seconds)"/>
+            </itemDef>
+            <itemDef name="beacon_daxss_cmd_op" type="uint8L">
+                <description text="DAXSS Command Last opcode"/>
+            </itemDef>
+            <itemDef name="beacon_daxss_cmd_succ" type="uint8L">
+                <description text="DAXSS Command Accept Count"/>
+            </itemDef>
+            <itemDef name="beacon_daxss_cmd_fail" type="uint8L">
+                <description text="DAXSS Command Reject Count"/>
+            </itemDef>
+            <itemDef name="beacon_daxss_cdh_enables" type="uint16L">
+                <description text="DAXSS CDH Enables"/>
+            </itemDef>
+            <!--<itemDef name="beacon_daxss_cdh_bat_heater_ena" type="YesNo1">-->
+                <!--<description text="DAXSS CDH Battery Heater Enabled"/>-->
+            <!--</itemDef>-->
+            <!--<itemDef name="beacon_daxss_cdh_bat_heater_ena" type="YesNo1">-->
+                <!--<description text="DAXSS CDH Battery Heater Enabled"/>-->
+            <!--</itemDef>-->
+            <itemDef name="beacon_daxss_cdh_temp" type="DAXSS_CDH_Temp16L">
+                <description text="DAXSS CDH Temp"/>
+            </itemDef>
+            <itemDef name="beacon_daxss_sps_rate" type="uint32L">
+                <description text="DAXSS SPS Sum Rate"/>
+            </itemDef>
+            <itemDef name="beacon_daxss_sps_x" type="uint16L">
+                <description text="DAXSS SPS X"/>
+            </itemDef>
+            <itemDef name="beacon_daxss_sps_y" type="uint16L">
+                <description text="DAXSS SPS Y"/>
+            </itemDef>
+            <itemDef name="beacon_daxss_slow_count" type="uint16L">
+                <description text="DAXSS X Slow Count Rate"/>
+            </itemDef>
+            <itemDef name="beacon_bat_fg1" type="EPS_SoC16L">
+                <description text="Battery Voltage"/>
+            </itemDef>
+            <itemDef name="beacon_daxss_curr" type="EPS_SA_I16L">
+                <description text="DAXSS Current"/>
+            </itemDef>
+            <itemDef name="beacon_daxss_volt" type="EPS_SA_V16L">
+                <description text="DAXSS Voltage"/>
+            </itemDef>
+            <itemDef name="beacon_cdh_curr" type="EPS_SA_I16L">
+                <description text="CDH Current"/>
+            </itemDef>
+            <itemDef name="beacon_cdh_volt" type="EPS_SA_V16L">
+                <description text="CDH Voltage"/>
+            </itemDef>
+            <itemDef name="beacon_sband_curr" type="EPS_SA_I16L">
+                <description text="SBand Current"/>
+            </itemDef>
+            <itemDef name="beacon_sband_volt" type="EPS_SA_V16L">
+                <description text="SBand Voltage"/>
+            </itemDef>
+            <itemDef name="beacon_uhf_curr" type="EPS_SA_I16L">
+                <description text="UHF Current"/>
+            </itemDef>
+            <itemDef name="beacon_uhf_volt" type="EPS_SA_V16L">
+                <description text="UHF Voltage"/>
+            </itemDef>
+            <itemDef name="beacon_heater_curr" type="EPS_SA_I16L">
+                <description text="Battery Heater Current"/>
+            </itemDef>
+            <itemDef name="beacon_heater_volt" type="EPS_SA_V16L">
+                <description text="Battery Heater Voltage"/>
+            </itemDef>
+            <itemDef name="beacon_sp2_curr" type="EPS_SA_I16L">
+                <description text="SP2 Current"/>
+            </itemDef>
+            <itemDef name="beacon_sp2_volt" type="EPS_SA_V16L">
+                <description text="SP2 Voltage"/>
+            </itemDef>
+            <itemDef name="beacon_sp1_curr" type="EPS_SA_I16L">
+                <description text="SP1 Current"/>
+            </itemDef>
+            <itemDef name="beacon_sp1_volt" type="EPS_SA_V16L">
+                <description text="SP1 Voltage"/>
+            </itemDef>
+            <itemDef name="beacon_sp0_curr" type="EPS_SA_I16L">
+                <description text="SP0 Current"/>
+            </itemDef>
+            <itemDef name="beacon_sp0_volt" type="EPS_SA_V16L">
+                <description text="SP0 Voltage"/>
+            </itemDef>
+            <itemDef name="beacon_bat_vcell" type="uint16L">
+                <description text="Battery FG Voltage"/>
+            </itemDef>
+            <itemDef name="beacon_gps_12v_2_curr" type="EPS_SA_I16L">
+                <description text="GPS 12V_2 Current"/>
+            </itemDef>
+            <itemDef name="beacon_gps_12v_2_volt" type="EPS_SA_V16L">
+                <description text="GPS 12V_2 Voltage"/>
+            </itemDef>
+            <itemDef name="beacon_gps_12v_1_curr" type="EPS_SA_I16L">
+                <description text="GPS 12V_1 Current"/>
+            </itemDef>
+            <itemDef name="beacon_gps_12v_1_volt" type="EPS_SA_V16L">
+                <description text="GPS 12V_1 Voltage"/>
+            </itemDef>
+            <itemDef name="beacon_bat_curr" type="EPS_SA_I16L">
+                <description text="Battery Sense Curr"/>
+            </itemDef>
+            <itemDef name="beacon_bat_volt" type="EPS_SA_V16L">
+                <description text="Battery Sense Voltage"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_curr" type="EPS_SA_I16L">
+                <description text="ADCS Current"/>
+            </itemDef>
+            <itemDef name="beacon_adcs_volt" type="EPS_SA_V16L">
+                <description text="ADCS Voltage"/>
+            </itemDef>
+            <itemDef name="beacon_3p3_curr" type="EPS_SA_I16L">
+                <description text="3.3 Current"/>
+            </itemDef>
+            <itemDef name="beacon_3p3_volt" type="EPS_SA_V16L">
+                <description text="3.3 Voltage"/>
+            </itemDef>
+            <itemDef name="beacon_cip_curr" type="EPS_SA_I16L">
+                <description text="CIP Current"/>
+            </itemDef>
+            <itemDef name="beacon_cip_volt" type="EPS_SA_V16L">
+                <description text="CIP Voltage"/>
+            </itemDef>
+            <itemDef name="beacon_obc_temp" type="EPS_ADC16L">
+                <description text="OBC Temperature 1"/>
+            </itemDef>
+            <itemDef name="beacon_eps_temp" type="EPS_ADC16L">
+                <description text="EPS Temperature"/>
+            </itemDef>
+            <itemDef name="beacon_int_temp" type="EPS_ADC16L">
+                <description text="Interface Temperature"/>
+            </itemDef>
+            <itemDef name="beacon_sp0_temp" type="EPS_ADC16L">
+                <description text="SP0 Temperature"/>
+            </itemDef>
+            <itemDef name="beacon_bat0_temp" type="EPS_ADC16L">
+                <description text="Battery 0 Temperature"/>
+            </itemDef>
+            <itemDef name="beacon_sp1_temp" type="EPS_ADC16L">
+                <description text="SP1 Temperature"/>
+            </itemDef>
+            <itemDef name="beacon_bat1_temp" type="EPS_ADC16L">
+                <description text="Battery 1 Temperature"/>
+            </itemDef>
+            <itemDef name="beacon_sp2_temp" type="EPS_ADC16L">
+                <description text="SP2 Temperature"/>
+            </itemDef>
+            <itemDef name="beacon_bat_fg3" type="EPS_SoC16L">
+                <description text="Battery Gauge"/>
+            </itemDef>
+            <itemDef name="beacon_bat0_temp_conv" type="floatL">
+                <description text="Battery Temp 0 Converted"/>
+            </itemDef>
+            <itemDef name="beacon_bat1_temp_conv" type="floatL">
+                <description text="Battery Temp 1 Converted"/>
+            </itemDef>
+            <itemDef name="beacon_mode" type="SystemMode8L">
+                <description text="Current system mode"/>
+            </itemDef>
+        </field>
+    </frameDef>
+    <frameDef id="#APID_TLM_SW_STAT_PKT" name="beacon">
+        <description text="Beacon Packet"/>
+        <field>
+            <frameCopy name="ccsdsTlmHeader" suffix="_beacon"/>
+            <item name="beacon_frame"/>
+        </field>
+    </frameDef>
+
+    <dictionary name="ADCSBootRelay">
+        <pair key="0" str="RED"/>
+        <pair key="3" str="PRI"/>
+    </dictionary>
+    <typeState name="ADCSBootRelay2" size="2" dict="ADCSBootRelay"/>
+
+    <dictionary name="ADCSWDEnaStat">
+        <pair key="0" str="DIS"/>
+        <pair key="1" str="ENA"/>
+    </dictionary>
+    <typeState name="ADCSWDEnaStat1" size="1" dict="ADCSWDEnaStat"/>
+
+    <dictionary name="ADCSWDRstStat">
+        <pair key="0" str="NONE"/>
+        <pair key="1" str="WATCHDOG"/>
+    </dictionary>
+    <typeState name="ADCSWDRstStat1" size="1" dict="ADCSWDRstStat"/>
+
+    <dictionary name="ADCSArmStat">
+        <pair key="0" str="NONE"/>
+        <pair key="1" str="ARMED"/>
+    </dictionary>
+    <typeState name="ADCSArmStat1" size="1" dict="ADCSArmStat"/>
+
+    <dictionary name="ADCSBootSel">
+        <pair key="0" str="FLASH"/>
+        <pair key="1" str="COMPILED"/>
+    </dictionary>
+    <typeState name="ADCSBootSel32" size="32" dict="ADCSBootSel" endian="BIG"/>
+
+
+    <frameDef name="adcs_l0_frame">
+        <field>
+            <itemDef name="adcs_l0_hw_sec" type="dn8">
+                <description text="Hardware second counter"/>
+            </itemDef>
+            <itemDef name="adcs_l0_rjct_count" type="dn8">
+                <description text="Level 0 reject counter"/>
+            </itemDef>
+            <itemDef name="adcs_l0_acpt_count" type="dn8">
+                <description text="Level 0 accept counter"/>
+            </itemDef>
+            <itemDef name="adcs_l0_wd_cnt" type="dn3">
+                <description text="Watchdog 2 second counter"/>
+            </itemDef>
+            <itemDef name="adcs_l0_rst_arm" type="ADCSArmStat1">
+                <description text="Processor reset arm status"/>
+            </itemDef>
+            <itemDef name="adcs_l0_wd_stat" type="ADCSWDRstStat1">
+                <description text="Watchdog reset status"/>
+            </itemDef>
+            <itemDef name="adcs_l0_wd_ena" type="ADCSWDEnaStat1">
+                <description text="Watchdog reset enable status"/>
+            </itemDef>
+            <itemDef name="adcs_l0_boot_relay" type="ADCSBootRelay2">
+                <description text="Boot relay status"/>
+            </itemDef>
+            <itemDef name="adcs_l0_adc_hvbus" type="dn16b">
+                <description text="ADC Channel 1"/>
+            </itemDef>
+            <itemDef name="adcs_l0_adc_lvbus" type="dn16b">
+                <description text="ADC Channel 0"/>
+            </itemDef>
+            <itemDef name="adcs_l0_adc_1p8_v" type="dn16b">
+                <description text="ADC Channel 3"/>
+            </itemDef>
+            <itemDef name="adcs_l0_adc_2p5_v" type="dn16b">
+                <description text="ADC Channel 2"/>
+            </itemDef>
+            <itemDef name="adcs_l0_adc_det_temp" type="dn16b">
+                <description text="ADC Channel 5"/>
+            </itemDef>
+            <itemDef name="adcs_l0_adc_1p0_v" type="dn16b">
+                <description text="ADC Channel 4"/>
+            </itemDef>
+            <itemDef name="adcs_l0_adc_flsh_pwr" type="dn16b">
+                <description text="ADC Channel 7"/>
+            </itemDef>
+            <itemDef name="adcs_l0_adc_box_temp" type="dn16b">
+                <description text="ADC Channel 6"/>
+            </itemDef>
+            <itemDef name="adcs_l0_cmd_time" type="uint32B">
+                <description text="Cmd Time Tag"/>
+            </itemDef>
+            <itemDef name="adcs_l0_boot_sel" type="ADCSBootSel32">
+                <description text="Status word 2"/>
+            </itemDef>
+            <itemDef name="adcs_l0_sync" type="uint32B">
+                <description text="L0 Sync"/>
+            </itemDef>
+        </field>
+    </frameDef>
+    <frameDef id="#APID_TLM_ADCS_L0_PKT" name="adcs_l0">
+        <description text="ADCS L0 Packet"/>
+        <field>
+            <frameCopy name="ccsdsTlmHeader" suffix="_adcs_l0"/>
+            <item name="adcs_l0_frame"/>
+        </field>
+    </frameDef>
+
+</hydraDef>

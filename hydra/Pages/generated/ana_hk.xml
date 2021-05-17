@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<pageDef>
+  <page title="ana_hk">
+    <column>
+      <frame name="ana_hk"/>
+    </column>
+  </page>
+</pageDef>
+

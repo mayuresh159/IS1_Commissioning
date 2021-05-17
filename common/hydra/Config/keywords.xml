@@ -1,0 +1,5 @@
+<hydraDef>
+
+  <keyword str="COMM_USB_PORT" value="/dev/ttyUSB0"/>
+  
+</hydraDef>

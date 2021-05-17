@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<pageDef>
+  <page title="adcs_tables">
+    <column>
+      <frame name="adcs_tables"/>
+    </column>
+  </page>
+</pageDef>
+

@@ -1,0 +1,83 @@
+<pageDef>
+
+	<size width="650" height="650"/>
+	<background color="WHITE"/>
+	<text color="BLACK"/>
+	<font name="Times_New_Roman" size="12"/>
+
+    <page title="Critical_Telemetry">
+        <column>
+
+        	<section name="Spacecraft State">
+        		<row item = "beacon_cmd_succ_count" label ="Commands Since Boot"/>
+				<row item = "beacon_mode" label ="Spacecraft Mode"/>
+				<row item = "beacon_adcs_mode" label ="Pointing Mode"/>
+				<row item = "beacon_pwr_status_cip" label ="CIP Enabled"/>
+				<row item = "beacon_pwr_status_daxss" label ="DAXSS Enabled"/>
+				<row item = "beacon_eclipse_state" label ="Onboard Eclipse Determination"/>	
+			</section>
+
+			<section name="Power">
+				<row item = "beacon_sp0_volt" label ="Body Mount Solar Panel Voltage" units="V"/>
+				<row item = "beacon_sp0_curr" label ="Body Mount Solar Panel Current" units="A"/>
+				<row item = "beacon_sp1_volt" label ="Deployable Solar Panel 1 Voltage" units="V"/>
+				<row item = "beacon_sp1_curr" label ="Deployable Solar Panel 1 Current" units="A"/>
+				<row item = "beacon_sp2_volt" label ="Deployable Solar Panel 2 Voltage" units="V"/>
+				<row item = "beacon_sp2_curr" label ="Deployable Solar Panel 2 Current" units="A"/>
+				<row item = "beacon_bat_volt" label ="Battery Voltage" units="V"/>	
+				<row item = "beacon_bat_curr" label ="Battery Current" units="A"/>			
+        	</section>
+
+			<!--  Added for TVAC test (T. Woods 6/23/2020) -->
+			<section name="TVAC Logging">
+				<row item = "beacon_mode" label ="Spacecraft Mode"/>
+				<row item = "beacon_bat_volt" label ="Battery Voltage" units="V"/>
+				<row item = "beacon_obc_temp" label ="CDH Board" units="C"/>
+				<row item = "beacon_uhf_temp" label ="UHF" units="C"/>	
+				<row item = "beacon_eps_temp" label ="EPS Board" units="C"/>
+				<row item = "beacon_sp0_temp" label ="Body Mount Solar Panel" units="C"/>
+				<row item = "beacon_bat1_temp_conv" label ="Battery Board" units="C"/>
+				<row item = "beacon_cip_temp1" label ="CIP" units="C"/>
+				<row item = "beacon_daxss_cdh_temp" label ="DAXSS" units="C"/>
+			</section>
+		
+		</column>
+		
+
+        <column>
+        	<section name="ADCS">
+        	
+				<row item = "beacon_adcs_sun_vec1" label ="Sun Vector 1"/>
+				<row item = "beacon_adcs_sun_vec2" label ="Sun Vector 2"/>
+				<row item = "beacon_adcs_sun_vec3" label ="Sun Vector 3"/>
+				<row item = "beacon_adcs_wheel_sp1" label ="Wheel Speed 1" units="rpm"/>
+				<row item = "beacon_adcs_wheel_sp2" label ="Wheel Speed 2" units="rpm"/>
+				<row item = "beacon_adcs_wheel_sp3" label ="Wheel Speed 3" units="rpm"/>
+
+				
+			</section>
+        	<section name="Temperature">
+        		
+        		<row item = "beacon_obc_temp" label ="CDH Board" units="C"/>
+				<row item = "beacon_eps_temp" label ="EPS Board" units="C"/>
+				<row item = "beacon_sp0_temp" label ="Body Mount Solar Panel" units="C"/>
+				<row item = "beacon_sp1_temp" label ="Deployable Solar Panel 1" units="C"/>
+				<row item = "beacon_sp2_temp" label ="Deployable Solar Panel 2" units="C"/>
+				<row item = "beacon_bat1_temp" label ="Battery Board" units="C"/>
+				<row item = "beacon_uhf_temp" label ="UHF" units="C"/>	
+				<row item = "beacon_sband_top_temp" label ="SBand" units="C"/>	
+        	</section>
+
+        	<section name="ADCS wheel Temperatures">
+        		
+        		<row item = "beacon_adcs_wheel_temp1" label ="Wheel 1 Temp" units="C"/>
+        		<row item = "beacon_adcs_wheel_temp2" label ="Wheel 2 Temp" units="C"/>
+        		<row item = "beacon_adcs_wheel_temp3" label ="Wheel 3 Temp" units="C"/>
+        	</section>
+
+		</column>
+
+	
+    </page>
+</pageDef>
+

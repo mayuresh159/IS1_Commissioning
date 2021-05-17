@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<hydraXTCE>
+  <tlm header="ccsdsHeader">
+    <packet>des_hk.des_hk_frame</packet>
+    <packet>des_task.des_task_frame</packet>
+    <packet>des_sched.des_sched_frame</packet>
+    <packet>des_time.des_time_frame</packet>
+    <packet>mem_dump.mem_dump_frame</packet>
+    <packet>fp_hk.fp_hk_frame</packet>
+    <packet>log_hk.log_hk_frame</packet>
+    <packet>lib_hk.lib_hk_frame</packet>
+    <packet>tbl_hk.tbl_hk_frame</packet>
+    <packet>seq_hk.seq_hk_frame</packet>
+    <packet>tlm_hk.tlm_hk_frame</packet>
+    <packet>cmd_hk.cmd_hk_frame</packet>
+    <packet>sband_hk.sband_hk_frame</packet>
+    <packet>sd_hk.sd_hk_frame</packet>
+    <packet>uhf_hk.uhf_hk_frame</packet>
+    <packet>uhf_pass.uhf_pass_frame</packet>
+    <packet>cip_hk.cip_hk_frame</packet>
+    <packet>cip_msg_hk.cip_msg_hk_frame</packet>
+    <packet>mode_hk.mode_hk_frame</packet>
+    <packet>daxss_msg_hk.daxss_msg_hk_frame</packet>
+    <packet>daxss_hk.daxss_hk_frame</packet>
+    <packet>ana_hk.ana_hk_frame</packet>
+    <packet>adcs_msg_hk.adcs_msg_hk_frame</packet>
+    <packet>adcs_hk.adcs_hk_frame</packet>
+    <packet>adcs_analogs.adcs_analogs_frame</packet>
+    <packet>adcs_gps.adcs_gps_frame</packet>
+    <packet>adcs_clock_sync.adcs_clock_sync_frame</packet>
+    <packet>adcs_tracker.adcs_tracker_frame</packet>
+    <packet>adcs_refs.adcs_refs_frame</packet>
+    <packet>adcs_time.adcs_time_frame</packet>
+    <packet>adcs_imu.adcs_imu_frame</packet>
+    <packet>adcs_cal.adcs_cal_frame</packet>
+    <packet>adcs_att_det.adcs_att_det_frame</packet>
+    <packet>adcs_tracker_ctrl.adcs_tracker_ctrl_frame</packet>
+    <packet>adcs_att_ctrl.adcs_att_ctrl_frame</packet>
+    <packet>adcs_tables.adcs_tables_frame</packet>
+    <packet>adcs_general.adcs_general_frame</packet>
+    <packet>adcs_att_cmd.adcs_att_cmd_frame</packet>
+    <packet>adcs_tracker2.adcs_tracker2_frame</packet>
+    <packet>adcs_tlm_proc.adcs_tlm_proc_frame</packet>
+    <packet>adcs_ext_tracker2.adcs_ext_tracker2_frame</packet>
+    <packet>adcs_rw_drive.adcs_rw_drive_frame</packet>
+    <packet>adcs_momentum.adcs_momentum_frame</packet>
+    <packet>adcs_css.adcs_css_frame</packet>
+    <packet>adcs_mag.adcs_mag_frame</packet>
+    <packet>adcs_command_tlm.adcs_command_tlm_frame</packet>
+  </tlm>
+</hydraXTCE>
+

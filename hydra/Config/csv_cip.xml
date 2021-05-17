@@ -1,0 +1,14 @@
+<hydraXTCE>
+    <cmd>
+        <name>cmd_cip_pass</name>
+        <name>cmd_cip_set_time_tag</name>
+        <name>cmd_cip_set_sweep_voltage</name>
+    </cmd>
+
+    <tlm header="ccsdsHeader">
+        <packet>cip_soh.cip_soh_frame</packet>
+        <packet>cip_sci1.cip_sci1_frame</packet>
+        <packet>cip_sci2.cip_sci2_frame</packet>
+    </tlm>
+
+</hydraXTCE>

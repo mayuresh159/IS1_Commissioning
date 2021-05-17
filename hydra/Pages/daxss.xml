@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<pageDef>
+  <page title="daxss">
+    <column>
+      <frame name="daxss_log"/>
+    </column>
+	<column>
+      <frame name="daxss_sci"/>
+    </column>
+  </page>
+</pageDef>

@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<pageDef>
+  <page title="log_msg">
+    <column>
+      <frame name="log_msg"/>
+    </column>
+  </page>
+</pageDef>
+

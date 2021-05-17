@@ -1,0 +1,504 @@
+<?xml version="1.0" ?>
+<hydraDef>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/des/DesLog.h-->
+    <pair key="#LOG_EVT_GROUP_DES_ERR_BASE" str="&quot;ERROR: DES Overrun: Task $desTaskID(%d), Start %d, Total %d, End %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/des/DesLog.h-->
+    <pair key="#LOG_EVT_GROUP_DES_ERR_BASE+1" str="&quot;ERROR: DES command is not implemented&quot;"/>
+  </dictionary>
+  <dictionary name="PostMortem">
+    <!--From file ../../common/src/apps/src/des/DesLog.h-->
+    <pair key="#LOG_EVT_GROUP_DES_ERR_BASE" str="&quot;Task Entry: $desTaskID(%d)&quot;"/>
+  </dictionary>
+  <dictionary name="PostMortem">
+    <!--From file ../../common/src/apps/src/des/DesLog.h-->
+    <pair key="#LOG_EVT_GROUP_DES_ERR_BASE+1" str="&quot;Task Exit: $desTaskID(%d)&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/mem/MemLog.h-->
+    <pair key="#LOG_EVT_GROUP_MEM_ERR_BASE" str="&quot;ERROR: Bad Memory Section %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/mem/MemLog.h-->
+    <pair key="#LOG_EVT_GROUP_MEM_ERR_BASE+1" str="&quot;Memory State $memOpTypes(%d) -&gt; $memOpTypes(%d)&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/mem/MemLog.h-->
+    <pair key="#LOG_EVT_GROUP_MEM_ERR_BASE+2" str="&quot;ERROR: Memory Operation $memOpTypes(%d) Failed - Count %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/mem/MemLog.h-->
+    <pair key="#LOG_EVT_GROUP_MEM_ERR_BASE+3" str="&quot;ERROR: Memory Default Case $memCaseStms(%d), %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/fp/FpLog.h-->
+    <pair key="#LOG_EVT_GROUP_FP_NOM_BASE" str="&quot;FP Entry Fired: Entry %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/fp/FpLog.h-->
+    <pair key="#LOG_EVT_GROUP_FP_NOM_BASE+1" str="&quot;FP Entry Passive: Entry %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/fp/FpLog.h-->
+    <pair key="#LOG_EVT_GROUP_FP_ERR_BASE" str="&quot;ERROR: FP Entry validate failed: Entry %d, $fpValidReason(%d)&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/fp/FpLog.h-->
+    <pair key="#LOG_EVT_GROUP_FP_ERR_BASE+1" str="&quot;ERROR: FP Entry check error: Entry %d, $fpWatchError(%d)&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/tbl/TblLog.h-->
+    <pair key="#LOG_EVT_GROUP_TBL_NOM_BASE" str="&quot;TBL: Update pending for table $TableIDs(%d)&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/tbl/TblLog.h-->
+    <pair key="#LOG_EVT_GROUP_TBL_NOM_BASE+1" str="&quot;TBL: Update complete for table $TableIDs(%d)&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/tbl/TblLog.h-->
+    <pair key="#LOG_EVT_GROUP_tbl_ERR_BASE+1" str="&quot;Table State $tblOpTypes(%d) -&gt; $tblOpTypes(%d)&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/tbl/TblLog.h-->
+    <pair key="#LOG_EVT_GROUP_tbl_ERR_BASE+2" str="&quot;ERROR: Table Operation $tblOpTypes(%d) Failed - Count %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/tbl/TblLog.h-->
+    <pair key="#LOG_EVT_GROUP_tbl_ERR_BASE+3" str="&quot;ERROR: Table Default Case $tblCaseStms(%d), %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/seq/SeqLog.h-->
+    <pair key="#LOG_EVT_GROUP_SEQ_NOM_BASE" str="&quot;Sequence %d State Transition: $seqState(%d) - $seqState(%d)&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/seq/SeqLog.h-->
+    <pair key="#LOG_EVT_GROUP_SEQ_NOM_BASE+1" str="&quot;ERROR: Sequence No Sequence: State $seqState(%d)&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/seq/SeqLog.h-->
+    <pair key="#LOG_EVT_GROUP_SEQ_NOM_BASE+2" str="&quot;ERROR: Sequence %d Bad State %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/seq/SeqLog.h-->
+    <pair key="#LOG_EVT_GROUP_SEQ_NOM_BASE+3" str="&quot;ERROR: Sequence %d Stopped in Error: Reason $seqStopCode(%d)&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/seq/SeqLog.h-->
+    <pair key="#LOG_EVT_GROUP_SEQ_NOM_BASE+4" str="&quot;ERROR: Sequence %d Already Nested&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/seq/SeqLog.h-->
+    <pair key="#LOG_EVT_GROUP_SEQ_NOM_BASE+5" str="&quot;Sequence %d Calling Buffer %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/seq/SeqLog.h-->
+    <pair key="#LOG_EVT_GROUP_SEQ_NOM_BASE+6" str="&quot;Sequence %d Returning&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/seq/SeqLog.h-->
+    <pair key="#LOG_EVT_GROUP_SEQ_NOM_BASE+7" str="&quot;Sequence %d Starting Buffer %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/seq/SeqLog.h-->
+    <pair key="#LOG_EVT_GROUP_SEQ_NOM_BASE+8" str="&quot;Sequence Found in Buffer 0x%02x%02x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/seq/SeqLog.h-->
+    <pair key="#LOG_EVT_GROUP_SEQ_NOM_BASE+9" str="&quot;ERROR: Sequence ID 0x%02x%02x%02x%02x Not Found&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/seq/SeqLog.h-->
+    <pair key="#LOG_EVT_GROUP_SEQ_NOM_BASE+10" str="&quot;Sequence Id 0x%02x%02x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/tlm/TlmLog.h-->
+    <pair key="#LOG_EVT_GROUP_TLM_ERR_BASE" str="&quot;ERROR: Telemetry packet could not be sent, Interface $PktStream(%d), Count %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/tlm/TlmLog.h-->
+    <pair key="#LOG_EVT_GROUP_TLM_NOM_BASE" str="&quot;Telemetry packet sent: Apid 0x%02X%02X, Interface $PktStream(%d)&quot;"/>
+  </dictionary>
+  <dictionary name="PostMortem">
+    <!--From file ../../common/src/apps/src/tlm/TlmLog.h-->
+    <pair key="#LOG_EVT_GROUP_TLM_NOM_BASE" str="&quot;Telemetry Packet Sent: Apid 0x%02x%02x, Interface $PktStream(%d)&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/cmd/CmdLog.h-->
+    <pair key="#LOG_EVT_GROUP_CMD_NOM_BASE" str="&quot;Command Received: Source $CmdSources(%d) $CmdOpcodesHydra(%d), Count %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/cmd/CmdLog.h-->
+    <pair key="#LOG_EVT_GROUP_CMD_ERR_BASE" str="&quot;ERROR: Command Failed: Source $CmdSources(%d) Opcode $CmdOpcodesHydra(%d) Reason $CmdFailCodes(%d) Count %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/cmd/CmdLog.h-->
+    <pair key="#LOG_EVT_GROUP_CMD_ERR_BASE+1" str="&quot;ERROR: Unknown ApID: Source $CmdSources(%d) ApID: 0x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/cmd/CmdLog.h-->
+    <pair key="#LOG_EVT_GROUP_CMD_ERR_BASE+2" str="&quot;ERROR: ApID not assigned: Source $CmdSources(%d) ApID: 0x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/cmd/CmdLog.h-->
+    <pair key="#LOG_EVT_GROUP_CMD_ERR_BASE+3" str="&quot;ERROR: Bad Packet Type: Source $CmdSources(%d) ApID: 0x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/cmd/CmdLog.h-->
+    <pair key="#LOG_EVT_GROUP_CMD_ERR_BASE+4" str="&quot;ERROR: Bad Packet Length: Source $CmdSources(%d) Length: 0x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/cmd/CmdLog.h-->
+    <pair key="#LOG_EVT_GROUP_CMD_ERR_BASE+5" str="&quot;ERROR: Bad Cmd Checksum: Source $CmdSources(%d), Calculated %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/cmd/CmdLog.h-->
+    <pair key="#LOG_EVT_GROUP_CMD_ERR_BASE+6" str="&quot;ERROR: Bad Cmd Length: Expected %d, Received %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file ../../common/src/apps/src/cmd/CmdLog.h-->
+    <pair key="#LOG_EVT_GROUP_CMD_ERR_BASE+7" str="&quot;ERROR: Bad Cmd Source: Source %d&quot;"/>
+  </dictionary>
+  <dictionary name="PostMortem">
+    <!--From file ../../common/src/apps/src/cmd/CmdLog.h-->
+    <pair key="#LOG_EVT_GROUP_CMD_NOM_BASE" str="&quot;Executing command: Source $CmdSources(%d), Opcode $CmdOpcodesHydra(%d)&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sband/sbandLog.h-->
+    <pair key="#LOG_EVT_GROUP_SBAND_NOM_BASE" str="&quot;SBAND Mode Changed: $SbandRadioMode(%d)&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sband/sbandLog.h-->
+    <pair key="#LOG_EVT_GROUP_SBAND_NOM_BASE+1" str="&quot;SBAND is ALIVE!&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sband/sbandLog.h-->
+    <pair key="#LOG_EVT_GROUP_SBAND_ERR_BASE" str="&quot;ERROR: Sync Mode Timeout&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sband/sbandLog.h-->
+    <pair key="#LOG_EVT_GROUP_SBAND_ERR_BASE+1" str="&quot;ERROR: SBAND is DEAD!&quot;"/>
+  </dictionary>
+  <dictionary name="PostMortem">
+    <!--From file apps/sband/sbandLog.h-->
+    <pair key="#LOG_EVT_GROUP_SBAND_NOM_BASE" str="&quot;Message Text&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_ERR_BASE" str="&quot;ERROR: SD Card: Cannot store, packet too large: size = 0x%02x%02x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_ERR_BASE+1" str="&quot;ERROR: SD Flash Timeout: Address 0x%02x%02x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_ERR_BASE+2" str="&quot;ERROR: SD Erase Is Busy&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_ERR_BASE+3" str="&quot;ERROR: SD Read Operation Timeout: Page 0x%02x%02x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_ERR_BASE+4" str="&quot;ERROR: SD Card: Could not load partition table&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_ERR_BASE+5" str="&quot;ERROR: SD Card: Could not initialize card %d, state $SDCardInitState(%d)&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_ERR_BASE+6" str="&quot;ERROR: SD Card: Page Read Timeout, Count 0x%02x%02x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_ERR_BASE+7" str="&quot;ERROR: SD Card: Read Start Failed: Count 0x%02x%02x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_ERR_BASE+8" str="&quot;ERROR: SD Card: Read Packet Length Error: 0x%02x%02x, Count 0x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_ERR_BASE+9" str="&quot;ERROR: SD Card: Bad Write Error: Address 0x%02x%02x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_ERR_BASE+10" str="&quot;ERROR: SD Card: Write Timeout Error&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_ERR_BASE+11" str="&quot;ERROR: SD Card: Invalid ApID, Cannot Store: ApID 0x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_ERR_BASE+12" str="&quot;ERROR: SD Card: Write not complete for read: Count 0x%02x%02x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_ERR_BASE+13" str="&quot;ERROR: SD Card: Too many attempts to read page 0x%02x%02x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_ERR_BASE+14" str="&quot;ERROR: SD Card: Attempting to Recover Card %d, Count %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_ERR_BASE+15" str="&quot;ERROR: SD Card: Too Many Recovery Attempts: Card %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_NOM_BASE" str="&quot;SD Flash: Commit page 0x%02x%02x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_NOM_BASE+1" str="&quot;SD Flash: Erase Block 0x%02x%02x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_NOM_BASE+2" str="&quot;SD Flash: Read Start, Count 0x%02x%02x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_NOM_BASE+3" str="&quot;SD Card: Read complete&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_NOM_BASE+4" str="&quot;SD Card: Initialization complete: Card %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_NOM_BASE+5" str="&quot;SD Card: Power State: Card %d, Power %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_NOM_BASE+6" str="&quot;SD Card: Card selected: Card %d&quot;"/>
+  </dictionary>
+  <dictionary name="PostMortem">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_NOM_BASE" str="&quot;SD Card start page read: address 0x%02x%02x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="PostMortem">
+    <!--From file apps/sdcard/SDCardLog.h-->
+    <pair key="#LOG_EVT_GROUP_SD_NOM_BASE+1" str="&quot;SD Card stop page read: Partition %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/eps/EPSLog.h-->
+    <pair key="#LOG_EVT_GROUP_EPS_NOM_BASE" str="&quot;EPS Power Switch: Component $PwrComponent(%d), State $PwrState(%d)&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/eps/EPSLog.h-->
+    <pair key="#LOG_EVT_GROUP_EPS_NOM_BASE+1" str="&quot;EPS Deployment Switch: Component $DeployComponent(%d), State $PwrState(%d)&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/eps/EPSLog.h-->
+    <pair key="#LOG_EVT_GROUP_EPS_NOM_BASE+2" str="&quot;EPS Eclipse Status: State %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/eps/EPSLog.h-->
+    <pair key="#LOG_EVT_GROUP_EPS_ERR_BASE" str="&quot;ERROR: EPS Hk query failed: code %d, point %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/eps/EPSLog.h-->
+    <pair key="#LOG_EVT_GROUP_EPS_ERR_BASE+1" str="&quot;ERROR: EPS Could not load table&quot;"/>
+  </dictionary>
+  <dictionary name="PostMortem">
+    <!--From file apps/eps/EPSLog.h-->
+    <pair key="#LOG_EVT_GROUP_EPS_NOM_BASE" str="&quot;Message Text&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/init/InitLog.h-->
+    <pair key="#LOG_EVT_GROUP_INIT_NOM_BASE" str="&quot;SD Card: Initialized card %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/init/InitLog.h-->
+    <pair key="#LOG_EVT_GROUP_INIT_ERR_BASE" str="&quot;ERROR: Could not initialize SD Card %d&quot;"/>
+  </dictionary>
+  <dictionary name="PostMortem">
+    <!--From file apps/init/InitLog.h-->
+    <pair key="#LOG_EVT_GROUP_INIT_NOM_BASE" str="&quot;Message Text&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/uhf/UHFLog.h-->
+    <pair key="#LOG_EVT_GROUP_UHF_NOM_BASE" str="&quot;UHF is ALIVE!&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/uhf/UHFLog.h-->
+    <pair key="#LOG_EVT_GROUP_UHF_NOM_BASE+1" str="&quot;UHF initialize command sent&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/uhf/UHFLog.h-->
+    <pair key="#LOG_EVT_GROUP_UHF_ERR_BASE" str="&quot;ERROR: AX25 Format Error: Type $UHFAX25Errors(%d), Count %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/uhf/UHFLog.h-->
+    <pair key="#LOG_EVT_GROUP_UHF_ERR_BASE+1" str="&quot;ERROR: UHF Rx Packet too long&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/uhf/UHFLog.h-->
+    <pair key="#LOG_EVT_GROUP_UHF_ERR_BASE+2" str="&quot;ERROR: UHF Tx In Progress&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/uhf/UHFLog.h-->
+    <pair key="#LOG_EVT_GROUP_UHF_ERR_BASE+3" str="&quot;ERROR: UHF Radio not ready for commands&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/uhf/UHFLog.h-->
+    <pair key="#LOG_EVT_GROUP_UHF_ERR_BASE+4" str="&quot;ERROR: UHF Radio Response Not Yet Sent&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/uhf/UHFLog.h-->
+    <pair key="#LOG_EVT_GROUP_UHF_ERR_BASE+5" str="&quot;ERROR: UHF Radio response too large: Count %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/uhf/UHFLog.h-->
+    <pair key="#LOG_EVT_GROUP_UHF_ERR_BASE+6" str="&quot;ERROR: UHF is DEAD!&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/cip/CIPLog.h-->
+    <pair key="#LOG_EVT_GROUP_CIP_NOM_BASE" str="&quot;CIP Pass through command sent: opcode $CIPCmdOpcodes(%d), count %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/cip/CIPLog.h-->
+    <pair key="#LOG_EVT_GROUP_CIP_NOM_BASE+1" str="&quot;CIP is ALIVE!&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/cip/CIPLog.h-->
+    <pair key="#LOG_EVT_GROUP_CIP_ERR_BASE" str="&quot;ERROR: CIP Packet CRC Incorrect: Recv 0x%02x, Expected 0x%02x, Count %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/cip/CIPLog.h-->
+    <pair key="#LOG_EVT_GROUP_CIP_ERR_BASE+1" str="&quot;ERROR: CIP is DEAD!&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/cip/CIPLog.h-->
+    <pair key="#LOG_EVT_GROUP_CIP_ERR_BASE+2" str="&quot;ERROR: CIP Message Length Error: Received 0x%02x%02x, Expected 0x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/cip/CIPLog.h-->
+    <pair key="#LOG_EVT_GROUP_CIP_ERR_BASE+3" str="&quot;ERROR: CIP Message ApID Error: Received 0x%02x%02x, Expected 0x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/cip/CIPLog.h-->
+    <pair key="#LOG_EVT_GROUP_CIP_ERR_BASE+4" str="&quot;ERROR: CIP Message Could not pass message: Count %d&quot;"/>
+  </dictionary>
+  <dictionary name="PostMortem">
+    <!--From file apps/cip/CIPLog.h-->
+    <pair key="#LOG_EVT_GROUP_CIP_NOM_BASE" str="&quot;Message Text&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/mode/modeLog.h-->
+    <pair key="#LOG_EVT_GROUP_MODE_NOM_BASE" str="&quot;System Mode Change: $SystemMode(%d) to $SystemMode(%d)&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/mode/modeLog.h-->
+    <pair key="#LOG_EVT_GROUP_MODE_NOM_BASE+1" str="&quot;Launch delay complete: Time 0x%02x%02x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/mode/modeLog.h-->
+    <pair key="#LOG_EVT_GROUP_MODE_NOM_BASE+2" str="&quot;Mode Eclipse Status Changed: State %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/mode/modeLog.h-->
+    <pair key="#LOG_EVT_GROUP_MODE_ERR_BASE" str="&quot;ERROR: Command Loss Timer: Last command time: 0x%02x%02x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/mode/modeLog.h-->
+    <pair key="#LOG_EVT_GROUP_MODE_ERR_BASE+1" str="&quot;ERROR: Command Loss Timer Again: Last command time: 0x%02x%02x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/mode/modeLog.h-->
+    <pair key="#LOG_EVT_GROUP_MODE_ERR_BASE+2" str="&quot;ERROR: Mode Parameter table could not be loaded&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/mode/modeLog.h-->
+    <pair key="#LOG_EVT_GROUP_MODE_ERR_BASE+3" str="&quot;ERROR: Could not read battery voltage&quot;"/>
+  </dictionary>
+  <dictionary name="PostMortem">
+    <!--From file apps/mode/modeLog.h-->
+    <pair key="#LOG_EVT_GROUP_MODE_NOM_BASE" str="&quot;Message Text&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/daxss/DaxssLog.h-->
+    <pair key="#LOG_EVT_GROUP_DAXSS_NOM_BASE" str="&quot;DAXSS Pass Through command sent: count %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/daxss/DaxssLog.h-->
+    <pair key="#LOG_EVT_GROUP_DAXSS_NOM_BASE+1" str="&quot;DAXSS is ALIVE!&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/daxss/DaxssLog.h-->
+    <pair key="#LOG_EVT_GROUP_DAXSS_ERR_BASE" str="&quot;ERROR: DAXSS Packet Bad Length: Length 0x%02x%02x, Apid 0x%02x, Count %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/daxss/DaxssLog.h-->
+    <pair key="#LOG_EVT_GROUP_DAXSS_ERR_BASE+1" str="&quot;ERROR: DAXSS Packet Bad Apid: Apid 0x%02x, Count %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/daxss/DaxssLog.h-->
+    <pair key="#LOG_EVT_GROUP_DAXSS_ERR_BASE+2" str="&quot;ERROR: DAXSS is DEAD!&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/daxss/DaxssLog.h-->
+    <pair key="#LOG_EVT_GROUP_DAXSS_ERR_BASE+3" str="&quot;ERROR: DAXSS Message Length Error: Received 0x%02x%02x, Expected 0x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/daxss/DaxssLog.h-->
+    <pair key="#LOG_EVT_GROUP_DAXSS_ERR_BASE+4" str="&quot;ERROR: DAXSS Message ApID Error: Received 0x%02x%02x, Expected 0x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/daxss/DaxssLog.h-->
+    <pair key="#LOG_EVT_GROUP_DAXSS_ERR_BASE+5" str="&quot;ERROR: DAXSS Message Could not pass message: Count %d&quot;"/>
+  </dictionary>
+  <dictionary name="PostMortem">
+    <!--From file apps/daxss/DaxssLog.h-->
+    <pair key="#LOG_EVT_GROUP_DAXSS_NOM_BASE" str="&quot;Message Text&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/adcs/ADCSLog.h-->
+    <pair key="#LOG_EVT_GROUP_ADCS_NOM_BASE" str="&quot;ADCS Eclipse Status: State %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/adcs/ADCSLog.h-->
+    <pair key="#LOG_EVT_GROUP_ADCS_NOM_BASE+1" str="&quot;ADCS is ALIVE!&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/adcs/ADCSLog.h-->
+    <pair key="#LOG_EVT_GROUP_ADCS_ERR_BASE" str="&quot;ERROR: Could not dump command response: Size 0x%02x%02x, Addr 0x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/adcs/ADCSLog.h-->
+    <pair key="#LOG_EVT_GROUP_ADCS_ERR_BASE+1" str="&quot;ERROR: ADCS Could not load table&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/adcs/ADCSLog.h-->
+    <pair key="#LOG_EVT_GROUP_ADCS_ERR_BASE+2" str="&quot;ERROR: ADCS is DEAD&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/adcs/ADCSLog.h-->
+    <pair key="#LOG_EVT_GROUP_ADCS_ERR_BASE+3" str="&quot;ERROR: ADCS housekeeping not received: Count %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/adcs/ADCSLog.h-->
+    <pair key="#LOG_EVT_GROUP_ADCS_ERR_BASE+4" str="&quot;ERROR: ADCS Message Length Error: Received 0x%02x%02x, Expected 0x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/adcs/ADCSLog.h-->
+    <pair key="#LOG_EVT_GROUP_ADCS_ERR_BASE+5" str="&quot;ERROR: ADCS Message ApID Error: Received 0x%02x%02x, Expected 0x%02x%02x&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/adcs/ADCSLog.h-->
+    <pair key="#LOG_EVT_GROUP_ADCS_ERR_BASE+6" str="&quot;ERROR: ADCS Message Could not pass message: Count %d&quot;"/>
+  </dictionary>
+  <dictionary name="Events">
+    <!--From file apps/adcs/ADCSLog.h-->
+    <pair key="#LOG_EVT_GROUP_ADCS_ERR_BASE+7" str="&quot;ERROR: ADCS Default case: State %d&quot;"/>
+  </dictionary>
+  <dictionary name="PostMortem">
+    <!--From file apps/adcs/ADCSLog.h-->
+    <pair key="#LOG_EVT_GROUP_ADCS_NOM_BASE" str="&quot;Message Text&quot;"/>
+  </dictionary>
+</hydraDef>
+

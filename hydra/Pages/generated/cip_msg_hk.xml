@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<pageDef>
+  <page title="cip_msg_hk">
+    <column>
+      <frame name="cip_msg_hk"/>
+    </column>
+  </page>
+</pageDef>
+

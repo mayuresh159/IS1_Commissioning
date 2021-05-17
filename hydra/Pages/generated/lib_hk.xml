@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<pageDef>
+  <page title="lib_hk">
+    <column>
+      <frame name="lib_hk"/>
+    </column>
+  </page>
+</pageDef>
+

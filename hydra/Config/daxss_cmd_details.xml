@@ -1,0 +1,1314 @@
+<hydraDef>
+
+    <frameDef decoder="cmdDecoder" name="daxssCmdHeader">
+        <field>
+            <itemDef name="daxssCmdHeader_flags" type="dn5" value="0x03"/>
+            <itemDef name="daxssCmdHeader_apid" type="dn11b" value="#APID_CMD_DAXSS"/>
+            <itemDef name="daxssCmdHeader_count" type="dn16b" value="0"/>
+            <itemDef name="daxssCmdHeader_len" type="dn16b" value="0"/>
+            <itemDef name="daxssCmdHeader_instCode" type="dn8" value="0x60"/>
+            <itemDef name="daxssCmdHeader_opcode" type="dn8" value="0"/>
+			<placeholder/>
+            <itemDef name="daxssCmdHeader_checksum" type="dn8" value="0"/>
+            <itemDef name="daxssCmdHeader_trailer" type="dn8" num="2" value="0x5A 0x5A"/>
+        </field>
+        <input item="daxssCmdHeader_opcode" name="opcode"/>
+        <length item="daxssCmdHeader_len" offset="-56"/>
+        <checksum item="daxssCmdHeader_checksum" start="daxssCmdHeader_instCode"
+                  stop="daxssCmdHeader_checksum" method="xor" seed="0xFF"/>
+    </frameDef>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_noop">
+        <description text="DAXSS Noop"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="0"/>
+    </command>
+
+    <dictionary name="daxssResetGroup">
+        <pair key="0" str="COMMAND"/>
+        <pair key="1" str="PERSIST"/>
+        <pair key="2" str="PHX2SAFE"/>
+        <pair key="3" str="LOCKOUT"/>
+        <pair key="4" str="CONTACT"/>
+    </dictionary>
+    <typeState name="daxssResetGroup8" size="8" dict="daxssResetGroup"/>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_reset_count">
+        <description text="DAXSS Reset Counters"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="3"/>
+        <field>
+            <argument id="group" type="daxssResetGroup8"/>
+        </field>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_time">
+        <description text="DAXSS Set Instrument Time"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="6"/>
+        <field>
+            <argument id="time" type="dn32b">
+                <description text="GPS Seconds"/>
+            </argument>
+        </field>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_time_now">
+        <description text="DAXSS Set Instrument Time"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="6"/>
+        <field>
+            <item name="gpsTime"/>
+        </field>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_rtc_sync">
+        <description text="DAXSS Set Real Time Clock (RTC) Sync Period"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="9"/>
+        <field>
+            <argument id="period" type="dn16b">
+                <description text="Period - 0-3600 seconds (0 means off)"/>
+            </argument>
+        </field>
+    </command>
+    <command name="cmd_daxss_set_rtc_sync_all" decoder="cmdDecoder" >
+    <description text="DAXSS Set Real Time Clock (RTC) Sync Period"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="9"/>
+    <field>
+      <argument id="Period" type="dn16b"/>
+      <argument id="Min" type="dn16b"/>
+      <argument id="Max" type="dn16b"/>
+    </field>
+  </command>
+
+    <dictionary name="daxssCopyParamSet">
+        <pair key="4" str="EEPVal1"/>
+        <pair key="5" str="EEPVal2"/>
+        <pair key="6" str="EEPMin"/>
+        <pair key="7" str="EEPMax"/>
+    </dictionary>
+    <typeState name="daxssCopyParamSet8" size="8" dict="daxssCopyParamSet"/>
+
+    <dictionary name="daxssCopyParamDir">
+        <pair key="0" str="RESTORE"/>
+        <pair key="1" str="SAVE"/>
+    </dictionary>
+    <typeState name="daxssCopyParamDir8" size="8" dict="daxssCopyParamDir"/>
+
+    <dictionary name="daxssCopyParamDefault">
+        <pair key="0" str="NOT_DEFAULT"/>
+        <pair key="1" str="ON_REBOOT"/>
+    </dictionary>
+    <typeState name="daxssCopyParamDefault8" size="8" dict="daxssCopyParamDefault"/>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_copy_param">
+        <description text="DAXSS Copy Parameter Set"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="12"/>
+        <field>
+            <argument id="set" type="daxssCopyParamSet8"/>
+            <argument id="dir" type="daxssCopyParamDir8"/>
+            <argument id="default" type="daxssCopyParamDefault8"/>
+        </field>
+    </command>
+
+    <dictionary name="daxssDumpParamSet">
+        <pair key="0" str="RAMVal1"/>
+        <pair key="1" str="RAMDef"/>
+        <pair key="2" str="RAMMin"/>
+        <pair key="3" str="RAMMax"/>
+        <pair key="4" str="EEPVal1"/>
+        <pair key="5" str="EEPVal2"/>
+        <pair key="6" str="EEPMin"/>
+        <pair key="7" str="EEPMax"/>
+    </dictionary>
+    <typeState name="daxssDumpParamSet8" size="8" dict="daxssDumpParamSet"/>
+    <itemTime name="gpsTime" type="dn32" method="secSinceEpoch" epoch="Jan 6 1980 00:00:00" offset="16"/>
+
+
+    <command decoder="cmdDecoder" name="cmd_daxss_dump_param">
+        <description text="DAXSS Dump Parameter Set"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="15"/>
+        <field>
+            <argument id="set" type="daxssDumpParamSet8"/>
+        </field>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_mode_persist">
+        <description text="DAXSS Set Mode Trigger Persistence"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="36"/>
+        <field>
+            <argument id="persistence" type="dn16b"/>
+        </field>
+    </command>
+    <command name="cmd_daxss_set_mode_persist_all" decoder="cmdDecoder" >
+    <description text="DAXSS Set Mode Trigger Persistence"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="36"/>
+    <field>
+      <argument id="Persistence" type="dn16b"/>
+      <argument id="Min" type="dn16b"/>
+      <argument id="Max" type="dn16b"/>
+    </field>
+  </command>
+
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_eclipse_calc">
+        <description text="DAXSS Set Eclipse Calc CSS"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="38"/>
+        <field>
+            <argument id="flag" type="dn8"/>
+        </field>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_eclipse_opt">
+        <description text="DAXSS Set Power Eclipse Options"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="45"/>
+        <field>
+            <argument id="flags" type="dn16b"/>
+        </field>
+    </command>
+    <command decoder="cmdDecoder" name="cmd_daxss_set_eclipse_opt_all">
+        <description text="DAXSS Set Power Eclipse Options"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="45"/>
+        <field>
+            <argument id="EnableFlag" type="dn16b"/>
+            <argument id="Min" type="dn16b"/>
+            <argument id="Max" type="dn16b"/>
+        </field>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_eclipse_out_volt">
+        <description text="DAXSS Set Eclipse Out Volt"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="46"/>
+        <field>
+            <argument id="volt" type="dn16b"/>
+        </field>
+    </command>
+    <command name="cmd_daxss_set_eclipse_out_volt_all" decoder="cmdDecoder" >
+            <description text="DAXSS Set Eclipse Out Volt"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="46"/>
+    <field>
+      <argument id="milliVolt" type="dn16b"/>
+      <argument id="Min" type="dn16b"/>
+      <argument id="Max" type="dn16b"/>
+    </field>
+  </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_eclipse_out_curr">
+        <description text="DAXSS Set Eclipse Out Current (CSS for FM-2)"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="47"/>
+        <field>
+            <argument id="curr" type="dn16b"/>
+        </field>
+    </command>
+    <command name="cmd_daxss_set_eclipse_out_curr_all" decoder="cmdDecoder" >
+    <description text="DAXSS Set Eclipse Out Current (CSS for FM-2)"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="47"/>
+    <field>
+      <argument id="CSSdn" type="dn16b"/>
+      <argument id="Min" type="dn16b"/>
+      <argument id="Max" type="dn16b"/>
+    </field>
+  </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_eclipse_out_end">
+        <description text="DAXSS Set Eclipse Out End"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="49"/>
+        <field>
+            <argument id="end" type="dn16b"/>
+        </field>
+    </command>
+    <command name="cmd_daxss_set_eclipse_out_end_all" decoder="cmdDecoder" >
+            <description text="DAXSS Set Eclipse Out End"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="49"/>
+    <field>
+      <argument id="HkCounts" type="dn16b"/>
+      <argument id="Min" type="dn16b"/>
+      <argument id="Max" type="dn16b"/>
+    </field>
+  </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_eclipse_in_volt">
+        <description text="DAXSS Set Eclipse In Volt"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="50"/>
+        <field>
+            <argument id="volt" type="dn16b"/>
+        </field>
+    </command>
+    <command name="cmd_daxss_set_eclipse_in_volt_all" decoder="cmdDecoder" >
+            <description text="DAXSS Set Eclipse In Volt"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="50"/>
+    <field>
+      <argument id="milliVolt" type="dn16b"/>
+      <argument id="Min" type="dn16b"/>
+      <argument id="Max" type="dn16b"/>
+    </field>
+  </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_issue_hk_pkt">
+        <description text="DAXSS Issue Real-Time HK Packet"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="51"/>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_eclipse_in_curr">
+        <description text="DAXSS Set Eclipse In Current (CSS for FM-2)"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="52"/>
+        <field>
+            <argument id="curr" type="dn16b"/>
+        </field>
+    </command>
+
+    <command name="cmd_daxss_set_eclipse_in_curr_all" decoder="cmdDecoder" >
+    <description text="DAXSS Set Eclipse In Current (CSS for FM-2)"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="52"/>
+    <field>
+      <argument id="CSSdn" type="dn16b"/>
+      <argument id="Min" type="dn16b"/>
+      <argument id="Max" type="dn16b"/>
+    </field>
+  </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_eclipse_in_start">
+        <description text="DAXSS Set Eclipse In Start"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="53"/>
+        <field>
+            <argument id="start" type="dn16b"/>
+        </field>
+    </command>
+    <command name="cmd_daxss_set_eclipse_in_start_all" decoder="cmdDecoder" >
+            <description text="DAXSS Set Eclipse In Start"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="53"/>
+    <field>
+      <argument id="HkCounts" type="dn16b"/>
+      <argument id="Min" type="dn16b"/>
+      <argument id="Max" type="dn16b"/>
+    </field>
+  </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_sci_pkt_rate">
+        <description text="DAXSS Set SCI Packet Rate"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="72"/>
+        <field>
+            <argument id="time" type="dn16b"/>
+        </field>
+    </command>
+    <command name="cmd_daxss_set_sci_pkt_rate_all" decoder="cmdDecoder" >
+    <description text="DAXSS Set SCI Packet Rate"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="72"/>
+    <field>
+      <argument id="RateSec" type="dn16b"/>
+      <argument id="Min" type="dn16b"/>
+      <argument id="Max" type="dn16b"/>
+    </field>
+  </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_route_log_pkt">
+        <description text="DAXSS Route LOG Packet"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="78"/>
+        <field>
+            <argument id="route" type="dn8"/>
+        </field>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_route_sci_pkt">
+        <description text="DAXSS Route SCI Packet"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="93"/>
+        <field>
+            <argument id="route" type="dn8"/>
+        </field>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_log_pbk">
+        <description text="DAXSS Set LOG Playback TLM Range"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="99"/>
+        <field>
+            <argument id="LogStart" type="dn32b"/>
+            <argument id="LogStop" type="dn32b"/>
+             <argument id="LogStep" type="dn16b"/>
+        </field>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_sci_pbk">
+        <description text="DAXSS Set SCI Playback TLM Range"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="111"/>
+        <field>
+            <argument id="SciStart" type="dn32b"/>
+      <argument id="SciStop" type="dn32b"/>
+      <argument id="SciStep" type="dn16b"/>
+        </field>
+    </command>
+
+    <dictionary name="daxssSwitchPwr">
+        <pair key="0" str="OFF"/>
+        <pair key="1" str="ON"/>
+        <pair key="2" str="TOGGLE"/>
+        <pair key="3" str="CYCLE"/>
+    </dictionary>
+    <typeState name="daxssSwitchPwr8" size="8" dict="daxssSwitchPwr"/>
+
+
+    <command decoder="cmdDecoder" name="cmd_daxss_pwr_sps">
+        <description text="DAXSS Switch Power SPS"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="147"/>
+        <field>
+            <argument id="pwr" type="daxssSwitchPwr8"/>
+        </field>
+    </command>
+
+
+    <command decoder="cmdDecoder" name="cmd_daxss_pwr_x123">
+        <description text="DAXSS Switch Power X123"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="150"/>
+        <field>
+            <argument id="pwr" type="daxssSwitchPwr8"/>
+        </field>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_i2c_timeout">
+        <description text="DAXSS Set I2C Timeout"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="177"/>
+        <field>
+            <argument id="TimeMinutes" type="dn16b"/>
+        </field>
+    </command>
+    <command name="cmd_daxss_set_i2c_timeout_all" decoder="cmdDecoder" >
+            <description text="DAXSS Set I2C Timeout"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="177"/>
+    <field>
+      <argument id="TimeMinutes" type="dn16b"/>
+      <argument id="Min" type="dn16b"/>
+      <argument id="Max" type="dn16b"/>
+    </field>
+  </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_write_cdh">
+        <description text="DAXSS Write to CDH (dsPIC33) Memory"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="180"/>
+        <field>
+            <argument id="addr" type="dn16b"/>
+            <argument id="value" type="dn16b"/>
+        </field>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_read_cdh">
+        <description text="DAXSS Read from CDH (dsPIC33) Memory"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="183"/>
+        <field>
+            <argument id="addr" type="dn16b"/>
+            <argument id="num" type="dn8"/>
+        </field>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_write_ee">
+        <description text="DAXSS Write to CDH EEPROM"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="186"/>
+        <field>
+            <argument id="addr" type="dn16b"/>
+            <argument id="value" type="dn16b"/>
+        </field>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_read_ee">
+        <description text="DAXSS Read from CDH EEPROM"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="189"/>
+        <field>
+            <argument id="addr" type="dn16b"/>
+            <argument id="num" type="dn8"/>
+        </field>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_sps_offset">
+        <description text="DAXSS Set SPS ASIC Offsets"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="192"/>
+        <field>
+            <argument id="offset1" type="dn16b"/>
+            <argument id="offset2" type="dn16b"/>
+            <argument id="offset3" type="dn16b"/>
+            <argument id="offset4" type="dn16b"/>
+            <argument id="offset5" type="dn16b"/>
+            <argument id="offset6" type="dn16b"/>
+        </field>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_stored_cmd_timeout">
+        <description text="DAXSS Set Stored Cmd Timeout"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="193"/>
+        <field>
+            <argument id="time" type="dn16b"/>
+        </field>
+    </command>
+    <command name="cmd_daxss_set_stored_cmd_timeout_all" decoder="cmdDecoder" >
+    <description text="DAXSS Set Stored Cmd Timeout"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="193"/>
+    <field>
+      <argument id="TimeSec" type="dn16b"/>
+      <argument id="Min" type="dn16b"/>
+      <argument id="Max" type="dn16b"/>
+    </field>
+  </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_get_stored_cmd_report">
+        <description text="DAXSS Get Stored Command Report"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="194"/>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_clear_stored">
+        <description text="DAXSS Get Stored Command Report"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="196"/>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_add_stored">
+        <description text="DAXSS Add Stored Command"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="198"/>
+        <field>
+            <argument id="GpsSeconds" type="dn32b"/>
+        </field>
+    </command>
+
+    <command name="cmd_daxss_set_picosim_led_power_timeout" decoder="cmdDecoder" >
+    <description text="DAXSS PicoSIM Timeout Duration"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="0xC9"/>
+    <field>
+      <argument id="Duration" type="dn16b"/>
+    </field>
+  </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_pico_gain">
+        <description text="DAXSS Set PicoSIM Gain "/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="202"/>
+        <field>
+            <argument id="gain" type="dn16b" min="0" max="3" minCheck="enabled" maxCheck="enabled"/>
+        </field>
+    </command>
+    <command name="cmd_daxss_set_pico_gain_all" decoder="cmdDecoder" >
+    <description text="DAXSS Set PicoSIM Gain "/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="202"/>
+    <field>
+      <argument id="Gain" type="dn16b" min="0" max="3" minCheck="enabled" maxCheck="enabled"/>
+      <argument id="Min" type="dn16b"/>
+      <argument id="Max" type="dn16b"/>
+    </field>
+  </command> 
+   <!-- Command to toggle PicoSIM driver LED until LED timeout (LED current 0 = 12.5mA, 1 = 25mA, 2=50mA, 3=100mA[disabled])-->
+<command name="daxss_cmd_picosim_led_cal" decoder="cmdDecoder" >
+    <description text="DAXSS Set PicoSIM Gain "/>
+    <header frame="daxssCmdHeader"/>
+    <output name="opcode" value="0xCE"/>
+    <field>
+      <argument id="EnableLED" type="dn8" min="0" max="1" minCheck="enabled" maxCheck="enabled"/>
+      <argument id="LEDCurrent" type="dn8" min="0" max="2" minCheck="enabled" maxCheck="enabled"/>
+    </field>
+  </command>  
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_pico_int_time">
+        <description text="DAXSS Set PicsoSIM Integration"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="203"/>
+        <field>
+            <argument id="time" type="dn16b" min="1" max="256" minCheck="enabled" maxCheck="enabled"/>
+        </field>
+    </command>
+    <command name="cmd_daxss_set_pico_int_time_all" decoder="cmdDecoder" >
+        <description text="DAXSS Set PicsoSIM Integration"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="203"/>
+        <field>
+            <argument id="Integration" type="dn16b" min="1" max="256" minCheck="enabled" maxCheck="enabled"/>
+            <argument id="Min" type="dn16b"/>
+            <argument id="Max" type="dn16b"/>
+        </field>
+     </command>  
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_sps_xact_offset">
+        <description text="DAXSS Set SPS to XACT Offset(s)"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="207"/>
+        <field>
+            <argument id="x" type="sn16"/>
+            <argument id="y" type="sn16"/>
+        </field>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_x123_compress">
+        <description text="DAXSS Set X123 Data Compression"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="210"/>
+        <field>
+            <argument id="flag" type="dn8"/>
+        </field>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_send_x123">
+        <description text="DAXSS Send X123 Command"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="219"/>
+        <field>
+            <argument id="cmd" type="charL" num="64"/>
+        </field>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_query_x123">
+        <description text="DAXSS Query X123 Status (send Query Info)"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="222"/>
+        <field>
+            <argument id="cmd" type="charL" num="64"/>
+        </field>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_arm">
+        <description text="DAXSS Enable Dual Command"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="237"/>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_x123_offset">
+        <description text="DAXSS Set X123 Auto Input Offset"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="240"/>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_x123_thresh">
+        <description text="DAXSS Set X123 Auto Fast Threshold"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="243"/>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_sps_sum_thresh">
+        <description text="DAXSS Set SPS Sum Threshold"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="246"/>
+        <field>
+            <argument id="threshold" type="dn16b"/>
+        </field>
+    </command>
+    <command name="cmd_daxss_set_sps_sum_thresh_all" decoder="cmdDecoder" >
+    <description text="DAXSS Set SPS Sum Threshold"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="246"/>
+    <field>
+      <argument id="Threshold" type="dn16b"/>
+      <argument id="Min" type="dn16b"/>
+      <argument id="Max" type="dn16b"/>
+    </field>
+  </command>
+
+  <command name="cmd_daxss_set_sps_sum_thresh_all_BAD" decoder="cmdDecoder" >
+    <field>
+        <opcode type="dn8" value="0xF6"/>
+      <argument id="Threshold" type="dn16b"/>
+      <argument id="Min" type="dn16b"/>
+      <argument id="Max" type="dn16b"/>
+    </field>
+  </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_watchdog">
+        <description text="DAXSS Trigger Watchdog Reset"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="252"/>
+    </command>
+
+    <command decoder="cmdDecoder" name="cmd_daxss_set_last_cmd_timeout">
+        <description text="DAXSS Set Last CMD Watchdog Timeout"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="253"/>
+        <field>
+            <argument id="timeout" type="dn16b"/>
+        </field>
+    </command>
+    <command name="cmd_daxss_set_last_cmd_timeout_all" decoder="cmdDecoder" >
+        <description text="DAXSS Set Last CMD Watchdog Timeout"/>
+        <header frame="daxssCmdHeader"/>
+        <output name="opcode" value="253"/>
+        <field>
+            <argument id="Timeout" type="dn16b"/>
+            <argument id="Min" type="dn16b"/>
+            <argument id="Max" type="dn16b"/>
+        </field>
+    </command>
+
+
+    <frameDef name="daxss_log_frame">
+        <field>
+
+            <!-- <itemDef name="daxss_sci_TimeGS_Sci_All"          type="dn32l"/> -->
+            <!-- <itemDef name="daxss_sci_TimeMS_Sci_All"          type="dn16bl"/> -->
+            <itemDef name="daxss_log_CDHState_Sci_All"        type="dn8"/>
+            <!-- <itemDef name="daxss_sci_CDHEclipse_Sci_All"      type="TRUE_FALSE_t"/> -->
+            <!-- <itemDef name="daxss_sci_CDHMode_Sci_All"           type="ModeStatus" /> -->
+            <itemDef name="daxss_log_CmdLastOpcode_Sci_All"         type="dn8"/>
+
+            <itemDef name="daxss_log_CmdLastStatus_Sci_All" type="dn16l"/>
+            <itemDef name="daxss_log_CmdAcceptCnt_Sci_All" type="dn16l"/>
+            <itemDef name="daxss_log_CmdRejectCnt_Sci_All" type="dn16l"/>
+            <itemDef name="daxss_log_ParamSetHdr_Sci_All" type="dn16l"/>
+
+            <itemDef name="daxss_log_cdhEnables" type="dn16l"/>
+            <itemDef name="daxss_log_cdhTemp" type="dn16l"/>
+            <itemDef name="daxss_log_sps_sum_rate" type="dn16l"/>
+            <itemDef name="daxss_log_sps_x" type="dn16l"/>
+            <itemDef name="daxss_log_sps_y" type="dn16l"/>
+            <itemDef name="daxss_log_x_fast" type="dn16l"/>
+            <itemDef name="daxss_log_x_slow" type="dn16l"/>
+            <itemDef name="daxss_log_x_accum" type="dn32l"/>
+            <itemDef name="daxss_log_x_temp" type="dn16l"/>
+            <itemDef name="daxss_log_spare" type="dn16l"/>
+            <itemDef name="daxss_log_msg" type="charL" num="80"/>
+            <itemDef name="daxss_log_check" type="dn16l"/>
+
+        </field>
+    </frameDef>
+	<frameDef name="daxss_log" id="#DAXSS_APID_TLM_LOG">
+		<field>
+			<frameCopy name="ccsdsTlmHeader" suffix="_daxss_log"/>
+            <item name="daxss_log_frame"/>
+		</field>
+	</frameDef>
+
+    <dictionary name="daxssCDHState">
+        <pair key="0" str="NOMINAL"/>
+        <pair key="1" str="PLAYBACK"/>
+        <pair key="2" str="LED1"/>
+        <pair key="3" str="LED2"/>
+        <pair key="4" str="ANT_DEP"/>
+        <pair key="5" str="SA_DEP"/>
+        <pair key="8" str="LOCKOUT"/>
+        <pair key="9" str="RETRY"/>
+        <pair key="0xA" str="ARMED"/>
+        <pair key="0xB" str="STORED_CMD_READY"/>
+    </dictionary>
+    <typeState name="daxssCDHState4" size="4" dict="daxssCDHState"/>
+
+    <dictionary name="daxssCDHEclipseFlag">
+        <pair key="0" str="NO_ECLIPSE"/>
+        <pair key="1" str="ECLIPSE"/>
+    </dictionary>
+    <typeState name="daxssCDHEclipseFlag1" size="1" dict="daxssCDHEclipseFlag"/>
+
+    <dictionary name="daxssCDHMode">
+        <pair key="0" str="UNKNOWN"/>
+        <pair key="1" str="PHX"/>
+        <pair key="2" str="SAFE"/>
+        <pair key="4" str="SCIENCE"/>
+    </dictionary>
+    <typeState name="daxssCDHMode3" size="3" dict="daxssCDHMode"/>
+
+    <dictionary name="daxssCmdStatus">
+        <pair key="0" str="SUCCESS"/>
+        <pair key="1" str="LENGTH"/>
+        <pair key="2" str="APID"/>
+        <pair key="3" str="OPCODE"/>
+        <pair key="4" str="CHECKSUM"/>
+        <pair key="5" str="SAFE_MODE"/>
+        <pair key="6" str="DUAL_CMD"/>
+        <pair key="7" str="PARAMETER"/>
+        <pair key="8" str="STATE"/>
+        <pair key="9" str="FAIL"/>
+    </dictionary>
+    <typeState name="daxssCmdStatus16L" size="16" dict="daxssCmdStatus"/>
+
+    <frameDef name="daxss_sci_frame">
+        <field>
+            <itemDef name="daxss_sci_cdh_info" type="uint8L" ignore="true">
+                <description text="DAXSS CDH Info"/>
+            </itemDef>
+            <itemDef name="daxss_sci_cdh_state" type="daxssCDHState4">
+                <description text="DAXSS CDH State"/>
+            </itemDef>
+            <itemDef name="daxss_sci_cdh_eclipse" type="daxssCDHEclipseFlag1">
+                <description text="DAXSS CDH Eclipse Flag"/>
+            </itemDef>
+            <itemDef name="daxss_sci_cdh_mode" type="daxssCDHMode3">
+                <description text="DAXSS CDH Mode"/>
+            </itemDef>
+            <itemDef name="daxss_sci_cmd_opcode" type="uint8L">
+                <description text="DAXSS Command Last opcode"/>
+            </itemDef>
+            <itemDef name="daxss_sci_cmd_status" type="daxssCmdStatus16L">
+                <description text="DAXSS Command Last Status"/>
+            </itemDef>
+            <itemDef name="daxss_sci_cmd_acpt_count" type="uint16L">
+                <description text="DAXSS Command Accept Count"/>
+            </itemDef>
+            <itemDef name="daxss_sci_cmd_rjct_count" type="uint16L">
+                <description text="DAXSS Command Reject Count"/>
+            </itemDef>
+            <itemDef name="daxss_sci_param_set_header" type="uint16L">
+                <description text="DAXSS Param Set Header"/>
+            </itemDef>
+            <itemDef name="daxss_sci_SparesEnabled1" type="dn6"/>
+            <itemDef name="daxss_sci_x123_enabled" type="dn1"/>
+            <itemDef name="daxss_sci_sps_enabled" type="dn1"/>
+            <itemDef name="daxss_sci_SparesEnabled2" type="uint8L"/>
+            <itemDef name="daxss_sci_sw_version" type="dn8">
+                <description text="DAXSS Version"/>
+            </itemDef>
+            <itemDef name="daxss_sci_fm" type="dn4">
+                <description text="DAXSS FM"/>
+            </itemDef>
+            <itemDef name="daxss_sci_patch_version" type="dn4">
+                <description text="DAXSS Patch Version"/>
+            </itemDef>
+            <itemDef name="daxss_sci_lockout_timeout" type="dn16l">
+                <description text="DAXSS Lockout Timeout Counter"/>
+            </itemDef>
+            <itemDef name="daxss_sci_inst_htr_set" type="sn16l">
+                <description text="DAXSS Inst Heater Setpoint"/>
+            </itemDef>
+            <itemDef name="daxss_sci_time_offset" type="dn32l">
+                <description text="DAXSS Time Offset"/>
+            </itemDef>
+            <itemDef name="daxss_sci_batt_v1" type="DAXSS_BatV_EU16L">
+                <description text="DAXSS Battery V1"/>
+            </itemDef>
+            <itemDef name="daxss_sci_batt_v2" type="DAXSS_BatV2_EU16L">
+                <description text="DAXSS Battery V2"/>
+            </itemDef>
+            <itemDef name="daxss_sci_5v" type="DAXSS_5V_EU16L">
+                <description text="DAXSS 5V"/>
+            </itemDef>
+            <itemDef name="daxss_sci_3v" type="DAXSS_5V_EU16L">
+                <description text="DAXSS 3V"/>
+            </itemDef>
+            <itemDef name="daxss_sci_cdh_temp" type="DAXSS_CDH_Temp16L">
+                <description text="DAXSS CDH Temp"/>
+            </itemDef>
+            <itemDef name="daxss_sci_i2c_err" type="dn16l">
+                <description text="DAXSS I2C error"/>
+            </itemDef>
+            <itemDef name="daxss_sci_rtc_err" type="dn16l">
+                <description text="DAXSS RTC Err"/>
+            </itemDef>
+            <itemDef name="daxss_sci_spi_sd_err" type="dn16l">
+                <description text="DAXSS SPI SD Error"/>
+            </itemDef>
+            <itemDef name="daxss_sci_uart1_err" type="dn16l">
+                <description text="DAXSS UART1Err"/>
+            </itemDef>
+            <itemDef name="daxss_sci_uart2_err" type="dn16l">
+                <description text="DAXSS UART2Err"/>
+            </itemDef>
+            <itemDef name="daxss_sci_uart3_err" type="dn16l">
+                <description text="DAXSS UART3Err"/>
+            </itemDef>
+            <itemDef name="daxss_sci_uart4_err" type="dn16l">
+                <description text="DAXSS UART4Err"/>
+            </itemDef>
+            <itemDef name="daxss_sci_mb_temp1" type="DAXSS_CDH_Temp16L">
+                <description text="DAXSS MB Temp1"/>
+            </itemDef>
+            <itemDef name="daxss_sci_mb_temp2" type="DAXSS_CDH_Temp16L">
+                <description text="DAXSS MB Temp2"/>
+            </itemDef>
+            <itemDef name="daxss_sci_eps_temp1" type="DAXSS_CDH_Temp16L">
+                <description text="DAXSS EPS Temp1"/>
+            </itemDef>
+            <itemDef name="daxss_sci_eps_temp2" type="DAXSS_CDH_Temp16L">
+                <description text="DAXSS EPS Temp2"/>
+            </itemDef>
+            <itemDef name="daxss_sci_bat_curr" type="DAXSS_BatCurr_EU16L">
+                <description text="DAXSS EPS Batt Curr"/>
+            </itemDef>
+            <itemDef name="daxss_sci_bat_volt" type="DAXSS_BatLoadV_EU16L">
+                <description text="DAXSS EPS Batt Volt"/>
+            </itemDef>
+            <itemDef name="daxss_sci_3v_curr" type="DAXSS_BatCurr_EU16L">
+                <description text="DAXSS 3V Curr"/>
+            </itemDef>
+            <itemDef name="daxss_sci_3v_volt" type="DAXSS_BatLoadV_EU16L">
+                <description text="DAXSS 3V Volt"/>
+            </itemDef>
+            <itemDef name="daxss_sci_5v_curr" type="DAXSS_BatCurr_EU16L">
+                <description text="DAXSS 5V Curr"/>
+            </itemDef>
+            <itemDef name="daxss_sci_5v_volt" type="DAXSS_BatLoadV_EU16L">
+                <description text="DAXSS 5V Volt"/>
+            </itemDef>
+            <itemDef name="daxss_sci_pico_sim_temp" type="sn8l">
+                <description text="DAXSS Pico Sim Temp"/>
+            </itemDef>
+            <itemDef name="daxss_sci_pico_sim_temp_dummy" type="sn8l">
+                <description text="DAXSS Pico Sim Temp Dummy"/>
+            </itemDef>
+            <itemDef name="daxss_sci_sps_board_temp" type="DAXSS_CDH_Temp16L">
+                <description text="DAXSS SPS Board Temp"/>
+            </itemDef>
+            <itemDef name="daxss_sci_sps_sum" type="dn32l">
+                <description text="DAXSS SPS Sum"/>
+            </itemDef>
+            <itemDef name="daxss_sci_sps_xpos" type="SPS_Pos">
+                <description text="DAXSS SPS X Pos"/>
+            </itemDef>
+            <itemDef name="daxss_sci_sps_ypos" type="SPS_Pos">
+                <description text="DAXSS SPS Y Pos"/>
+            </itemDef>
+            <itemDef name="daxss_sci_spares" type="dn8" num="6">
+                <description text="DAXSS Sci Spares"/>
+            </itemDef>
+            <itemDef name="daxss_sci_pico_sim_int_time" type="dn16l">
+                <description text="DAXSS Pico Sim Int Time"/>
+            </itemDef>
+            <itemDef name="daxss_sci_pico_sim_data1" type="dn24l">
+                <description text="DAXSS Pico Sim Data1"/>
+            </itemDef>
+            <itemDef name="daxss_sci_pico_sim_num1" type="dn8">
+                <description text="DAXSS Pico Sim Num Integrations 1"/>
+            </itemDef>
+            <itemDef name="daxss_sci_pico_sim_data2" type="dn24l">
+                <description text="DAXSS Pico Sim Data2"/>
+            </itemDef>
+            <itemDef name="daxss_sci_pico_sim_num2" type="dn8">
+                <description text="DAXSS Pico Sim Num Integrations 2"/>
+            </itemDef>
+            <itemDef name="daxss_sci_pico_sim_data3" type="dn24l">
+                <description text="DAXSS Pico Sim Data3"/>
+            </itemDef>
+            <itemDef name="daxss_sci_pico_sim_num3" type="dn8">
+                <description text="DAXSS Pico Sim Num Integrations 3"/>
+            </itemDef>
+            <itemDef name="daxss_sci_pico_sim_data4" type="dn24l">
+                <description text="DAXSS Pico Sim Data4"/>
+            </itemDef>
+            <itemDef name="daxss_sci_pico_sim_num4" type="dn8">
+                <description text="DAXSS Pico Sim Num Integrations 4"/>
+            </itemDef>
+            <itemDef name="daxss_sci_pico_sim_data5" type="dn24l">
+                <description text="DAXSS Pico Sim Data5"/>
+            </itemDef>
+            <itemDef name="daxss_sci_pico_sim_num5" type="dn8">
+                <description text="DAXSS Pico Sim Num Integrations 5"/>
+            </itemDef>
+            <itemDef name="daxss_sci_pico_sim_data6" type="dn24l">
+                <description text="DAXSS Pico Sim Data6"/>
+            </itemDef>
+            <itemDef name="daxss_sci_pico_sim_num6" type="dn8">
+                <description text="DAXSS Pico Sim Num Integrations 6"/>
+            </itemDef>
+            <itemDef name="daxss_sci_sps_data1" type="uint16L">
+                <description text="DAXSS SPS Data1"/>
+            </itemDef>
+            <itemDef name="daxss_sci_sps_data2" type="uint16L">
+                <description text="DAXSS SPS Data2"/>
+            </itemDef>
+            <itemDef name="daxss_sci_sps_data3" type="uint16L">
+                <description text="DAXSS SPS Data3"/>
+            </itemDef>
+            <itemDef name="daxss_sci_sps_data4" type="uint16L">
+                <description text="DAXSS SPS Data4"/>
+            </itemDef>
+            <itemDef name="daxss_sci_sps_int_time" type="uint16L">
+                <description text="DAXSS SPS Integ Time"/>
+            </itemDef>
+            <itemDef name="daxss_sci_x123_fast_count" type="uint32L">
+                <description text="DAXSS X123 Fast Count"/>
+            </itemDef>
+            <itemDef name="daxss_sci_x123_slow_count" type="uint32L">
+                <description text="DAXSS X123 Slow Count"/>
+            </itemDef>
+            <itemDef name="daxss_sci_x123_gp_count" type="uint32L">
+                <description text="DAXSS X123 GP Count"/>
+            </itemDef>
+            <itemDef name="daxss_sci_x123_accum_time" type="uint32L">
+                <description text="DAXSS X123 Accum Time"/>
+            </itemDef>
+            <itemDef name="daxss_sci_x123_live_time" type="uint32L">
+                <description text="DAXSS X123 Live Time"/>
+            </itemDef>
+            <itemDef name="daxss_sci_x123_real_time" type="uint32L">
+                <description text="DAXSS X123 Real Time"/>
+            </itemDef>
+            <itemDef name="daxss_sci_x123_hv" type="DAXSS_HV_EU16L">
+                <description text="DAXSS X123 HV"/>
+            </itemDef>
+            <itemDef name="daxss_sci_x123_det_temp" type="DAXSS_DetTemp_EU16L">
+                <description text="DAXSS X123 Det Temp"/>
+            </itemDef>
+            <itemDef name="daxss_sci_x123_brd_temp" type="sn8">
+                <description text="DAXSS X123 Board Temp"/>
+            </itemDef>
+            <itemDef name="daxss_sci_x123_flags1" type="dn8">
+                <description text="DAXSS X123 Flags1"/>
+            </itemDef>
+            <itemDef name="daxss_sci_x123_flags2" type="dn8">
+                <description text="DAXSS X123 Flags2"/>
+            </itemDef>
+            <itemDef name="daxss_sci_x123_flags3" type="dn8">
+                <description text="DAXSS X123 Flags3"/>
+            </itemDef>
+            <itemDef name="daxss_sci_x123_read_err" type="dn8">
+                <description text="DAXSS X123 Read Errors"/>
+            </itemDef>
+            <itemDef name="daxss_sci_x123_radio_active" type="dn8">
+                <description text="DAXSS X123 Radio Active"/>
+            </itemDef>
+            <itemDef name="daxss_sci_x123_write_err" type="dn8">
+                <description text="DAXSS X123 Write Errors"/>
+            </itemDef>
+            <itemDef name="daxss_sci_x123_spare_err" type="dn8">
+                <description text="DAXSS X123 Spare Errors"/>
+            </itemDef>
+            <itemDef name="daxss_sci_x123_cmp_info" type="uint16L">
+                <description text="DAXSS X123 CMP Info"/>
+            </itemDef>
+            <itemDef name="daxss_sci_x123_spect_len" type="uint16L">
+                <description text="DAXSS X123 Spect Len"/>
+            </itemDef>
+            <itemDef name="daxss_sci_x123_group_count" type="uint16L">
+                <description text="DAXSS X123 Group Count"/>
+            </itemDef>
+            <itemDef name="daxss_sci_first_data" num="78" type="dn8">
+                <description text="DAXSS Irst Data"/>
+            </itemDef>
+            <itemDef name="daxss_sci_chksm" type="uint16L">
+                <description text="DAXSS Fletcher Checksum"/>
+            </itemDef>
+        </field>
+    </frameDef>
+    <frameDef id="#DAXSS_APID_TLM_SCI" name="daxss_sci">
+        <description text="DAXSS Science Packet"/>
+        <field>
+            <frameCopy name="ccsdsTlmHeader" suffix="_daxss_sci"/>
+            <item name="daxss_sci_frame"/>
+        </field>
+    </frameDef>
+
+    <frameDef name="daxss_mem_frame">
+        <field>
+            <itemDef name="daxss_mem_cdh_info" type="uint8L" ignore="true">
+                <description text="DAXSS CDH Info"/>
+            </itemDef>
+            <itemDef name="daxss_mem_cdh_state" type="daxssCDHState4">
+                <description text="DAXSS CDH State"/>
+            </itemDef>
+            <itemDef name="daxss_mem_cdh_eclipse" type="daxssCDHEclipseFlag1">
+                <description text="DAXSS CDH Eclipse Flag"/>
+            </itemDef>
+            <itemDef name="daxss_mem_cdh_mode" type="daxssCDHMode3">
+                <description text="DAXSS CDH Mode"/>
+            </itemDef>
+            <itemDef name="daxss_mem_cmd_opcode" type="uint8L">
+                <description text="DAXSS Command Last opcode"/>
+            </itemDef>
+            <itemDef name="daxss_mem_cmd_status" type="daxssCmdStatus16L">
+                <description text="DAXSS Command Last Status"/>
+            </itemDef>
+            <itemDef name="daxss_mem_cmd_acpt_count" type="uint16L">
+                <description text="DAXSS Command Accept Count"/>
+            </itemDef>
+            <itemDef name="daxss_mem_cmd_rjct_count" type="uint16L">
+                <description text="DAXSS Command Reject Count"/>
+            </itemDef>
+            <itemDef name="daxss_mem_param_set_header" type="uint16L">
+                <description text="DAXSS Param Set Header"/>
+            </itemDef>
+            <itemDef name="daxss_mem_cdh_enables" type="uint16L">
+                <description text="DAXSS CDH Enables"/>
+            </itemDef>
+            <itemDef name="daxss_mem_dump_spares" type="uint32L">
+                <description text="DAXSS Dump Spares"/>
+            </itemDef>
+            <itemDef name="daxss_param_header" type="uint16L">
+                <description text="DAXSS Parameter Header"/>
+            </itemDef>
+            <itemDef name="daxss_param_rtc_sync_period" type="uint16L">
+                <description text="DAXSS RTC Sync Period"/>
+            </itemDef>
+            <itemDef name="daxss_param_safe_to_phx" type="uint16L">
+                <description text="DAXSS SOC Safe To Phoenix"/>
+            </itemDef>
+            <itemDef name="daxss_param_phx_to_safe" type="uint16L">
+                <description text="DAXSS SOC Phoenix to Safe"/>
+            </itemDef>
+            <itemDef name="daxss_param_sci_to_safe" type="uint16L">
+                <description text="DAXSS SOC Science to Safe"/>
+            </itemDef>
+            <itemDef name="daxss_param_trig_persist" type="uint16L">
+                <description text="DAXSS SOC Trigger Persistence"/>
+            </itemDef>
+            <itemDef name="daxss_param_max_phx_safe" type="uint16L">
+                <description text="DAXSS Max Phoenix to Safe"/>
+            </itemDef>
+            <itemDef name="daxss_param_sps_sum_thresh" type="uint16L">
+                <description text="DAXSS SPS Sum Threshold"/>
+            </itemDef>
+            <itemDef name="daxss_param_cmd_wdog_time" type="uint16L">
+                <description text="DAXSS Last Command Watchdog Timeout"/>
+            </itemDef>
+            <itemDef name="daxss_param_eclipse_pwr_phx" type="uint16L">
+                <description text="DAXSS Eclipse Power Phoenix"/>
+            </itemDef>
+            <itemDef name="daxss_param_eclipse_pwr_safe" type="uint16L">
+                <description text="DAXSS Eclipse Power Safe"/>
+            </itemDef>
+            <itemDef name="daxss_param_eclipse_pwr_sci" type="uint16L">
+                <description text="DAXSS Eclipse Power Science"/>
+            </itemDef>
+            <itemDef name="daxss_param_eclipse_out_volt" type="uint16L">
+                <description text="DAXSS Eclipse Out Voltage"/>
+            </itemDef>
+            <itemDef name="daxss_param_eclipse_out_curr" type="uint16L">
+                <description text="DAXSS Eclipse Out Current"/>
+            </itemDef>
+            <itemDef name="daxss_param_eclipse_out_end" type="uint16L">
+                <description text="DAXSS Eclipse Out End"/>
+            </itemDef>
+            <itemDef name="daxss_param_eclipse_in_volt" type="uint16L">
+                <description text="DAXSS Eclipse In Voltage"/>
+            </itemDef>
+            <itemDef name="daxss_param_eclipse_in_curr" type="uint16L">
+                <description text="DAXSS Eclipse In Current"/>
+            </itemDef>
+            <itemDef name="daxss_param_eclipse_in_start" type="uint16L">
+                <description text="DAXSS Eclipse In Start"/>
+            </itemDef>
+            <itemDef name="daxss_param_beacon_rate" type="uint16L">
+                <description text="DAXSS Beacon Rate"/>
+            </itemDef>
+            <itemDef name="daxss_param_hk_rate" type="uint16L">
+                <description text="DAXSS HK Rate"/>
+            </itemDef>
+            <itemDef name="daxss_param_ana_dwell_ind" type="uint16L">
+                <description text="DAXSS Analog Dwell index"/>
+            </itemDef>
+            <itemDef name="daxss_param_adcs_data_rate" type="uint16L">
+                <description text="DAXSS ADCS Data Rate"/>
+            </itemDef>
+            <itemDef name="daxss_param_adcs_img_rate" type="uint16L">
+                <description text="DAXSS ADCS Image Rate"/>
+            </itemDef>
+            <itemDef name="daxss_param_sps_rate" type="uint16L">
+                <description text="DAXSS SPS Rate"/>
+            </itemDef>
+            <itemDef name="daxss_param_sci_rate" type="uint16L">
+                <description text="DAXSS Science rate"/>
+            </itemDef>
+            <itemDef name="daxss_param_ant_deploy" type="uint16L">
+                <description text="DAXSS Antenna Deploy"/>
+            </itemDef>
+            <itemDef name="daxss_param_sa_deploy" type="uint16L">
+                <description text="DAXSS SA Deploy"/>
+            </itemDef>
+            <itemDef name="daxss_param_batt_heater_temp" type="uint16L">
+                <description text="DAXSS Heater Temp"/>
+            </itemDef>
+            <itemDef name="daxss_param_i2c_timeout" type="uint16L">
+                <description text="DAXSS I2C Timeout"/>
+            </itemDef>
+            <itemDef name="daxss_param_tx_timeout" type="uint16L">
+                <description text="DAXSS Contact Tx Timeout"/>
+            </itemDef>
+            <itemDef name="daxss_param_ant_timeout" type="uint16L">
+                <description text="DAXSS Antenna Deploy Timeout"/>
+            </itemDef>
+            <itemDef name="daxss_param_sa_timeout" type="uint16L">
+                <description text="DAXSS Solar Array Deploy Timeout"/>
+            </itemDef>
+            <itemDef name="daxss_param_led_timeout" type="uint16L">
+                <description text="DAXSS LED Power Timeout"/>
+            </itemDef>
+            <itemDef name="daxss_param_sps_asic_off" type="uint16L" num="6">
+                <description text="DAXSS SPS ASIC Offset"/>
+            </itemDef>
+            <itemDef name="daxss_param_sps_offset_x" type="sn16l">
+                <description text="DAXSS SPS Offset X"/>
+            </itemDef>
+            <itemDef name="daxss_param_sps_offset_y" type="sn16l">
+                <description text="DAXSS SPS Offset Y"/>
+            </itemDef>
+            <itemDef name="daxss_param_sd_write_ctrl_addr" type="uint16L">
+                <description text="DAXSS SD Write Control Block Addr"/>
+            </itemDef>
+            <itemDef name="daxss_param_sd_ephem_addr" type="uint16L">
+                <description text="DAXSS SD Ephemeris Block Addr"/>
+            </itemDef>
+            <itemDef name="daxss_param_sd_x123_comp" type="uint16L">
+                <description text="DAXSS SD X123 Compression"/>
+            </itemDef>
+            <itemDef name="daxss_param_safe_to_sci" type="uint16L">
+                <description text="DAXSS SOC Safe to Science"/>
+            </itemDef>
+            <itemDef name="daxss_param_cmd_dup_timeout" type="uint16L">
+                <description text="DAXSS Command Duplicate Timeout"/>
+            </itemDef>
+            <itemDef name="daxss_param_pico_sim_gain" type="uint16L">
+                <description text="DAXSS PICO Sim Gain"/>
+            </itemDef>
+            <itemDef name="daxss_param_pico_sim_int" type="uint16L">
+                <description text="DAXSS PICO Sim Integration Time"/>
+            </itemDef>
+            <itemDef name="daxss_param_sps_adc_gain" type="uint16L">
+                <description text="DAXSS SPS ADC Gain"/>
+            </itemDef>
+            <itemDef name="daxss_param_spare" type="uint16L" num="14">
+                <description text="DAXSS Spare Parameters"/>
+            </itemDef>
+            <itemDef name="daxss_param_check" type="uint16L">
+                <description text="DAXSS Check Bytes"/>
+            </itemDef>
+        </field>
+    </frameDef>
+
+    <frameDef id="#DAXSS_APID_TLM_MEM" name="daxss_mem">
+        <description text="DAXSS Memory Dump Packet"/>
+        <field>
+            <frameCopy name="ccsdsTlmHeader" suffix="_daxss_mem"/>
+            <item name="daxss_mem_frame"/>
+        </field>
+    </frameDef>
+
+    <!--<frameDef name="daxss_sci_frame">-->
+        <!--<field>-->
+            <!--&lt;!&ndash; <itemDef name="daxss_sci_TimeGS_Sci_All"          type="dn32l"/> &ndash;&gt;-->
+            <!--&lt;!&ndash; <itemDef name="daxss_sci_TimeMS_Sci_All"          type="dn16l"/> &ndash;&gt;-->
+            <!--<itemDef name="daxss_sci_CDHState_Sci_All"        type="dn8"/>-->
+            <!--&lt;!&ndash; <itemDef name="daxss_sci_CDHEclipse_Sci_All"      type="TRUE_FALSE_t"/> &ndash;&gt;-->
+            <!--&lt;!&ndash; <itemDef name="daxss_sci_CDHMode_Sci_All"           type="ModeStatus" /> &ndash;&gt;-->
+            <!--<itemDef name="daxss_sci_CmdLastOpcode_Sci_All"         type="dn8"/>-->
+
+            <!--<itemDef name="daxss_sci_CmdLastStatus_Sci_All" type="dn16l"/>-->
+            <!--<itemDef name="daxss_sci_CmdAcceptCnt_Sci_All" type="dn16l"/>-->
+            <!--<itemDef name="daxss_sci_CmdRejectCnt_Sci_All" type="dn16l"/>-->
+            <!--<itemDef name="daxss_sci_ParamSetHdr_Sci_All" type="dn16l"/>-->
+
+            <!--<itemDef name="daxss_sci_cdhEnables" type="dn16l"/>-->
+            <!--&lt;!&ndash; <itemDef name="daxss_sci_BatHeaterEnabled_Sci_All"        type="TRUE_FALSE_t"/> &ndash;&gt;-->
+            <!--&lt;!&ndash; <itemDef name="daxss_sci_SADeployEnabled_Sci_All"         type="TRUE_FALSE_t"/> &ndash;&gt;-->
+            <!--&lt;!&ndash; <itemDef name="daxss_sci_AntDeployEnabled_Sci_All"        type="TRUE_FALSE_t"/> &ndash;&gt;-->
+            <!--&lt;!&ndash; <itemDef name="daxss_sci_SdCardEnabled_Sci_All"         type="TRUE_FALSE_t"/> &ndash;&gt;-->
+            <!--&lt;!&ndash; <itemDef name="daxss_sci_CommEnabled_Sci_All"         type="TRUE_FALSE_t"/> &ndash;&gt;-->
+            <!--&lt;!&ndash; <itemDef name="daxss_sci_ADCSEnabled_Sci_All"         type="TRUE_FALSE_t"/> &ndash;&gt;-->
+            <!--&lt;!&ndash; <itemDef name="daxss_sci_X123Enabled_Sci_All"         type="TRUE_FALSE_t"/> &ndash;&gt;-->
+            <!--&lt;!&ndash; <itemDef name="daxss_sci_SPSEnabled_Sci_All"        type="TRUE_FALSE_t"/> &ndash;&gt;-->
+            <!--&lt;!&ndash; <itemDef name="daxss_sci_EnabledSpares_Sci_All"         type="dn8l"/> &ndash;&gt;-->
+
+            <!--<itemDef name="daxss_sci_FSWVersonMajorMinor" type="dn8"/>-->
+            <!--<itemDef name="daxss_sci_FM" type="dn4"/>-->
+            <!--<itemDef name="daxss_sci_FSWPatchVersion" type="dn4"/>-->
+            <!--&lt;!&ndash;-->
+            <!--<itemDef name="daxss_sci_LockoutTimeoutCntr" type="dn16l"/>-->
+            <!--<itemDef name="daxss_sci_InstHtrSetpoint" type="sn16l"/>-->
+            <!--<itemDef name="daxss_sci_TimeOffset" type="dn32l"/>-->
+            <!--<itemDef name="daxss_sci_BatteryV1" type="CDH_Batt_V1"/>-->
+            <!--<itemDef name="daxss_sci_BatteryV2" type="CDH_Batt_V2"/>-->
+            <!--<itemDef name="daxss_sci_5_V" type="CDH_V"/>-->
+            <!--<itemDef name="daxss_sci_3_V" type="CDH_V"/>-->
+            <!--<itemDef name="daxss_sci_CDH_Temp" type="CDH_Temp"/>-->
+            <!--<itemDef name="daxss_sci_I2cErr" type="dn16l"/>-->
+            <!--<itemDef name="daxss_sci_RtcErr" type="dn16l"/>-->
+            <!--<itemDef name="daxss_sci_SpiSDErr" type="dn16l"/>-->
+            <!--<itemDef name="daxss_sci_Uart1Err" type="dn16l"/>-->
+            <!--<itemDef name="daxss_sci_Uart2Err" type="dn16l"/>-->
+            <!--<itemDef name="daxss_sci_Uart3Err" type="dn16l"/>-->
+            <!--<itemDef name="daxss_sci_Uart4Err" type="dn16l"/>-->
+            <!--<itemDef name="daxss_sci_MbTemp1" type="CDH_Temp"/>-->
+            <!--<itemDef name="daxss_sci_MbTemp2" type="CDH_Temp"/>-->
+            <!--<itemDef name="daxss_sci_EpsTemp1" type="CDH_Temp"/>-->
+            <!--<itemDef name="daxss_sci_EpsTemp2" type="CDH_Temp"/>-->
+            <!--<itemDef name="daxss_sci_EpsBatteryAmp" type="EPS_SA_I5"/>-->
+            <!--<itemDef name="daxss_sci_EpsBatteryVolt" type="EPS_SA_V"/>-->
+            <!--<itemDef name="daxss_sci_Eps3VAmp" type="EPS_SA_I"/>-->
+            <!--<itemDef name="daxss_sci_Eps3VVolt" type="EPS_SA_V"/>-->
+            <!--<itemDef name="daxss_sci_Eps5VAmp" type="EPS_SA_I"/>-->
+            <!--<itemDef name="daxss_sci_Eps5VVolt" type="EPS_SA_V"/>-->
+            <!--<itemDef name="daxss_sci_PicoSimTemp" type="sn8l"/>-->
+            <!--<itemDef name="daxss_sci_PicoSimTemp_dummy" type="sn8l"/>-->
+            <!--<itemDef name="daxss_sci_SPSBoardTemp" type="CDH_Temp"/>-->
+            <!--<itemDef name="daxss_sci_SciSpsSum" type="dn32l"/>-->
+            <!--<itemDef name="daxss_sci_SciSpsXPos" type="SPS_Pos"/>-->
+            <!--<itemDef name="daxss_sci_SciSpsYPos" type="SPS_Pos"/>-->
+            <!--<itemDef name="daxss_sci_SciSpares" type="dn8" num="4"/>-->
+            <!--<itemDef name="daxss_sci_PicoSimIntegTime" type="dn16l"/>-->
+            <!--<itemDef name="daxss_sci_PicoSimData1" type="dn24l"/>-->
+            <!--<itemDef name="daxss_sci_PicoSimCount1" type="dn8"/>-->
+            <!--<itemDef name="daxss_sci_PicoSimData2" type="dn24l"/>-->
+            <!--<itemDef name="daxss_sci_PicoSimCount2" type="dn8"/>-->
+            <!--<itemDef name="daxss_sci_PicoSimData3" type="dn24l"/>-->
+            <!--<itemDef name="daxss_sci_PicoSimCount3" type="dn8"/>-->
+            <!--<itemDef name="daxss_sci_PicoSimData4" type="dn24l"/>-->
+            <!--<itemDef name="daxss_sci_PicoSimCount4" type="dn8"/>-->
+            <!--<itemDef name="daxss_sci_PicoSimData5" type="dn24l"/>-->
+            <!--<itemDef name="daxss_sci_PicoSimCount5" type="dn8"/>-->
+            <!--<itemDef name="daxss_sci_PicoSimData6" type="dn24l"/>-->
+            <!--<itemDef name="daxss_sci_PicoSimCount6" type="dn8"/>-->
+            <!--<itemDef name="daxss_sci_SpsData1" type="dn16l"/>-->
+            <!--<itemDef name="daxss_sci_SpsData2" type="dn16l"/>-->
+            <!--<itemDef name="daxss_sci_SpsData3" type="dn16l"/>-->
+            <!--<itemDef name="daxss_sci_SpsData4" type="dn16l"/>-->
+            <!--<itemDef name="daxss_sci_SpsIntegTime" type="dn16l"/>-->
+            <!--<itemDef name="daxss_sci_X123FastCount" type="dn32l"/>-->
+            <!--<itemDef name="daxss_sci_X123SlowCount" type="dn32l"/>-->
+            <!--<itemDef name="daxss_sci_X123_GP_Count" type="dn32l"/>-->
+            <!--<itemDef name="daxss_sci_X123_Accum_Time" type="dn32l"/>-->
+            <!--<itemDef name="daxss_sci_X123_Live_Time" type="dn32l"/>-->
+            <!--<itemDef name="daxss_sci_X123_Real_Time" type="dn32l"/>-->
+            <!--<itemDef name="daxss_sci_X123_HV" type="X123_High_V"/>-->
+            <!--<itemDef name="daxss_sci_X123_Det_Temp" type="X123_Det_Temp"/>-->
+            <!--<itemDef name="daxss_sci_X123_Brd_Temp" type="sn8"/>-->
+            <!--<itemDef name="daxss_sci_X123_Flags1" type="dn8"/>-->
+            <!--<itemDef name="daxss_sci_X123_Flags2" type="dn8"/>-->
+            <!--<itemDef name="daxss_sci_X123_Flags3" type="dn8"/>-->
+            <!--<itemDef name="daxss_sci_X123_Read_Errors" type="dn8"/>-->
+            <!--<itemDef name="daxss_sci_X123_Radio_Active" type="dn8"/>-->
+            <!--<itemDef name="daxss_sci_X123_Write_Errors" type="dn8"/>-->
+            <!--<itemDef name="daxss_sci_X123_Spare_Errors" type="dn8"/>-->
+            <!--<itemDef name="daxss_sci_X123_Cmp_Info" type="dn16l"/>-->
+            <!--<itemDef name="daxss_sci_X123_Spect_Len" type="dn16l"/>-->
+            <!--<itemDef name="daxss_sci_X123_Group_Count" type="dn16l"/>-->
+            <!--<itemDef name="daxss_sci_irst_Data" type="dn8" num="78"/>-->
+            <!--<item name="Fletcher_code"/>-->
+            <!--&ndash;&gt;-->
+        <!--</field>-->
+    <!--</frameDef>-->
+	<!--<frameDef name="daxss_sci" id="#DAXSS_APID_TLM_SCI">-->
+        <!--<field>-->
+            <!--<frameCopy name="ccsdsTlmHeader" suffix="_daxss_sci"/>-->
+            <!--<item name="daxss_sci_frame"/>-->
+            <!---->
+        <!--</field>-->
+    <!--</frameDef>-->
+
+</hydraDef>

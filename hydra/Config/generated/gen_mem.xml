@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<hydraDef>
+  <decoderDef name="memDumpDecoder">
+    <frameMap>
+      <map frame="fp_watch" id="FP_W"/>
+    </frameMap>
+  </decoderDef>
+  <decoderDef name="memDumpDecoder">
+    <frameMap>
+      <map frame="fp_result" id="FP_R"/>
+    </frameMap>
+  </decoderDef>
+</hydraDef>
+

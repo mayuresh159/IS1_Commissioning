@@ -1,0 +1,3544 @@
+<?xml version="1.0" ?>
+<hydraDef>
+  <frameDef name="fp_watch_entry">
+    <description text="FP Watch Table Entry"/>
+    <field>
+      <itemDef name="fp_watch_mask" type="uint32L">
+        <description text="Value mask"/>
+      </itemDef>
+      <itemDef name="fp_watch_threshold" type="uint32L">
+        <description text="Watchpoint threshold"/>
+      </itemDef>
+      <itemDef name="fp_watch_msg" type="PktApids16L">
+        <description text="Watchpoint messageID"/>
+      </itemDef>
+      <itemDef name="fp_watch_offset" type="uint16L">
+        <description text="Watchpoint offset"/>
+      </itemDef>
+      <itemDef name="fp_watch_response" type="uint16L">
+        <description text="Watchpoint response"/>
+      </itemDef>
+      <itemDef name="fp_watch_persist" type="uint16L">
+        <description text="Watchpoint persistence"/>
+      </itemDef>
+      <itemDef name="pad1" type="uint16L">
+        <description text=""/>
+      </itemDef>
+      <itemDef name="fp_watch_state" type="FpWatchState8L">
+        <description text="Watchpoint state"/>
+      </itemDef>
+      <itemDef name="fp_watch_size" type="uint8L">
+        <description text="Watchpoint size (in bytes)"/>
+      </itemDef>
+      <itemDef name="fp_watch_op" type="FpWatchOperator8L">
+        <description text="Watchpoint operator"/>
+      </itemDef>
+      <itemDef name="fp_watch_pad1" type="uint8L">
+        <description text="Pad"/>
+      </itemDef>
+      <itemDef name="fp_watch_pad2" type="uint8L">
+        <description text="Pad"/>
+      </itemDef>
+      <itemDef name="fp_watch_pad3" type="uint8L">
+        <description text="Pad"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef name="fp_result_entry">
+    <description text="FP Results Table Entry"/>
+    <field>
+      <itemDef name="fp_result_gtb_cnt" type="uint16L">
+        <description text="Good To Bad Count"/>
+      </itemDef>
+      <itemDef name="fp_result_btg_ct" type="uint16L">
+        <description text="Bad To Good Count"/>
+      </itemDef>
+      <itemDef name="fp_result_cnt" type="uint16L">
+        <description text="Response count"/>
+      </itemDef>
+      <itemDef name="fp_result_consec_cnt" type="uint16L">
+        <description text="Max consecutive failure count"/>
+      </itemDef>
+      <itemDef name="fp_result_passive_cnt" type="uint16L">
+        <description text="Passive fail Count"/>
+      </itemDef>
+      <itemDef name="fp_result_persist_count" type="uint16L">
+        <description text="Current persistence count"/>
+      </itemDef>
+      <itemDef name="fp_result_msg_cnt" type="uint32L">
+        <description text="Count of last message read"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef name="tbl_info_entry">
+    <description text="Table Info Entry"/>
+    <field>
+      <itemDef name="tbl_reg_size" type="uint32L">
+        <description text="Size of table, in bytes"/>
+      </itemDef>
+      <itemDef name="tbl_addr_prime" type="uint32L">
+        <description text="Primary table location"/>
+      </itemDef>
+      <itemDef name="tbl_addr_back" type="uint32L">
+        <description text="Backup table location"/>
+      </itemDef>
+      <itemDef name="tbl_update_time" type="uint32L">
+        <description text="Last table update time"/>
+      </itemDef>
+      <itemDef name="tbl_query_time" type="uint32L">
+        <description text="Last table query time"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef name="des_hk_frame">
+    <field>
+      <itemDef name="des_cycle_count" type="uint16L">
+        <description text="Number of schedule cycles"/>
+      </itemDef>
+      <itemDef name="des_over_count" type="uint16L">
+        <description text="Number of overrun tasks"/>
+      </itemDef>
+      <itemDef name="des_isr_count" type="uint16L">
+        <description text="System ISR count"/>
+      </itemDef>
+      <itemDef name="des_last_overrun" type="desTaskID8L">
+        <description text="Last task ID to overrun its allocation"/>
+      </itemDef>
+      <itemDef name="pad" type="uint8L">
+        <description text=""/>
+      </itemDef>
+      <itemDef name="des_back_count" type="uint32L">
+        <description text="Background cycle count"/>
+      </itemDef>
+      <itemDef name="des_back_hwm" type="uint32L">
+        <description text="Background cycle count high watermark"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_DES_PKT" name="des_hk">
+    <description text="DES Housekeeping Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_des_hk"/>
+      <item name="des_hk_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="des_task_frame">
+    <field>
+      <itemDef name="des_task_count" type="uint32L">
+        <description text="Number of scheduled tasks"/>
+      </itemDef>
+      <item name="des_cycle_count"/>
+      <itemDef name="des_task_exec" num="#NUM_TASK_IDS" type="uint32L">
+        <description text="Execution count for each task"/>
+      </itemDef>
+      <itemDef name="des_task_over" num="#NUM_TASK_IDS" type="uint32L">
+        <description text="Overrun count for each task"/>
+      </itemDef>
+      <itemDef name="des_task_back" num="#DES_MAX_BACKGROUND_TASKS" type="uint32L">
+        <description text="Background task IDs"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_TASK_PKT" name="des_task">
+    <description text="DES Task Diag Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_des_task"/>
+      <item name="des_task_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="des_sched_frame">
+    <field>
+      <item name="des_task_count"/>
+      <item name="des_back_count"/>
+      <itemDef name="des_task_slot" num="#DES_SLICE_NUMBER" type="desTaskID8L">
+        <description text="Tasks assigned to slices"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_SCHED_PKT" name="des_sched">
+    <description text="DES Task Schedule Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_des_sched"/>
+      <item name="des_sched_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="des_time_entry">
+    <description text="DES Task Timing Packet Entry"/>
+    <field>
+      <itemDef name="des_time_min" type="uint32L">
+        <description text="Min Time"/>
+      </itemDef>
+      <itemDef name="des_time_max" type="uint32L">
+        <description text="Max Time"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef name="des_time_background_entry">
+    <description text="DES Background Timing Packet Entry"/>
+    <field>
+      <itemDef name="des_time_bck_min" type="uint32L">
+        <description text="Min Time"/>
+      </itemDef>
+      <itemDef name="des_time_bck_max" type="uint32L">
+        <description text="Max Time"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef name="des_time_frame">
+    <field>
+      <frameCopy name="des_time_entry" suffix="0"/>
+      <frameCopy name="des_time_entry" suffix="1"/>
+      <frameCopy name="des_time_entry" suffix="2"/>
+      <frameCopy name="des_time_entry" suffix="3"/>
+      <frameCopy name="des_time_entry" suffix="4"/>
+      <frameCopy name="des_time_entry" suffix="5"/>
+      <frameCopy name="des_time_entry" suffix="6"/>
+      <frameCopy name="des_time_entry" suffix="7"/>
+      <frameCopy name="des_time_entry" suffix="8"/>
+      <frameCopy name="des_time_entry" suffix="9"/>
+      <frameCopy name="des_time_entry" suffix="10"/>
+      <frameCopy name="des_time_entry" suffix="11"/>
+      <frameCopy name="des_time_entry" suffix="12"/>
+      <frameCopy name="des_time_entry" suffix="13"/>
+      <frameCopy name="des_time_entry" suffix="14"/>
+      <frameCopy name="des_time_entry" suffix="15"/>
+      <frameCopy name="des_time_entry" suffix="16"/>
+      <frameCopy name="des_time_entry" suffix="17"/>
+      <frameCopy name="des_time_entry" suffix="18"/>
+      <frameCopy name="des_time_background_entry" suffix="0"/>
+      <frameCopy name="des_time_background_entry" suffix="1"/>
+      <frameCopy name="des_time_background_entry" suffix="2"/>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_DES_TIME_PKT" name="des_time">
+    <description text="DES Task Timing Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_des_time"/>
+      <item name="des_time_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="mem_dump_header">
+    <description text=""/>
+    <field>
+      <itemDef name="mem_dump_name" num="#MEM_MAX_NAME_SIZE" type="charL">
+        <description text="Name of memory dump"/>
+      </itemDef>
+      <itemDef name="mem_dump_offset" type="uint32L">
+        <description text=""/>
+      </itemDef>
+      <itemDef name="mem_dump_length" type="uint32L">
+        <description text=""/>
+      </itemDef>
+      <itemDef name="mem_dump_trans" type="uint16L">
+        <description text=""/>
+      </itemDef>
+      <itemDef name="mem_dump_flags" type="uint16L">
+        <description text=""/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef name="mem_dump_frame">
+    <field>
+      <item name="mem_dump_header"/>
+      <itemDef name="data" num="#MAX_MEM_XFER_SIZE" type="uint8L">
+        <description text=""/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_MEM_PKT" name="mem_dump">
+    <description text="Memory Dump Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_mem_dump"/>
+      <item name="mem_dump_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="fp_hk_frame">
+    <field>
+      <itemDef name="fp_task_state" type="FpWatchState32L">
+        <description text="Task State"/>
+      </itemDef>
+      <itemDef name="fp_resp_count" type="uint32L">
+        <description text="Response Count"/>
+      </itemDef>
+      <itemDef name="fp_passive_count" type="uint32L">
+        <description text="Passive Count"/>
+      </itemDef>
+      <itemDef name="fp_err_count" type="uint32L">
+        <description text="Error Count"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_FP_PKT" name="fp_hk">
+    <description text="FP Housekeeping packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_fp_hk"/>
+      <item name="fp_hk_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="fp_watch_frame">
+    <field>
+      <frameCopy name="fp_watch_entry" suffix="0"/>
+      <frameCopy name="fp_watch_entry" suffix="1"/>
+      <frameCopy name="fp_watch_entry" suffix="2"/>
+      <frameCopy name="fp_watch_entry" suffix="3"/>
+      <frameCopy name="fp_watch_entry" suffix="4"/>
+      <frameCopy name="fp_watch_entry" suffix="5"/>
+      <frameCopy name="fp_watch_entry" suffix="6"/>
+      <frameCopy name="fp_watch_entry" suffix="7"/>
+      <frameCopy name="fp_watch_entry" suffix="8"/>
+      <frameCopy name="fp_watch_entry" suffix="9"/>
+      <frameCopy name="fp_watch_entry" suffix="10"/>
+      <frameCopy name="fp_watch_entry" suffix="11"/>
+      <frameCopy name="fp_watch_entry" suffix="12"/>
+      <frameCopy name="fp_watch_entry" suffix="13"/>
+      <frameCopy name="fp_watch_entry" suffix="14"/>
+      <frameCopy name="fp_watch_entry" suffix="15"/>
+    </field>
+  </frameDef>
+  <frameDef name="fp_watch">
+    <description text="FP Watch Table"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_fp_watch"/>
+      <frameCopy name="mem_dump_header" suffix="_fp_watch"/>
+      <item name="fp_watch_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="fp_result_frame">
+    <field>
+      <frameCopy name="fp_result_entry" suffix="0"/>
+      <frameCopy name="fp_result_entry" suffix="1"/>
+      <frameCopy name="fp_result_entry" suffix="2"/>
+      <frameCopy name="fp_result_entry" suffix="3"/>
+      <frameCopy name="fp_result_entry" suffix="4"/>
+      <frameCopy name="fp_result_entry" suffix="5"/>
+      <frameCopy name="fp_result_entry" suffix="6"/>
+      <frameCopy name="fp_result_entry" suffix="7"/>
+      <frameCopy name="fp_result_entry" suffix="8"/>
+      <frameCopy name="fp_result_entry" suffix="9"/>
+      <frameCopy name="fp_result_entry" suffix="10"/>
+      <frameCopy name="fp_result_entry" suffix="11"/>
+      <frameCopy name="fp_result_entry" suffix="12"/>
+      <frameCopy name="fp_result_entry" suffix="13"/>
+      <frameCopy name="fp_result_entry" suffix="14"/>
+      <frameCopy name="fp_result_entry" suffix="15"/>
+    </field>
+  </frameDef>
+  <frameDef name="fp_result">
+    <description text="FP Results Table"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_fp_result"/>
+      <frameCopy name="mem_dump_header" suffix="_fp_result"/>
+      <item name="fp_result_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="log_hk_frame">
+    <field>
+      <itemDef name="log_write_count" type="uint16L">
+        <description text="Log Write Count"/>
+      </itemDef>
+      <itemDef name="log_mask_count" type="uint16L">
+        <description text="Log Mask Count"/>
+      </itemDef>
+      <itemDef name="log_size" type="uint16L">
+        <description text="Log Size"/>
+      </itemDef>
+      <itemDef name="log_state" type="uint8L">
+        <description text="Log State"/>
+      </itemDef>
+      <itemDef name="log_mask_state" type="uint8L">
+        <description text="Log Mask State"/>
+      </itemDef>
+      <itemDef name="log_mask_value" num="#LOG_MASK_ARRAY_SIZE" type="uint32L">
+        <description text="Log mask"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_LOG_PKT" name="log_hk">
+    <description text="Log Housekeeping Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_log_hk"/>
+      <item name="log_hk_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="log_msg_frame">
+    <field>
+      <itemDef name="log_time_sec" type="uint32L">
+        <description text="Time message was written (in seconds)"/>
+      </itemDef>
+      <itemDef name="log_time_sub" type="uint16L">
+        <description text="Time message was written (in subseconds)"/>
+      </itemDef>
+      <itemDef name="log_msgid" type="uint16L">
+        <description text="ID of the message"/>
+      </itemDef>
+      <itemDef name="log_slice" type="uint8L">
+        <description text="Slice index when the event was logged"/>
+      </itemDef>
+      <itemDef name="log_pad1" type="uint8L">
+        <description text=""/>
+      </itemDef>
+      <itemDef name="log_pad2" type="uint8L">
+        <description text=""/>
+      </itemDef>
+      <itemDef name="log_pad3" type="uint8L">
+        <description text=""/>
+      </itemDef>
+      <itemDef name="log_params" num="#EVENT_NUM_PARAMS" type="uint8L">
+        <description text="Parameters for the message"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef name="log_msg">
+    <description text="Format of Event Message"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_log_msg"/>
+      <item name="log_msg_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="lib_reg_entry">
+    <description text="Library Registration Entry"/>
+    <field>
+      <itemDef name="lib_reg_apid" type="PktApids16L">
+        <description text="ApID for entry"/>
+      </itemDef>
+      <itemDef name="lib_reg_size" type="uint16L">
+        <description text="Allocated size for this packet"/>
+      </itemDef>
+      <itemDef name="lib_reg_location" type="uint32L">
+        <description text="Memory location for this packet"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef name="lib_meta_entry">
+    <description text="Library Meta Entry"/>
+    <field>
+      <itemDef name="lib_hk_apid" type="PktApids16L">
+        <description text="ApID for entry"/>
+      </itemDef>
+      <item name="lib_hk_apid"/>
+      <itemDef name="lib_hk_count" type="uint16L">
+        <description text="Number of packets stored"/>
+      </itemDef>
+      <itemDef name="lib_hk_time" type="uint32L">
+        <description text="Time of last packet"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef name="lib_hk_frame">
+    <field>
+      <itemDef name="lib_reg_err_max" type="uint8L">
+        <description text="Registration Errors due to packet number"/>
+      </itemDef>
+      <itemDef name="lib_reg_err_size" type="uint8L">
+        <description text="Registration Errors due to size"/>
+      </itemDef>
+      <itemDef name="lib_reg_err_dup" type="uint8L">
+        <description text="Registration Errors due to packet id"/>
+      </itemDef>
+      <itemDef name="lib_id_err" type="uint8L">
+        <description text="Bad access due to ID"/>
+      </itemDef>
+      <itemDef name="lib_entry_num" type="uint16L">
+        <description text="Number of registered entries"/>
+      </itemDef>
+      <itemDef name="lib_entry_store" type="uint16L">
+        <description text="Size of packet storage"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_LIB_PKT" name="lib_hk">
+    <description text="Library Housekeeping Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_lib_hk"/>
+      <item name="lib_hk_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="tbl_hk_frame">
+    <field>
+      <itemDef name="tbl_unreg_err_count" type="uint32L">
+        <description text="Unregistered Table Error Count"/>
+      </itemDef>
+      <itemDef name="tbl_invalid_err_count" type="uint32L">
+        <description text="Invalid Table Access Count"/>
+      </itemDef>
+      <itemDef name="tbl_check_err_count" type="uint32L">
+        <description text="Bad checksum calculation count"/>
+      </itemDef>
+      <itemDef name="tbl_match_err_count" type="uint32L">
+        <description text="Copy mismatch count"/>
+      </itemDef>
+      <itemDef name="tbl_read_err_count" type="uint32L">
+        <description text="Storage Read Error Count"/>
+      </itemDef>
+      <frameCopy name="tbl_info_entry" suffix="0"/>
+      <frameCopy name="tbl_info_entry" suffix="1"/>
+      <frameCopy name="tbl_info_entry" suffix="2"/>
+      <frameCopy name="tbl_info_entry" suffix="3"/>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_TBL_PKT" name="tbl_hk">
+    <description text="Table Housekeeping Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_tbl_hk"/>
+      <item name="tbl_hk_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="seq_hk_frame">
+    <field>
+      <itemDef name="seq_cmd_cnt" num="#SEQ_NUM_ENGINES" type="uint32L">
+        <description text="Number of output commands"/>
+      </itemDef>
+      <itemDef name="seq_wait_time" num="#SEQ_NUM_ENGINES" type="uint32L">
+        <description text="Time at which wait expires"/>
+      </itemDef>
+      <itemDef name="seq_position" num="#SEQ_NUM_ENGINES" type="uint32L">
+        <description text="Current offset within sequence"/>
+      </itemDef>
+      <itemDef name="seq_buffer_id" num="#SEQ_NUM_ENGINES" type="uint16L">
+        <description text="Active sequence buffer ID"/>
+      </itemDef>
+      <itemDef name="seq_state" num="#SEQ_NUM_ENGINES" type="seqState8L">
+        <description text="State of the engine"/>
+      </itemDef>
+      <itemDef name="seq_stop_code" num="#SEQ_NUM_ENGINES" type="seqStopCode8L">
+        <description text="Reason for last termination"/>
+      </itemDef>
+      <itemDef name="seq_wait_type" num="#SEQ_NUM_ENGINES" type="seqWaitType8L">
+        <description text="Type of wait for suspend state"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_SEQ_PKT" name="seq_hk">
+    <description text="Sequence Housekeeping Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_seq_hk"/>
+      <item name="seq_hk_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="tlm_hk_frame">
+    <field>
+      <itemDef name="tlm_sent_count" type="uint32L">
+        <description text="Number of sent packets"/>
+      </itemDef>
+      <itemDef name="tlm_err_count" type="uint32L">
+        <description text="Number of errors"/>
+      </itemDef>
+      <itemDef name="tlm_pkt_rate" num="#PKT_APID_MAX" type="uint32L">
+        <description text="Packet Rates"/>
+      </itemDef>
+      <itemDef name="tlm_stream_state" type="EnableDisable32L">
+        <description text="Stream state"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_TLM_PKT" name="tlm_hk">
+    <description text="Telemetry Task Housekeeping Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_tlm_hk"/>
+      <item name="tlm_hk_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="cmd_hk_frame">
+    <field>
+      <itemDef name="cmd_recv_count" type="uint16L">
+        <description text="Number of received commands"/>
+      </itemDef>
+      <itemDef name="cmd_fmt_count" type="uint16L">
+        <description text="Number of bad format commands"/>
+      </itemDef>
+      <itemDef name="cmd_rjct_count" type="uint16L">
+        <description text="Number of received commands"/>
+      </itemDef>
+      <itemDef name="cmd_succ_count" type="uint16L">
+        <description text="Number of successful commands"/>
+      </itemDef>
+      <itemDef name="cmd_succ_op" type="CmdOpcodesHydra8L">
+        <description text="Last successful command opcode"/>
+      </itemDef>
+      <itemDef name="cmd_rjct_op" type="CmdOpcodesHydra8L">
+        <description text="Last rejected command opcode"/>
+      </itemDef>
+      <itemDef name="cmd_fail_code" type="CmdFailCodes8L">
+        <description text="Command failure code"/>
+      </itemDef>
+      <item name="pad"/>
+      <itemDef name="cmd_src_cnt" num="#CMD_SOURCE_NUM" type="uint8L">
+        <description text="Command source count"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_CMD_PKT" name="cmd_hk">
+    <description text="Command Housekeeping Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_cmd_hk"/>
+      <item name="cmd_hk_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="sband_hk_frame">
+    <field>
+      <itemDef name="sband_sent_count" type="uint16L">
+        <description text="SBand Byte Sent Count"/>
+      </itemDef>
+      <itemDef name="sband_idle_count" type="uint16L">
+        <description text="IDLE Frame Count"/>
+      </itemDef>
+      <itemDef name="sband_control" type="uint8L">
+        <description text="Control register"/>
+      </itemDef>
+      <itemDef name="sband_encoder" type="uint8L">
+        <description text="Encoder register"/>
+      </itemDef>
+      <itemDef name="sband_power" type="SBANDPAPower8L">
+        <description text="PA Power"/>
+      </itemDef>
+      <itemDef name="sband_synth_offset" type="uint8L">
+        <description text="Synth Offset"/>
+      </itemDef>
+      <itemDef name="sband_underrun" type="uint16L">
+        <description text="Buffer underruns"/>
+      </itemDef>
+      <itemDef name="sband_overruns" type="uint16L">
+        <description text="Buffer overruns"/>
+      </itemDef>
+      <itemDef name="sband_buf_count" type="uint16L">
+        <description text="Buffer count"/>
+      </itemDef>
+      <itemDef name="sband_rf_pwr" type="SBAND_RF_Pwr16L">
+        <description text="RF Out Power"/>
+      </itemDef>
+      <itemDef name="sband_pa_temp_pad" type="dn4">
+        <description text="Power Amplifier Temp Padding"/>
+      </itemDef>
+      <itemDef name="sband_pa_temp" type="SBAND_PA_Temp12L">
+        <description text="Power Amplifier Temp"/>
+      </itemDef>
+      <itemDef name="sband_bdt_temp_pad" type="dn4">
+        <description text="Board Top Temperature Padding"/>
+      </itemDef>
+      <itemDef name="sband_bdt_temp" type="SBAND_Board_Temp12L">
+        <description text="Board Top Temperature"/>
+      </itemDef>
+      <itemDef name="sband_bdb_temp_pad" type="dn4">
+        <description text="Board bottom Temperature Padding"/>
+      </itemDef>
+      <itemDef name="sband_bdb_temp" type="SBAND_Board_Temp12L">
+        <description text="Board bottom Temperature"/>
+      </itemDef>
+      <itemDef name="sband_bat_cur" type="SBAND_Bat_Curr16L">
+        <description text="Battery current"/>
+      </itemDef>
+      <itemDef name="sband_bat_volt" type="SBAND_Bat_Volt16L">
+        <description text="Battery voltage"/>
+      </itemDef>
+      <itemDef name="sband_pa_curr" type="SBAND_PA_Curr16L">
+        <description text="Power Amplifier current"/>
+      </itemDef>
+      <itemDef name="sband_pa_volt" type="SBAND_PA_Volt16L">
+        <description text="Power Amplifier Voltage"/>
+      </itemDef>
+      <itemDef name="sband_version" type="uint8L">
+        <description text="Firmware version"/>
+      </itemDef>
+      <itemDef name="sband_debug" type="uint8L">
+        <description text="SBand Debug"/>
+      </itemDef>
+      <itemDef name="sband_status" type="SBANDStatus8L">
+        <description text="SBand Status"/>
+      </itemDef>
+      <itemDef name="sband_tx_ready" type="uint8L">
+        <description text="SBand Tx Ready"/>
+      </itemDef>
+      <itemDef name="sband_hk_valid" type="uint8L">
+        <description text="SBand Hk Data valid"/>
+      </itemDef>
+      <itemDef name="sband_i2c_timeout" type="uint8L">
+        <description text="SBand I2C Comm Timeout"/>
+      </itemDef>
+      <itemDef name="sband_i2c_fail" type="uint8L">
+        <description text="SBand I2C Comm Failed"/>
+      </itemDef>
+      <item name="pad"/>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_SBAND_PKT" name="sband_hk">
+    <description text="sband Housekeeping Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_sband_hk"/>
+      <item name="sband_hk_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="sd_partition_entry">
+    <description text="Partition Info Entry"/>
+    <field>
+      <itemDef name="sd_partition_start" type="uint32L">
+        <description text="Start address"/>
+      </itemDef>
+      <itemDef name="sd_partition_size" type="uint32L">
+        <description text="Partition Size"/>
+      </itemDef>
+      <itemDef name="sd_partition_write" type="uint32L">
+        <description text="Partition write address"/>
+      </itemDef>
+      <itemDef name="sd_partition_read" type="uint32L">
+        <description text="Partition read address"/>
+      </itemDef>
+      <itemDef name="sd_partition_pbk" type="uint32L">
+        <description text="Partition playback address"/>
+      </itemDef>
+      <itemDef name="sd_partition_id" type="SDPartitions32L">
+        <description text="Partition ID"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef name="sd_hk_frame">
+    <field>
+      <itemDef name="sd_write_cnt" type="uint16L">
+        <description text="Number of packets written"/>
+      </itemDef>
+      <itemDef name="sd_read_cnt" type="uint16L">
+        <description text="Number of packets read"/>
+      </itemDef>
+      <itemDef name="sd_write_state" type="EnableDisable8L">
+        <description text="State of write"/>
+      </itemDef>
+      <itemDef name="sd_card0_state" type="SDCardState8L">
+        <description text="State of Card 0"/>
+      </itemDef>
+      <itemDef name="sd_card1_state" type="SDCardState8L">
+        <description text="State of Card 1"/>
+      </itemDef>
+      <itemDef name="sd_card_sel" type="StorageId8L">
+        <description text="Current device selected"/>
+      </itemDef>
+      <itemDef name="sd_read_state" type="EnableDisable8L">
+        <description text="SD Read State"/>
+      </itemDef>
+      <itemDef name="sd_pbk_state" type="EnableDisable8L">
+        <description text="SD Playback State"/>
+      </itemDef>
+      <itemDef name="sd_read_stream" type="PktStream8L">
+        <description text="SD Read Stream"/>
+      </itemDef>
+      <itemDef name="sd_read_id" type="SDPartitions8L">
+        <description text="SD Read Partition ID"/>
+      </itemDef>
+      <itemDef name="sd_read_end_time" type="uint32L">
+        <description text="SD Read End Time"/>
+      </itemDef>
+      <frameCopy name="sd_partition_entry" suffix="0"/>
+      <frameCopy name="sd_partition_entry" suffix="1"/>
+      <frameCopy name="sd_partition_entry" suffix="2"/>
+      <frameCopy name="sd_partition_entry" suffix="3"/>
+      <frameCopy name="sd_partition_entry" suffix="4"/>
+      <frameCopy name="sd_partition_entry" suffix="5"/>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_SD_HK_PKT" name="sd_hk">
+    <description text="SDCARD Housekeeping Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_sd_hk"/>
+      <item name="sd_hk_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="uhf_hk_frame">
+    <field>
+      <itemDef name="uhf_tx_count" type="uint32L">
+        <description text="Number of bytes transmitted"/>
+      </itemDef>
+      <itemDef name="uhf_rx_discard" type="uint16L">
+        <description text="Number of bytes discarded from uplink"/>
+      </itemDef>
+      <itemDef name="uhf_sbe_count" type="uint16L">
+        <description text="Single bit error count"/>
+      </itemDef>
+      <itemDef name="uhf_mbe_count" type="uint16L">
+        <description text="Multi bit error count"/>
+      </itemDef>
+      <itemDef name="uhf_pass_err_cnt" type="uint16L">
+        <description text="Pass through packet response error count"/>
+      </itemDef>
+      <itemDef name="uhf_uart_recv_cnt" type="uint32L">
+        <description text="Count of bytes received by UART"/>
+      </itemDef>
+      <itemDef name="uhf_uart_drop_cnt" type="uint16L">
+        <description text="Count of bytes dropped by UART"/>
+      </itemDef>
+      <itemDef name="uhf_uart_fra_err" type="uint16L">
+        <description text="Count of UART framing errors"/>
+      </itemDef>
+      <itemDef name="uhf_uart_par_err" type="uint16L">
+        <description text="Count of UART parity errors"/>
+      </itemDef>
+      <itemDef name="uhf_uart_ovr_err" type="uint16L">
+        <description text="Count of UART overrun errors"/>
+      </itemDef>
+      <itemDef name="uhf_uart_sent_cnt" type="uint16L">
+        <description text="Count of bytes sent by UART"/>
+      </itemDef>
+      <itemDef name="uhf_uart_cmd_cnt" type="uint16L">
+        <description text="Count of commands received by radio"/>
+      </itemDef>
+      <itemDef name="uhf_cmd_ready" type="uint8L">
+        <description text="Ready for commanding"/>
+      </itemDef>
+      <itemDef name="uhf_alive" type="uint8L">
+        <description text="Indicates good communication with UHF"/>
+      </itemDef>
+      <itemDef name="uhf_channel" type="charL">
+        <description text="UHF Channel"/>
+      </itemDef>
+      <itemDef name="uhf_chksm_compare" type="uint8L">
+        <description text="UHF Checksum compare result"/>
+      </itemDef>
+      <itemDef name="uhf_watchdog_count" type="uint8L">
+        <description text="UHF Watchdog Count"/>
+      </itemDef>
+      <itemDef name="uhf_trap_count" type="uint8L">
+        <description text="UHF Trap Count"/>
+      </itemDef>
+      <itemDef name="uhf_pll_count" type="uint8L">
+        <description text="UHF PLL Count"/>
+      </itemDef>
+      <itemDef name="uhf_temp_buff" type="dn2">
+        <description text="UHF Temp"/>
+      </itemDef>
+      <itemDef name="uhf_temp" type="sn6l">
+        <description text="UHF Temp"/>
+      </itemDef>
+      <itemDef name="uhf_echo_mode" type="charL">
+        <description text="UHF Echo Mode"/>
+      </itemDef>
+      <itemDef name="uhf_afc_mode" type="charL">
+        <description text="UHF AFC Mode"/>
+      </itemDef>
+      <itemDef name="uhf_swd_mode" type="charL">
+        <description text="UHF SWD State"/>
+      </itemDef>
+      <itemDef name="uhf_read_mode" type="charL">
+        <description text="UHF Readback State"/>
+      </itemDef>
+      <itemDef name="uhf_locked" type="uint8L">
+        <description text="UHF Locked State"/>
+      </itemDef>
+      <itemDef name="uhfPad1" type="uint8L"/>
+      <itemDef name="uhfPad2" type="uint8L"/>
+      <itemDef name="uhfPad3" type="uint8L"/>
+      <itemDef name="uhf_tx_gap" type="uint32L">
+        <description text="UHF Transmit Gap"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_UHF_HK_PKT" name="uhf_hk">
+    <description text="UHF Housekeeping Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_uhf_hk"/>
+      <item name="uhf_hk_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="uhf_pass_frame">
+    <field>
+      <itemDef name="uhf_pass_size" type="uint32L">
+        <description text="Pass through response size"/>
+      </itemDef>
+      <itemDef name="uhf_pass_response" num="#UHF_RESPONSE_BUFFER_SIZE" type="charL">
+        <description text="Pass through command response"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_UHF_PASS_PKT" name="uhf_pass">
+    <description text="UHF Pass Through Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_uhf_pass"/>
+      <item name="uhf_pass_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="cip_hk_frame">
+    <field>
+      <itemDef name="cip_soh_count" type="uint16L">
+        <description text="Count of packets received"/>
+      </itemDef>
+      <itemDef name="cip_sci_count" type="uint16L">
+        <description text="Count of packets received"/>
+      </itemDef>
+      <itemDef name="cip_pkt_err_count" type="uint16L">
+        <description text="Number of packet errors"/>
+      </itemDef>
+      <itemDef name="cip_pass_count" type="uint16L">
+        <description text="Number of pass through commands"/>
+      </itemDef>
+      <itemDef name="cip_pkt_crc_count" type="uint16L">
+        <description text="Number of packet CRC errors"/>
+      </itemDef>
+      <itemDef name="cip_sync_err_count" type="uint16L">
+        <description text="Number of packet sync errors"/>
+      </itemDef>
+      <itemDef name="cip_pkt_comstat" type="uint32L">
+        <description text="ComStat field from CIP packet"/>
+      </itemDef>
+      <itemDef name="cip_pkt_temp1" type="uint16L">
+        <description text="Temp1 field from CIP packet"/>
+      </itemDef>
+      <itemDef name="cip_pkt_temp2" type="uint16L">
+        <description text="Temp2 field from CIP packet"/>
+      </itemDef>
+      <itemDef name="cip_pkt_temp3" type="uint16L">
+        <description text="Temp3 field from CIP packet"/>
+      </itemDef>
+      <itemDef name="cip_alive" type="uint16L">
+        <description text="Indicates if CIP is communicating"/>
+      </itemDef>
+      <itemDef name="cip_fast_count" type="uint32L">
+        <description text="Fast science mode count"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_CIP_HK_PKT" name="cip_hk">
+    <description text="CIP Housekeeping Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_cip_hk"/>
+      <item name="cip_hk_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="cip_msg_hk_frame">
+    <field>
+      <itemDef name="cip_msg_recv_count" type="uint16L">
+        <description text="Number of received messages"/>
+      </itemDef>
+      <itemDef name="cip_msg_rjct_count" type="uint16L">
+        <description text="Number of rejected messages"/>
+      </itemDef>
+      <itemDef name="cip_fmt_count" type="uint16L">
+        <description text="Number of bad format messages"/>
+      </itemDef>
+      <itemDef name="cipMsgPad" type="uint16L">
+        <description text=""/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_CIP_MSG_PKT" name="cip_msg_hk">
+    <description text="CIP Message Engine Housekeeping Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_cip_msg_hk"/>
+      <item name="cip_msg_hk_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="mode_hk_frame">
+    <field>
+      <itemDef name="mode_avoid_flags" num="#MODE_SYSTEM_NUM" type="AvoidFlag8L">
+        <description text="State of avoid flags"/>
+      </itemDef>
+      <itemDef name="mode_thresholds" num="#MODE_THRESHOLD_NUM" type="EPS_SA_V16L">
+        <description text="Mode transition thresholds"/>
+      </itemDef>
+      <itemDef name="mode_last_cmd_time" type="uint32L">
+        <description text="Number of seconds since last successful command"/>
+      </itemDef>
+      <itemDef name="clt_triggered" type="uint32L">
+        <description text="Indicates if command loss timer triggered"/>
+      </itemDef>
+      <itemDef name="clt_threshold" type="uint32L">
+        <description text="Threshold for command loss timer"/>
+      </itemDef>
+      <itemDef name="clt_countdown" type="uint32L">
+        <description text="Number of seconds until CLT is triggered"/>
+      </itemDef>
+      <itemDef name="mode_deployables" num="#NUM_DEPLOYABLES" type="uint8L">
+        <description text="Commanded status of deployables"/>
+      </itemDef>
+      <itemDef name="mode_curr_mode" type="SystemMode8L">
+        <description text="Current system mode"/>
+      </itemDef>
+      <itemDef name="mode_launch_delay" type="uint32L">
+        <description text="Delay after launch"/>
+      </itemDef>
+      <itemDef name="mode_launch_count" type="uint32L">
+        <description text="Launch delay counter"/>
+      </itemDef>
+      <itemDef name="mode_launch_flag" type="uint32L">
+        <description text="Launch complete flag"/>
+      </itemDef>
+      <itemDef name="mode_deploy_int" type="uint32L">
+        <description text="Deployment interval"/>
+      </itemDef>
+      <itemDef name="mode_deploy_count" type="uint32L">
+        <description text="Deployment countdown"/>
+      </itemDef>
+      <itemDef name="mode_eclipse_method" type="EclipseMethod8L">
+        <description text="Eclipse determination method"/>
+      </itemDef>
+      <itemDef name="mode_eclipse" type="EclipseState8L">
+        <description text="Indicates if system is in eclipse"/>
+      </itemDef>
+      <itemDef name="mode_auto_state" type="EnableDisable8L">
+        <description text="Indicates if system is autonomously changing modes"/>
+      </itemDef>
+      <itemDef name="pad3" type="uint8L">
+        <description text=""/>
+      </itemDef>
+      <itemDef name="mode_auto_time" type="uint32L">
+        <description text="Time when auto mode will restore"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_MODE_PKT" name="mode_hk">
+    <description text="mode Housekeeping Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_mode_hk"/>
+      <item name="mode_hk_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="daxss_msg_hk_frame">
+    <field>
+      <itemDef name="daxss_msg_recv_count" type="uint16L">
+        <description text="Number of received messages"/>
+      </itemDef>
+      <item name="daxss_msg_recv_count"/>
+      <itemDef name="daxss_msg_fmt_count" type="uint16L">
+        <description text="Number of bad format messages"/>
+      </itemDef>
+      <itemDef name="daxssMsgPad" type="uint16L">
+        <description text=""/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_DAXSS_MSG_PKT" name="daxss_msg_hk">
+    <description text="DAXSS Message Engine Housekeeping Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_daxss_msg_hk"/>
+      <item name="daxss_msg_hk_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="daxss_hk_frame">
+    <field>
+      <itemDef name="daxss_recv_count" type="uint16L">
+        <description text="Count of DAXSS packets received"/>
+      </itemDef>
+      <itemDef name="daxss_pass_count" type="uint16L">
+        <description text="Count of DAXSS pass through commands sent"/>
+      </itemDef>
+      <itemDef name="daxss_bad_apid_count" type="uint16L">
+        <description text="Count of DAXSS packets with bad apids"/>
+      </itemDef>
+      <itemDef name="daxss_bad_len_count" type="uint16L">
+        <description text="Count of DAXSS packets with bad lengths"/>
+      </itemDef>
+      <itemDef name="daxss_alive_state" type="uint8L">
+        <description text="State of communication with DAXSS"/>
+      </itemDef>
+      <itemDef name="daxss_cmd_op" type="uint8L">
+        <description text="DAXSS Command Last opcode"/>
+      </itemDef>
+      <itemDef name="daxss_sync_errors" type="uint16L">
+        <description text="Count of DAXSS sync errors"/>
+      </itemDef>
+      <itemDef name="daxss_cmd_succ" type="uint16L">
+        <description text="DAXSS Command Accept Count"/>
+      </itemDef>
+      <itemDef name="daxss_cmd_fail" type="uint16L">
+        <description text="DAXSS Command Reject Count"/>
+      </itemDef>
+      <itemDef name="daxss_cdh_enables" type="uint16L">
+        <description text="DAXSS CDH Enables"/>
+      </itemDef>
+      <itemDef name="daxss_cdh_temp" type="uint16L">
+        <description text="DAXSS CDH Temp"/>
+      </itemDef>
+      <itemDef name="daxss_sps_rate" type="uint32L">
+        <description text="DAXSS SPS Sum Rate"/>
+      </itemDef>
+      <itemDef name="daxss_sps_x" type="uint16L">
+        <description text="DAXSS SPS X"/>
+      </itemDef>
+      <itemDef name="daxss_sps_y" type="uint16L">
+        <description text="DAXSS SPS Y"/>
+      </itemDef>
+      <itemDef name="daxss_slow_count" type="uint16L">
+        <description text="DAXSS X Slow Count Rate"/>
+      </itemDef>
+      <itemDef name="daxssHkPad2" type="uint16L">
+        <description text=""/>
+      </itemDef>
+	  <itemDef name="daxss_time_sec" type="uint32L">
+        <description text="DAXSS Timestamp (seconds)"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_DAXSS_HK_PKT" name="daxss_hk">
+    <description text="DAXSS Housekeeping Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_daxss_hk"/>
+      <item name="daxss_hk_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="ana_hk_frame">
+    <field>
+      <itemDef name="eps_bat_fg1" type="EPS_SoC16L">
+        <description text="Battery Voltage"/>
+      </itemDef>
+      <itemDef name="eps_daxss_curr" type="EPS_SA_I16L">
+        <description text="DAXSS Current"/>
+      </itemDef>
+      <itemDef name="eps_daxss_volt" type="EPS_SA_V16L">
+        <description text="DAXSS Voltage"/>
+      </itemDef>
+      <itemDef name="eps_cdh_curr" type="EPS_SA_I16L">
+        <description text="CDH Current"/>
+      </itemDef>
+      <itemDef name="eps_cdh_volt" type="EPS_SA_V16L">
+        <description text="CDH Voltage"/>
+      </itemDef>
+      <itemDef name="eps_sband_curr" type="EPS_SA_I16L">
+        <description text="SBand Current"/>
+      </itemDef>
+      <itemDef name="eps_sband_volt" type="EPS_SA_V16L">
+        <description text="SBand Voltage"/>
+      </itemDef>
+      <itemDef name="eps_uhf_curr" type="EPS_SA_I16L">
+        <description text="UHF Current"/>
+      </itemDef>
+      <itemDef name="eps_uhf_volt" type="EPS_SA_V16L">
+        <description text="UHF Voltage"/>
+      </itemDef>
+      <itemDef name="eps_heater_curr" type="EPS_SA_I16L">
+        <description text="Battery Heater Current"/>
+      </itemDef>
+      <itemDef name="eps_heater_volt" type="EPS_SA_V16L">
+        <description text="Battery Heater Voltage"/>
+      </itemDef>
+      <itemDef name="eps_sp2_curr" type="EPS_SA_I16L">
+        <description text="SP2 Current"/>
+      </itemDef>
+      <itemDef name="eps_sp2_volt" type="EPS_SA_V16L">
+        <description text="SP2 Voltage"/>
+      </itemDef>
+      <itemDef name="eps_sp1_curr" type="EPS_SA_I16L">
+        <description text="SP1 Current"/>
+      </itemDef>
+      <itemDef name="eps_sp1_volt" type="EPS_SA_V16L">
+        <description text="SP1 Voltage"/>
+      </itemDef>
+      <itemDef name="eps_sp0_curr" type="EPS_SA_I16L">
+        <description text="SP0 Current"/>
+      </itemDef>
+      <itemDef name="eps_sp0_volt" type="EPS_SA_V16L">
+        <description text="SP0 Voltage"/>
+      </itemDef>
+      <itemDef name="eps_bat_vcell" type="uint16L">
+        <description text="Battery FG Voltage"/>
+      </itemDef>
+      <itemDef name="eps_gps_12v_2_curr" type="EPS_SA_I16L">
+        <description text="GPS 12V_2 Current"/>
+      </itemDef>
+      <itemDef name="eps_gps_12v_2_volt" type="EPS_SA_V16L">
+        <description text="GPS 12V_2 Voltage"/>
+      </itemDef>
+      <itemDef name="eps_gps_12v_1_curr" type="EPS_SA_I16L">
+        <description text="GPS 12V_1 Current"/>
+      </itemDef>
+      <itemDef name="eps_gps_12v_1_volt" type="EPS_SA_V16L">
+        <description text="GPS 12V_1 Voltage"/>
+      </itemDef>
+      <itemDef name="eps_bat_curr" type="EPS_SA_I16L">
+        <description text="Battery Sense Curr"/>
+      </itemDef>
+      <itemDef name="eps_bat_volt" type="EPS_SA_V16L">
+        <description text="Battery Sense Voltage"/>
+      </itemDef>
+      <itemDef name="eps_adcs_curr" type="EPS_SA_I16L">
+        <description text="ADCS Current"/>
+      </itemDef>
+      <itemDef name="eps_adcs_volt" type="EPS_SA_V16L">
+        <description text="ADCS Voltage"/>
+      </itemDef>
+      <itemDef name="eps_3p3_curr" type="EPS_SA_I16L">
+        <description text="3.3 Current"/>
+      </itemDef>
+      <itemDef name="eps_3p3_volt" type="EPS_SA_V16L">
+        <description text="3.3 Voltage"/>
+      </itemDef>
+      <itemDef name="eps_cip_curr" type="EPS_SA_I16L">
+        <description text="CIP Current"/>
+      </itemDef>
+      <itemDef name="eps_cip_volt" type="EPS_SA_V16L">
+        <description text="CIP Voltage"/>
+      </itemDef>
+      <itemDef name="eps_obc_temp" type="EPS_ADC16L">
+        <description text="OBC Temperature 1"/>
+      </itemDef>
+      <itemDef name="eps_eps_temp" type="EPS_ADC16L">
+        <description text="EPS Temperature"/>
+      </itemDef>
+      <itemDef name="eps_int_temp" type="EPS_ADC16L">
+        <description text="Interface Temperature"/>
+      </itemDef>
+      <itemDef name="eps_sp0_temp" type="EPS_ADC16L">
+        <description text="SP0 Temperature"/>
+      </itemDef>
+      <itemDef name="eps_bat0_temp" type="EPS_ADC16L">
+        <description text="Battery 0 Temperature"/>
+      </itemDef>
+      <itemDef name="eps_sp1_temp" type="EPS_ADC16L">
+        <description text="SP1 Temperature"/>
+      </itemDef>
+      <itemDef name="eps_bat1_temp" type="EPS_ADC16L">
+        <description text="Battery 1 Temperature"/>
+      </itemDef>
+      <itemDef name="eps_sp2_temp" type="EPS_ADC16L">
+        <description text="SP2 Temperature"/>
+      </itemDef>
+      <itemDef name="eps_bat_fg3" type="EPS_SoC16L">
+        <description text="Battery Gauge"/>
+      </itemDef>
+      <itemDef name="eps_eclipse_threshold" type="EPS_SA_I16L">
+        <description text="Solar Array Eclipse Threshold"/>
+      </itemDef>
+      <itemDef name="eps_bat0_temp_conv" type="floatL">
+        <description text="Battery Temp 0 Converted"/>
+      </itemDef>
+      <itemDef name="eps_bat1_temp_conv" type="floatL">
+        <description text="Battery Temp 1 Converted"/>
+      </itemDef>
+      <itemDef name="eps_batt_set_low" type="floatL">
+        <description text="Battery Low Setpoint"/>
+      </itemDef>
+      <itemDef name="eps_batt_set_high" type="floatL">
+        <description text="Battery High Setpoint"/>
+      </itemDef>
+      <itemDef name="eps_batt_samples" type="uint8L">
+        <description text="Battery Consecutive samples"/>
+      </itemDef>
+      <itemDef name="eps_eclipse" type="EPSEclipseState8L">
+        <description text="Eclipse State"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ANA_HK_PKT" name="ana_hk">
+    <description text="Analog Housekeeping Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_ana_hk"/>
+      <item name="ana_hk_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_msg_hk_frame">
+    <field>
+      <itemDef name="adcs_msg_recv_count" type="uint16L">
+        <description text="Number of received messages"/>
+      </itemDef>
+      <itemDef name="adcs_msg_rjct_count" type="uint16L">
+        <description text="Number of rejected messages"/>
+      </itemDef>
+      <itemDef name="adcs_msg_fmt_count" type="uint16L">
+        <description text="Number of bad format messages"/>
+      </itemDef>
+      <itemDef name="adcsMsgPad" type="uint16L">
+        <description text=""/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_MSG_PKT" name="adcs_msg_hk">
+    <description text="ADCS Message Engine Housekeeping Info"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_msg_hk"/>
+      <item name="adcs_msg_hk_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_hk_frame">
+    <field>
+      <itemDef name="adcs_read_sent_cnt" type="uint16L">
+        <description text="Number of read commands sent"/>
+      </itemDef>
+      <itemDef name="adcs_write_sent_cnt" type="uint16L">
+        <description text="Number of write commands sent"/>
+      </itemDef>
+      <itemDef name="adcs_sync_err_cnt" type="uint16L">
+        <description text="Number of response sync errors"/>
+      </itemDef>
+      <itemDef name="adcs_len_err_cnt" type="uint16L">
+        <description text="Number of response length errors"/>
+      </itemDef>
+      <itemDef name="adcs_crc_err_cnt" type="uint16L">
+        <description text="Number of response crc errors"/>
+      </itemDef>
+      <itemDef name="adcs_hk_pkt_cnt" type="uint16L">
+        <description text="Number of hk packets received from XACT"/>
+      </itemDef>
+      <itemDef name="adcs_alive" type="uint8L">
+        <description text="Alive state of communication"/>
+      </itemDef>
+      <itemDef name="adcs_eclipse" type="uint8L">
+        <description text="State of eclipse"/>
+      </itemDef>
+      <itemDef name="adcs_eclipse_threshold" type="uint16L">
+        <description text="CSS Threshold for eclipse determination"/>
+      </itemDef>
+      <itemDef name="adcs_eclipse_count" type="uint16L">
+        <description text="CSS below threshold count"/>
+      </itemDef>
+      <item name="pad1"/>
+      <itemDef name="pad2" type="uint8L">
+        <description text=""/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_PKT" name="adcs_hk">
+    <description text="ADCS Housekeeping Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_hk"/>
+      <item name="adcs_hk_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_analogs_frame">
+    <field>
+      <itemDef name="adcs_analogs_voltage_2p5" type="adcs_analogs_voltage_2p5_eu8B">
+        <description text="Voltage_2p5"/>
+      </itemDef>
+      <itemDef name="adcs_analogs_voltage_1p8" type="adcs_analogs_voltage_1p8_eu8B">
+        <description text="Voltage_1p8"/>
+      </itemDef>
+      <itemDef name="adcs_analogs_voltage_1p0" type="adcs_analogs_voltage_1p0_eu8B">
+        <description text="Voltage_1p0"/>
+      </itemDef>
+      <itemDef name="adcs_analogs_det_temp" type="adcs_analogs_det_temp_eu8BS">
+        <description text="Tracker Detector temperature"/>
+      </itemDef>
+      <itemDef name="adcs_analogs_ext_temp" type="adcs_analogs_ext_temp_eu16BS">
+        <description text="Ext Temp"/>
+      </itemDef>
+      <itemDef name="adcs_analogs_imu_temp" type="adcs_analogs_imu_temp_eu16BS">
+        <description text="Imu Temp"/>
+      </itemDef>
+      <itemDef name="adcs_analogs_motor1_temp" type="adcs_analogs_motor1_temp_eu16BS">
+        <description text="Wheel 1 Temp"/>
+      </itemDef>
+      <itemDef name="adcs_analogs_motor2_temp" type="adcs_analogs_motor2_temp_eu16BS">
+        <description text="Wheel 2 Temp"/>
+      </itemDef>
+      <itemDef name="adcs_analogs_motor3_temp" type="adcs_analogs_motor3_temp_eu16BS">
+        <description text="Wheel 3 Temp"/>
+      </itemDef>
+      <itemDef name="adcs_analogs_motor4_temp" type="adcs_analogs_motor4_temp_eu16BS">
+        <description text="Wheel 4 Temp"/>
+      </itemDef>
+      <itemDef name="adcs_analogs_digital_bus_v" type="adcs_analogs_digital_bus_v_eu16BS">
+        <description text="Digital Bus Voltage"/>
+      </itemDef>
+      <itemDef name="adcs_analogs_motor_bus_v" type="adcs_analogs_motor_bus_v_eu16BS">
+        <description text="Motor Bus Voltage"/>
+      </itemDef>
+      <itemDef name="adcs_analogs_rod_bus_v" type="adcs_analogs_rod_bus_v_eu16BS">
+        <description text="Rod Bus Voltage"/>
+      </itemDef>
+      <itemDef name="pad0" type="uint8B">
+        <description text=""/>
+      </itemDef>
+      <item name="pad1"/>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_ANALOGS_PKT" name="adcs_analogs">
+    <description text="ADCS Analogs Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_analogs"/>
+      <item name="adcs_analogs_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_gps_frame">
+    <field>
+      <itemDef name="adcs_gps_time" type="int32B">
+        <description text="Time from GPS"/>
+      </itemDef>
+      <itemDef name="adcs_gps_position_ecef1" type="adcs_gps_position_ecef1_eu32BS">
+        <description text="GPS Position ECEF"/>
+      </itemDef>
+      <itemDef name="adcs_gps_position_ecef2" type="adcs_gps_position_ecef2_eu32BS">
+        <description text="GPS Position ECEF"/>
+      </itemDef>
+      <itemDef name="adcs_gps_position_ecef3" type="adcs_gps_position_ecef3_eu32BS">
+        <description text="GPS Position ECEF"/>
+      </itemDef>
+      <itemDef name="adcs_gps_velocity_ecef1" type="adcs_gps_velocity_ecef1_eu32BS">
+        <description text="GPS Velocity ECEF"/>
+      </itemDef>
+      <itemDef name="adcs_gps_velocity_ecef2" type="adcs_gps_velocity_ecef2_eu32BS">
+        <description text="GPS Velocity ECEF"/>
+      </itemDef>
+      <itemDef name="adcs_gps_velocity_ecef3" type="adcs_gps_velocity_ecef3_eu32BS">
+        <description text="GPS Velocity ECEF"/>
+      </itemDef>
+      <itemDef name="adcs_gps_sample_usec_ct" type="uint32B">
+        <description text="Last Valid Data PPS Usec"/>
+      </itemDef>
+      <itemDef name="adcs_gps_cycles_since_latest_data" type="uint32B">
+        <description text="Cycles Since Valid GPS Data"/>
+      </itemDef>
+      <itemDef name="adcs_gps_gps_lock_count" type="uint16B">
+        <description text="spare"/>
+      </itemDef>
+      <itemDef name="adcs_gps_ms_gtracked_satellites" type="uint8B">
+        <description text="MSG Tracked Sats"/>
+      </itemDef>
+      <itemDef name="adcs_gps_ms_gused_satellites" type="uint8B">
+        <description text="MSG Used Sats"/>
+      </itemDef>
+      <itemDef name="adcs_gps_msg_data_valid" type="adcs_gps_msg_data_valid_state8B">
+        <description text="MSG Decode Successful"/>
+      </itemDef>
+      <itemDef name="adcs_gps_gps_valid" type="adcs_gps_gps_valid_state8B">
+        <description text="GPS Valid"/>
+      </itemDef>
+      <itemDef name="adcs_gps_gps_enable" type="adcs_gps_gps_enable_state8B">
+        <description text="GPS Enabled"/>
+      </itemDef>
+      <itemDef name="adcs_gps_new_data_received" type="adcs_gps_new_data_received_state8B">
+        <description text="New GPS Data Received"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_GPS_PKT" name="adcs_gps">
+    <description text="ADCS Gps Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_gps"/>
+      <item name="adcs_gps_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_clock_sync_frame">
+    <field>
+      <itemDef name="adcs_clock_sync_counts_per_sec" type="uint32B">
+        <description text="Counts Per Second"/>
+      </itemDef>
+      <itemDef name="adcs_clock_sync_gps_pps_time_usec" type="uint32B">
+        <description text="GPS PPS Time Usec"/>
+      </itemDef>
+      <itemDef name="adcs_clock_sync_hr_run_count" type="uint32B">
+        <description text="High Rate Run Count"/>
+      </itemDef>
+      <itemDef name="adcs_clock_sync_hr_time_usec" type="uint32B">
+        <description text="High Rate Time Usec"/>
+      </itemDef>
+      <itemDef name="adcs_clock_sync_hr_cycle_num" type="uint32B">
+        <description text="High Rate Cycle Num"/>
+      </itemDef>
+      <itemDef name="adcs_clock_sync_vhr_cycle_num" type="uint32B">
+        <description text="Very High Rate Cycle Num"/>
+      </itemDef>
+      <itemDef name="adcs_clock_sync_cycles_since_pps" type="uint32B">
+        <description text="HR Cycles Since Last PPS"/>
+      </itemDef>
+      <itemDef name="adcs_clock_sync_vhr_exec_time_ms" type="uint8B">
+        <description text="Very High Rate Duration"/>
+      </itemDef>
+      <itemDef name="adcs_clock_sync_vhr_0_exec_time_us" type="adcs_clock_sync_vhr_0_exec_time_us_eu8B">
+        <description text="Very High Rate Cycle 0 Duration"/>
+      </itemDef>
+      <itemDef name="adcs_clock_sync_hr_exec_time_ms1" type="uint8B">
+        <description text="High Rate Duration"/>
+      </itemDef>
+      <itemDef name="adcs_clock_sync_hr_exec_time_ms2" type="uint8B">
+        <description text="High Rate Duration"/>
+      </itemDef>
+      <itemDef name="adcs_clock_sync_hr_exec_time_ms3" type="uint8B">
+        <description text="High Rate Duration"/>
+      </itemDef>
+      <itemDef name="adcs_clock_sync_hr_exec_time_ms4" type="uint8B">
+        <description text="High Rate Duration"/>
+      </itemDef>
+      <itemDef name="adcs_clock_sync_hr_exec_time_ms5" type="uint8B">
+        <description text="High Rate Duration"/>
+      </itemDef>
+      <itemDef name="adcs_clock_sync_clock_sync_enable" type="uint8B">
+        <description text="Clock Sync Enable"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_CLOCK_SYNC_PKT" name="adcs_clock_sync">
+    <description text="ADCS Clock_sync Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_clock_sync"/>
+      <item name="adcs_clock_sync_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_tracker_frame">
+    <field>
+      <itemDef name="adcs_tracker_attitude_st1" type="adcs_tracker_attitude_st1_eu32BS">
+        <description text="Tracker Attitude"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_attitude_st2" type="adcs_tracker_attitude_st2_eu32BS">
+        <description text="Tracker Attitude"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_attitude_st3" type="adcs_tracker_attitude_st3_eu32BS">
+        <description text="Tracker Attitude"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_attitude_st4" type="adcs_tracker_attitude_st4_eu32BS">
+        <description text="Tracker Attitude"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_rate_est1" type="adcs_tracker_rate_est1_eu16BS">
+        <description text="Tracker Rate"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_rate_est2" type="adcs_tracker_rate_est2_eu16BS">
+        <description text="Tracker Rate"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_rate_est3" type="adcs_tracker_rate_est3_eu16BS">
+        <description text="Tracker Rate"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_right_asc" type="adcs_tracker_right_asc_eu16B">
+        <description text="Tracker Right Ascension"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_declination" type="adcs_tracker_declination_eu16BS">
+        <description text="Tracker Declination"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_roll" type="adcs_tracker_roll_eu16BS">
+        <description text="Tracker Roll"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_att_covariance1" type="adcs_tracker_att_covariance1_eu32BS">
+        <description text="Attitude Covariance"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_att_covariance2" type="adcs_tracker_att_covariance2_eu32BS">
+        <description text="Attitude Covariance"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_att_covariance3" type="adcs_tracker_att_covariance3_eu32BS">
+        <description text="Attitude Covariance"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_att_covariance4" type="adcs_tracker_att_covariance4_eu32BS">
+        <description text="Attitude Covariance"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_att_covariance5" type="adcs_tracker_att_covariance5_eu32BS">
+        <description text="Attitude Covariance"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_att_covariance6" type="adcs_tracker_att_covariance6_eu32BS">
+        <description text="Attitude Covariance"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_maximum_residual" type="uint8B">
+        <description text="Maximum Residual"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_maximum_residual_init" type="uint8B">
+        <description text="Max Residual 1st pass"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_analog_gain_eu" type="adcs_tracker_analog_gain_eu_eu8B">
+        <description text="Analog Gain"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_mag_bright" type="adcs_tracker_mag_bright_eu8B">
+        <description text="Bright Magnitude Limit"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_mag_dim" type="adcs_tracker_mag_dim_eu8B">
+        <description text="Dim Magnitude Limit"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_peak_noise_all_trk_blks" type="adcs_tracker_peak_noise_all_trk_blks_eu8B">
+        <description text="Peak 3-Sigma Noise"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_peak_bckgnd_all_trk_blks" type="adcs_tracker_peak_bckgnd_all_trk_blks_eu8B">
+        <description text="Peak Mean Background"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_median_noise_all_trk_blks" type="adcs_tracker_median_noise_all_trk_blks_eu8B">
+        <description text="Median 3-Sigma noise"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_median_bckgnd_all_trk_blks" type="adcs_tracker_median_bckgnd_all_trk_blks_eu8B">
+        <description text="Median Mean Bkgd"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_operating_mode" type="adcs_tracker_operating_mode_state8B">
+        <description text="Tracker Operating Mode"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_star_id_step" type="adcs_tracker_star_id_step_state8B">
+        <description text="Star ID Step"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_id_status" type="adcs_tracker_id_status_state8B">
+        <description text="Star ID Status"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_id_status_save" type="adcs_tracker_id_status_save_state8B">
+        <description text="Star ID Status Saved"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_att_status" type="adcs_tracker_att_status_state8B">
+        <description text="Tracker Attitude Status"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_rate_est_status" type="adcs_tracker_rate_est_status_state8B">
+        <description text="Tracker Rate Est Status"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_rate_aid_status" type="adcs_tracker_rate_aid_status_state8B">
+        <description text="Rate Aid Status"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_vel_aid_status" type="adcs_tracker_vel_aid_status_state8B">
+        <description text="Velocity Aid Status"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_att_aid_status" type="adcs_tracker_att_aid_status_state8B">
+        <description text="Attitude Aid Status"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_att_time_tag" type="uint32B">
+        <description text="Star Tracker Time Tag"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_num_id_patterns_tried" type="uint32B">
+        <description text="Num ID Patterns Tried"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_pixel_amp_threshold" type="adcs_tracker_pixel_amp_threshold_eu8B">
+        <description text="Pixel Ampl Threshold"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_amplitude_offset" type="uint8B">
+        <description text="Amplitude Offset"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_current_tint" type="uint32B">
+        <description text="Current Tint"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_start_set_time" type="uint32B">
+        <description text="StartSetTime"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_mem_det_trigger_delay" type="uint32B">
+        <description text="MemDetTriggerDelay"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_image_read_dt" type="uint32B">
+        <description text="ImageReadDt"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_maximum_residual_id" type="uint16B">
+        <description text="Maximum Residual ID"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_maximum_residual_id_init" type="uint16B">
+        <description text="Max Residual ID 1st pass"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_max_row_bckgnd_post_comp" type="uint16B">
+        <description text="Max Background Level"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_excluded_id" type="uint16B">
+        <description text="Latest Excluded Star ID"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_id_stars1" type="uint16B">
+        <description text="Stars Used For Pattern Match"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_id_stars2" type="uint16B">
+        <description text="Stars Used For Pattern Match"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_id_stars3" type="uint16B">
+        <description text="Stars Used For Pattern Match"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_id_stars4" type="uint16B">
+        <description text="Stars Used For Pattern Match"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_det_timeout_count" type="uint16B">
+        <description text="Number of detector timeouts"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_num_pix_groups_for_id" type="uint8B">
+        <description text="Num Pixel Groups"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_id_tolerance" type="uint8B">
+        <description text="StarID Tolerance"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_num_of_att_loops" type="uint8B">
+        <description text="Num Attitude Loops"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_num_attitude_stars" type="uint8B">
+        <description text="Num Stars Used in Att"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_num_stars_high_residual" type="uint8B">
+        <description text="Num Stars High Residual"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_auto_black_enable" type="adcs_tracker_auto_black_enable_state8B">
+        <description text="Auto Black Enable"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_black_level" type="uint8B">
+        <description text="Black Level"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_num_stars_on_fov" type="uint8B">
+        <description text="Num Stars on FOV"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_num_track_blocks_issued" type="uint8B">
+        <description text="Num Track Blocks Issued"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_num_track_stars" type="uint8B">
+        <description text="Num Tracked Stars"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_num_id_stars" type="uint8B">
+        <description text="Num ID Stars"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_fs_wcounter" type="uint8B">
+        <description text="FSW Counter"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_auto_track" type="adcs_tracker_auto_track_state8B">
+        <description text="Auto Track from Star ID"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_auto_integration" type="adcs_tracker_auto_integration_state8B">
+        <description text="Auto Integration Adjust"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_auto_gain" type="adcs_tracker_auto_gain_state8B">
+        <description text="Auto Gain Adjust"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_test_mode" type="uint8B">
+        <description text="Test Mode"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_fpga_det_timeout" type="adcs_tracker_fpga_det_timeout_state8B">
+        <description text="Fpga Detector Timeout"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_store_seq_images" type="adcs_tracker_store_seq_images_state8B">
+        <description text="Store Sequential Images"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_track_ref_available" type="adcs_tracker_track_ref_available_state8B">
+        <description text="Track Ref Available"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_num_exclusions" type="uint8B">
+        <description text="Number of Stars in Exclusion List"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_id_wait_counter" type="uint8B">
+        <description text="TriStar Execution Time"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_image_index" type="uint8B">
+        <description text="Current Image Index"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_ref_index" type="uint8B">
+        <description text="Reference Image Index"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_track_rows" type="uint8B">
+        <description text="Track Block Row Size"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_track_cols" type="uint8B">
+        <description text="Track Block Col Size"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_num_bright_stars" type="uint8B">
+        <description text="Number of Bright Stars"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_image_filter_enabled" type="uint8B">
+        <description text="Image Filter Enabled"/>
+      </itemDef>
+      <item name="pad0"/>
+      <item name="pad1"/>
+      <item name="pad2"/>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_TRACKER_PKT" name="adcs_tracker">
+    <description text="ADCS Tracker Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_tracker"/>
+      <item name="adcs_tracker_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_refs_frame">
+    <field>
+      <itemDef name="adcs_refs_gps_timer" type="uint32B">
+        <description text="Gps Timer"/>
+      </itemDef>
+      <itemDef name="adcs_refs_time_now" type="doubleB">
+        <description text="Orbit Time"/>
+      </itemDef>
+      <itemDef name="adcs_refs_q_ecef_wrt_eci1" type="adcs_refs_q_ecef_wrt_eci1_eu32BS">
+        <description text="Q ECEF wrt ECI"/>
+      </itemDef>
+      <itemDef name="adcs_refs_q_ecef_wrt_eci2" type="adcs_refs_q_ecef_wrt_eci2_eu32BS">
+        <description text="Q ECEF wrt ECI"/>
+      </itemDef>
+      <itemDef name="adcs_refs_q_ecef_wrt_eci3" type="adcs_refs_q_ecef_wrt_eci3_eu32BS">
+        <description text="Q ECEF wrt ECI"/>
+      </itemDef>
+      <itemDef name="adcs_refs_q_ecef_wrt_eci4" type="adcs_refs_q_ecef_wrt_eci4_eu32BS">
+        <description text="Q ECEF wrt ECI"/>
+      </itemDef>
+      <itemDef name="adcs_refs_position_wrt_eci1" type="adcs_refs_position_wrt_eci1_eu32BS">
+        <description text="Orbit Position ECI"/>
+      </itemDef>
+      <itemDef name="adcs_refs_position_wrt_eci2" type="adcs_refs_position_wrt_eci2_eu32BS">
+        <description text="Orbit Position ECI"/>
+      </itemDef>
+      <itemDef name="adcs_refs_position_wrt_eci3" type="adcs_refs_position_wrt_eci3_eu32BS">
+        <description text="Orbit Position ECI"/>
+      </itemDef>
+      <itemDef name="adcs_refs_position_wrt_ecef1" type="adcs_refs_position_wrt_ecef1_eu32BS">
+        <description text="Orbit Position ECEF"/>
+      </itemDef>
+      <itemDef name="adcs_refs_position_wrt_ecef2" type="adcs_refs_position_wrt_ecef2_eu32BS">
+        <description text="Orbit Position ECEF"/>
+      </itemDef>
+      <itemDef name="adcs_refs_position_wrt_ecef3" type="adcs_refs_position_wrt_ecef3_eu32BS">
+        <description text="Orbit Position ECEF"/>
+      </itemDef>
+      <itemDef name="adcs_refs_velocity_wrt_eci1" type="adcs_refs_velocity_wrt_eci1_eu32BS">
+        <description text="Orbit Velocity ECI"/>
+      </itemDef>
+      <itemDef name="adcs_refs_velocity_wrt_eci2" type="adcs_refs_velocity_wrt_eci2_eu32BS">
+        <description text="Orbit Velocity ECI"/>
+      </itemDef>
+      <itemDef name="adcs_refs_velocity_wrt_eci3" type="adcs_refs_velocity_wrt_eci3_eu32BS">
+        <description text="Orbit Velocity ECI"/>
+      </itemDef>
+      <itemDef name="adcs_refs_velocity_wrt_ecef1" type="adcs_refs_velocity_wrt_ecef1_eu32BS">
+        <description text="Orbit Velocity ECEF"/>
+      </itemDef>
+      <itemDef name="adcs_refs_velocity_wrt_ecef2" type="adcs_refs_velocity_wrt_ecef2_eu32BS">
+        <description text="Orbit Velocity ECEF"/>
+      </itemDef>
+      <itemDef name="adcs_refs_velocity_wrt_ecef3" type="adcs_refs_velocity_wrt_ecef3_eu32BS">
+        <description text="Orbit Velocity ECEF"/>
+      </itemDef>
+      <itemDef name="adcs_refs_nadir_vector_body1" type="adcs_refs_nadir_vector_body1_eu16BS">
+        <description text="Nadir Vector in Body"/>
+      </itemDef>
+      <itemDef name="adcs_refs_nadir_vector_body2" type="adcs_refs_nadir_vector_body2_eu16BS">
+        <description text="Nadir Vector in Body"/>
+      </itemDef>
+      <itemDef name="adcs_refs_nadir_vector_body3" type="adcs_refs_nadir_vector_body3_eu16BS">
+        <description text="Nadir Vector in Body"/>
+      </itemDef>
+      <itemDef name="adcs_refs_sun_vector_body1" type="adcs_refs_sun_vector_body1_eu16BS">
+        <description text="Sun vector in spacecraft body frame"/>
+      </itemDef>
+      <itemDef name="adcs_refs_sun_vector_body2" type="adcs_refs_sun_vector_body2_eu16BS">
+        <description text="Sun vector in spacecraft body frame"/>
+      </itemDef>
+      <itemDef name="adcs_refs_sun_vector_body3" type="adcs_refs_sun_vector_body3_eu16BS">
+        <description text="Sun vector in spacecraft body frame"/>
+      </itemDef>
+      <itemDef name="adcs_refs_moon_vector_body1" type="adcs_refs_moon_vector_body1_eu16BS">
+        <description text="Moon vector in spacecraft body frame"/>
+      </itemDef>
+      <itemDef name="adcs_refs_moon_vector_body2" type="adcs_refs_moon_vector_body2_eu16BS">
+        <description text="Moon vector in spacecraft body frame"/>
+      </itemDef>
+      <itemDef name="adcs_refs_moon_vector_body3" type="adcs_refs_moon_vector_body3_eu16BS">
+        <description text="Moon vector in spacecraft body frame"/>
+      </itemDef>
+      <itemDef name="adcs_refs_mag_model_vector_eci1" type="adcs_refs_mag_model_vector_eci1_eu16BS">
+        <description text="Mag Model Vector ECI"/>
+      </itemDef>
+      <itemDef name="adcs_refs_mag_model_vector_eci2" type="adcs_refs_mag_model_vector_eci2_eu16BS">
+        <description text="Mag Model Vector ECI"/>
+      </itemDef>
+      <itemDef name="adcs_refs_mag_model_vector_eci3" type="adcs_refs_mag_model_vector_eci3_eu16BS">
+        <description text="Mag Model Vector ECI"/>
+      </itemDef>
+      <itemDef name="adcs_refs_mag_model_vector_body1" type="adcs_refs_mag_model_vector_body1_eu16BS">
+        <description text="Mag Model Vector Body"/>
+      </itemDef>
+      <itemDef name="adcs_refs_mag_model_vector_body2" type="adcs_refs_mag_model_vector_body2_eu16BS">
+        <description text="Mag Model Vector Body"/>
+      </itemDef>
+      <itemDef name="adcs_refs_mag_model_vector_body3" type="adcs_refs_mag_model_vector_body3_eu16BS">
+        <description text="Mag Model Vector Body"/>
+      </itemDef>
+      <itemDef name="adcs_refs_sun_model_vector_eci1" type="adcs_refs_sun_model_vector_eci1_eu16BS">
+        <description text="Sun Model Vector ECI"/>
+      </itemDef>
+      <itemDef name="adcs_refs_sun_model_vector_eci2" type="adcs_refs_sun_model_vector_eci2_eu16BS">
+        <description text="Sun Model Vector ECI"/>
+      </itemDef>
+      <itemDef name="adcs_refs_sun_model_vector_eci3" type="adcs_refs_sun_model_vector_eci3_eu16BS">
+        <description text="Sun Model Vector ECI"/>
+      </itemDef>
+      <itemDef name="adcs_refs_moon_model_vector_eci1" type="adcs_refs_moon_model_vector_eci1_eu16BS">
+        <description text="Moon Model Vector ECI"/>
+      </itemDef>
+      <itemDef name="adcs_refs_moon_model_vector_eci2" type="adcs_refs_moon_model_vector_eci2_eu16BS">
+        <description text="Moon Model Vector ECI"/>
+      </itemDef>
+      <itemDef name="adcs_refs_moon_model_vector_eci3" type="adcs_refs_moon_model_vector_eci3_eu16BS">
+        <description text="Moon Model Vector ECI"/>
+      </itemDef>
+      <itemDef name="adcs_refs_aero_density" type="int16B">
+        <description text="Atmospheric Density"/>
+      </itemDef>
+      <itemDef name="adcs_refs_orbit_method" type="adcs_refs_orbit_method_state8B">
+        <description text="Orbit Method"/>
+      </itemDef>
+      <itemDef name="adcs_refs_refs_valid" type="adcs_refs_refs_valid_state8B">
+        <description text="Refs Valid"/>
+      </itemDef>
+      <itemDef name="adcs_refs_esm_valid" type="adcs_refs_esm_valid_state8B">
+        <description text="Earth, Sun, Moon valid"/>
+      </itemDef>
+      <itemDef name="adcs_refs_run_low_rate_task" type="adcs_refs_run_low_rate_task_state8B">
+        <description text="RunLowRateTask"/>
+      </itemDef>
+      <itemDef name="adcs_refs_auto_gps_usage" type="adcs_refs_auto_gps_usage_state8B">
+        <description text="Auto GPS Usage"/>
+      </itemDef>
+      <item name="pad0"/>
+      <item name="pad1"/>
+      <item name="pad2"/>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_REFS_PKT" name="adcs_refs">
+    <description text="ADCS Refs Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_refs"/>
+      <item name="adcs_refs_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_time_frame">
+    <field>
+      <itemDef name="adcs_time_tai_seconds" type="doubleB">
+        <description text="TAI Seconds"/>
+      </itemDef>
+      <itemDef name="adcs_time_cycle_time" type="adcs_time_cycle_time_eu32B">
+        <description text="Cycle Time"/>
+      </itemDef>
+      <itemDef name="adcs_time_jd_of_now_wrt_tai" type="uint32B">
+        <description text="Julian Date TAI"/>
+      </itemDef>
+      <itemDef name="adcs_time_gps_update_cycle_period" type="uint32B">
+        <description text="GPS Update Cycle Period"/>
+      </itemDef>
+      <itemDef name="adcs_time_gps_update_cycle_count" type="uint32B">
+        <description text="GPS Update Cycle Count"/>
+      </itemDef>
+      <itemDef name="adcs_time_time_valid" type="adcs_time_time_valid_state8B">
+        <description text="Time Valid"/>
+      </itemDef>
+      <itemDef name="adcs_time_pps_config" type="adcs_time_pps_config_state8B">
+        <description text="PPS Type"/>
+      </itemDef>
+      <item name="pad0"/>
+      <item name="pad1"/>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_TIME_PKT" name="adcs_time">
+    <description text="ADCS Time Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_time"/>
+      <item name="adcs_time_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_imu_frame">
+    <field>
+      <itemDef name="adcs_imu_avg_channel_rates1" type="adcs_imu_avg_channel_rates1_eu16BS">
+        <description text="IMU Channel Rate"/>
+      </itemDef>
+      <itemDef name="adcs_imu_avg_channel_rates2" type="adcs_imu_avg_channel_rates2_eu16BS">
+        <description text="IMU Channel Rate"/>
+      </itemDef>
+      <itemDef name="adcs_imu_avg_channel_rates3" type="adcs_imu_avg_channel_rates3_eu16BS">
+        <description text="IMU Channel Rate"/>
+      </itemDef>
+      <itemDef name="adcs_imu_imu_avg_vector_body1" type="adcs_imu_imu_avg_vector_body1_eu16BS">
+        <description text="IMU Body Rate"/>
+      </itemDef>
+      <itemDef name="adcs_imu_imu_avg_vector_body2" type="adcs_imu_imu_avg_vector_body2_eu16BS">
+        <description text="IMU Body Rate"/>
+      </itemDef>
+      <itemDef name="adcs_imu_imu_avg_vector_body3" type="adcs_imu_imu_avg_vector_body3_eu16BS">
+        <description text="IMU Body Rate"/>
+      </itemDef>
+      <itemDef name="adcs_imu_avg_time_tag" type="uint32B">
+        <description text="IMU Body Rate Time Tag"/>
+      </itemDef>
+      <itemDef name="adcs_imu_raw_first_packet_rates1" type="int16B">
+        <description text="IMU Raw First Pkt Rate"/>
+      </itemDef>
+      <itemDef name="adcs_imu_raw_first_packet_rates2" type="int16B">
+        <description text="IMU Raw First Pkt Rate"/>
+      </itemDef>
+      <itemDef name="adcs_imu_raw_first_packet_rates3" type="int16B">
+        <description text="IMU Raw First Pkt Rate"/>
+      </itemDef>
+      <itemDef name="adcs_imu_imu_invalid_count" type="uint16B">
+        <description text="IMU Invalid Count"/>
+      </itemDef>
+      <itemDef name="adcs_imu_new_packet_count" type="uint8B">
+        <description text="IMU Packet Count"/>
+      </itemDef>
+      <itemDef name="adcs_imu_first_packet_id" type="uint8B">
+        <description text="IMU First Packet ID"/>
+      </itemDef>
+      <itemDef name="adcs_imu_imu_vector_valid" type="adcs_imu_imu_vector_valid_state8B">
+        <description text="IMU Rate Valid"/>
+      </itemDef>
+      <itemDef name="adcs_imu_imu_vector_enabled" type="adcs_imu_imu_vector_enabled_state8B">
+        <description text="IMU Rate Enabled"/>
+      </itemDef>
+      <itemDef name="adcs_imu_imu_test_mode" type="adcs_imu_imu_test_mode_state8B">
+        <description text="IMU Test Mode"/>
+      </itemDef>
+      <item name="pad0"/>
+      <item name="pad1"/>
+      <item name="pad2"/>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_IMU_PKT" name="adcs_imu">
+    <description text="ADCS Imu Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_imu"/>
+      <item name="adcs_imu_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_cal_frame">
+    <field>
+      <itemDef name="adcs_cal_q_tracker_wrt_body1" type="adcs_cal_q_tracker_wrt_body1_eu32BS">
+        <description text="Q Tracker wrt Body Used"/>
+      </itemDef>
+      <itemDef name="adcs_cal_q_tracker_wrt_body2" type="adcs_cal_q_tracker_wrt_body2_eu32BS">
+        <description text="Q Tracker wrt Body Used"/>
+      </itemDef>
+      <itemDef name="adcs_cal_q_tracker_wrt_body3" type="adcs_cal_q_tracker_wrt_body3_eu32BS">
+        <description text="Q Tracker wrt Body Used"/>
+      </itemDef>
+      <itemDef name="adcs_cal_q_tracker_wrt_body4" type="adcs_cal_q_tracker_wrt_body4_eu32BS">
+        <description text="Q Tracker wrt Body Used"/>
+      </itemDef>
+      <itemDef name="adcs_cal_q_tracker_wrt_body5" type="adcs_cal_q_tracker_wrt_body5_eu32BS">
+        <description text="Q Tracker wrt Body Used"/>
+      </itemDef>
+      <itemDef name="adcs_cal_q_tracker_wrt_body6" type="adcs_cal_q_tracker_wrt_body6_eu32BS">
+        <description text="Q Tracker wrt Body Used"/>
+      </itemDef>
+      <itemDef name="adcs_cal_q_tracker_wrt_body7" type="adcs_cal_q_tracker_wrt_body7_eu32BS">
+        <description text="Q Tracker wrt Body Used"/>
+      </itemDef>
+      <itemDef name="adcs_cal_q_tracker_wrt_body8" type="adcs_cal_q_tracker_wrt_body8_eu32BS">
+        <description text="Q Tracker wrt Body Used"/>
+      </itemDef>
+      <itemDef name="adcs_cal_q_tracker_wrt_body_est1" type="adcs_cal_q_tracker_wrt_body_est1_eu32BS">
+        <description text="Q Tracker wrt Body Estimate"/>
+      </itemDef>
+      <itemDef name="adcs_cal_q_tracker_wrt_body_est2" type="adcs_cal_q_tracker_wrt_body_est2_eu32BS">
+        <description text="Q Tracker wrt Body Estimate"/>
+      </itemDef>
+      <itemDef name="adcs_cal_q_tracker_wrt_body_est3" type="adcs_cal_q_tracker_wrt_body_est3_eu32BS">
+        <description text="Q Tracker wrt Body Estimate"/>
+      </itemDef>
+      <itemDef name="adcs_cal_q_tracker_wrt_body_est4" type="adcs_cal_q_tracker_wrt_body_est4_eu32BS">
+        <description text="Q Tracker wrt Body Estimate"/>
+      </itemDef>
+      <itemDef name="adcs_cal_q_tracker_wrt_body_est5" type="adcs_cal_q_tracker_wrt_body_est5_eu32BS">
+        <description text="Q Tracker wrt Body Estimate"/>
+      </itemDef>
+      <itemDef name="adcs_cal_q_tracker_wrt_body_est6" type="adcs_cal_q_tracker_wrt_body_est6_eu32BS">
+        <description text="Q Tracker wrt Body Estimate"/>
+      </itemDef>
+      <itemDef name="adcs_cal_q_tracker_wrt_body_est7" type="adcs_cal_q_tracker_wrt_body_est7_eu32BS">
+        <description text="Q Tracker wrt Body Estimate"/>
+      </itemDef>
+      <itemDef name="adcs_cal_q_tracker_wrt_body_est8" type="adcs_cal_q_tracker_wrt_body_est8_eu32BS">
+        <description text="Q Tracker wrt Body Estimate"/>
+      </itemDef>
+      <itemDef name="adcs_cal_tracker_align_used_res1" type="adcs_cal_tracker_align_used_res1_eu32BS">
+        <description text="Tracker Alignment Used Residual"/>
+      </itemDef>
+      <itemDef name="adcs_cal_tracker_align_used_res2" type="adcs_cal_tracker_align_used_res2_eu32BS">
+        <description text="Tracker Alignment Used Residual"/>
+      </itemDef>
+      <itemDef name="adcs_cal_tracker_align_used_res3" type="adcs_cal_tracker_align_used_res3_eu32BS">
+        <description text="Tracker Alignment Used Residual"/>
+      </itemDef>
+      <itemDef name="adcs_cal_tracker_align_est_res1" type="adcs_cal_tracker_align_est_res1_eu32BS">
+        <description text="Tracker Alignment Estimate Residual"/>
+      </itemDef>
+      <itemDef name="adcs_cal_tracker_align_est_res2" type="adcs_cal_tracker_align_est_res2_eu32BS">
+        <description text="Tracker Alignment Estimate Residual"/>
+      </itemDef>
+      <itemDef name="adcs_cal_tracker_align_est_res3" type="adcs_cal_tracker_align_est_res3_eu32BS">
+        <description text="Tracker Alignment Estimate Residual"/>
+      </itemDef>
+      <itemDef name="adcs_cal_rejected_tracker_est_count" type="uint32B">
+        <description text="Rejected Tracker Align Est Count"/>
+      </itemDef>
+      <itemDef name="adcs_cal_tracker_n" type="uint16B">
+        <description text="Tracker Alignment N Parameter"/>
+      </itemDef>
+      <itemDef name="adcs_cal_tracker_align_method" type="adcs_cal_tracker_align_method_state8B">
+        <description text="Tracker Alignment Method"/>
+      </itemDef>
+      <itemDef name="adcs_cal_tracker_align_usage" type="adcs_cal_tracker_align_usage_state8B">
+        <description text="Tracker Alignment Usage Config"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_CAL_PKT" name="adcs_cal">
+    <description text="ADCS Cal Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_cal"/>
+      <item name="adcs_cal_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_att_det_frame">
+    <field>
+      <itemDef name="adcs_att_det_q_body_wrt_eci1" type="adcs_att_det_q_body_wrt_eci1_eu32BS">
+        <description text="Attitude Quaternion"/>
+      </itemDef>
+      <itemDef name="adcs_att_det_q_body_wrt_eci2" type="adcs_att_det_q_body_wrt_eci2_eu32BS">
+        <description text="Attitude Quaternion"/>
+      </itemDef>
+      <itemDef name="adcs_att_det_q_body_wrt_eci3" type="adcs_att_det_q_body_wrt_eci3_eu32BS">
+        <description text="Attitude Quaternion"/>
+      </itemDef>
+      <itemDef name="adcs_att_det_q_body_wrt_eci4" type="adcs_att_det_q_body_wrt_eci4_eu32BS">
+        <description text="Attitude Quaternion"/>
+      </itemDef>
+      <itemDef name="adcs_att_det_residual1" type="adcs_att_det_residual1_eu32BS">
+        <description text="Attitude Filter Residual"/>
+      </itemDef>
+      <itemDef name="adcs_att_det_residual2" type="adcs_att_det_residual2_eu32BS">
+        <description text="Attitude Filter Residual"/>
+      </itemDef>
+      <itemDef name="adcs_att_det_residual3" type="adcs_att_det_residual3_eu32BS">
+        <description text="Attitude Filter Residual"/>
+      </itemDef>
+      <itemDef name="adcs_att_det_body_rate1" type="adcs_att_det_body_rate1_eu32BS">
+        <description text="Body Frame Rate"/>
+      </itemDef>
+      <itemDef name="adcs_att_det_body_rate2" type="adcs_att_det_body_rate2_eu32BS">
+        <description text="Body Frame Rate"/>
+      </itemDef>
+      <itemDef name="adcs_att_det_body_rate3" type="adcs_att_det_body_rate3_eu32BS">
+        <description text="Body Frame Rate"/>
+      </itemDef>
+      <itemDef name="adcs_att_det_gyro_bias_est1" type="adcs_att_det_gyro_bias_est1_eu16BS">
+        <description text="Estimated Gyro Bias"/>
+      </itemDef>
+      <itemDef name="adcs_att_det_gyro_bias_est2" type="adcs_att_det_gyro_bias_est2_eu16BS">
+        <description text="Estimated Gyro Bias"/>
+      </itemDef>
+      <itemDef name="adcs_att_det_gyro_bias_est3" type="adcs_att_det_gyro_bias_est3_eu16BS">
+        <description text="Estimated Gyro Bias"/>
+      </itemDef>
+      <itemDef name="adcs_att_det_attitude_alg" type="adcs_att_det_attitude_alg_state8B">
+        <description text="Attitude Filter Algorithm"/>
+      </itemDef>
+      <itemDef name="adcs_att_det_good_att_rate_timer" type="uint32B">
+        <description text="GoodAttRateTimer"/>
+      </itemDef>
+      <itemDef name="adcs_att_det_bad_att_timer" type="uint32B">
+        <description text="BadAttTimer"/>
+      </itemDef>
+      <itemDef name="adcs_att_det_bad_rate_timer" type="uint32B">
+        <description text="BadRateTimer"/>
+      </itemDef>
+      <itemDef name="adcs_att_det_reinit_count" type="uint32B">
+        <description text="Attitude Filter Reinit Count"/>
+      </itemDef>
+      <itemDef name="adcs_att_det_attitude_valid" type="adcs_att_det_attitude_valid_state8B">
+        <description text="Attitude Valid"/>
+      </itemDef>
+      <itemDef name="adcs_att_det_meas_att_valid" type="adcs_att_det_meas_att_valid_state8B">
+        <description text="Measured Attitude Valid"/>
+      </itemDef>
+      <itemDef name="adcs_att_det_meas_rate_valid" type="adcs_att_det_meas_rate_valid_state8B">
+        <description text="Measured Rate Valid"/>
+      </itemDef>
+      <itemDef name="adcs_att_det_tracker_used" type="uint8B">
+        <description text="Tracker Used"/>
+      </itemDef>
+      <itemDef name="adcs_att_det_tracker_preference" type="uint8B">
+        <description text="Tracker Preference"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_ATT_DET_PKT" name="adcs_att_det">
+    <description text="ADCS Att_det Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_att_det"/>
+      <item name="adcs_att_det_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_tracker_ctrl_frame">
+    <field>
+      <itemDef name="adcs_tracker_ctrl_q_body_wrt_eci1" type="adcs_tracker_ctrl_q_body_wrt_eci1_eu32BS">
+        <description text="Q Body wrt ECI (Raw Tracker)"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_ctrl_q_body_wrt_eci2" type="adcs_tracker_ctrl_q_body_wrt_eci2_eu32BS">
+        <description text="Q Body wrt ECI (Raw Tracker)"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_ctrl_q_body_wrt_eci3" type="adcs_tracker_ctrl_q_body_wrt_eci3_eu32BS">
+        <description text="Q Body wrt ECI (Raw Tracker)"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_ctrl_q_body_wrt_eci4" type="adcs_tracker_ctrl_q_body_wrt_eci4_eu32BS">
+        <description text="Q Body wrt ECI (Raw Tracker)"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_ctrl_q_body_wrt_eci5" type="adcs_tracker_ctrl_q_body_wrt_eci5_eu32BS">
+        <description text="Q Body wrt ECI (Raw Tracker)"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_ctrl_q_body_wrt_eci6" type="adcs_tracker_ctrl_q_body_wrt_eci6_eu32BS">
+        <description text="Q Body wrt ECI (Raw Tracker)"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_ctrl_q_body_wrt_eci7" type="adcs_tracker_ctrl_q_body_wrt_eci7_eu32BS">
+        <description text="Q Body wrt ECI (Raw Tracker)"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_ctrl_q_body_wrt_eci8" type="adcs_tracker_ctrl_q_body_wrt_eci8_eu32BS">
+        <description text="Q Body wrt ECI (Raw Tracker)"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_ctrl_tracker_att_valid1" type="adcs_tracker_ctrl_tracker_att_valid1_state8B">
+        <description text="Tracker Valid Flag"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_ctrl_tracker_att_valid2" type="adcs_tracker_ctrl_tracker_att_valid2_state8B">
+        <description text="Tracker Valid Flag"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_ctrl_tracker_usage_enabled1" type="adcs_tracker_ctrl_tracker_usage_enabled1_state8B">
+        <description text="Tracker Usage Enabled"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_ctrl_tracker_usage_enabled2" type="adcs_tracker_ctrl_tracker_usage_enabled2_state8B">
+        <description text="Tracker Usage Enabled"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_ctrl_max_backgnd_tripped1" type="adcs_tracker_ctrl_max_backgnd_tripped1_state8B">
+        <description text="Exceeded Max Background"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_ctrl_max_backgnd_tripped2" type="adcs_tracker_ctrl_max_backgnd_tripped2_state8B">
+        <description text="Exceeded Max Background"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_ctrl_max_rot_rate_tripped1" type="adcs_tracker_ctrl_max_rot_rate_tripped1_state8B">
+        <description text="Exceeded Max Rotation Rate"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_ctrl_max_rot_rate_tripped2" type="adcs_tracker_ctrl_max_rot_rate_tripped2_state8B">
+        <description text="Exceeded Max Rotation Rate"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_ctrl_aid_status_bit1" type="uint8B">
+        <description text="Tracker 1 Aiding Status"/>
+      </itemDef>
+      <itemDef name="adcs_tracker_ctrl_aid_status_bit2" type="uint8B">
+        <description text="Tracker 2 Aiding Status"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_TRACKER_CTRL_PKT" name="adcs_tracker_ctrl">
+    <description text="ADCS Tracker_ctrl Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_tracker_ctrl"/>
+      <item name="adcs_tracker_ctrl_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_att_ctrl_frame">
+    <field>
+      <itemDef name="adcs_att_ctrl_position_error1" type="adcs_att_ctrl_position_error1_eu32BS">
+        <description text="Attitude Error"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_position_error2" type="adcs_att_ctrl_position_error2_eu32BS">
+        <description text="Attitude Error"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_position_error3" type="adcs_att_ctrl_position_error3_eu32BS">
+        <description text="Attitude Error"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_rate_error1" type="adcs_att_ctrl_rate_error1_eu32BS">
+        <description text="Rate Error"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_rate_error2" type="adcs_att_ctrl_rate_error2_eu32BS">
+        <description text="Rate Error"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_rate_error3" type="adcs_att_ctrl_rate_error3_eu32BS">
+        <description text="Rate Error"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_integral_error1" type="adcs_att_ctrl_integral_error1_eu16BS">
+        <description text="Integral Error"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_integral_error2" type="adcs_att_ctrl_integral_error2_eu16BS">
+        <description text="Integral Error"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_integral_error3" type="adcs_att_ctrl_integral_error3_eu16BS">
+        <description text="Integral Error"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_eigen_error" type="adcs_att_ctrl_eigen_error_eu32B">
+        <description text="Eigen Error"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_max_rate1" type="adcs_att_ctrl_max_rate1_eu16B">
+        <description text="Commanded Rate Lim"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_max_rate2" type="adcs_att_ctrl_max_rate2_eu16B">
+        <description text="Commanded Rate Lim"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_max_rate3" type="adcs_att_ctrl_max_rate3_eu16B">
+        <description text="Commanded Rate Lim"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_max_accel1" type="adcs_att_ctrl_max_accel1_eu16B">
+        <description text="Commanded Accel Lim"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_max_accel2" type="adcs_att_ctrl_max_accel2_eu16B">
+        <description text="Commanded Accel Lim"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_max_accel3" type="adcs_att_ctrl_max_accel3_eu16B">
+        <description text="Commanded Accel Lim"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_feedback_ctrl_torq1" type="adcs_att_ctrl_feedback_ctrl_torq1_eu16BS">
+        <description text="Feedback Ctrl Torque"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_feedback_ctrl_torq2" type="adcs_att_ctrl_feedback_ctrl_torq2_eu16BS">
+        <description text="Feedback Ctrl Torque"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_feedback_ctrl_torq3" type="adcs_att_ctrl_feedback_ctrl_torq3_eu16BS">
+        <description text="Feedback Ctrl Torque"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_ctrl_torque1" type="adcs_att_ctrl_ctrl_torque1_eu16BS">
+        <description text="Total Torque Cmd"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_ctrl_torque2" type="adcs_att_ctrl_ctrl_torque2_eu16BS">
+        <description text="Total Torque Cmd"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_ctrl_torque3" type="adcs_att_ctrl_ctrl_torque3_eu16BS">
+        <description text="Total Torque Cmd"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_time_into_search" type="uint16B">
+        <description text="Time Into Sun Search"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_wait_timer" type="uint16B">
+        <description text="Sun Search Wait Timer"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_sun_point_angle_error" type="adcs_att_ctrl_sun_point_angle_error_eu16B">
+        <description text="Sun Point Angle Error"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_sun_point_state" type="adcs_att_ctrl_sun_point_state_state8B">
+        <description text="Sun Point State"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_gain_index" type="uint8B">
+        <description text="Att Control Gain Index Setting"/>
+      </itemDef>
+      <itemDef name="adcs_att_ctrl_momentum_too_high" type="adcs_att_ctrl_momentum_too_high_state8B">
+        <description text="Momentum Too High for Wheels"/>
+      </itemDef>
+      <item name="pad0"/>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_ATT_CTRL_PKT" name="adcs_att_ctrl">
+    <description text="ADCS Att_ctrl Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_att_ctrl"/>
+      <item name="adcs_att_ctrl_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_tables_frame">
+    <field>
+      <itemDef name="adcs_tables_length32" type="uint32B">
+        <description text="Length"/>
+      </itemDef>
+      <itemDef name="adcs_tables_offset32" type="uint32B">
+        <description text="Offset"/>
+      </itemDef>
+      <itemDef name="adcs_tables_checksum" type="uint16B">
+        <description text="Checksum"/>
+      </itemDef>
+      <itemDef name="adcs_tables_table_upload_status" type="adcs_tables_table_upload_status_state8B">
+        <description text="Table Upload Status"/>
+      </itemDef>
+      <itemDef name="adcs_tables_which_table" type="uint8B">
+        <description text="Which Table"/>
+      </itemDef>
+      <itemDef name="adcs_tables_image" type="uint8B">
+        <description text="Flash Image"/>
+      </itemDef>
+      <itemDef name="adcs_tables_flash_burn_armed" type="adcs_tables_flash_burn_armed_state8B">
+        <description text="Flash Burn Armed"/>
+      </itemDef>
+      <item name="pad0"/>
+      <item name="pad1"/>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_TABLES_PKT" name="adcs_tables">
+    <description text="ADCS Tables Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_tables"/>
+      <item name="adcs_tables_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_general_frame">
+    <field>
+      <itemDef name="adcs_general_software_version1" type="uint32B">
+        <description text="Software Version Code"/>
+      </itemDef>
+      <itemDef name="adcs_general_software_version2" type="uint32B">
+        <description text="Software Version Code"/>
+      </itemDef>
+      <itemDef name="adcs_general_hardware_version" type="uint32B">
+        <description text="Hardware Version Code"/>
+      </itemDef>
+      <itemDef name="adcs_general_async_running" type="uint8B">
+        <description text="Async Task Running"/>
+      </itemDef>
+      <itemDef name="adcs_general_inertia1" type="adcs_general_inertia1_eu32BS">
+        <description text="Spacecraft Inertia"/>
+      </itemDef>
+      <itemDef name="adcs_general_inertia2" type="adcs_general_inertia2_eu32BS">
+        <description text="Spacecraft Inertia"/>
+      </itemDef>
+      <itemDef name="adcs_general_inertia3" type="adcs_general_inertia3_eu32BS">
+        <description text="Spacecraft Inertia"/>
+      </itemDef>
+      <itemDef name="adcs_general_inertia4" type="adcs_general_inertia4_eu32BS">
+        <description text="Spacecraft Inertia"/>
+      </itemDef>
+      <itemDef name="adcs_general_inertia5" type="adcs_general_inertia5_eu32BS">
+        <description text="Spacecraft Inertia"/>
+      </itemDef>
+      <itemDef name="adcs_general_inertia6" type="adcs_general_inertia6_eu32BS">
+        <description text="Spacecraft Inertia"/>
+      </itemDef>
+      <itemDef name="adcs_general_inertia7" type="adcs_general_inertia7_eu32BS">
+        <description text="Spacecraft Inertia"/>
+      </itemDef>
+      <itemDef name="adcs_general_inertia8" type="adcs_general_inertia8_eu32BS">
+        <description text="Spacecraft Inertia"/>
+      </itemDef>
+      <itemDef name="adcs_general_inertia9" type="adcs_general_inertia9_eu32BS">
+        <description text="Spacecraft Inertia"/>
+      </itemDef>
+      <item name="pad0"/>
+      <item name="pad1"/>
+      <item name="pad2"/>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_GENERAL_PKT" name="adcs_general">
+    <description text="ADCS General Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_general"/>
+      <item name="adcs_general_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_att_cmd_frame">
+    <field>
+      <itemDef name="adcs_att_cmd_cmd_q_body_wrt_eci1" type="adcs_att_cmd_cmd_q_body_wrt_eci1_eu32BS">
+        <description text="Commanded Att Quat"/>
+      </itemDef>
+      <itemDef name="adcs_att_cmd_cmd_q_body_wrt_eci2" type="adcs_att_cmd_cmd_q_body_wrt_eci2_eu32BS">
+        <description text="Commanded Att Quat"/>
+      </itemDef>
+      <itemDef name="adcs_att_cmd_cmd_q_body_wrt_eci3" type="adcs_att_cmd_cmd_q_body_wrt_eci3_eu32BS">
+        <description text="Commanded Att Quat"/>
+      </itemDef>
+      <itemDef name="adcs_att_cmd_cmd_q_body_wrt_eci4" type="adcs_att_cmd_cmd_q_body_wrt_eci4_eu32BS">
+        <description text="Commanded Att Quat"/>
+      </itemDef>
+      <itemDef name="adcs_att_cmd_cmd_body_rate1" type="adcs_att_cmd_cmd_body_rate1_eu32BS">
+        <description text="Commanded Rate"/>
+      </itemDef>
+      <itemDef name="adcs_att_cmd_cmd_body_rate2" type="adcs_att_cmd_cmd_body_rate2_eu32BS">
+        <description text="Commanded Rate"/>
+      </itemDef>
+      <itemDef name="adcs_att_cmd_cmd_body_rate3" type="adcs_att_cmd_cmd_body_rate3_eu32BS">
+        <description text="Commanded Rate"/>
+      </itemDef>
+      <itemDef name="adcs_att_cmd_cmd_body_accel1" type="adcs_att_cmd_cmd_body_accel1_eu32BS">
+        <description text="Commanded Accel"/>
+      </itemDef>
+      <itemDef name="adcs_att_cmd_cmd_body_accel2" type="adcs_att_cmd_cmd_body_accel2_eu32BS">
+        <description text="Commanded Accel"/>
+      </itemDef>
+      <itemDef name="adcs_att_cmd_cmd_body_accel3" type="adcs_att_cmd_cmd_body_accel3_eu32BS">
+        <description text="Commanded Accel"/>
+      </itemDef>
+      <itemDef name="adcs_att_cmd_commanded_sun1" type="adcs_att_cmd_commanded_sun1_eu16BS">
+        <description text="Desired Sun Vector"/>
+      </itemDef>
+      <itemDef name="adcs_att_cmd_commanded_sun2" type="adcs_att_cmd_commanded_sun2_eu16BS">
+        <description text="Desired Sun Vector"/>
+      </itemDef>
+      <itemDef name="adcs_att_cmd_commanded_sun3" type="adcs_att_cmd_commanded_sun3_eu16BS">
+        <description text="Desired Sun Vector"/>
+      </itemDef>
+      <itemDef name="adcs_att_cmd_hr_cycle_safe_mode" type="uint32B">
+        <description text="HR Run Count at Time of Safe Mode"/>
+      </itemDef>
+      <itemDef name="adcs_att_cmd_rotisserie_rate" type="adcs_att_cmd_rotisserie_rate_eu16BS">
+        <description text="Desired Sun Rot Rate"/>
+      </itemDef>
+      <itemDef name="adcs_att_cmd_adcs_mode" type="adcs_att_cmd_adcs_mode_state8B">
+        <description text="ADCS Mode"/>
+      </itemDef>
+      <itemDef name="adcs_att_cmd_safe_mode_reason" type="adcs_att_cmd_safe_mode_reason_state8B">
+        <description text="Safe Mode Reason"/>
+      </itemDef>
+      <itemDef name="adcs_att_cmd_recommend_sun_point" type="adcs_att_cmd_recommend_sun_point_state8B">
+        <description text="RecommendSunPoint"/>
+      </itemDef>
+      <item name="pad0"/>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_ATT_CMD_PKT" name="adcs_att_cmd">
+    <description text="ADCS Att_cmd Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_att_cmd"/>
+      <item name="adcs_att_cmd_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_tracker2_frame">
+    <field>
+      <itemDef name="adcs_tracker2_attitude_st1" type="adcs_tracker2_attitude_st1_eu32BS">
+        <description text="Tracker Attitude"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_attitude_st2" type="adcs_tracker2_attitude_st2_eu32BS">
+        <description text="Tracker Attitude"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_attitude_st3" type="adcs_tracker2_attitude_st3_eu32BS">
+        <description text="Tracker Attitude"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_attitude_st4" type="adcs_tracker2_attitude_st4_eu32BS">
+        <description text="Tracker Attitude"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_rate_est1" type="adcs_tracker2_rate_est1_eu16BS">
+        <description text="Tracker Rate"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_rate_est2" type="adcs_tracker2_rate_est2_eu16BS">
+        <description text="Tracker Rate"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_rate_est3" type="adcs_tracker2_rate_est3_eu16BS">
+        <description text="Tracker Rate"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_right_asc" type="adcs_tracker2_right_asc_eu16B">
+        <description text="Tracker Right Ascension"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_declination" type="adcs_tracker2_declination_eu16BS">
+        <description text="Tracker Declination"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_roll" type="adcs_tracker2_roll_eu16BS">
+        <description text="Tracker Roll"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_att_covariance1" type="adcs_tracker2_att_covariance1_eu32BS">
+        <description text="Attitude Covariance"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_att_covariance2" type="adcs_tracker2_att_covariance2_eu32BS">
+        <description text="Attitude Covariance"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_att_covariance3" type="adcs_tracker2_att_covariance3_eu32BS">
+        <description text="Attitude Covariance"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_att_covariance4" type="adcs_tracker2_att_covariance4_eu32BS">
+        <description text="Attitude Covariance"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_att_covariance5" type="adcs_tracker2_att_covariance5_eu32BS">
+        <description text="Attitude Covariance"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_att_covariance6" type="adcs_tracker2_att_covariance6_eu32BS">
+        <description text="Attitude Covariance"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_maximum_residual" type="uint8B">
+        <description text="Maximum Residual"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_maximum_residual_init" type="uint8B">
+        <description text="Max Residual 1st pass"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_analog_gain_eu" type="adcs_tracker2_analog_gain_eu_eu8B">
+        <description text="Analog Gain"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_mag_bright" type="adcs_tracker2_mag_bright_eu8B">
+        <description text="Bright Magnitude Limit"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_mag_dim" type="adcs_tracker2_mag_dim_eu8B">
+        <description text="Dim Magnitude Limit"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_peak_noise_all_trk_blks" type="adcs_tracker2_peak_noise_all_trk_blks_eu8B">
+        <description text="Peak 3-Sigma Noise"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_peak_bckgnd_all_trk_blks" type="adcs_tracker2_peak_bckgnd_all_trk_blks_eu8B">
+        <description text="Peak Mean Background"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_median_noise_all_trk_blks" type="adcs_tracker2_median_noise_all_trk_blks_eu8B">
+        <description text="Median 3-Sigma noise"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_median_bckgnd_all_trk_blks" type="adcs_tracker2_median_bckgnd_all_trk_blks_eu8B">
+        <description text="Median Mean Bkgd"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_operating_mode" type="adcs_tracker2_operating_mode_state8B">
+        <description text="Tracker Operating Mode"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_star_id_step" type="adcs_tracker2_star_id_step_state8B">
+        <description text="Star ID Step"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_id_status" type="adcs_tracker2_id_status_state8B">
+        <description text="Star ID Status"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_id_status_save" type="adcs_tracker2_id_status_save_state8B">
+        <description text="Star ID Status Saved"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_att_status" type="adcs_tracker2_att_status_state8B">
+        <description text="Tracker Attitude Status"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_rate_est_status" type="adcs_tracker2_rate_est_status_state8B">
+        <description text="Tracker Rate Est Status"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_rate_aid_status" type="adcs_tracker2_rate_aid_status_state8B">
+        <description text="Rate Aid Status"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_vel_aid_status" type="adcs_tracker2_vel_aid_status_state8B">
+        <description text="Velocity Aid Status"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_att_aid_status" type="adcs_tracker2_att_aid_status_state8B">
+        <description text="Attitude Aid Status"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_att_time_tag" type="uint32B">
+        <description text="Star Tracker Time Tag"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_num_id_patterns_tried" type="uint32B">
+        <description text="Num ID Patterns Tried"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_pixel_amp_threshold" type="adcs_tracker2_pixel_amp_threshold_eu8B">
+        <description text="Pixel Ampl Threshold"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_amplitude_offset" type="uint8B">
+        <description text="Amplitude Offset"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_current_tint" type="uint32B">
+        <description text="Current Tint"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_start_set_time" type="uint32B">
+        <description text="StartSetTime"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_mem_det_trigger_delay" type="uint32B">
+        <description text="MemDetTriggerDelay"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_image_read_dt" type="uint32B">
+        <description text="ImageReadDt"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_maximum_residual_id" type="uint16B">
+        <description text="Maximum Residual ID"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_maximum_residual_id_init" type="uint16B">
+        <description text="Max Residual ID 1st pass"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_max_row_bckgnd_post_comp" type="uint16B">
+        <description text="Max Background Level"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_excluded_id" type="uint16B">
+        <description text="Latest Excluded Star ID"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_id_stars1" type="uint16B">
+        <description text="Stars Used For Pattern Match"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_id_stars2" type="uint16B">
+        <description text="Stars Used For Pattern Match"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_id_stars3" type="uint16B">
+        <description text="Stars Used For Pattern Match"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_id_stars4" type="uint16B">
+        <description text="Stars Used For Pattern Match"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_det_timeout_count" type="uint16B">
+        <description text="Number of detector timeouts"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_num_pix_groups_for_id" type="uint8B">
+        <description text="Num Pixel Groups"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_id_tolerance" type="uint8B">
+        <description text="StarID Tolerance"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_num_of_att_loops" type="uint8B">
+        <description text="Num Attitude Loops"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_num_attitude_stars" type="uint8B">
+        <description text="Num Stars Used in Att"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_num_stars_high_residual" type="uint8B">
+        <description text="Num Stars High Residual"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_auto_black_enable" type="adcs_tracker2_auto_black_enable_state8B">
+        <description text="Auto Black Enable"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_black_level" type="uint8B">
+        <description text="Black Level"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_num_stars_on_fov" type="uint8B">
+        <description text="Num Stars on FOV"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_num_track_blocks_issued" type="uint8B">
+        <description text="Num Track Blocks Issued"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_num_track_stars" type="uint8B">
+        <description text="Num Tracked Stars"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_num_id_stars" type="uint8B">
+        <description text="Num ID Stars"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_fs_wcounter" type="uint8B">
+        <description text="FSW Counter"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_auto_track" type="adcs_tracker2_auto_track_state8B">
+        <description text="Auto Track from Star ID"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_auto_integration" type="adcs_tracker2_auto_integration_state8B">
+        <description text="Auto Integration Adjust"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_auto_gain" type="adcs_tracker2_auto_gain_state8B">
+        <description text="Auto Gain Adjust"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_test_mode" type="uint8B">
+        <description text="Test Mode"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_fpga_det_timeout" type="adcs_tracker2_fpga_det_timeout_state8B">
+        <description text="Fpga Detector Timeout"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_store_seq_images" type="adcs_tracker2_store_seq_images_state8B">
+        <description text="Store Sequential Images"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_track_ref_available" type="adcs_tracker2_track_ref_available_state8B">
+        <description text="Track Ref Available"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_num_exclusions" type="uint8B">
+        <description text="Number of Stars in Exclusion List"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_id_wait_counter" type="uint8B">
+        <description text="TriStar Execution Time"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_image_index" type="uint8B">
+        <description text="Current Image Index"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_ref_index" type="uint8B">
+        <description text="Reference Image Index"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_track_rows" type="uint8B">
+        <description text="Track Block Row Size"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_track_cols" type="uint8B">
+        <description text="Track Block Col Size"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_num_bright_stars" type="uint8B">
+        <description text="Number of Bright Stars"/>
+      </itemDef>
+      <itemDef name="adcs_tracker2_image_filter_enabled" type="uint8B">
+        <description text="Image Filter Enabled"/>
+      </itemDef>
+      <item name="pad0"/>
+      <item name="pad1"/>
+      <item name="pad2"/>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_TRACKER2_PKT" name="adcs_tracker2">
+    <description text="ADCS Tracker2 Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_tracker2"/>
+      <item name="adcs_tracker2_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_tlm_proc_frame">
+    <field>
+      <itemDef name="adcs_tlm_proc_tlm_table_used" type="uint8B">
+        <description text="Tlm Map ID"/>
+      </itemDef>
+      <itemDef name="adcs_tlm_proc_file_pointer" type="uint32B">
+        <description text="Tlm File Pointer"/>
+      </itemDef>
+      <itemDef name="adcs_tlm_proc_buffer_index" type="uint8B">
+        <description text="Tlm File Buffer Index"/>
+      </itemDef>
+      <itemDef name="adcs_tlm_proc_streaming" type="adcs_tlm_proc_streaming_state8B">
+        <description text="Tlm Streaming"/>
+      </itemDef>
+      <item name="pad0"/>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_TLM_PROC_PKT" name="adcs_tlm_proc">
+    <description text="ADCS Tlm_proc Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_tlm_proc"/>
+      <item name="adcs_tlm_proc_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_ext_tracker2_frame">
+    <field>
+      <itemDef name="adcs_ext_tracker2_l01" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l02" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l03" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l04" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l05" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l06" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l07" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l08" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l09" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l010" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l011" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l012" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l013" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l014" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l015" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l016" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l017" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l018" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l019" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l020" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l021" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l022" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l023" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l024" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l025" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l026" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l027" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l028" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l029" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l030" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l031" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_l032" type="uint8B">
+        <description text="Submap: LEON L0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_cmd_status" type="adcs_ext_tracker2_cmd_status_state8B">
+        <description text="External NST 2 Command Accept Status"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_cmd_reject_status" type="adcs_ext_tracker2_cmd_reject_status_state8B">
+        <description text="External NST 2 Command Reject Status"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_cmd_accept_count" type="uint8B">
+        <description text="Command Accept Count"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_cmd_reject_count" type="uint8B">
+        <description text="Command Reject Count"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_last_acc_cmd_bytes1" type="uint8B">
+        <description text="Last Accept Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_last_acc_cmd_bytes2" type="uint8B">
+        <description text="Last Accept Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_last_acc_cmd_bytes3" type="uint8B">
+        <description text="Last Accept Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_last_acc_cmd_bytes4" type="uint8B">
+        <description text="Last Accept Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_last_acc_cmd_bytes5" type="uint8B">
+        <description text="Last Accept Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_last_acc_cmd_bytes6" type="uint8B">
+        <description text="Last Accept Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_last_acc_cmd_bytes7" type="uint8B">
+        <description text="Last Accept Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_last_acc_cmd_bytes8" type="uint8B">
+        <description text="Last Accept Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_last_rej_cmd_bytes1" type="uint8B">
+        <description text="Last Reject Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_last_rej_cmd_bytes2" type="uint8B">
+        <description text="Last Reject Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_last_rej_cmd_bytes3" type="uint8B">
+        <description text="Last Reject Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_last_rej_cmd_bytes4" type="uint8B">
+        <description text="Last Reject Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_last_rej_cmd_bytes5" type="uint8B">
+        <description text="Last Reject Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_last_rej_cmd_bytes6" type="uint8B">
+        <description text="Last Reject Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_last_rej_cmd_bytes7" type="uint8B">
+        <description text="Last Reject Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_last_rej_cmd_bytes8" type="uint8B">
+        <description text="Last Reject Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_software_version1" type="uint32B">
+        <description text="Software Version Code"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_software_version2" type="uint32B">
+        <description text="Software Version Code"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_hardware_version" type="uint32B">
+        <description text="Hardware Version Code"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_counts_per_sec" type="uint32B">
+        <description text="Counts Per Second"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_hr_run_count" type="uint32B">
+        <description text="High Rate Run Count"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_hr_time_usec" type="uint32B">
+        <description text="High Rate Time Usec"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_cycles_since_pps" type="uint32B">
+        <description text="HR Cycles Since Last PPS"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_hr_exec_time_ms1" type="uint8B">
+        <description text="High Rate Duration msec"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_hr_exec_time_ms2" type="uint8B">
+        <description text="High Rate Duration msec"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_hr_exec_time_ms3" type="uint8B">
+        <description text="High Rate Duration msec"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_hr_exec_time_ms4" type="uint8B">
+        <description text="High Rate Duration msec"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_hr_exec_time_ms5" type="uint8B">
+        <description text="High Rate Duration msec"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_clock_sync_enable" type="uint8B">
+        <description text="Clock Sync Enable"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_voltage_5p0" type="adcs_ext_tracker2_voltage_5p0_eu8B">
+        <description text="Voltage_5p0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_voltage_3p3" type="adcs_ext_tracker2_voltage_3p3_eu8B">
+        <description text="Voltage_3p3"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_voltage_2p5" type="adcs_ext_tracker2_voltage_2p5_eu8B">
+        <description text="Voltage_2p5"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_voltage_1p8" type="adcs_ext_tracker2_voltage_1p8_eu8B">
+        <description text="Voltage_1p8"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_voltage_1p0" type="adcs_ext_tracker2_voltage_1p0_eu8B">
+        <description text="Voltage_1p0"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_det_temp" type="adcs_ext_tracker2_det_temp_eu8BS">
+        <description text="Tracker Detector temperature"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_length32" type="uint32B">
+        <description text="Length"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_offset32" type="uint32B">
+        <description text="Offset"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_checksum" type="uint16B">
+        <description text="Checksum"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_table_upload_status" type="adcs_ext_tracker2_table_upload_status_state8B">
+        <description text="Table Upload Status"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_which_table" type="uint8B">
+        <description text="Which Table"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_image" type="uint8B">
+        <description text="Flash Image"/>
+      </itemDef>
+      <itemDef name="adcs_ext_tracker2_flash_burn_armed" type="uint8B">
+        <description text="Flash Burn Armed"/>
+      </itemDef>
+      <item name="pad0"/>
+      <item name="pad1"/>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_EXT_TRACKER2_PKT" name="adcs_ext_tracker2">
+    <description text="ADCS Ext_tracker2 Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_ext_tracker2"/>
+      <item name="adcs_ext_tracker2_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_rw_drive_frame">
+    <field>
+      <itemDef name="adcs_rw_drive_theta_err1" type="adcs_rw_drive_theta_err1_eu16BS">
+        <description text="thetaErr"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_theta_err2" type="adcs_rw_drive_theta_err2_eu16BS">
+        <description text="thetaErr"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_theta_err3" type="adcs_rw_drive_theta_err3_eu16BS">
+        <description text="thetaErr"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_theta_err4" type="adcs_rw_drive_theta_err4_eu16BS">
+        <description text="thetaErr"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_drag_est1" type="adcs_rw_drive_drag_est1_eu16BS">
+        <description text="Wheel Est. Drag"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_drag_est2" type="adcs_rw_drive_drag_est2_eu16BS">
+        <description text="Wheel Est. Drag"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_drag_est3" type="adcs_rw_drive_drag_est3_eu16BS">
+        <description text="Wheel Est. Drag"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_drag_est4" type="adcs_rw_drive_drag_est4_eu16BS">
+        <description text="Wheel Est. Drag"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_obs_angle_residual1" type="adcs_rw_drive_obs_angle_residual1_eu16BS">
+        <description text="Wheel Angle Residual"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_obs_angle_residual2" type="adcs_rw_drive_obs_angle_residual2_eu16BS">
+        <description text="Wheel Angle Residual"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_obs_angle_residual3" type="adcs_rw_drive_obs_angle_residual3_eu16BS">
+        <description text="Wheel Angle Residual"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_obs_angle_residual4" type="adcs_rw_drive_obs_angle_residual4_eu16BS">
+        <description text="Wheel Angle Residual"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_filtered_speed_rpm_161" type="adcs_rw_drive_filtered_speed_rpm_161_eu16BS">
+        <description text="Wheel Meas Speed"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_filtered_speed_rpm_162" type="adcs_rw_drive_filtered_speed_rpm_162_eu16BS">
+        <description text="Wheel Meas Speed"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_filtered_speed_rpm_163" type="adcs_rw_drive_filtered_speed_rpm_163_eu16BS">
+        <description text="Wheel Meas Speed"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_filtered_speed_rpm_164" type="adcs_rw_drive_filtered_speed_rpm_164_eu16BS">
+        <description text="Wheel Meas Speed"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_speed_cmd_rpm_161" type="adcs_rw_drive_speed_cmd_rpm_161_eu16BS">
+        <description text="Wheel Command Speed"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_speed_cmd_rpm_162" type="adcs_rw_drive_speed_cmd_rpm_162_eu16BS">
+        <description text="Wheel Command Speed"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_speed_cmd_rpm_163" type="adcs_rw_drive_speed_cmd_rpm_163_eu16BS">
+        <description text="Wheel Command Speed"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_speed_cmd_rpm_164" type="adcs_rw_drive_speed_cmd_rpm_164_eu16BS">
+        <description text="Wheel Command Speed"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_torque_command1" type="adcs_rw_drive_torque_command1_eu32BS">
+        <description text="Wheel Command Torq"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_torque_command2" type="adcs_rw_drive_torque_command2_eu32BS">
+        <description text="Wheel Command Torq"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_torque_command3" type="adcs_rw_drive_torque_command3_eu32BS">
+        <description text="Wheel Command Torq"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_torque_command4" type="adcs_rw_drive_torque_command4_eu32BS">
+        <description text="Wheel Command Torq"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_meas_wheel_current1" type="adcs_rw_drive_meas_wheel_current1_eu16BS">
+        <description text="Coarse Wheel Current"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_meas_wheel_current2" type="adcs_rw_drive_meas_wheel_current2_eu16BS">
+        <description text="Coarse Wheel Current"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_meas_wheel_current3" type="adcs_rw_drive_meas_wheel_current3_eu16BS">
+        <description text="Coarse Wheel Current"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_meas_wheel_current4" type="adcs_rw_drive_meas_wheel_current4_eu16BS">
+        <description text="Coarse Wheel Current"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_rw_time" type="uint32B">
+        <description text="Wheel time tag"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_pwm_counts1" type="uint32B">
+        <description text="Wheel PWM Counts"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_pwm_counts2" type="uint32B">
+        <description text="Wheel PWM Counts"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_pwm_counts3" type="uint32B">
+        <description text="Wheel PWM Counts"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_pwm_counts4" type="uint32B">
+        <description text="Wheel PWM Counts"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_pw_mcmd_ct1" type="uint32B">
+        <description text="Wheel PWM Command Counts"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_pw_mcmd_ct2" type="uint32B">
+        <description text="Wheel PWM Command Counts"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_pw_mcmd_ct3" type="uint32B">
+        <description text="Wheel PWM Command Counts"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_pw_mcmd_ct4" type="uint32B">
+        <description text="Wheel PWM Command Counts"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_motor_tach_counts1" type="uint16B">
+        <description text="Wheel Tach Counts"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_motor_tach_counts2" type="uint16B">
+        <description text="Wheel Tach Counts"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_motor_tach_counts3" type="uint16B">
+        <description text="Wheel Tach Counts"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_motor_tach_counts4" type="uint16B">
+        <description text="Wheel Tach Counts"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_sensor_cal_timer1" type="uint16B">
+        <description text="Cal Cycle Timer"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_sensor_cal_timer2" type="uint16B">
+        <description text="Cal Cycle Timer"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_sensor_cal_timer3" type="uint16B">
+        <description text="Cal Cycle Timer"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_sensor_cal_timer4" type="uint16B">
+        <description text="Cal Cycle Timer"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_operating_mode1" type="adcs_rw_drive_operating_mode1_state8B">
+        <description text="Wheel Operating Mode"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_operating_mode2" type="adcs_rw_drive_operating_mode2_state8B">
+        <description text="Wheel Operating Mode"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_operating_mode3" type="adcs_rw_drive_operating_mode3_state8B">
+        <description text="Wheel Operating Mode"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_operating_mode4" type="adcs_rw_drive_operating_mode4_state8B">
+        <description text="Wheel Operating Mode"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_control_mode1" type="adcs_rw_drive_control_mode1_state8B">
+        <description text="Wheel Control Mode"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_control_mode2" type="adcs_rw_drive_control_mode2_state8B">
+        <description text="Wheel Control Mode"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_control_mode3" type="adcs_rw_drive_control_mode3_state8B">
+        <description text="Wheel Control Mode"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_control_mode4" type="adcs_rw_drive_control_mode4_state8B">
+        <description text="Wheel Control Mode"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_motor_fault_count1" type="uint8B">
+        <description text="Wheel Motor Fault Count"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_motor_fault_count2" type="uint8B">
+        <description text="Wheel Motor Fault Count"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_motor_fault_count3" type="uint8B">
+        <description text="Wheel Motor Fault Count"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_motor_fault_count4" type="uint8B">
+        <description text="Wheel Motor Fault Count"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_motor_hall_state1" type="uint8B">
+        <description text="Motor Hall State"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_motor_hall_state2" type="uint8B">
+        <description text="Motor Hall State"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_motor_hall_state3" type="uint8B">
+        <description text="Motor Hall State"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_motor_hall_state4" type="uint8B">
+        <description text="Motor Hall State"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_pw_menable1" type="adcs_rw_drive_pw_menable1_state8B">
+        <description text="Wheel PWM Enable"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_pw_menable2" type="adcs_rw_drive_pw_menable2_state8B">
+        <description text="Wheel PWM Enable"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_pw_menable3" type="adcs_rw_drive_pw_menable3_state8B">
+        <description text="Wheel PWM Enable"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_pw_menable4" type="adcs_rw_drive_pw_menable4_state8B">
+        <description text="Wheel PWM Enable"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_pw_mdirection1" type="adcs_rw_drive_pw_mdirection1_state8B">
+        <description text="Wheel PWM Direction"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_pw_mdirection2" type="adcs_rw_drive_pw_mdirection2_state8B">
+        <description text="Wheel PWM Direction"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_pw_mdirection3" type="adcs_rw_drive_pw_mdirection3_state8B">
+        <description text="Wheel PWM Direction"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_pw_mdirection4" type="adcs_rw_drive_pw_mdirection4_state8B">
+        <description text="Wheel PWM Direction"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_pw_mcmd_dir1" type="adcs_rw_drive_pw_mcmd_dir1_state8B">
+        <description text="Wheel PWM Command Direction"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_pw_mcmd_dir2" type="adcs_rw_drive_pw_mcmd_dir2_state8B">
+        <description text="Wheel PWM Command Direction"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_pw_mcmd_dir3" type="adcs_rw_drive_pw_mcmd_dir3_state8B">
+        <description text="Wheel PWM Command Direction"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_pw_mcmd_dir4" type="adcs_rw_drive_pw_mcmd_dir4_state8B">
+        <description text="Wheel PWM Command Direction"/>
+      </itemDef>
+      <itemDef name="adcs_rw_drive_rw_test_mode" type="adcs_rw_drive_rw_test_mode_state8B">
+        <description text="Wheel Test Mode"/>
+      </itemDef>
+      <item name="pad0"/>
+      <item name="pad1"/>
+      <item name="pad2"/>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_RW_DRIVE_PKT" name="adcs_rw_drive">
+    <description text="ADCS Rw_drive Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_rw_drive"/>
+      <item name="adcs_rw_drive_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_momentum_frame">
+    <field>
+      <itemDef name="adcs_momentum_momentum_vector_body1" type="adcs_momentum_momentum_vector_body1_eu16BS">
+        <description text="System Momentum in Body Frame"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_momentum_vector_body2" type="adcs_momentum_momentum_vector_body2_eu16BS">
+        <description text="System Momentum in Body Frame"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_momentum_vector_body3" type="adcs_momentum_momentum_vector_body3_eu16BS">
+        <description text="System Momentum in Body Frame"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_total_momentum_mag" type="adcs_momentum_total_momentum_mag_eu16B">
+        <description text="System Momentum Magnitude"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_wheel_momentum_body1" type="adcs_momentum_wheel_momentum_body1_eu16BS">
+        <description text="Wheel Momentum in Body"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_wheel_momentum_body2" type="adcs_momentum_wheel_momentum_body2_eu16BS">
+        <description text="Wheel Momentum in Body"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_wheel_momentum_body3" type="adcs_momentum_wheel_momentum_body3_eu16BS">
+        <description text="Wheel Momentum in Body"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_bus_momentum_body1" type="adcs_momentum_bus_momentum_body1_eu16BS">
+        <description text="Body Only Momentum in Body"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_bus_momentum_body2" type="adcs_momentum_bus_momentum_body2_eu16BS">
+        <description text="Body Only Momentum in Body"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_bus_momentum_body3" type="adcs_momentum_bus_momentum_body3_eu16BS">
+        <description text="Body Only Momentum in Body"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_cmd_momentum_inertial1" type="adcs_momentum_cmd_momentum_inertial1_eu16BS">
+        <description text="Commanded Momentum in J2000 frame"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_cmd_momentum_inertial2" type="adcs_momentum_cmd_momentum_inertial2_eu16BS">
+        <description text="Commanded Momentum in J2000 frame"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_cmd_momentum_inertial3" type="adcs_momentum_cmd_momentum_inertial3_eu16BS">
+        <description text="Commanded Momentum in J2000 frame"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_duty_cycle1" type="int8B">
+        <description text="Torque Rod Duty Cycle"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_duty_cycle2" type="int8B">
+        <description text="Torque Rod Duty Cycle"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_duty_cycle3" type="int8B">
+        <description text="Torque Rod Duty Cycle"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_cycle_avg_magnet_torque1" type="adcs_momentum_cycle_avg_magnet_torque1_eu16BS">
+        <description text="Torque Rod Torque"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_cycle_avg_magnet_torque2" type="adcs_momentum_cycle_avg_magnet_torque2_eu16BS">
+        <description text="Torque Rod Torque"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_cycle_avg_magnet_torque3" type="adcs_momentum_cycle_avg_magnet_torque3_eu16BS">
+        <description text="Torque Rod Torque"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_torque_rod_mode1" type="adcs_momentum_torque_rod_mode1_state8B">
+        <description text="Torque Rod Ctrl Mode"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_torque_rod_mode2" type="adcs_momentum_torque_rod_mode2_state8B">
+        <description text="Torque Rod Ctrl Mode"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_torque_rod_mode3" type="adcs_momentum_torque_rod_mode3_state8B">
+        <description text="Torque Rod Ctrl Mode"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_mag_source_setting" type="adcs_momentum_mag_source_setting_state8B">
+        <description text="Mag Field Source Setting"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_mag_source_used" type="adcs_momentum_mag_source_used_state8B">
+        <description text="Mag Field Source"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_momentum_vector_valid" type="adcs_momentum_momentum_vector_valid_state8B">
+        <description text="Momentum Vector Valid"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_momentum_vector_enabled" type="adcs_momentum_momentum_vector_enabled_state8B">
+        <description text="Momentum Vector Enabled"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_use_wheel_momenta" type="adcs_momentum_use_wheel_momenta_state8B">
+        <description text="Use Wheel Momenta Flag"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_torque_rod_enable1" type="adcs_momentum_torque_rod_enable1_state8B">
+        <description text="Torque Rod Enable"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_torque_rod_enable2" type="adcs_momentum_torque_rod_enable2_state8B">
+        <description text="Torque Rod Enable"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_torque_rod_enable3" type="adcs_momentum_torque_rod_enable3_state8B">
+        <description text="Torque Rod Enable"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_torque_rod_direction1" type="adcs_momentum_torque_rod_direction1_state8B">
+        <description text="Torque Rod Direction"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_torque_rod_direction2" type="adcs_momentum_torque_rod_direction2_state8B">
+        <description text="Torque Rod Direction"/>
+      </itemDef>
+      <itemDef name="adcs_momentum_torque_rod_direction3" type="adcs_momentum_torque_rod_direction3_state8B">
+        <description text="Torque Rod Direction"/>
+      </itemDef>
+      <item name="pad0"/>
+      <item name="pad1"/>
+      <item name="pad2"/>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_MOMENTUM_PKT" name="adcs_momentum">
+    <description text="ADCS Momentum Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_momentum"/>
+      <item name="adcs_momentum_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_css_frame">
+    <field>
+      <itemDef name="adcs_css_sun_vector_body1" type="adcs_css_sun_vector_body1_eu16BS">
+        <description text="Meas Sun Body Vector"/>
+      </itemDef>
+      <itemDef name="adcs_css_sun_vector_body2" type="adcs_css_sun_vector_body2_eu16BS">
+        <description text="Meas Sun Body Vector"/>
+      </itemDef>
+      <itemDef name="adcs_css_sun_vector_body3" type="adcs_css_sun_vector_body3_eu16BS">
+        <description text="Meas Sun Body Vector"/>
+      </itemDef>
+      <itemDef name="adcs_css_sun_vector_status" type="adcs_css_sun_vector_status_state8B">
+        <description text="Meas Sun Body Vector Status"/>
+      </itemDef>
+      <itemDef name="adcs_css_num_diodes_used1" type="uint8B">
+        <description text="Num Diodes Used All CSS Packages"/>
+      </itemDef>
+      <itemDef name="adcs_css_num_diodes_used2" type="uint8B">
+        <description text="Num Diodes Used All CSS Packages"/>
+      </itemDef>
+      <itemDef name="adcs_css_num_diodes_used3" type="uint8B">
+        <description text="Num Diodes Used All CSS Packages"/>
+      </itemDef>
+      <itemDef name="adcs_css_num_diodes_used4" type="uint8B">
+        <description text="Num Diodes Used All CSS Packages"/>
+      </itemDef>
+      <itemDef name="adcs_css_raw_sun_sensor_data1" type="uint16B">
+        <description text="Raw Data All CSS Packages"/>
+      </itemDef>
+      <itemDef name="adcs_css_raw_sun_sensor_data2" type="uint16B">
+        <description text="Raw Data All CSS Packages"/>
+      </itemDef>
+      <itemDef name="adcs_css_raw_sun_sensor_data3" type="uint16B">
+        <description text="Raw Data All CSS Packages"/>
+      </itemDef>
+      <itemDef name="adcs_css_raw_sun_sensor_data4" type="uint16B">
+        <description text="Raw Data All CSS Packages"/>
+      </itemDef>
+      <itemDef name="adcs_css_raw_sun_sensor_data5" type="uint16B">
+        <description text="Raw Data All CSS Packages"/>
+      </itemDef>
+      <itemDef name="adcs_css_raw_sun_sensor_data6" type="uint16B">
+        <description text="Raw Data All CSS Packages"/>
+      </itemDef>
+      <itemDef name="adcs_css_raw_sun_sensor_data7" type="uint16B">
+        <description text="Raw Data All CSS Packages"/>
+      </itemDef>
+      <itemDef name="adcs_css_raw_sun_sensor_data8" type="uint16B">
+        <description text="Raw Data All CSS Packages"/>
+      </itemDef>
+      <itemDef name="adcs_css_raw_sun_sensor_data9" type="uint16B">
+        <description text="Raw Data All CSS Packages"/>
+      </itemDef>
+      <itemDef name="adcs_css_raw_sun_sensor_data10" type="uint16B">
+        <description text="Raw Data All CSS Packages"/>
+      </itemDef>
+      <itemDef name="adcs_css_raw_sun_sensor_data11" type="uint16B">
+        <description text="Raw Data All CSS Packages"/>
+      </itemDef>
+      <itemDef name="adcs_css_raw_sun_sensor_data12" type="uint16B">
+        <description text="Raw Data All CSS Packages"/>
+      </itemDef>
+      <itemDef name="adcs_css_raw_sun_sensor_data13" type="uint16B">
+        <description text="Raw Data All CSS Packages"/>
+      </itemDef>
+      <itemDef name="adcs_css_raw_sun_sensor_data14" type="uint16B">
+        <description text="Raw Data All CSS Packages"/>
+      </itemDef>
+      <itemDef name="adcs_css_raw_sun_sensor_data15" type="uint16B">
+        <description text="Raw Data All CSS Packages"/>
+      </itemDef>
+      <itemDef name="adcs_css_raw_sun_sensor_data16" type="uint16B">
+        <description text="Raw Data All CSS Packages"/>
+      </itemDef>
+      <itemDef name="adcs_css_sun_vector_enabled" type="adcs_css_sun_vector_enabled_state8B">
+        <description text="Sun Vector Enabled"/>
+      </itemDef>
+      <itemDef name="adcs_css_sun_sensor_used" type="uint8B">
+        <description text="Sun Sensor Package Used"/>
+      </itemDef>
+      <itemDef name="adcs_css_css_test_mode" type="adcs_css_css_test_mode_state8B">
+        <description text="CSS Test Mode"/>
+      </itemDef>
+      <item name="pad0"/>
+      <item name="pad1"/>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_CSS_PKT" name="adcs_css">
+    <description text="ADCS Css Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_css"/>
+      <item name="adcs_css_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_mag_frame">
+    <field>
+      <itemDef name="adcs_mag_mag_vector_body1" type="adcs_mag_mag_vector_body1_eu16BS">
+        <description text="Meas Mag Field Body"/>
+      </itemDef>
+      <itemDef name="adcs_mag_mag_vector_body2" type="adcs_mag_mag_vector_body2_eu16BS">
+        <description text="Meas Mag Field Body"/>
+      </itemDef>
+      <itemDef name="adcs_mag_mag_vector_body3" type="adcs_mag_mag_vector_body3_eu16BS">
+        <description text="Meas Mag Field Body"/>
+      </itemDef>
+      <itemDef name="adcs_mag_raw_magnetometer_data1" type="uint16B">
+        <description text="Raw Mag Data All Packages"/>
+      </itemDef>
+      <itemDef name="adcs_mag_raw_magnetometer_data2" type="uint16B">
+        <description text="Raw Mag Data All Packages"/>
+      </itemDef>
+      <itemDef name="adcs_mag_raw_magnetometer_data3" type="uint16B">
+        <description text="Raw Mag Data All Packages"/>
+      </itemDef>
+      <itemDef name="adcs_mag_raw_magnetometer_data4" type="uint16B">
+        <description text="Raw Mag Data All Packages"/>
+      </itemDef>
+      <itemDef name="adcs_mag_raw_magnetometer_data5" type="uint16B">
+        <description text="Raw Mag Data All Packages"/>
+      </itemDef>
+      <itemDef name="adcs_mag_raw_magnetometer_data6" type="uint16B">
+        <description text="Raw Mag Data All Packages"/>
+      </itemDef>
+      <itemDef name="adcs_mag_raw_magnetometer_data7" type="uint16B">
+        <description text="Raw Mag Data All Packages"/>
+      </itemDef>
+      <itemDef name="adcs_mag_raw_magnetometer_data8" type="uint16B">
+        <description text="Raw Mag Data All Packages"/>
+      </itemDef>
+      <itemDef name="adcs_mag_raw_magnetometer_data9" type="uint16B">
+        <description text="Raw Mag Data All Packages"/>
+      </itemDef>
+      <itemDef name="adcs_mag_raw_magnetometer_data10" type="uint16B">
+        <description text="Raw Mag Data All Packages"/>
+      </itemDef>
+      <itemDef name="adcs_mag_raw_magnetometer_data11" type="uint16B">
+        <description text="Raw Mag Data All Packages"/>
+      </itemDef>
+      <itemDef name="adcs_mag_raw_magnetometer_data12" type="uint16B">
+        <description text="Raw Mag Data All Packages"/>
+      </itemDef>
+      <itemDef name="adcs_mag_raw_magnetometer_data13" type="uint16B">
+        <description text="Raw Mag Data All Packages"/>
+      </itemDef>
+      <itemDef name="adcs_mag_raw_magnetometer_data14" type="uint16B">
+        <description text="Raw Mag Data All Packages"/>
+      </itemDef>
+      <itemDef name="adcs_mag_raw_magnetometer_data15" type="uint16B">
+        <description text="Raw Mag Data All Packages"/>
+      </itemDef>
+      <itemDef name="adcs_mag_mag_vector_valid" type="adcs_mag_mag_vector_valid_state8B">
+        <description text="Meas Mag Field Valid"/>
+      </itemDef>
+      <itemDef name="adcs_mag_mag_sensor_used" type="uint8B">
+        <description text="Mag Sensor Used"/>
+      </itemDef>
+      <itemDef name="adcs_mag_mag_test_mode" type="adcs_mag_mag_test_mode_state8B">
+        <description text="Mag Test Mode"/>
+      </itemDef>
+      <item name="pad0"/>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_MAG_PKT" name="adcs_mag">
+    <description text="ADCS Mag Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_mag"/>
+      <item name="adcs_mag_frame"/>
+    </field>
+  </frameDef>
+  <frameDef name="adcs_command_tlm_frame">
+    <field>
+      <itemDef name="adcs_command_tlm_cmd_status" type="adcs_command_tlm_cmd_status_state8B">
+        <description text="Command Status"/>
+      </itemDef>
+      <itemDef name="adcs_command_tlm_cmd_reject_status" type="adcs_command_tlm_cmd_reject_status_state8B">
+        <description text="Command Reject Status"/>
+      </itemDef>
+      <itemDef name="adcs_command_tlm_cmd_accept_count" type="uint8B">
+        <description text="Command Accept Count"/>
+      </itemDef>
+      <itemDef name="adcs_command_tlm_cmd_reject_count" type="uint8B">
+        <description text="Command Reject Count"/>
+      </itemDef>
+      <itemDef name="adcs_command_tlm_last_acc_cmd_bytes1" type="uint8B">
+        <description text="Last Accept Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_command_tlm_last_acc_cmd_bytes2" type="uint8B">
+        <description text="Last Accept Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_command_tlm_last_acc_cmd_bytes3" type="uint8B">
+        <description text="Last Accept Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_command_tlm_last_acc_cmd_bytes4" type="uint8B">
+        <description text="Last Accept Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_command_tlm_last_acc_cmd_bytes5" type="uint8B">
+        <description text="Last Accept Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_command_tlm_last_acc_cmd_bytes6" type="uint8B">
+        <description text="Last Accept Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_command_tlm_last_acc_cmd_bytes7" type="uint8B">
+        <description text="Last Accept Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_command_tlm_last_acc_cmd_bytes8" type="uint8B">
+        <description text="Last Accept Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_command_tlm_last_rej_cmd_bytes1" type="uint8B">
+        <description text="Last Reject Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_command_tlm_last_rej_cmd_bytes2" type="uint8B">
+        <description text="Last Reject Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_command_tlm_last_rej_cmd_bytes3" type="uint8B">
+        <description text="Last Reject Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_command_tlm_last_rej_cmd_bytes4" type="uint8B">
+        <description text="Last Reject Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_command_tlm_last_rej_cmd_bytes5" type="uint8B">
+        <description text="Last Reject Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_command_tlm_last_rej_cmd_bytes6" type="uint8B">
+        <description text="Last Reject Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_command_tlm_last_rej_cmd_bytes7" type="uint8B">
+        <description text="Last Reject Cmd Bytes"/>
+      </itemDef>
+      <itemDef name="adcs_command_tlm_last_rej_cmd_bytes8" type="uint8B">
+        <description text="Last Reject Cmd Bytes"/>
+      </itemDef>
+    </field>
+  </frameDef>
+  <frameDef id="#APID_TLM_ADCS_COMMAND_TLM_PKT" name="adcs_command_tlm">
+    <description text="ADCS Command_tlm Packet"/>
+    <field>
+      <frameCopy name="ccsdsTlmHeader" suffix="_adcs_command_tlm"/>
+      <item name="adcs_command_tlm_frame"/>
+    </field>
+  </frameDef>
+</hydraDef>
+

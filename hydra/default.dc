@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<isisDC>
+  <mainWindow x="-94" y="-1057" width="700" height="800"/>
+  <page name="C:\Users\chandranadmin\Documents\IS1_FSW_wksps\cubesat\inspire\hydra\//Pages/beacon.xml" x="200" y="200" width="400" height="500"/>
+  <page name="C:\Users\chandranadmin\Documents\IS1_FSW_wksps\cubesat\inspire\hydra\//Pages/Beacon_Detailed.xml" x="596" y="-1056" width="900" height="700"/>
+  <page name="C:\Users\chandranadmin\Documents\IS1_FSW_wksps\cubesat\inspire\hydra\//Pages/critical_telemetry.xml" x="-101" y="-289" width="650" height="284"/>
+</isisDC>
