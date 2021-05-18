@@ -1,4 +1,4 @@
-; MINXSS CDH telemetry check
+; IS-1 CDH telemetry check
 ; Purpose: Checks the CDH tlm for correct values
 ; Outline:
 ;     On start up check the CDH Tlm before deployments
@@ -12,27 +12,28 @@
 ;   PHOENIX or SAFE
 ;
 ; ISSUES:
-;    
-; MODIFICATION HISTORY: 
-;    2020-3-12: Robert Sewell -- Created
 ;
+; MODIFICATION HISTORY:
+;    2020-3-12: Robert Sewell -- Created
+;    2021-5-18: Mayuresh -- Converted variables isFlight and isTVACTest to arguments
 
-declare cmdCnt dn16l
-declare cmdTry dn16l
-declare cmdSucceed dn16l
-declare successCnt dn8
-declare failCnt dn8
-declare isTVACTest dn16
-declare isFlight dn16
+argument isFlight   dn8
+argument isTVACTest dn8
+
+declare cmdCnt      dn16l
+declare cmdTry      dn16l
+declare cmdSucceed  dn16l
+declare successCnt  dn8
+declare failCnt     dn8
 
 set successCnt = 0
 set failCnt = 0
 
 ;Change to 0 if in TVAC
-set isFlight = 0
+;set isFlight = 0
 
 ;Change to 1 if in TVAC
-set isTVACTest = 1 
+;set isTVACTest = 1
 
 CDH:
 echo STARTING CDH tlm checks
@@ -52,7 +53,7 @@ else
     pause
 endif
 
-; Eclipse Flag (NEEDS UPDATING for tlm name)
+; Eclipse Flag
 if beacon_eclipse_state == 0
     echo InspireSAT-1 believes it is in sunlight
 else if beacon_eclipse_state == 1
@@ -61,7 +62,7 @@ else if beacon_eclipse_state == 1
     pause
 else
     echo Unknown eclipse state!
-    pause 
+    pause
 endif
 
 ; Last Opcode
@@ -97,7 +98,7 @@ else
     pause
 endif
 
-; Last Command Fail Code 
+; Last Command Fail Code
 if beacon_cmd_fail_code <= 7
     set successCnt = successCnt + 1
 else
@@ -147,7 +148,7 @@ if beacon_clt_state == 0
 else
     echo Command Loss Timer Fault
     set failCnt = failCnt + 1
-    pause 
+    pause
 endif
 
 ; SD Card Power State

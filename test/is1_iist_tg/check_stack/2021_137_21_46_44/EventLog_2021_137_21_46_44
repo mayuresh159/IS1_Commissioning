@@ -1,0 +1,28 @@
+2021/137-21:46:44: <TEST> Starting new test: :is1_iist_tg:check_stack
+2021/137-21:46:44: <TEST> New rundir: ..\test\is1_iist_tg\check_stack\2021_137_21_46_44\
+2021/137-21:46:44: <HW> Starting new file: EventLog_2021_137_21_46_44
+2021/137-21:48:23: <INT> Starting aliveness
+2021/137-21:48:23: <SCR> Starting script in engine 0
+2021/137-21:48:23: <SCR> Starting script aliveness
+2021/137-21:48:23: <INT> STARTING Aliveness Test
+2021/137-21:48:23: <INT> Power on InspireSat-1 and Press GO
+2021/137-21:49:34: <SCR> User Button Press: GO
+2021/137-21:49:34: <CMD> Sending command cmd_set_pkt_rate apid 1 rate 3 stream 0
+2021/137-21:49:37: <CMD> Sending command cmd_set_pkt_rate apid 1 rate 3 stream 0
+2021/137-21:49:41: <CMD> Sending command cmd_set_pkt_rate apid 1 rate 3 stream 0
+2021/137-21:49:45: <CMD> Sending command cmd_set_pkt_rate apid 1 rate 3 stream 0
+2021/137-21:49:48: <CMD> Sending command cmd_set_pkt_rate apid 1 rate 3 stream 0
+2021/137-21:49:52: <CMD> Sending command cmd_set_pkt_rate apid 1 rate 3 stream 0
+2021/137-21:49:56: <CMD> Sending command cmd_set_pkt_rate apid 1 rate 3 stream 0
+2021/137-21:49:59: <CMD> Sending command cmd_set_pkt_rate apid 1 rate 3 stream 0
+2021/137-21:50:03: <CMD> Sending command cmd_set_pkt_rate apid 1 rate 3 stream 0
+2021/137-21:50:07: <CMD> Sending command cmd_set_pkt_rate apid 1 rate 3 stream 0
+2021/137-21:50:09: <SCR> User Button Press: GOTO 28
+2021/137-21:50:10: <CMD> Sending command cmd_issue_pkt apid 1 stream 0
+2021/137-21:50:14: <CMD> Sending command cmd_issue_pkt apid 1 stream 0
+2021/137-21:50:18: <CMD> Sending command cmd_issue_pkt apid 1 stream 0
+2021/137-21:50:21: <CMD> Sending command cmd_issue_pkt apid 1 stream 0
+2021/137-21:50:25: <CMD> Sending command cmd_issue_pkt apid 1 stream 0
+2021/137-21:50:29: <CMD> Sending command cmd_issue_pkt apid 1 stream 0
+2021/137-21:50:32: <CMD> Sending command cmd_issue_pkt apid 1 stream 0
+2021/137-21:50:34: <SCR> User Button Press: PAUSE

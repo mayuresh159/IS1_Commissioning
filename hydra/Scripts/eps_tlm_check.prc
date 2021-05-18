@@ -1,28 +1,24 @@
-;
-; NAME:
-;   eps_tlm_check
-;
+; IS-1 CDH telemetry check
 ; PURPOSE:
 ;   Run through all EPS related housekeeping (HK) elements and verify that they are in expected range or have expected value
-;
+; Outline:
+;     On start up check the EPS Tlm values
+; NAME:
+;   eps_tlm_check
 ; EXPECTED CONFIGURATION:
 ;   PHOENIX or SAFE
 ;
-;  COMMANDS TESTED
-;   None
-;
-; ISSUES:
-;   None
-;
 ; MODIFICATION HISTORY
-;   2020-03-13
+;   2020-03-13 : Robert Sewell - Created
+;   2021-05-18 : Mayuresh - Converted parameters isFlight and isTVACTest to arguments
 
-declare cmdCnt dn16
-declare seqCnt dn14
-declare isTVACTest dn16
-declare isFlight dn16
-declare successCnt dn8
-declare failCnt dn8
+argument isFlight   dn8
+argument isTVACTest dn8
+
+declare cmdCnt      dn16
+declare seqCnt      dn14
+declare successCnt  dn8
+declare failCnt     dn8
 
 set successCnt = 0
 set failCnt = 0
@@ -30,8 +26,8 @@ set failCnt = 0
 ; 0 is FALSE/NO and 1 is TRUE/YES
 ; TVAC expands acceptable temperatures and doesn't raise a flag if heaters are enabled
 ; isFlight uses the same limits as isTVACTest
-set isTVACTest = 1
-set isFlight = 0
+;set isTVACTest = 1
+;set isFlight = 0
 
 echo STARTING EPS tlm checks
 
@@ -115,7 +111,7 @@ if isFlight == 1
 endif
 
 NOT_TVAC:
-if beacon_eps_temp <= 30 
+if beacon_eps_temp <= 30
     if beacon_eps_temp >= 15
         set successCnt = successCnt + 1
     else
@@ -129,8 +125,8 @@ else
     pause
 endif
 
-if beacon_obc_temp <= 30 
-    if beacon_obc_temp >= 15 
+if beacon_obc_temp <= 30
+    if beacon_obc_temp >= 15
         set successCnt = successCnt + 1
     else
         echo OBC temp outside of limits
@@ -144,7 +140,7 @@ else
 endif
 
 if beacon_int_temp <= 30
-    if beacon_int_temp >= 15 
+    if beacon_int_temp >= 15
         set successCnt = successCnt + 1
     else
         echo Interface card temp outside of limits
@@ -205,7 +201,7 @@ endif
 goto VOLTAGE_AND_CURRENTS
 
 VOLTAGE_AND_CURRENTS:
-; 3.3 current monitor 
+; 3.3 current monitor
 if beacon_cdh_curr >= .22
     set successCnt = successCnt + 1
 else
@@ -230,7 +226,7 @@ if beacon_pwr_status_htr == 1
         echo Battery Voltage Below Low Limit
         set failCnt = failCnt + 1
         pause
-    endif   
+    endif
     if beacon_bat_volt <= 8.2
         set successCnt = successCnt + 1
     else

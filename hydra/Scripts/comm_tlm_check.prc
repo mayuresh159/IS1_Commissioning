@@ -10,15 +10,17 @@
 ;   PHOENIX or SAFE
 ;
 ; ISSUES:
-;    
-; MODIFICATION HISTORY: 
-;    2020-3-12: Robert Sewell -- Created
 ;
+; MODIFICATION HISTORY:
+;    2020-3-12: Robert Sewell -- Created
+;    2021-5-18: Mayuresh - Converted variables isFlight and isTVACTest to arguments
+
+argument isFlight dn16
+argument isTVACTest dn16
+
 declare cmdCnt dn16
 declare seqCnt dn14
 declare cmdTry dn16
-declare isTVACTest dn16
-declare isFlight dn16
 declare successCnt dn8
 declare failCnt dn8
 declare SBANDpwr dn8
@@ -35,7 +37,7 @@ if beacon_pwr_status_sband == 0
         set cmdTry = cmdTry + 1
         wait 3500
     endwhile
-    set successCnt = successCnt + 1  
+    set successCnt = successCnt + 1
 endif
 
 verify beacon_alive_uhf == 1
@@ -55,13 +57,13 @@ while beacon_cmd_succ_count < $cmdCnt
     set cmdTry = cmdTry + 1
     wait 3500
 endwhile
-set successCnt = successCnt + 1  
+set successCnt = successCnt + 1
 
 ; 0 is FALSE/NO and 1 is TRUE/YES
 ; TVAC expands acceptable temperatures and doesn't raise a flag if heaters are enabled
 ; isFlight uses the same limits as isTVACTest
-set isTVACTest = 1
-set isFlight = 0
+;set isTVACTest = 1
+;set isFlight = 0
 
 UHF_TLM_CHECKS:
 if uhf_tx_count >= 0
@@ -168,7 +170,7 @@ else
     pause
 endif
 
-;UHF Locked 
+;UHF Locked
 if uhf_locked == 0
     set successCnt = successCnt + 1
 else
@@ -177,7 +179,7 @@ else
     pause
 endif
 
-;UHF Readback 
+;UHF Readback
 if uhf_read_mode == 0x4E
     set successCnt = successCnt + 1
 else
@@ -213,7 +215,7 @@ else
     pause
 endif
 
-;UHF Channel 
+;UHF Channel
 if uhf_channel == 0x41
     set successCnt = successCnt + 1
 else
@@ -328,7 +330,7 @@ else
     pause
 endif
 
-VOLTAGES_CURRENTS: 
+VOLTAGES_CURRENTS:
 
 ;UHF Voltage
 if beacon_uhf_volt >= 5.75
@@ -573,7 +575,7 @@ if $SBANDpwr == 0
         set cmdTry = cmdTry + 1
         wait 3500
     endwhile
-    set successCnt = successCnt + 1 
+    set successCnt = successCnt + 1
 endif
 
 echo COMPLETED Radios tlm checks with Successes = $successCnt and Failures = $failCnt
