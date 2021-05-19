@@ -2,7 +2,7 @@
 ; Purpose: Check for aliveness in safe Mode
 ; Script name: commission_aliveness_safe
 ; Main subsystems: CDH, EPS, UHF, SBand, ADCS (+GPS), CIP, DAXSS
-; Safe mode: No Payloads | Just CDH, EPS, UHF, SBand, ADCS
+; Safe mode: No Payloads, No SBand | Just CDH, EPS, UHF, ADCS, DAXSS (electronics would be on but instrument off)
 ; Outline:
 ;   Check for command ability
 ; 	Check CDH, EPS, UHF
@@ -50,6 +50,7 @@ endtimeout
 
 
 ;route adcs_analogs, adcs_command_tlm, adcs_mag and adcs_rw_drive
+; New definition of beacon packet includes critical ADCS data and we do not need the additional ADCS packets to be routed
 ; Streams - 0/DBG 1/UHF 2/SD 3/SBAND
 
 ; adcs_analogs
@@ -108,6 +109,11 @@ call commission_comm_tlm_check
 call commission_adcs_tlm_check
 
 
+; TODO: Cancel antenna deployment commands put over here
+; Keep a pause first before confirming
+pause
+
+
 ; Finish up aliveness test tasks
 FINISH:
 
@@ -115,7 +121,7 @@ FINISH:
 ; adcs_analogs
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 215 rate 0 stream 0
+    cmd_set_pkt_rate apid 215 rate 0 stream 1
     set cmdTry = cmdTry + 1
     wait 3500
 endwhile
@@ -124,7 +130,7 @@ set successCnt = successCnt + 1
 ; adcs_command_tlm
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 200 rate 0 stream 0
+    cmd_set_pkt_rate apid 200 rate 0 stream 1
     set cmdTry = cmdTry + 1
     wait 3500
 endwhile
@@ -133,7 +139,7 @@ set successCnt = successCnt + 1
 ; adcs_mag
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 211 rate 0 stream 0
+    cmd_set_pkt_rate apid 211 rate 0 stream 1
     set cmdTry = cmdTry + 1
     wait 3500
 endwhile
@@ -142,7 +148,7 @@ set successCnt = successCnt + 1
 ; adcs_rw_drive
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 206 rate 0 stream 0
+    cmd_set_pkt_rate apid 206 rate 0 stream 1
     set cmdTry = cmdTry + 1
     wait 3500
 endwhile

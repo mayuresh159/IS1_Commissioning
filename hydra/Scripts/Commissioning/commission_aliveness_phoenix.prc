@@ -20,7 +20,17 @@ echo STARTING Commission aliveness phoenix test
 echo NOTE that one should GOTO FINISH when less than 2 minutes from the pass end time
 
 ; wait until IS-1 responds
-; call hello_is1
+; call hello_is1,
+; wait for beacon packets at the normal cadence
+; verify that the command counter increments
+; NoOp command and incrementing command counter should confirm the hello_is1
+;set cmdCnt = beacon_cmd_succ_count + 1
+;while beacon_cmd_succ_count < $cmdCnt
+;	NoOp
+;	set cmdTry = cmdTry + 1
+;	wait 3500
+;endwhile
+
 
 ; Get beacon packet to debug every 3 seconds
 ; Should the beacon be set to DBG or UHF? The beacon packet update when in orbit will happen over UHF and no hardline exists!
@@ -42,10 +52,8 @@ set cmdSucceed = cmdSucceed + 1
 tlmwait beacon_mode == 0 ? 10000
 timeout
   echo Spacecraft not in Phoenix Mode
-  ; set mode to Phoenix manually
-  cmd_mode_set mode 0
-  wait 3000
-  ;goto FINISH
+  echo Do you wish to continue in Phoenix mode?
+  pause 
 endtimeout
 
 

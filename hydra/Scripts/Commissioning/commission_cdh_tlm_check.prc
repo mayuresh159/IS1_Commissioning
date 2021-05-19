@@ -107,6 +107,7 @@ if beacon_cdh_volt >= 3.2
 else
     echo CDH V Monitor Below Low Limit
     set failCnt = failCnt + 1
+    pause
 endif
 
 if beacon_cdh_volt <= 3.5
@@ -114,6 +115,7 @@ if beacon_cdh_volt <= 3.5
 else
     echo CDH V Monitor Above High Limit
     set failCnt = failCnt + 1
+    pause
 endif
 
 ; 3.3 current monitor (NEEDS UPDATING for value)
@@ -122,6 +124,7 @@ if beacon_cdh_curr >= .22
 else
     echo CDH A Monitor Below Low Limit
     set failCnt = failCnt + 1
+    pause
 endif
 
 if beacon_cdh_curr <= .28
@@ -129,6 +132,7 @@ if beacon_cdh_curr <= .28
 else
     echo CDH A Monitor Above High Limit
     set failCnt = failCnt + 1
+    pause
 endif
 
 

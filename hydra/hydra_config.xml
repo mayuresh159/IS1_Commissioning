@@ -1,6 +1,7 @@
 <hydraDef>
 
     <scriptDir name="Scripts"/>
+    <scriptDir name="Scripts/Commissioning"/>
 
     <import>../common/hydra</import>
 
