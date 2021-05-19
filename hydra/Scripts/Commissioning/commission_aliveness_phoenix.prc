@@ -24,11 +24,12 @@ echo NOTE that one should GOTO FINISH when less than 2 minutes from the pass end
 
 ; Get beacon packet to debug every 3 seconds
 ; Should the beacon be set to DBG or UHF? The beacon packet update when in orbit will happen over UHF and no hardline exists!
-; Set beacons to DBG stream
+; Set beacons to DBG/UHF stream
+; 0/DBG 1/UHF 2/SD 3/SBAND
 set cmdCnt = beacon_cmd_succ_count + 1
 ; repeat until command is accepted by SC
 while beacon_cmd_succ_count < $cmdCnt
-	cmd_set_pkt_rate apid 1 rate 3 stream 0
+	cmd_set_pkt_rate apid 1 rate 3 stream 1
 	set cmdTry = cmdTry + 1
 	wait 3500
 endwhile
@@ -37,24 +38,28 @@ set cmdSucceed = cmdSucceed + 1
 
 ; confirm phoenix mode
 ; wait to check if the satellite is in phoenix mode for atleast 10 sec, else proceed with TLM checks
-tlmwait beacon_mode == 1 ? 10000
+; 0/PHOENIX 1/SAFE 2/SCID 3/SCIC
+tlmwait beacon_mode == 0 ? 10000
 timeout
   echo Spacecraft not in Phoenix Mode
-  goto FINISH
+  ; set mode to Phoenix manually
+  cmd_mode_set mode 0
+  wait 3000
+  ;goto FINISH
 endtimeout
 
 
 
 CHECKOUT:
 ; Decided to keep all parameter checks
-; Call cdh_tlm_check in flight context
-call cdh_tlm_check(1,0)
+; Call cdh_tlm_check
+call commission_cdh_tlm_check
 
 ; Call eps_tlm_check in flight context
-call eps_tlm_check(1,0)
+call commission_eps_tlm_check
 
 ; Call comm_tlm_check in flight context
-call comm_tlm_check(1,0)
+call commission_comm_tlm_check
 
 
 

@@ -20,9 +20,6 @@
 ;    2016/03/05: James Paul Mason: Updated for flight.
 ;
 
-declare isFlight dn16
-declare isTVACTest dn16
-
 declare cmdCnt dn16l
 declare cmdTry dn16l
 declare successCnt dn16l
@@ -33,59 +30,9 @@ declare magnetometer2Squared dn16
 declare magnetometer3Squared dn16
 declare magnetometerSquareSum dn16
 
-;0 is false/no and 1 is true/yes
-; TVAC expands acceptable temperatures and doesn't raise a flag if heaters are enabled
-; isFlight uses the same limits as isTVACTest
-set isTVACTest = 1
-set isFlight = 0
 
-; Set mode to Safe mode if not already safe mode
-if beacon_mode != 1
-    set cmdCnt = beacon_cmd_succ_count + 1
-    while beacon_cmd_succ_count < $cmdCnt
-        cmd_mode_set mode 1
-        set cmdTry = cmdTry + 1
-        wait 3529
-    endwhile
-    set successCnt = successCnt + 1
-endif
-
-
-;route adcs_analogs, adcs_command_tlm, adcs_mag and adcs_rw_drive
-; 0/DBG 1/UHF 2/SD 3/SBAND
-; adcs_analogs
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 215 rate 10 stream 0
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set successCnt = successCnt + 1
-; adcs_command_tlm
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 200 rate 10 stream 0
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set successCnt = successCnt + 1
-; adcs_mag
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 211 rate 10 stream 0
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set successCnt = successCnt + 1
-; adcs_rw_drive
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 206 rate 10 stream 0
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set successCnt = successCnt + 1
-
+; Safe mode already ensured in calling script
+; Packets already routed to UHF in calling script
 
 SUN_SENSOR_STATUS:
 ; Sun point status - require operator to okay for proceed since this is highly context dependent
@@ -153,12 +100,14 @@ if beacon_adcs_digi_bus_volt >= 4.75
     set successCnt = successCnt + 1
 else
     echo XACT 5V Line Below Low Limit
+    print beacon_adcs_digi_bus_volt
     set failCnt = failCnt + 1
 endif
 if beacon_adcs_digi_bus_volt <= 5.25
     set successCnt = successCnt + 1
 else
     echo XACT 5V Line Above High Limit
+    print beacon_adcs_digi_bus_volt
     set failCnt = failCnt + 1
 endif
 
@@ -167,12 +116,14 @@ if adcs_analogs_motor_bus_v >= 11.4
     set successCnt = successCnt + 1
 else
     echo XACT 12 V Line for Reaction Wheels Below Low Limit
+    print adcs_analogs_motor_bus_v
     set failCnt = failCnt + 1
 endif
 if adcs_analogs_motor_bus_v <= 12.6
     set successCnt = successCnt + 1
 else
     echo XACT 12 V Line for Reaction Wheels Above High Limit
+    print adcs_analogs_motor_bus_v
     set failCnt = failCnt + 1
 endif
 
@@ -181,163 +132,96 @@ if adcs_analogs_rod_bus_v >= 11.4
     set successCnt = successCnt + 1
 else
     echo XACT 12 V Line for Rods Below Low Limit
+    print adcs_analogs_rod_bus_v
     set failCnt = failCnt + 1
 endif
 if adcs_analogs_rod_bus_v <= 12.6
     set successCnt = successCnt + 1
 else
     echo XACT 12 V Line for Rods Above High Limit
+    print adcs_analogs_rod_bus_v
     set failCnt = failCnt + 1
 endif
 
 TEMPERATURES:
-
-if isTVACTest == 1
-    goto IS_TVAC
+; Tracker Det Temp
+if beacon_adcs_star_temp >= 15
+    set successCnt = successCnt + 1
+else
+    echo Star Tracker Temp Below Low Limit
+    print beacon_adcs_star_temp
+    set failCnt = failCnt + 1
 endif
-if isFlight == 1
-    goto NOT_TVAC
+if beacon_adcs_star_temp <= 30
+    set successCnt = successCnt + 1
+else
+    echo Star Tracker Temp Above High Limit
+    print beacon_adcs_star_temp
+    set failCnt = failCnt + 1
 endif
 
-NOT_TVAC:
-    ; Tracker Det Temp
-    if beacon_adcs_star_temp >= 15
-        set successCnt = successCnt + 1
-    else
-        echo Star Tracker Temp Below Low Limit
-        set failCnt = failCnt + 1
-    endif
-    if beacon_adcs_star_temp <= 30
-        set successCnt = successCnt + 1
-    else
-        echo Star Tracker Temp Above High Limit
-        set failCnt = failCnt + 1
-    endif
+;IMU temp
+if adcs_analogs_imu_temp >= 15
+    set successCnt = successCnt + 1
+else
+    echo ADCS IMU Temp Below Low Limit
+    print adcs_analogs_imu_temp
+    set failCnt = failCnt + 1
+endif
+if adcs_analogs_imu_temp <= 30
+    set successCnt = successCnt + 1
+else
+    echo ADCS IMU Temp Above High Limit
+    print adcs_analogs_imu_temp
+    set failCnt = failCnt + 1
+endif
 
-    ;IMU temp
-    if adcs_analogs_imu_temp >= 15
-        set successCnt = successCnt + 1
-    else
-        echo ADCS IMU Temp Below Low Limit
-        set failCnt = failCnt + 1
-    endif
-    if adcs_analogs_imu_temp <= 30
-        set successCnt = successCnt + 1
-    else
-        echo ADCS IMU Temp Above High Limit
-        set failCnt = failCnt + 1
-    endif
+; Wheel Temps
+if beacon_adcs_wheel_temp1 >= 15
+    set successCnt = successCnt + 1
+else
+    echo Wheel 1 Temp Below Low Limit
+    print beacon_adcs_wheel_temp1
+    set failCnt = failCnt + 1
+endif
+if beacon_adcs_wheel_temp1 <= 30
+    set successCnt = successCnt + 1
+else
+    echo Wheel 1 Temp Above High Limit
+    print beacon_adcs_wheel_temp1
+    set failCnt = failCnt + 1
+endif
 
-    ; Wheel Temps
-    if beacon_adcs_wheel_temp1 >= 15
-        set successCnt = successCnt + 1
-    else
-        echo Wheel 1 Temp Below Low Limit
-        set failCnt = failCnt + 1
-    endif
-    if beacon_adcs_wheel_temp1 <= 30
-        set successCnt = successCnt + 1
-    else
-        echo Wheel 1 Temp Above High Limit
-        set failCnt = failCnt + 1
-    endif
+if beacon_adcs_wheel_temp2 >= 15
+    set successCnt = successCnt + 1
+else
+    echo Wheel 2 Temp Below Low Limit
+    print beacon_adcs_wheel_temp2
+    set failCnt = failCnt + 1
+endif
+if beacon_adcs_wheel_temp2 <= 30
+    set successCnt = successCnt + 1
+else
+    echo Wheel 2 Temp Above High Limit
+    print beacon_adcs_wheel_temp2
+    set failCnt = failCnt + 1
+endif
 
-    if beacon_adcs_wheel_temp2 >= 15
-        set successCnt = successCnt + 1
-    else
-        echo Wheel 2 Temp Below Low Limit
-        set failCnt = failCnt + 1
-    endif
-    if beacon_adcs_wheel_temp2 <= 30
-        set successCnt = successCnt + 1
-    else
-        echo Wheel 2 Temp Above High Limit
-        set failCnt = failCnt + 1
-    endif
+if beacon_adcs_wheel_temp3 >= 15
+    set successCnt = successCnt + 1
+else
+    echo Wheel 3 Temp Below Low Limit
+    print beacon_adcs_wheel_temp3
+    set failCnt = failCnt + 1
+endif
+if beacon_adcs_wheel_temp3 <= 30
+    set successCnt = successCnt + 1
+else
+    echo Wheel 3 Temp Above High Limit
+    print beacon_adcs_wheel_temp3
+    set failCnt = failCnt + 1
+endif
 
-    if beacon_adcs_wheel_temp3 >= 15
-        set successCnt = successCnt + 1
-    else
-        echo Wheel 3 Temp Below Low Limit
-        set failCnt = failCnt + 1
-    endif
-    if beacon_adcs_wheel_temp3 <= 30
-        set successCnt = successCnt + 1
-    else
-        echo Wheel 3 Temp Above High Limit
-        set failCnt = failCnt + 1
-    endif
-    goto END_TEMPERATURES
-
-IS_TVAC:
-    ; Tracker Det Temp
-    if beacon_adcs_star_temp >= -15
-        set successCnt = successCnt + 1
-    else
-        echo Star Tracker Temp Below Low Limit
-        set failCnt = failCnt + 1
-    endif
-    if beacon_adcs_star_temp <= 40
-        set successCnt = successCnt + 1
-    else
-        echo Star Tracker Temp Above High Limit
-        set failCnt = failCnt + 1
-    endif
-
-    ;IMU temp
-    if adcs_analogs_imu_temp >= -15
-        set successCnt = successCnt + 1
-    else
-        echo ADCS IMU Temp Below Low Limit
-        set failCnt = failCnt + 1
-    endif
-    if adcs_analogs_imu_temp <= 40
-        set successCnt = successCnt + 1
-    else
-        echo ADCS IMU Temp Above High Limit
-        set failCnt = failCnt + 1
-    endif
-
-    ; Wheel Temps
-    if beacon_adcs_wheel_temp1 >= -15
-        set successCnt = successCnt + 1
-    else
-        echo Wheel 1 Temp Below Low Limit
-        set failCnt = failCnt + 1
-    endif
-    if beacon_adcs_wheel_temp1 <= 40
-        set successCnt = successCnt + 1
-    else
-        echo Wheel 1 Temp Above High Limit
-        set failCnt = failCnt + 1
-    endif
-
-    if beacon_adcs_wheel_temp2 >= -15
-        set successCnt = successCnt + 1
-    else
-        echo Wheel 2 Temp Below Low Limit
-        set failCnt = failCnt + 1
-    endif
-    if beacon_adcs_wheel_temp2 <= 40
-        set successCnt = successCnt + 1
-    else
-        echo Wheel 2 Temp Above High Limit
-        set failCnt = failCnt + 1
-    endif
-
-    if beacon_adcs_wheel_temp3 >= -15
-        set successCnt = successCnt + 1
-    else
-        echo Wheel 3 Temp Below Low Limit
-        set failCnt = failCnt + 1
-    endif
-    if beacon_adcs_wheel_temp3 <= 40
-        set successCnt = successCnt + 1
-    else
-        echo Wheel 3 Temp Above High Limit
-        set failCnt = failCnt + 1
-    endif
-END_TEMPERATURES:
 
 SUN_BODY_VECTOR: ; 5% tolerance on unit vector
 declare sunBodyVectorSum float32
@@ -431,12 +315,16 @@ if adcs_rw_drive_drag_est1 >= -40
     set successCnt = successCnt + 1
 else
     echo XACT Wheel 1 Drag Less Than Lower Limit. Wheels cold?
+    print adcs_rw_drive_drag_est1
+    print beacon_adcs_wheel_temp1
     set failCnt = failCnt + 1
 endif
 if adcs_rw_drive_drag_est1 <= 40
     set successCnt = successCnt + 1
 else
     echo XACT Wheel 1 Drag Greater Than Upper Limit. Wheels cold?
+    print adcs_rw_drive_drag_est1
+    print beacon_adcs_wheel_temp1
     set failCnt = failCnt + 1
 endif
 
@@ -445,12 +333,16 @@ if adcs_rw_drive_drag_est2 >= -40
     set successCnt = successCnt + 1
 else
     echo XACT Wheel 2 Drag Less Than Lower Limit. Wheels cold?
+    print adcs_rw_drive_drag_est2
+    print beacon_adcs_wheel_temp2
     set failCnt = failCnt + 1
 endif
 if adcs_rw_drive_drag_est2 <= 40
     set successCnt = successCnt + 1
 else
     echo XACT Wheel 2 Drag Greater Than Upper Limit. Wheels cold?
+    print adcs_rw_drive_drag_est2
+    print beacon_adcs_wheel_temp2
     set failCnt = failCnt + 1
 endif
 
@@ -459,12 +351,16 @@ if adcs_rw_drive_drag_est3 >= -40
     set successCnt = successCnt + 1
 else
     echo XACT Wheel 3 Drag Less Than Lower Limit. Wheels cold?
+    print adcs_rw_drive_drag_est3
+    print beacon_adcs_wheel_temp3
     set failCnt = failCnt + 1
 endif
 if adcs_rw_drive_drag_est3 <= 40
     set successCnt = successCnt + 1
 else
     echo XACT Wheel 3 Drag Greater Than Upper Limit. Wheels cold?
+    print adcs_rw_drive_drag_est3
+    print beacon_adcs_wheel_temp3
     set failCnt = failCnt + 1
 endif
 
@@ -475,12 +371,14 @@ if beacon_adcs_wheel_sp1 >= -800
     set successCnt = successCnt + 1
 else
     echo XACT Wheel 1 Speed Below Lower Limit
+    print beacon_adcs_wheel_sp1
     set failCnt = failCnt + 1
 endif
 if beacon_adcs_wheel_sp1 <= 800
     set successCnt = successCnt + 1
 else
     echo XACT Wheel 1 Speed Above Upper Limit
+    print beacon_adcs_wheel_sp1
     set failCnt = failCnt + 1
 endif
 
@@ -489,12 +387,14 @@ if beacon_adcs_wheel_sp2 >= -800
     set successCnt = successCnt + 1
 else
     echo XACT Wheel 2 Speed Below Lower Limit
+    print beacon_adcs_wheel_sp2
     set failCnt = failCnt + 1
 endif
 if beacon_adcs_wheel_sp2 <= 800
     set successCnt = successCnt + 1
 else
     echo XACT Wheel 2 Speed Above Upper Limit
+    print beacon_adcs_wheel_sp2
     set failCnt = failCnt + 1
 endif
 
@@ -503,12 +403,14 @@ if beacon_adcs_wheel_sp3 >= -800
     set successCnt = successCnt + 1
 else
     echo XACT Wheel 3 Speed Below Lower Limit
+    print beacon_adcs_wheel_sp3
     set failCnt = failCnt + 1
 endif
 if beacon_adcs_wheel_sp3 <= 800
     set successCnt = successCnt + 1
 else
     echo XACT Wheel 3 Speed Above Upper Limit
+    print beacon_adcs_wheel_sp3
     set failCnt = failCnt + 1
 endif
 
@@ -520,12 +422,14 @@ if beacon_adcs_body_rt1 >= -0.1
     set successCnt = successCnt + 1
 else
     echo XACT Body Frame Rate 1 Above Stable Pointing Limit
+    print beacon_adcs_body_rt1
     set failCnt = failCnt + 1
 endif
 if beacon_adcs_body_rt1 <= 0.1
     set successCnt = successCnt + 1
 else
     echo XACT Body Frame Rate 1 Above Stable Pointing Limit
+    print beacon_adcs_body_rt1
     set failCnt = failCnt + 1
 endif
 
@@ -534,12 +438,14 @@ if beacon_adcs_body_rt2 >= -0.1
     set successCnt = successCnt + 1
 else
     echo XACT Body Frame Rate 2 Above Stable Pointing Limit
+    print beacon_adcs_body_rt2
     set failCnt = failCnt + 1
 endif
 if beacon_adcs_body_rt2 <= 0.1
     set successCnt = successCnt + 1
 else
     echo XACT Body Frame Rate 2 Above Stable Pointing Limit
+    print beacon_adcs_body_rt2
     set failCnt = failCnt + 1
 endif
 
@@ -548,12 +454,14 @@ if beacon_adcs_body_rt3 >= -0.1
     set successCnt = successCnt + 1
 else
     echo XACT Body Frame Rate 3 Above Stable Pointing Limit
+    print beacon_adcs_body_rt3
     set failCnt = failCnt + 1
 endif
 if beacon_adcs_body_rt3 <= 0.1
     set successCnt = successCnt + 1
 else
     echo XACT Body Frame Rate 3 Above Stable Pointing Limit
+    print beacon_adcs_body_rt3
     set failCnt = failCnt + 1
 endif
 
@@ -576,42 +484,8 @@ echo Fail count = $failCnt
 if $failCnt > 0
     echo ADCS Tlm Check: FAIL!
     echo Look at ECHO statements to see ADCS failures
-    pause
 else
     echo ADCS Tlm Check: SUCCESS!
 endif
-
-;turn of routing of adcs_analogs, adcs_command_tlm, and adcs_mag
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 215 rate 0 stream 0
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set successCnt = successCnt + 1
-
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 200 rate 0 stream 0
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set successCnt = successCnt + 1
-
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 211 rate 0 stream 0
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set successCnt = successCnt + 1
-
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 206 rate 0 stream 0
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set successCnt = successCnt + 1
 
 ; End adcs_tlm_check
