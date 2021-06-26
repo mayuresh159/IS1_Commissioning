@@ -38,4 +38,4 @@ cmd_mode_deploy_flag component 1 state 0
 cmd_mode_deploy_flag component 2 state 0
 
 ;   4. Deployment timeouts between retry. (135 minutes)
-;
+cmd_mode_deploy_interval value 8100
