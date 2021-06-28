@@ -68,6 +68,12 @@ verify mode_deployables[0] == 1
 verify mode_deployables[1] == 1
 verify mode_deployables[2] == 1
 
+;Here should we read the launch_delay value as follows:
+;echo Launch Delay Value = $mode_launch_delay?
+;This could be helpful if we want to know when to expect the first beacon
+;also, what exactly does launch_flag do? 
+;(do we need to set it to 1, declaring that the wait is over)
+
 ; Disable mode_hk_packet routing
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
