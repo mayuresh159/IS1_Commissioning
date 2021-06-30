@@ -6,7 +6,7 @@ declare cmdTryADCS dn16l
 declare cmdSucceedADCS dn16l
 declare launchDelay dn16l
 
-; Start beacon packet?
+; Start beacon packet? - Clarified Not required. 
 
 ; Set reaction wheels to idling mode
 set cmdCntADCS = beacon_adcs_cmd_acpt + 1
@@ -73,6 +73,7 @@ verify mode_deployables[2] == 1
 ;This could be helpful if we want to know when to expect the first beacon
 ;also, what exactly does launch_flag do? 
 ;(do we need to set it to 1, declaring that the wait is over)
+;Clarified: Flag need not be set - FSW will set. 
 
 ; Disable mode_hk_packet routing
 set cmdCnt = beacon_cmd_succ_count + 1

@@ -28,12 +28,14 @@ endwhile
 set cmdSucceed = cmdSucceed + 1 
 
 ;Issue one becon pkt to UHF
-;The stream is set to 0, should it be set to 1?
+;The stream is set to 0, should it be set to 1? Clarified should be 1. 
 ;When Aliveness is run for the first time at IIST, 
 ;UHF groundstation may not available, should be disable this?
+;Clarified - will be checked with spectrum analyser 
+
 set cmdTry = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-	cmd_issue_pkt apid 1 stream 0 
+	cmd_issue_pkt apid 1 stream 1 
 	set cmdTry = cmdTry + 1
 	wait 3500
 endwhile
@@ -51,17 +53,18 @@ call Scripts/adcs_tlm_check
 ;At first power on at IIST, will the satellite be in Safe?
 ;If not for the first aliveness test:
 ;cip_tlm_check and aliveness_daxss can be disabled here
-if beacon_pwr_status_cip == 1
-	call Scripts/cip_tlm_check
-else
-	echo CIP is OFF
-endif
+;Clarified: These are disabled. 
+;if beacon_pwr_status_cip == 1
+;	call Scripts/cip_tlm_check
+;else
+;	echo CIP is OFF
+;endif
 
-if beacon_pwr_status_daxss == 1
-	call Scripts/DAXSS/aliveness_daxss
-else
-	echo DAXSS is off
-endif
+;if beacon_pwr_status_daxss == 1
+;	call Scripts/DAXSS/aliveness_daxss
+;else
+;	echo DAXSS is off
+;endif
 
 FINISH:
 echo COMPLETED Aliveness Test
