@@ -27,6 +27,48 @@ declare waitinterval dn16l
 set cmdSucceed = 0
 set waitinterval = 3500
 
+; Start routing of packets which include table parameters for monitoring
+;mode_hk :
+;    avoid_flags
+;    mode_transition_thresholds
+;    last_cmd_time
+;    clt_triggered_flag
+;    clt_threshold
+;    clt_countdown - remaining seconds before clt_triggers
+;    deployables - Commanded state of deployables
+;    curr_mode - safe/phoenix/scic/scid
+;    launch_delay - threshold value
+;    launch_count - counter current value
+;    launch_flag - flag if the counter is above the threshold value
+;    deployment_interval - reason for selecting 135 minutes?
+;    deploy_count - current counter value
+;    eclipse_method - adcs/ eps
+;    eclipse - flag
+;    auto_state - flag indicates if the system is automatically changing modes
+
+;adcs_hk :
+;    adcs_eclipse_threshold - css threshold for eclipse determination
+
+;analog_hk : apid - 2
+;    eps_eclipse_thresh - solar array eclipse threshold
+;    batt_set_low - battery low setpoint
+;    batt_set_high - battery high setpoint
+;    batt_samples - battery consecutive samples
+
+
+;tlm_hk : ? to check packet rates of different types of packets?
+;    sent_count
+;    error_count
+;    packet_rate 1280 bits
+;    stream_rate
+
+;sd_hk :
+;    card_0_state
+;    card_1_state
+;    card_select - 0/CARD_0, 1/CARD_1, 2/FLASH
+;
+
+
 ;   1. Deployment timeout for beacon (40 minutes)
 ;   2. Deployment timeout for antenna and SA (40 minutes)
 ; Delay value to be given in seconds

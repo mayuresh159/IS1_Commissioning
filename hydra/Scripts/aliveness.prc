@@ -25,21 +25,30 @@ while beacon_cmd_succ_count < $cmdCnt
 	set cmdTry = cmdTry + 1
 	wait 3500
 endwhile
-set cmdSucceed = cmdSucceed + 1 
+set cmdSucceed = cmdSucceed + 1
 
 ;Issue one becon pkt to UHF
+<<<<<<< Updated upstream
 ;The stream is set to 0, should it be set to 1? Clarified should be 1. 
 ;When Aliveness is run for the first time at IIST, 
+=======
+;The stream is set to 0, should it be set to 1?
+;When Aliveness is run for the first time at IIST,
+>>>>>>> Stashed changes
 ;UHF groundstation may not available, should be disable this?
 ;Clarified - will be checked with spectrum analyser 
 
 set cmdTry = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+<<<<<<< Updated upstream
 	cmd_issue_pkt apid 1 stream 1 
+=======
+	cmd_issue_pkt apid 1 stream 0
+>>>>>>> Stashed changes
 	set cmdTry = cmdTry + 1
 	wait 3500
 endwhile
-set cmdSucceed = cmdSucceed + 1 
+set cmdSucceed = cmdSucceed + 1
 
 CHECKOUT:
 call Scripts/cdh_tlm_check
@@ -60,11 +69,19 @@ call Scripts/adcs_tlm_check
 ;	echo CIP is OFF
 ;endif
 
+<<<<<<< Updated upstream
 ;if beacon_pwr_status_daxss == 1
 ;	call Scripts/DAXSS/aliveness_daxss
 ;else
 ;	echo DAXSS is off
 ;endif
+=======
+if beacon_pwr_status_daxss == 1
+;	call Scripts/DAXSS/aliveness_daxss
+else
+	echo DAXSS is off
+endif
+>>>>>>> Stashed changes
 
 FINISH:
 echo COMPLETED Aliveness Test
