@@ -43,21 +43,23 @@
 
     <decoderHdr name="ax25StripDecoder" length="16">
         <description text="Removes AX25 header and leaves CCSDS packet"/>
-        <outBuffer size="256"/>
-        <outputDevice name="uhfRawFile" enabled="false"/>
+        <outBuffer size="512"/>
         <outputDevice name="ccsdsDecoder"/>
     </decoderHdr>
 
     <decoderDef name="ax25Decoder" updateDB="enabled" archive="enabled">
         <description text="Decomposes AX25 header and sends packet off to be stripped"/>
-        <frame name="ax25TlmHdr"/>
+        <!--<frame name="ax25TlmHdr"/>-->
+        <outputDevice name="uhfRawFile" enabled="true"/>
         <outputDevice name="ax25StripDecoder"/>
     </decoderDef>
 
     <readerHeader name="uhfReader" hw="uhfSimTlm" decoder="ax25Decoder" maxSize="2048"
-                  headerSize="22" offset="3" lengthField="20:0:dn16b" autoStart="true">
+                  headerSize="22" offset="1" lengthField="20:0:dn16b" autoStart="true">
         <description text="Reads AX25 packets from radio simulation"/>
     </readerHeader>
+    <!-- <readerFixed name="uhfReader" hw="uhfSimTlm" decoder="ax25Decoder" size="272" autoStart="true">
+    </readerFixed> -->
 
     <decoderDef name="ax25Wrapper">
 
