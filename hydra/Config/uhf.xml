@@ -55,12 +55,12 @@
 
     <!-- Radio telecommand path goes  cmdDecoder->ax25Wrapper->uhfSimCmd  -->
     <decoderDef name="ax25Wrapper">
-        <frameHeader type="dn8" num="16" value="0x92 0xA6 0x5A 0x62 0x40 0x40 0x60 0x84 0x86 0xA8 0x40 0x40 0x40 0xE1 0x03 0xF0"/>
+        <!-- <frameHeader type="dn8" num="16" value="0x92 0xA6 0x5A 0x62 0x40 0x40 0x60 0x84 0x86 0xA8 0x40 0x40 0x40 0xE1 0x03 0xF0"/> -->
         <outputDevice name="uhfSimCmd"/>
     </decoderDef>
 
     <decoderDef name="cmdDecoder">
-        <!-- <headerFrame name="ax25CmdHeader"/> -->
+        <headerFrame name="ax25CmdHeader"/>
         <outputDevice name="ax25Wrapper" enabled="false"/>
     </decoderDef>
 
