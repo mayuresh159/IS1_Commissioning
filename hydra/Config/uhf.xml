@@ -30,8 +30,8 @@
             <!--<itemDef name="ax25CmdHeader_CRC" type="dn16b" value="0"/>-->
         </field>
         <!--<checksum item="ax25CmdHeader_CRC" method="ax25" start="BEGIN" stop="ax25CmdHeader_CRC"
-                  width="16" poly="0x1021" seed="0xFF">-->
-        </checksum>
+                  width="16" poly="0x1021" seed="0xFF">
+        </checksum>-->
     </frameDef>
 
     <!-- Radio telemetry data goes from radio->uhfReader->ax25Decoder->ax25StripDecoder->ccsdsDecoder -->
