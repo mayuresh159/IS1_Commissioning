@@ -1,3 +1,4 @@
 set_dec_header cmdDecoder ax25CmdHeader
+hydra_uart_cmd_disable
 hydra_uhf_cmd_enable
 cmd_sync_disable
