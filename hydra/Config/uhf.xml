@@ -27,10 +27,10 @@
             <itemDef name="ax25CmdHeader_Ctrl" type="dn8" value="0x03"/>
             <itemDef name="ax25CmdHeader_PID" type="dn8" value="0xF0"/>
             <placeholder/>
-            <itemDef name="ax25CmdHeader_CRC" type="dn16b" value="0"/>
+            <!--<itemDef name="ax25CmdHeader_CRC" type="dn16b" value="0"/>-->
         </field>
-        <checksum item="ax25CmdHeader_CRC" method="ax25" start="BEGIN" stop="ax25CmdHeader_CRC"
-                  width="16" poly="0x1021" seed="0xFF">
+        <!--<checksum item="ax25CmdHeader_CRC" method="ax25" start="BEGIN" stop="ax25CmdHeader_CRC"
+                  width="16" poly="0x1021" seed="0xFF">-->
         </checksum>
     </frameDef>
 
