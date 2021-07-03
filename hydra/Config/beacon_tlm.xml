@@ -577,4 +577,16 @@
         </field>
     </frameDef>
 
+    <alias name="enable_uhf_beacon" command="cmd_set_pkt_rate">
+        <argument id="apid" value="1"/>
+        <argument id="rate" value="10"/>
+        <argument id="stream" value="1"/>
+    </alias>
+
+    <alias name="disable_uhf_beacon" command="cmd_set_pkt_rate">
+        <argument id="apid" value="1"/>
+        <argument id="rate" value="0"/>
+        <argument id="stream" value="1"/>
+    </alias>
+
 </hydraDef>
