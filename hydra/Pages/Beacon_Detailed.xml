@@ -1,6 +1,7 @@
 <pageDef>
 
 	<size width="900" height="700"/>
+	<position x="750" y="0"/>
 	<background color="WHITE"/>
 	<text color="BLACK"/>
 	<font name="Times_New_Roman" size="10"/>
@@ -20,11 +21,11 @@
 				<row item = "beacon_pwr_status_sd1" label ="SD Card 1"/>
 				<row item = "beacon_pwr_status_sd0" label ="SD Card 2"/>
 				<row item = "beacon_pwr_status_htr" label ="Battery Heater"/>
-				
+
 			</section>
 
 			<section name="Temperature">
-        		
+
         		<row item = "beacon_obc_temp" label ="CDH Board" units="C"/>
 				<row item = "beacon_eps_temp" label ="EPS Board" units="C"/>
 				<row item = "beacon_int_temp" label ="Interface Card" units="C"/>
@@ -32,14 +33,14 @@
 				<row item = "beacon_sp1_temp" label ="Deployable Solar Panel 1" units="C"/>
 				<row item = "beacon_sp2_temp" label ="Deployable Solar Panel 2" units="C"/>
 				<row item = "beacon_bat1_temp_conv" label ="Battery Board" units="C"/>
-				<row item = "beacon_uhf_temp" label ="UHF" units="C"/>	
-				<row item = "beacon_sband_top_temp" label ="SBand" units="C"/>	
+				<row item = "beacon_uhf_temp" label ="UHF" units="C"/>
+				<row item = "beacon_sband_top_temp" label ="SBand" units="C"/>
 				<row item = "beacon_cip_temp1" label ="CIP" units="C"/>
 				<row item = "beacon_daxss_cdh_temp" label ="DAXSS" units="C"/>
         	</section>
-		
+
 		</column>
-		
+
 
         <column>
         	<section name="Power">
@@ -49,19 +50,19 @@
 				<row item = "beacon_sp1_curr" label ="Deployable Solar Panel 1 Current" units="A"/>
 				<row item = "beacon_sp2_volt" label ="Deployable Solar Panel 2 Voltage" units="V"/>
 				<row item = "beacon_sp2_curr" label ="Deployable Solar Panel 2 Current" units="A"/>
-				<row item = "beacon_bat_volt" label ="Battery Voltage" units="V"/>	
+				<row item = "beacon_bat_volt" label ="Battery Voltage" units="V"/>
 				<row item = "beacon_bat_curr" label ="Battery Current" units="A"/>
-				<row item = "beacon_cip_volt" label ="CIP Voltage" units="V"/>	
+				<row item = "beacon_cip_volt" label ="CIP Voltage" units="V"/>
 				<row item = "beacon_cip_curr" label ="CIP Current" units="A"/>
-				<row item = "beacon_daxss_volt" label ="DAXSS Voltage" units="V"/>	
+				<row item = "beacon_daxss_volt" label ="DAXSS Voltage" units="V"/>
 				<row item = "beacon_daxss_curr" label ="DAXSS Current" units="A"/>
-				<row item = "beacon_adcs_volt" label ="ADCS Voltage" units="V"/>	
+				<row item = "beacon_adcs_volt" label ="ADCS Voltage" units="V"/>
 				<row item = "beacon_adcs_curr" label ="ADCS Current" units="A"/>
-				<row item = "beacon_sband_volt" label ="Sband Voltage" units="V"/>	
+				<row item = "beacon_sband_volt" label ="Sband Voltage" units="V"/>
 				<row item = "beacon_sband_curr" label ="Sband Current" units="A"/>
-				<row item = "beacon_uhf_volt" label ="UHF Voltage" units="V"/>	
+				<row item = "beacon_uhf_volt" label ="UHF Voltage" units="V"/>
 				<row item = "beacon_uhf_curr" label ="UHF Current" units="A"/>
-				<row item = "beacon_cdh_volt" label ="CDH Voltage" units="V"/>	
+				<row item = "beacon_cdh_volt" label ="CDH Voltage" units="V"/>
 				<row item = "beacon_cdh_curr" label ="CDH Current" units="A"/>
 				<row item = "beacon_gps_12v_1_volt" label ="GPS 1" units="V"/>
 				<row item = "beacon_gps_12v_1_curr" label ="GPS 1" units="A"/>"/>
@@ -70,19 +71,19 @@
 				<row item = "beacon_heater_volt" label ="Heater Voltage" units="V"/>
 				<row item = "beacon_heater_curr" label ="Heater Current" units="A"/>
 
-				
+
 			</section>
 
 		</column>
 
 		<column>
         	<section name="ADCS">
-        		<row item = "beacon_adcs_mode" label ="ADCS Mode"/>
-        		<row item = "beacon_adcs_sun_pt_state" label ="ADCS Sun Point State"/>
-        		<row item = "beacon_adcs_wheel_temp1" label ="Wheel 1 Temp" units="C"/>
-        		<row item = "beacon_adcs_wheel_temp2" label ="Wheel 2 Temp" units="C"/>
-        		<row item = "beacon_adcs_wheel_temp3" label ="Wheel 3 Temp" units="C"/>
-        		<row item = "beacon_adcs_star_temp" label ="Star Tracker Temp" units="C"/>
+        <row item = "beacon_adcs_mode" label ="ADCS Mode"/>
+        <row item = "beacon_adcs_sun_pt_state" label ="ADCS Sun Point State"/>
+        <row item = "beacon_adcs_wheel_temp1" label ="Wheel 1 Temp" units="C"/>
+        <row item = "beacon_adcs_wheel_temp2" label ="Wheel 2 Temp" units="C"/>
+        <row item = "beacon_adcs_wheel_temp3" label ="Wheel 3 Temp" units="C"/>
+        <row item = "beacon_adcs_star_temp" label ="Star Tracker Temp" units="C"/>
 				<row item = "beacon_adcs_sun_vec1" label ="Sun Vector 1"/>
 				<row item = "beacon_adcs_sun_vec2" label ="Sun Vector 2"/>
 				<row item = "beacon_adcs_sun_vec3" label ="Sun Vector 3"/>
@@ -92,15 +93,13 @@
 				<row item = "beacon_adcs_body_rt1" label ="Body Frame Rate 1" />
 				<row item = "beacon_adcs_body_rt2" label ="Body Frame Rate 2" />
 				<row item = "beacon_adcs_body_rt3" label ="Body Frame Rate 3" />
-				<row item = "beacon_adcs_body_quat1" label ="Body Quat 1" />
+				<!--<row item = "beacon_adcs_body_quat1" label ="Body Quat 1" />
 				<row item = "beacon_adcs_body_quat2" label ="Body Quat 2" />
 				<row item = "beacon_adcs_body_quat3" label ="Body Quat 3" />
-				<row item = "beacon_adcs_body_quat4" label ="Body Quat 4" />
-
+				<row item = "beacon_adcs_body_quat4" label ="Body Quat 4" />-->
 			</section>
 
 	</column>
-	
+
     </page>
 </pageDef>
-
