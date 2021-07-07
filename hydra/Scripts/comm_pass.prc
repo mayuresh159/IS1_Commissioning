@@ -40,7 +40,7 @@ if beacon_pwr_status_sband == 0
 	    set cmdTry = cmdTry + 1
 	    wait 3500
 	endwhile
-	set cmdSucceed = cmdSucceed + 1 
+	set cmdSucceed = cmdSucceed + 1
 endif
 
 ; Route SBAND and UHF HK for 3-sec rate
@@ -65,14 +65,14 @@ while beacon_cmd_succ_count < $cmdCnt
     set cmdTry = cmdTry + 1
     wait 3500
 endwhile
-set cmdSucceed = cmdSucceed + 1 
+set cmdSucceed = cmdSucceed + 1
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
     cmd_set_pkt_rate apid 52 rate 1 stream SD
     set cmdTry = cmdTry + 1
     wait 3500
 endwhile
-set cmdSucceed = cmdSucceed + 1 
+set cmdSucceed = cmdSucceed + 1
 
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
@@ -90,6 +90,7 @@ while beacon_cmd_succ_count < $cmdCnt
 endwhile
 set cmdSucceed = cmdSucceed + 1
 
+; Change names to match for IS-1
 set sdpbkMisc = sd_partition_pbk0
 set sdpbkSciC = sd_partition_pbk1
 set sdpbkSciD = sd_partition_pbk2
@@ -116,7 +117,7 @@ if $sdWriteMisc != $sdpbkMisc
         set cmdTry = cmdTry + 1
         wait 3500
     endwhile
-    set cmdSucceed = cmdSucceed + 1 
+    set cmdSucceed = cmdSucceed + 1
 endif
 tlmwait sd_partition_pbk0 >= $sdWriteMisc - 1 ? 300000
 echo Verify MISC playback finished over UHF
@@ -134,7 +135,7 @@ if $sdWriteSciC != $sdpbkSciC
         set cmdTry = cmdTry + 1
         wait 3500
     endwhile
-    set cmdSucceed = cmdSucceed + 1 
+    set cmdSucceed = cmdSucceed + 1
 endif
 tlmwait sd_partition_pbk1 >= $sdWriteSciC - 1 ? 300000
 echo Verify SCI-C playback finished over UHF
@@ -152,7 +153,7 @@ if $sdWriteSciD != $sdpbkSciD
         set cmdTry = cmdTry + 1
         wait 3500
     endwhile
-    set cmdSucceed = cmdSucceed + 1 
+    set cmdSucceed = cmdSucceed + 1
 endif
 tlmwait sd_partition_pbk2 >= $sdWriteSciD - 1 ? 300000
 echo Verify SCI-D playback finished over UHF
@@ -170,7 +171,7 @@ if $sdWriteADCS != $sdpbkADCS
         set cmdTry = cmdTry + 1
         wait 3500
     endwhile
-    set cmdSucceed = cmdSucceed + 1 
+    set cmdSucceed = cmdSucceed + 1
 endif
 tlmwait sd_partition_pbk3 >= $sdWriteADCS - 1 ? 300000
 echo Verify ADCS playback finished over UHF
@@ -188,7 +189,7 @@ if $sdWriteBeacon != $sdpbkBeacon
         set cmdTry = cmdTry + 1
         wait 3500
     endwhile
-    set cmdSucceed = cmdSucceed + 1 
+    set cmdSucceed = cmdSucceed + 1
 endif
 tlmwait sd_partition_pbk4 >= $sdWriteBeacon - 1 ? 300000
 echo Verify Beacon playback finished over UHF
@@ -207,7 +208,7 @@ if $sdWriteLog != $sdpbkLog
         set cmdTry = cmdTry + 1
         wait 3500
     endwhile
-    set cmdSucceed = cmdSucceed + 1 
+    set cmdSucceed = cmdSucceed + 1
 endif
 tlmwait sd_partition_pbk5 >= $sdWriteLog - 1 ? 300000
 echo Verify Log playback finished over UHF
@@ -221,7 +222,7 @@ set cmdCnt = beacon_cmd_succ_count + 1
         set cmdTry = cmdTry + 1
         wait 3500
     endwhile
-    set cmdSucceed = cmdSucceed + 1 
+    set cmdSucceed = cmdSucceed + 1
 
     verify sband_status == 3
     verify sband_control == 130
@@ -237,7 +238,7 @@ set cmdCnt = beacon_cmd_succ_count + 1
         set cmdTry = cmdTry + 1
         wait 3500
     endwhile
-    set cmdSucceed = cmdSucceed + 1 
+    set cmdSucceed = cmdSucceed + 1
 endif
 tlmwait sd_partition_pbk0 >= $sdWriteMisc - 1 ? 300000
 echo Verify MISC playback finished over UHF
@@ -250,7 +251,7 @@ if $sdWriteSciC != $sdpbkSciC
         set cmdTry = cmdTry + 1
         wait 3500
     endwhile
-    set cmdSucceed = cmdSucceed + 1 
+    set cmdSucceed = cmdSucceed + 1
 
     verify sband_status == 3
     verify sband_control == 130
@@ -266,7 +267,7 @@ if $sdWriteSciC != $sdpbkSciC
         set cmdTry = cmdTry + 1
         wait 3500
     endwhile
-    set cmdSucceed = cmdSucceed + 1 
+    set cmdSucceed = cmdSucceed + 1
 endif
 tlmwait sd_partition_pbk1 >= $sdWriteSciC - 1 ? 300000
 echo Verify SCI-C playback finished over UHF
@@ -279,7 +280,7 @@ if $sdWriteSciD != $sdpbkSciD
         set cmdTry = cmdTry + 1
         wait 3500
     endwhile
-    set cmdSucceed = cmdSucceed + 1 
+    set cmdSucceed = cmdSucceed + 1
 
     verify sband_status == 3
     verify sband_control == 130
@@ -295,7 +296,7 @@ if $sdWriteSciD != $sdpbkSciD
         set cmdTry = cmdTry + 1
         wait 3500
     endwhile
-    set cmdSucceed = cmdSucceed + 1 
+    set cmdSucceed = cmdSucceed + 1
 endif
 tlmwait sd_partition_pbk2 >= $sdWriteSciD - 1 ? 300000
 echo Verify SCI-D playback finished over UHF
@@ -308,7 +309,7 @@ if $sdWriteADCS != $sdpbkADCS
         set cmdTry = cmdTry + 1
         wait 3500
     endwhile
-    set cmdSucceed = cmdSucceed + 1 
+    set cmdSucceed = cmdSucceed + 1
 
     verify sband_status == 3
     verify sband_control == 130
@@ -324,7 +325,7 @@ if $sdWriteADCS != $sdpbkADCS
         set cmdTry = cmdTry + 1
         wait 3500
     endwhile
-    set cmdSucceed = cmdSucceed + 1 
+    set cmdSucceed = cmdSucceed + 1
 endif
 tlmwait sd_partition_pbk3 >= $sdWriteADCS - 1 ? 300000
 echo Verify ADCS playback finished over UHF
@@ -337,7 +338,7 @@ if $sdWriteBeacon != $sdpbkBeacon
         set cmdTry = cmdTry + 1
         wait 3500
     endwhile
-    set cmdSucceed = cmdSucceed + 1 
+    set cmdSucceed = cmdSucceed + 1
 
     verify sband_status == 3
     verify sband_control == 130
@@ -353,7 +354,7 @@ if $sdWriteBeacon != $sdpbkBeacon
         set cmdTry = cmdTry + 1
         wait 3500
     endwhile
-    set cmdSucceed = cmdSucceed + 1 
+    set cmdSucceed = cmdSucceed + 1
 endif
 tlmwait sd_partition_pbk4 >= $sdWriteBeacon - 1 ? 300000
 echo Verify Beacon playback finished over UHF
@@ -366,7 +367,7 @@ if $sdWriteLog != $sdpbkLog
         set cmdTry = cmdTry + 1
         wait 3500
     endwhile
-    set cmdSucceed = cmdSucceed + 1 
+    set cmdSucceed = cmdSucceed + 1
 
     verify sband_status == 3
     verify sband_control == 130
@@ -383,7 +384,7 @@ if $sdWriteLog != $sdpbkLog
         set cmdTry = cmdTry + 1
         wait 3500
     endwhile
-    set cmdSucceed = cmdSucceed + 1 
+    set cmdSucceed = cmdSucceed + 1
 endif
 tlmwait sd_partition_pbk5 >= $sdWriteLog - 1 ? 300000
 echo Verify Log playback finished over UHF
@@ -395,7 +396,7 @@ while beacon_cmd_succ_count < $cmdCnt
     set cmdTry = cmdTry + 1
     wait 3500
 endwhile
-set cmdSucceed = cmdSucceed + 1 
+set cmdSucceed = cmdSucceed + 1
 
 ClOSEOUT:
 
@@ -405,7 +406,7 @@ while beacon_cmd_succ_count < $cmdCnt
     set cmdTry = cmdTry + 1
     wait 3500
 endwhile
-set cmdSucceed = cmdSucceed + 1 
+set cmdSucceed = cmdSucceed + 1
 
 FINISH:
 set cmdCnt = beacon_cmd_succ_count + 1
@@ -422,7 +423,7 @@ while beacon_cmd_succ_count < $cmdCnt
     set cmdTry = cmdTry + 1
     wait 3500
 endwhile
-set cmdSucceed = cmdSucceed + 1 
+set cmdSucceed = cmdSucceed + 1
 
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
@@ -446,7 +447,7 @@ while beacon_cmd_succ_count < $cmdCnt
     set cmdTry = cmdTry + 1
     wait 3500
 endwhile
-set cmdSucceed = cmdSucceed + 1 
+set cmdSucceed = cmdSucceed + 1
 
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt

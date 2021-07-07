@@ -1,0 +1,9 @@
+<hydraDef>
+  <itemTime name="systemTimemSec" type="dn32" value="0" method="msSinceMidnight" epoch="Jul 1 2021 0:0:0"/>
+  <itemTime name="systemTimeSec" type="dn32" value="0" method="secSinceEpoch" epoch="Jul 1 2021 0:0:0"/>
+  <itemTime name="systemTimeDay" type="dn32" value="0" method="daySinceEpoch" epoch="Jul 1 2021 0:0:0"/>
+
+  <!--<itemDerived name="sysTimeSecDer" type="dn32" fact1="systemTimemSec" fact2="1000" opcode="/"/>
+  <itemDerived name="sysTimeHourDer" type="dn32" fact1="sysTimeSecDer" fact2="3600" opcode="/"/>-->
+
+</hydraDef>

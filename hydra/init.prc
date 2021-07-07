@@ -17,7 +17,5 @@ start setup_for_uhf_cmd
 GOTO END
 
 END:
-show_page Beacon_Detailed
-pause
-start quick_start_bench
+load_dc default.dc
 ; end of script

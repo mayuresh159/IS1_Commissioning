@@ -25,6 +25,7 @@
     <include>Config/daxss_types.xml</include>
     <include>Config/cip_cmd_details.xml</include>
 	  <include>Config/beacon_tlm.xml</include>
+    <include>Config/time.xml</include>
 
     <testing>
         <archiveDirectory path="../test"/>
