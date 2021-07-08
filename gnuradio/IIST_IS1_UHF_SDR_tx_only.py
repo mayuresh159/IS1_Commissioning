@@ -34,6 +34,7 @@ import kiss
 import sip
 import sys
 import time
+import tr
 from gnuradio import qtgui
 
 
@@ -80,6 +81,7 @@ class IIST_IS1_UHF_SDR_tx_only(gr.top_block, Qt.QWidget):
         self.samps_per_symb = samps_per_symb = samp_rate/baud
         self.interp = interp = 25
         self.decim = decim = 24
+        self.corr_tx_freq = corr_tx_freq = 437.5e6
         self.bb_gain = bb_gain = .95
         self.alpha = alpha = .5
 
@@ -119,6 +121,7 @@ class IIST_IS1_UHF_SDR_tx_only(gr.top_block, Qt.QWidget):
         self.uhd_usrp_sink_0_0.set_center_freq(uhd.tune_request(tx_freq+tx_correct, tx_offset), 0)
         self.uhd_usrp_sink_0_0.set_gain(tx_gain, 0)
         self.uhd_usrp_sink_0_0.set_antenna('TX/RX', 0)
+        self.tr_tr_switch_cc_0 = tr.tr_switch_cc(self.get_corr_tx_freq)
         self.rational_resampler_xxx_0 = filter.rational_resampler_ccc(
                 interpolation=interp,
                 decimation=decim,
@@ -198,6 +201,7 @@ class IIST_IS1_UHF_SDR_tx_only(gr.top_block, Qt.QWidget):
         self.msg_connect((self.blocks_socket_pdu_0_2, 'pdus'), (self.blocks_message_debug_0, 'print_pdu'))
         self.msg_connect((self.blocks_socket_pdu_0_2, 'pdus'), (self.kiss_hdlc_framer_0, 'in'))
         self.msg_connect((self.kiss_hdlc_framer_0, 'out'), (self.blocks_pdu_to_tagged_stream_0_0, 'pdus'))
+        self.msg_connect((self.tr_tr_switch_cc_0, 'tx_freq'), (self.uhd_usrp_sink_0_0, 'command'))
         self.connect((self.blocks_multiply_const_vxx_0_0, 0), (self.rational_resampler_xxx_0, 0))
         self.connect((self.blocks_pack_k_bits_bb_0, 0), (self.digital_gfsk_mod_0, 0))
         self.connect((self.blocks_pdu_to_tagged_stream_0_0, 0), (self.kiss_nrzi_encode_0, 0))
@@ -206,7 +210,8 @@ class IIST_IS1_UHF_SDR_tx_only(gr.top_block, Qt.QWidget):
         self.connect((self.digital_scrambler_bb_0, 0), (self.blocks_pack_k_bits_bb_0, 0))
         self.connect((self.kiss_nrzi_encode_0, 0), (self.digital_scrambler_bb_0, 0))
         self.connect((self.rational_resampler_xxx_0, 0), (self.qtgui_freq_sink_x_1, 0))
-        self.connect((self.rational_resampler_xxx_0, 0), (self.uhd_usrp_sink_0_0, 0))
+        self.connect((self.rational_resampler_xxx_0, 0), (self.tr_tr_switch_cc_0, 0))
+        self.connect((self.tr_tr_switch_cc_0, 0), (self.uhd_usrp_sink_0_0, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "IIST_IS1_UHF_SDR_tx_only")
@@ -276,6 +281,12 @@ class IIST_IS1_UHF_SDR_tx_only(gr.top_block, Qt.QWidget):
     def set_decim(self, decim):
         self.decim = decim
         self.qtgui_freq_sink_x_1.set_frequency_range(0, self.samp_rate/self.decim * self.interp)
+
+    def get_corr_tx_freq(self):
+        return self.corr_tx_freq
+
+    def set_corr_tx_freq(self, corr_tx_freq):
+        self.corr_tx_freq = corr_tx_freq
 
     def get_bb_gain(self):
         return self.bb_gain

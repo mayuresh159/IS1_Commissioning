@@ -159,7 +159,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1480, 204)</value>
+      <value>(1472, 220)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -204,6 +204,33 @@
     <param>
       <key>widget</key>
       <value>counter_slider</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1872, 436)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>corr_tx_freq</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>437.5e6</value>
     </param>
   </block>
   <block>
@@ -272,7 +299,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(80, 260)</value>
+      <value>(1144, 188)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -330,7 +357,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1984, 92)</value>
+      <value>(2200, 164)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -393,7 +420,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1864, 92)</value>
+      <value>(2080, 164)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -977,7 +1004,7 @@ Line Encoding</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1872, 220)</value>
+      <value>(1848, 252)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -1288,6 +1315,49 @@ Line Encoding</value>
     </param>
   </block>
   <block>
+    <key>tr_tr_switch_cc</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1848, 360)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>tr_tr_switch_cc_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>corr_tx_freq</key>
+      <value>corr_tx_freq</value>
+    </param>
+  </block>
+  <block>
     <key>parameter</key>
     <param>
       <key>alias</key>
@@ -1303,7 +1373,7 @@ Line Encoding</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1880, 4)</value>
+      <value>(2096, 76)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1350,7 +1420,7 @@ Line Encoding</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1984, 4)</value>
+      <value>(2200, 76)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2054,7 +2124,7 @@ One per uplink packet</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1872, 316)</value>
+      <value>(2096, 300)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2273,8 +2343,20 @@ One per uplink packet</value>
   </connection>
   <connection>
     <source_block_id>rational_resampler_xxx_0</source_block_id>
+    <sink_block_id>tr_tr_switch_cc_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>tr_tr_switch_cc_0</source_block_id>
     <sink_block_id>uhd_usrp_sink_0_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>tr_tr_switch_cc_0</source_block_id>
+    <sink_block_id>uhd_usrp_sink_0_0</sink_block_id>
+    <source_key>tx_freq</source_key>
+    <sink_key>command</sink_key>
   </connection>
 </flow_graph>

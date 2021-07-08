@@ -46,7 +46,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>IIST_IS1_UHF_SDR_v1</value>
+      <value>IIST_IS1_UHF_SDR_rx_only</value>
     </param>
     <param>
       <key>max_nouts</key>
@@ -878,7 +878,7 @@ recording required</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>file</key>
@@ -1074,7 +1074,7 @@ recording required</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
