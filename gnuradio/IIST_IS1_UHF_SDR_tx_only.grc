@@ -412,7 +412,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>10</value>
+      <value>50</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -448,7 +448,7 @@
     </param>
     <param>
       <key>start</key>
-      <value>0</value>
+      <value>40</value>
     </param>
     <param>
       <key>step</key>
@@ -456,7 +456,7 @@
     </param>
     <param>
       <key>stop</key>
-      <value>86</value>
+      <value>60</value>
     </param>
     <param>
       <key>rangeType</key>

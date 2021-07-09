@@ -76,7 +76,7 @@ class IIST_IS1_UHF_SDR_tx_only(gr.top_block, Qt.QWidget):
         ##################################################
         self.samp_rate = samp_rate = 240000
         self.baud = baud = 9600
-        self.tx_gain = tx_gain = 10
+        self.tx_gain = tx_gain = 50
         self.tx_correct = tx_correct = 0
         self.samps_per_symb = samps_per_symb = samp_rate/baud
         self.interp = interp = 25
@@ -88,7 +88,7 @@ class IIST_IS1_UHF_SDR_tx_only(gr.top_block, Qt.QWidget):
         ##################################################
         # Blocks
         ##################################################
-        self._tx_gain_range = Range(0, 86, 1, 10, 200)
+        self._tx_gain_range = Range(40, 60, 1, 50, 200)
         self._tx_gain_win = RangeWidget(self._tx_gain_range, self.set_tx_gain, 'TX Gain', "counter_slider", float)
         self.top_grid_layout.addWidget(self._tx_gain_win, 7, 0, 1, 4)
         for r in range(7, 8):
