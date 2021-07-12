@@ -22,8 +22,8 @@
 
     <frameDef name="ax25CmdHeader">
         <field>
-            <itemDef name="ax25CmdHeader_Source" type="dn8" num="7" value="0x92 0xA6 0x5A 0x62 0x40 0x40 0x60"/>
-            <itemDef name="ax25CmdHeader_Dest" type="dn8" num="7" value="0x84 0x86 0xA8 0x40 0x40 0x40 0xE1"/>
+            <itemDef name="ax25CmdHeader_Dest" type="dn8" num="7" value="0x92 0xA6 0x5A 0x62 0x40 0x40 0x60"/>
+            <itemDef name="ax25CmdHeader_Source" type="dn8" num="7" value="0x84 0x86 0xA8 0x40 0x40 0x40 0xE1"/>
             <itemDef name="ax25CmdHeader_Ctrl" type="dn8" value="0x03"/>
             <itemDef name="ax25CmdHeader_PID" type="dn8" value="0xF0"/>
             <placeholder/>

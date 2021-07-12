@@ -2,6 +2,7 @@
 
     <scriptDir name="Scripts"/>
     <scriptDir name="Scripts/Commissioning"/>
+    <scriptDir name="Scripts/UHF"/>
 
     <import>../common/hydra</import>
 
