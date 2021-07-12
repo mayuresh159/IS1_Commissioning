@@ -1,0 +1,58 @@
+<hydraDef>
+
+	<monitorRange name="bat_volt_mon_in"   item="beacon_bat_volt"    color="green"  enabled="true"  bound="inside"  low="7.6"  high="8.2"/>
+	<monitorRange name="bat_volt_mon_out"   item="beacon_bat_volt"    color="red"  enabled="true"  bound="outside"  low="7.6"  high="8.2"/>
+
+	<!-- From CDH tlm check -->
+	<monitorRange name="cdh_volt_mon_in"   item="beacon_cdh_volt"    color="green"  enabled="true"  bound="inside"  low="3.2"  high="3.5"/>
+	<monitorRange name="cdh_volt_mon_out"   item="beacon_cdh_volt"    color="red"  enabled="true"  bound="outside"  low="3.2"  high="3.5"/>
+	<monitorRange name="cdh_curr_mon_in"   item="beacon_cdh_curr"    color="green"  enabled="true"  bound="inside"  low="0.22"  high="0.28"/>
+	<monitorRange name="cdh_curr_mon_out"   item="beacon_cdh_curr"    color="red"  enabled="true"  bound="outside"  low="0.22"  high="0.28"/>
+	<monitorRange name="cdh_temp_mon_in"   item="beacon_obc_temp"    color="green"  enabled="true"  bound="inside"  low="15"  high="35"/>
+	<monitorRange name="cdh_temp_mon_out"   item="beacon_obc_temp"    color="red"  enabled="true"  bound="outside"  low="15"  high="35"/>
+	<monitorRange name="int_temp_mon_in"   item="beacon_int_temp"    color="green"  enabled="true"  bound="inside"  low="15"  high="35"/>
+	<monitorRange name="int_temp_mon_out"   item="beacon_int_temp"    color="red"  enabled="true"  bound="outside"  low="15"  high="35"/>
+	<!-- From EPS tlm check --> 
+	<monitorRange name="eps_temp_mon_in"   item="beacon_eps_temp"    color="green"  enabled="true"  bound="inside"  low="15"  high="35"/>
+	<monitorRange name="eps_temp_mon_out"   item="beacon_eps_temp"    color="red"  enabled="true"  bound="outside"  low="15"  high="35"/>
+	<!-- From COMM tlm check -->
+	<monitorRange name="uhf_volt_mon_in"   item="beacon_uhf_volt"    color="green"  enabled="true"  bound="inside"  low="5.75"  high="6.25"/>
+	<monitorRange name="uhf_volt_mon_out"   item="beacon_uhf_volt"    color="red"  enabled="true"  bound="outside"  low="5.75"  high="6.25"/>
+	<monitorRange name="uhf_curr_mon_in"   item="beacon_uhf_curr"    color="green"  enabled="true"  bound="inside"  low="0.03"  high="0.05"/>
+	<monitorRange name="uhf_curr_mon_out"   item="beacon_uhf_curr"    color="red"  enabled="true"  bound="outside"  low="0.03"  high="0.05"/>
+	<monitorRange name="uhf_temp_mon_in"   item="beacon_uhf_temp"    color="green"  enabled="true"  bound="inside"  low="15"  high="35"/>
+	<monitorRange name="uhf_temp_mon_out"   item="beacon_uhf_temp"    color="red"  enabled="true"  bound="outside"  low="15"  high="35"/>
+	<monitorRange name="sband_volt_mon_in"   item="beacon_sband_volt"    color="green"  enabled="true"  bound="inside"  low="5.75"  high="6.25"/>
+	<monitorRange name="sband_volt_mon_out"   item="beacon_sband_volt"    color="red"  enabled="true"  bound="outside"  low="5.75"  high="6.25"/>
+	<monitorRange name="sband_curr_mon_in"   item="beacon_sband_curr"    color="green"  enabled="true"  bound="inside"  low="0.05"  high="0.7"/>
+	<monitorRange name="sband_curr_mon_out"   item="beacon_sband_curr"    color="red"  enabled="true"  bound="outside"  low="0.05"  high="0.7"/>
+	<monitorRange name="sband_temp_mon_in"   item="beacon_sband_top_temp"    color="green"  enabled="true"  bound="inside"  low="15"  high="35"/>
+	<monitorRange name="sband_temp_mon_out"   item="beacon_sband_top_temp"    color="red"  enabled="true"  bound="outside"  low="15"  high="35"/>
+	<!-- From ADCS tlm check -->
+	<monitorRange name="adcs_star_temp_mon_in"   item="beacon_adcs_star_temp"    color="green"  enabled="true"  bound="inside"  low="15"  high="35"/>
+	<monitorRange name="adcs_star_temp_mon_out"   item="beacon_adcs_star_temp"    color="red"  enabled="true"  bound="outside"  low="15"  high="35"/>
+	<monitorRange name="adcs_wheel1_temp_mon_in"   item="beacon_adcs_wheel_temp1"    color="green"  enabled="true"  bound="inside"  low="15"  high="35"/>
+	<monitorRange name="adcs_wheel1_temp_mon_out"   item="beacon_adcs_wheel_temp1"    color="red"  enabled="true"  bound="outside"  low="15"  high="35"/>
+	<monitorRange name="adcs_wheel2_temp_mon_in"   item="beacon_adcs_wheel_temp2"    color="green"  enabled="true"  bound="inside"  low="15"  high="35"/>
+	<monitorRange name="adcs_wheel2_temp_mon_out"   item="beacon_adcs_wheel_temp2"    color="red"  enabled="true"  bound="outside"  low="15"  high="35"/>
+	<monitorRange name="adcs_wheel3_temp_mon_in"   item="beacon_adcs_wheel_temp3"    color="green"  enabled="true"  bound="inside"  low="15"  high="35"/>
+	<monitorRange name="adcs_wheel3_temp_mon_out"   item="beacon_adcs_wheel_temp3"    color="red"  enabled="true"  bound="outside"  low="15"  high="35"/>
+	<monitorRange name="adcs_wheel1_speed_mon_in"   item="beacon_adcs_wheel_sp1"    color="green"  enabled="true"  bound="inside"  low="-1000"  high="1000"/>
+	<monitorRange name="adcs_wheel1_speed_mon_out"   item="beacon_adcs_wheel_sp1"    color="red"  enabled="true"  bound="outside"  low="-1000"  high="1000"/>
+	<monitorRange name="adcs_wheel2_speed_mon_in"   item="beacon_adcs_wheel_sp2"    color="green"  enabled="true"  bound="inside"  low="-1000"  high="1000"/>
+	<monitorRange name="adcs_wheel2_speed_mon_out"   item="beacon_adcs_wheel_sp2"    color="red"  enabled="true"  bound="outside"  low="-1000"  high="1000"/>
+	<monitorRange name="adcs_wheel3_speed_mon_in"   item="beacon_adcs_wheel_sp3"    color="green"  enabled="true"  bound="inside"  low="-1000"  high="1000"/>
+	<monitorRange name="adcs_wheel3_speed_mon_out"   item="beacon_adcs_wheel_sp3"    color="red"  enabled="true"  bound="outside"  low="-1000"  high="1000"/>
+	<monitorRange name="adcs_body_rt1_mon_in"   item="beacon_adcs_body_rt1"    color="green"  enabled="true"  bound="inside"  low="-5"  high="5"/>
+	<monitorRange name="adcs_body_rt1_mon_out"   item="beacon_adcs_body_rt1"    color="red"  enabled="true"  bound="outside"  low="-5"  high="5"/>
+	<monitorRange name="adcs_body_rt2_mon_in"   item="beacon_adcs_body_rt2"    color="green"  enabled="true"  bound="inside"  low="-5"  high="5"/>
+	<monitorRange name="adcs_body_rt2_mon_out"   item="beacon_adcs_body_rt2"    color="red"  enabled="true"  bound="outside"  low="-5"  high="5"/>
+	<monitorRange name="adcs_body_rt3_mon_in"   item="beacon_adcs_body_rt3"    color="green"  enabled="true"  bound="inside"  low="-5"  high="5"/>
+	<monitorRange name="adcs_body_rt3_mon_out"   item="beacon_adcs_body_rt3"    color="red"  enabled="true"  bound="outside"  low="-5"  high="5"/>
+
+	<!-- From Beacon detailed page -->
+	<monitorRange name="heater_volt_mon_in"   item="beacon_heater_volt"    color="red"  enabled="true"  bound="inside"  low="1"  high="8"/>
+	<monitorRange name="heater_volt_mon_out"   item="beacon_heater_volt"    color="green"  enabled="true"  bound="outside"  low="1"  high="9"/>
+
+
+</hydraDef>

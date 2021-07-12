@@ -1,12 +1,11 @@
 <pageDef>
 
 	<size width="900" height="700"/>
-	<position x="750" y="0"/>
+	<text color="BLUE"/>
 	<background color="WHITE"/>
-	<text color="BLACK"/>
 	<font name="Times_New_Roman" size="10"/>
 
-    <page title="IS-1 Beacon">
+    <page title="IS-1 Beacon Telemetry">
         <column>
 
         	<section name="Spacecraft State">

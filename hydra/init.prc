@@ -17,5 +17,5 @@ start setup_for_uhf_cmd
 GOTO END
 
 END:
-load_dc default.dc
+show_page Beacon_Detailed
 ; end of script
