@@ -44,7 +44,8 @@
 
     <decoderDef name="ax25Decoder" updateDB="enabled" archive="enabled">
         <description text="Decomposes AX25 header and sends packet off to be stripped"/>
-        <frame name="ax25TlmHdr"/>
+        <!--<frame name="ax25TlmHdr"/>-->
+        <outputDevice name="uhfRawFile" enabled="true"/>
         <outputDevice name="ax25StripDecoder"/>
     </decoderDef>
 
@@ -52,6 +53,8 @@
                   headerSize="22" offset="1" lengthField="20:0:dn16b" autoStart="true">
         <description text="Reads AX25 packets from radio simulation"/>
     </readerHeader>
+    <!-- <readerFixed name="uhfReader" hw="uhfSimTlm" decoder="ax25Decoder" size="272" autoStart="true">
+    </readerFixed> -->
 
     <!-- Radio telecommand path goes  cmdDecoder->ax25Wrapper->uhfSimCmd  -->
     <decoderDef name="ax25Wrapper">
