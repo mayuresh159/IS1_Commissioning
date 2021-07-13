@@ -3,47 +3,42 @@
     <hwServer name="uhfSimTlm" port="50001" mode="read"/>
     <hwServer name="uhfSimCmd" port="50000" mode="write"/>
 
-    <hwOutFile name="uhfDebugFile" prefix="uhf_dbg"/>
+    <!-- <hwOutFile name="uhfDebugFile" prefix="uhf_dbg"/> -->
     <hwOutFile name="uhfRawFile" prefix="uhf"/>
 
-    <decoderDef name="debugDecoder">
+    <!-- <decoderDef name="debugDecoder">
         <outputDevice name="uhfDebugFile"/>
     </decoderDef>
 
-    <readerFixed name="uhfDebugReader" hw="uhfSimTlm" decoder="debugDecoder" size="1" autoStart="false"/>
+    <readerFixed name="uhfDebugReader" hw="uhfSimTlm" decoder="debugDecoder" size="1" autoStart="false"/> -->
 
     <frameDef name="ax25TlmHdr">
         <field>
-            <!-- <itemDef name="ax25TlmStart" type="dn8"/> -->
             <itemDef name="ax25TlmAddr" type="dn8" num="14"/>
             <itemDef name="ax25TlmControl" type="dn8"/>
             <itemDef name="ax25TlmPID" type="dn8"/>
         </field>
     </frameDef>
 
-    <!-- Radio data goes from radio->ax25Decoder->ax25StripDecoder->ccsdsDecoder -->
-
     <frameDef name="ax25CmdHeader">
         <field>
-            <itemDef name="ax25CmdHeader_Source" type="dn8" num="7" value="0x92 0xA6 0x5A 0x62 0x40 0x40 0x60"/>
-            <itemDef name="ax25CmdHeader_Dest" type="dn8" num="7" value="0x84 0x86 0xA8 0x40 0x40 0x40 0xE1"/>
+            <itemDef name="ax25CmdHeader_Dest" type="dn8" num="7" value="0x92 0xA6 0x5A 0x62 0x40 0x40 0x60"/>
+            <itemDef name="ax25CmdHeader_Source" type="dn8" num="7" value="0x84 0x86 0xA8 0x40 0x40 0x40 0xE1"/>
             <itemDef name="ax25CmdHeader_Ctrl" type="dn8" value="0x03"/>
             <itemDef name="ax25CmdHeader_PID" type="dn8" value="0xF0"/>
             <placeholder/>
-            <itemDef name="ax25CmdHeader_CRC" type="dn16b" value="0"/>
+            <!--<itemDef name="ax25CmdHeader_CRC" type="dn16b" value="0"/>-->
         </field>
-
-        <checksum item="ax25CmdHeader_CRC" method="ax25" start="BEGIN" stop="ax25CmdHeader_CRC"
+        <!--<checksum item="ax25CmdHeader_CRC" method="ax25" start="BEGIN" stop="ax25CmdHeader_CRC"
                   width="16" poly="0x1021" seed="0xFF">
-            <!--<table>-->
-
-            <!--</table>-->
-        </checksum>
+        </checksum>-->
     </frameDef>
 
+    <!-- Radio telemetry data goes from radio->uhfReader->ax25Decoder->ax25StripDecoder->ccsdsDecoder -->
     <decoderHdr name="ax25StripDecoder" length="16">
         <description text="Removes AX25 header and leaves CCSDS packet"/>
-        <outBuffer size="512"/>
+        <outBuffer size="2048"/>
+        <outputDevice name="uhfRawFile" enabled="false"/>
         <outputDevice name="ccsdsDecoder"/>
     </decoderHdr>
 
@@ -61,10 +56,9 @@
     <!-- <readerFixed name="uhfReader" hw="uhfSimTlm" decoder="ax25Decoder" size="272" autoStart="true">
     </readerFixed> -->
 
+    <!-- Radio telecommand path goes  cmdDecoder->ax25Wrapper->uhfSimCmd  -->
     <decoderDef name="ax25Wrapper">
-
-        <!--<frameHeader type="dn8" num="16" value="0x92 0xA6 0x5A 0x62 0x40 0x40 0x60 0x84 0x86 0xA8 0x40 0x40 0x40 0xE1 0x03 0xF0"/>-->
-
+        <!-- <frameHeader type="dn8" num="16" value="0x92 0xA6 0x5A 0x62 0x40 0x40 0x60 0x84 0x86 0xA8 0x40 0x40 0x40 0xE1 0x03 0xF0"/> -->
         <outputDevice name="uhfSimCmd"/>
     </decoderDef>
 

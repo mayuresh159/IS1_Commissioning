@@ -18,10 +18,10 @@ echo STARTING Aliveness Test
 echo Power on InspireSat-1 and Press GO
 pause
 
-;Get beacon packet to debug every 3 seconds
+;Get beacon packet to UHF every 3 seconds
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-	cmd_set_pkt_rate apid 1 rate 3 stream 0
+	cmd_set_pkt_rate apid 1 rate 3 stream UHF
 	set cmdTry = cmdTry + 1
 	wait 3500
 endwhile
@@ -35,20 +35,20 @@ set cmdSucceed = cmdSucceed + 1
 
 set cmdTry = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-	cmd_issue_pkt apid 1 stream 0
+	cmd_issue_pkt apid 1 stream UHF
 	set cmdTry = cmdTry + 1
 	wait 3500
 endwhile
 set cmdSucceed = cmdSucceed + 1
 
 CHECKOUT:
-call Scripts/cdh_tlm_check
+call Scripts/UHF/uhf_cdh_tlm_check
 
-call Scripts/eps_tlm_check
+call Scripts/UHF/uhf_eps_tlm_check
 
-call Scripts/comm_tlm_check
+call Scripts/UHF/uhf_comm_tlm_check
 
-call Scripts/adcs_tlm_check
+call Scripts/UHF/uhf_adcs_tlm_check
 
 ;At first power on at IIST, will the satellite be in Safe?
 ;If not for the first aliveness test:
@@ -67,6 +67,15 @@ call Scripts/adcs_tlm_check
 ;endif
 
 FINISH:
+; Set beacon packet back to original rate at 10 seconds
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+	cmd_set_pkt_rate apid 1 rate 10 stream UHF
+	set cmdTry = cmdTry + 1
+	wait 3500
+endwhile
+set cmdSucceed = cmdSucceed + 1
+
 echo COMPLETED Aliveness Test
 
 print cmdTry

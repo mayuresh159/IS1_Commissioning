@@ -7,6 +7,14 @@ declare cmdSucceedADCS dn16l
 declare launchDelay dn16l
 
 ; Start beacon packet? - Clarified Not required. 
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+	cmd_set_pkt_rate apid 1 rate 3 stream UHF
+	set cmdTry = cmdTry + 1
+	wait 3529
+endwhile
+set cmdSucceed = cmdSucceed + 1
+
 
 ; Set reaction wheels to idling mode
 set cmdCntADCS = beacon_adcs_cmd_acpt + 1
@@ -30,7 +38,7 @@ verify beacon_adcs_wheel_sp3 <= 10
 ; Route mode_hk_packet to debug UART
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 53 rate 3 stream 0
+    cmd_set_pkt_rate apid 53 rate 3 stream UHF
     set cmdTry = cmdTry + 1
     wait 3500
 endwhile
@@ -78,7 +86,7 @@ verify mode_deployables[2] == 1
 ; Disable mode_hk_packet routing
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 53 rate 0 stream 0
+    cmd_set_pkt_rate apid 53 rate 0 stream UHF
     set cmdTry = cmdTry + 1
     wait 3500
 endwhile

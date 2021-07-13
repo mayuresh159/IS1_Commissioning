@@ -1,1 +1,4 @@
 set_dec_header cmdDecoder NONE
+hydra_uhf_cmd_disable
+hydra_uart_cmd_enable
+cmd_sync_enable

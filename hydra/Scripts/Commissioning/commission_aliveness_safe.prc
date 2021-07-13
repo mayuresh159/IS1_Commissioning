@@ -109,10 +109,60 @@ call commission_comm_tlm_check
 call commission_adcs_tlm_check
 
 
-; TODO: Cancel antenna deployment commands put over here
-; Keep a pause first before confirming
+; TODO: Cancel all deployments commands put over here
+; Keep a pause first before confirming 
 pause
 
+; First Route mode_hk_packet to UHF, to verify status of deployments
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+    cmd_set_pkt_rate apid 53 rate 10 stream 1
+    set cmdTry = cmdTry + 1
+    wait 3500
+endwhile
+set cmdSucceed = cmdSucceed + 1
+
+; Stop deployments 
+; Set deploy flag states (PANEL1, PANEL2 and ANTENNA) to 1
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+    cmd_mode_deploy_flag component 0 state 1
+    set cmdTry = cmdTry + 1
+    wait 3529
+endwhile
+set cmdSucceed = cmdSucceed + 1
+
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+    cmd_mode_deploy_flag component 1 state 1
+    set cmdTry = cmdTry + 1
+    wait 3529
+endwhile
+set cmdSucceed = cmdSucceed + 1
+
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+    cmd_mode_deploy_flag component 2 state 1
+    set cmdTry = cmdTry + 1
+    wait 3529
+endwhile
+set cmdSucceed = cmdSucceed + 1
+
+wait 3500
+
+; Verify that the deployable states have been set
+verify mode_deployables[0] == 1
+verify mode_deployables[1] == 1
+verify mode_deployables[2] == 1
+
+; Disable mode_hk_packet routing
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+    cmd_set_pkt_rate apid 53 rate 0 stream 0
+    set cmdTry = cmdTry + 1
+    wait 3500
+endwhile
+set cmdSucceed = cmdSucceed + 1
 
 ; Finish up aliveness test tasks
 FINISH:
