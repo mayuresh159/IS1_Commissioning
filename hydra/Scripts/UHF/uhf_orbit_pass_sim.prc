@@ -384,7 +384,7 @@ if $sdWriteBeacon_2 != $sdpbkBeacon
     set cmdSucceed = cmdSucceed + 1
 endif
 tlmwait sd_partition_pbk4 >= $sdWriteBeacon_2 - 1 ? 300000
-set sdNumPktsBeaconAct = sd_partition_pb4 - $sdpbkBeacon
+set sdNumPktsBeaconAct = sd_partition_pbk4 - $sdpbkBeacon
 echo Verify Beacon playback finished over UHF
 echo Expected packets
 print sdNumPktsBeacon
@@ -410,7 +410,7 @@ if $sdWriteMisc_2 != $sdpbkMisc
     set cmdSucceed = cmdSucceed + 1
 endif
 tlmwait sd_partition_pbk0 >= $sdWriteMisc_2 - 1 ? 700000
-set sdNumPktsMiscAct = sd_partition_pb0 - $sdpbkMisc
+set sdNumPktsMiscAct = sd_partition_pbk0 - $sdpbkMisc
 echo Verify Misc playback finished over UHF
 echo Expected packets
 print sdNumPktsMisc
@@ -435,7 +435,7 @@ if $sdWriteADCS_2 != $sdpbkADCS
     set cmdSucceed = cmdSucceed + 1
 endif
 tlmwait sd_partition_pbk3 >= $sdWriteADCS_2 - 1 ? 300000
-set sdNumPktsADCSAct = sd_partition_pb3 - $sdpbkADCS
+set sdNumPktsADCSAct = sd_partition_pbk3 - $sdpbkADCS
 echo Verify ADCS playback finished over UHF
 echo Expected packets
 print sdNumPktsADCS
@@ -460,7 +460,7 @@ if $sdWriteLog_2 != $sdpbkLog
     set cmdSucceed = cmdSucceed + 1
 endif
 tlmwait sd_partition_pbk5 >= $sdWriteLog_2 - 1 ? 300000
-set sdNumPktsLogAct = sd_partition_pb5 - $sdpbkLog
+set sdNumPktsLogAct = sd_partition_pbk5 - $sdpbkLog
 echo Verify Log playback finished over UHF
 echo Expected packets
 print sdNumPktsLog
