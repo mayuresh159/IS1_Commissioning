@@ -375,12 +375,17 @@ if $sdWriteBeacon_2 != $sdpbkBeacon
     else
         set sdNumPktsBeacon = $sdWriteBeacon_2 - $sdpbkBeacon
     endif
-    set cmdCnt = beacon_cmd_succ_count + 1
-    while beacon_cmd_succ_count < $cmdCnt
-        cmd_sd_playback stream UHF start $sdpbkBeacon num $sdNumPktsBeacon timeout 300 partition 4 decimation 1
-        set cmdTry = cmdTry + 1
-        wait 3500
-    endwhile
+;    set cmdCnt = beacon_cmd_succ_count + 1
+;    while beacon_cmd_succ_count < $cmdCnt
+;        cmd_sd_playback stream UHF start $sdpbkBeacon num $sdNumPktsBeacon timeout 300 partition 4 decimation 1
+;        set cmdTry = cmdTry + 1
+;        wait 3500
+;    endwhile
+
+	 cmd_sd_playback stream UHF start $sdpbkBeacon num $sdNumPktsBeacon timeout 300 partition 4 decimation 1
+	 echo Retry if playback did not start
+	 pause
+
     set cmdSucceed = cmdSucceed + 1
 endif
 tlmwait sd_partition_pbk4 >= $sdWriteBeacon_2 - 1 ? 300000
@@ -402,11 +407,16 @@ if $sdWriteMisc_2 != $sdpbkMisc
         set sdNumPktsMisc = $sdWriteMisc_2 - $sdpbkMisc
     endif
     set cmdCnt = beacon_cmd_succ_count + 1
-    while beacon_cmd_succ_count < $cmdCnt
-        cmd_sd_playback stream UHF start $sdpbkMisc num $sdNumPktsMisc timeout 700 partition 4 decimation 1
-        set cmdTry = cmdTry + 1
-        wait 3500
-    endwhile
+;    while beacon_cmd_succ_count < $cmdCnt
+;        cmd_sd_playback stream UHF start $sdpbkMisc num $sdNumPktsMisc timeout 700 partition 0 decimation 1
+;        set cmdTry = cmdTry + 1
+;        wait 3500
+;    endwhile
+
+	cmd_sd_playback stream UHF start $sdpbkMisc num $sdNumPktsMisc timeout 700 partition 0 decimation 1
+	echo Retry if playback did not start
+	pause
+
     set cmdSucceed = cmdSucceed + 1
 endif
 tlmwait sd_partition_pbk0 >= $sdWriteMisc_2 - 1 ? 700000
@@ -427,11 +437,16 @@ if $sdWriteADCS_2 != $sdpbkADCS
         set sdNumPktsADCS = $sdWriteADCS_2 - $sdpbkADCS
     endif
     set cmdCnt = beacon_cmd_succ_count + 1
-    while beacon_cmd_succ_count < $cmdCnt
-        cmd_sd_playback stream UHF start $sdpbkADCS num $sdNumPktsADCS timeout 300 partition 4 decimation 1
-        set cmdTry = cmdTry + 1
-        wait 3500
-    endwhile
+;    while beacon_cmd_succ_count < $cmdCnt
+;        cmd_sd_playback stream UHF start $sdpbkADCS num $sdNumPktsADCS timeout 300 partition 3 decimation 1
+;        set cmdTry = cmdTry + 1
+;        wait 3500
+;    endwhile
+
+	cmd_sd_playback stream UHF start $sdpbkADCS num $sdNumPktsADCS timeout 300 partition 3 decimation 1
+	echo Retry if playback did not start
+	pause
+
     set cmdSucceed = cmdSucceed + 1
 endif
 tlmwait sd_partition_pbk3 >= $sdWriteADCS_2 - 1 ? 300000
@@ -452,11 +467,16 @@ if $sdWriteLog_2 != $sdpbkLog
         set sdNumPktsLog = $sdWriteLog_2 - $sdpbkLog
     endif
     set cmdCnt = beacon_cmd_succ_count + 1
-    while beacon_cmd_succ_count < $cmdCnt
-        cmd_sd_playback stream UHF start $sdpbkLog num $sdNumPktsLog timeout 300 partition 4 decimation 1
-        set cmdTry = cmdTry + 1
-        wait 3500
-    endwhile
+;    while beacon_cmd_succ_count < $cmdCnt
+;        cmd_sd_playback stream UHF start $sdpbkLog num $sdNumPktsLog timeout 300 partition 5 decimation 1
+;        set cmdTry = cmdTry + 1
+;        wait 3500
+;    endwhile
+
+	cmd_sd_playback stream UHF start $sdpbkLog num $sdNumPktsLog timeout 300 partition 5 decimation 1
+	echo Retry if playback did not start
+	pause
+
     set cmdSucceed = cmdSucceed + 1
 endif
 tlmwait sd_partition_pbk5 >= $sdWriteLog_2 - 1 ? 300000
