@@ -63,7 +63,8 @@ test start name="90minOrbitSim" group="is1_iist_tg"
 
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-	enable_uhf_beacon
+	cmd_noop
+	cmd_set_pkt_rate apid SW_STAT rate 10 stream UHF
 	set cmdTry = cmdTry + 1
 	wait 3500
 endwhile
@@ -88,6 +89,7 @@ TAKE_PTRS:
 ; Start sd_hk packet routing to fetch the current write pointers
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid SD_HK rate 3 stream UHF
 	set cmdTry = cmdTry + 1
 	wait 3500
@@ -120,6 +122,7 @@ ROUTE_PKTS:
 ; Beacon packet to SD card
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid SW_STAT rate 5 stream SD
 	set cmdTry = cmdTry + 1
 	wait 3500
@@ -132,6 +135,7 @@ pause
 ; SD_HK packet to SD card
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid SD_HK rate 5 stream SD
 	set cmdTry = cmdTry + 1
 	wait 3500
@@ -142,6 +146,7 @@ echo SD_Hk packet routed to SD
 ; Mode_HK packet to SD card
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid MODE_HK rate 5 stream SD
 	set cmdTry = cmdTry + 1
 	wait 3500
@@ -152,6 +157,7 @@ echo Mode_Hk packet routed to SD
 ; Tlm_HK packet to SD card
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid TLM_HK rate 5 stream SD
 	set cmdTry = cmdTry + 1
 	wait 3500
@@ -162,6 +168,7 @@ echo Tlm_HK packet routed to SD
 ; Uhf_HK packet to SD card
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid UHF_HK rate 5 stream SD
 	set cmdTry = cmdTry + 1
 	wait 3500
@@ -172,6 +179,7 @@ echo Uhf_HK packet routed to SD
 ; Cmd_HK packet to SD card
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid CMD_HK rate 5 stream SD
 	set cmdTry = cmdTry + 1
 	wait 3500
@@ -182,6 +190,7 @@ echo Cmd_HK packet routed to SD
 ; Ana_HK packet to SD card
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid ANA_HK rate 5 stream SD
 	set cmdTry = cmdTry + 1
 	wait 3500
@@ -192,6 +201,7 @@ echo Ana_HK packet routed to SD
 ; ADCS_HK packet to SD card
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid ADCS_HK rate 5 stream SD
 	set cmdTry = cmdTry + 1
 	wait 3500
@@ -202,6 +212,7 @@ echo ADCS_HK packet routed to SD
 ; ADCS_Analogs packet to SD card
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid ADCS_ANALOGS rate 5 stream SD
 	set cmdTry = cmdTry + 1
 	wait 3500
@@ -217,6 +228,7 @@ START_ORBIT:
 ; Turn off SD_HK on UHF
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid SD_HK rate 0 stream UHF
 	set cmdTry = cmdTry + 1
 	wait 3500
@@ -225,6 +237,7 @@ set cmdSucceed = cmdSucceed + 1
 
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid SW_STAT rate 30 stream UHF
 	set cmdTry = cmdTry + 1
 	wait 3500
@@ -252,6 +265,7 @@ call show_time
 ; Detect beacon and start sd_hk packet routing
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid SW_STAT rate 3 stream UHF
 	set cmdTry = cmdTry + 1
 	wait 3500
@@ -261,6 +275,7 @@ echo Fast Beacon restarted and ground pass started
 
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid SD_HK rate 3 stream UHF
 	set cmdTry = cmdTry + 1
 	wait 3500
@@ -275,6 +290,7 @@ GP_STOP_PKT_ROUTE:
 ; Turn off packet routing to SD card
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid SW_STAT rate 0 stream SD
 	set cmdTry = cmdTry + 1
 	wait 3500
@@ -287,6 +303,7 @@ pause
 ; SD_HK packet to SD card
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid SD_HK rate 0 stream SD
 	set cmdTry = cmdTry + 1
 	wait 3500
@@ -297,6 +314,7 @@ echo SD_Hk packet stopped routing to SD
 ; Mode_HK packet to SD card
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid MODE_HK rate 0 stream SD
 	set cmdTry = cmdTry + 1
 	wait 3500
@@ -307,6 +325,7 @@ echo Mode_Hk packet stopped routing to SD
 ; Tlm_HK packet to SD card
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid TLM_HK rate 0 stream SD
 	set cmdTry = cmdTry + 1
 	wait 3500
@@ -317,6 +336,7 @@ echo Tlm_HK packet stopped routing to SD
 ; Uhf_HK packet to SD card
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid UHF_HK rate 0 stream SD
 	set cmdTry = cmdTry + 1
 	wait 3500
@@ -327,6 +347,7 @@ echo Uhf_HK packet stopped routing to SD
 ; Cmd_HK packet to SD card
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid CMD_HK rate 0 stream SD
 	set cmdTry = cmdTry + 1
 	wait 3500
@@ -337,6 +358,7 @@ echo Cmd_HK packet stopped routing to SD
 ; Ana_HK packet to SD card
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid ANA_HK rate 0 stream SD
 	set cmdTry = cmdTry + 1
 	wait 3500
@@ -347,6 +369,7 @@ echo Ana_HK packet stopped routing to SD
 ; ADCS_HK packet to SD card
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid ADCS_HK rate 0 stream SD
 	set cmdTry = cmdTry + 1
 	wait 3500
@@ -357,6 +380,7 @@ echo ADCS_HK packet stopped routing to SD
 ; ADCS_Analogs packet to SD card
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid ADCS_ANALOGS rate 0 stream SD
 	set cmdTry = cmdTry + 1
 	wait 3500
@@ -375,26 +399,18 @@ if $sdWriteBeacon_2 != $sdpbkBeacon
     else
         set sdNumPktsBeacon = $sdWriteBeacon_2 - $sdpbkBeacon
     endif
-;    set cmdCnt = beacon_cmd_succ_count + 1
-;    while beacon_cmd_succ_count < $cmdCnt
-;        cmd_sd_playback stream UHF start $sdpbkBeacon num $sdNumPktsBeacon timeout 300 partition 4 decimation 1
-;        set cmdTry = cmdTry + 1
-;        wait 3500
-;    endwhile
 
-	 cmd_sd_playback stream UHF start $sdpbkBeacon num $sdNumPktsBeacon timeout 300 partition 4 decimation 1
-	 echo Retry if playback did not start
-	 pause
+	 	set cmdCnt = beacon_cmd_succ_count + 1
+	 	cmd_sd_playback stream UHF start $sdpbkBeacon num $sdNumPktsBeacon timeout 300 partition 4 decimation 1
+	 	echo Retry if playback did not start
+	 	pause
+		set cmdSucceed = cmdSucceed + 1
 
-    set cmdSucceed = cmdSucceed + 1
 endif
 tlmwait sd_partition_pbk4 >= $sdWriteBeacon_2 - 1 ? 300000
 set sdNumPktsBeaconAct = sd_partition_pbk4 - $sdpbkBeacon
 echo Verify Beacon playback finished over UHF
-echo Expected packets
-print sdNumPktsBeacon
-echo Actual packets
-print sdNumPktsBeaconAct
+echo Expected packets = $sdNumPktsBeacon, Actual packets = $sdNumPktsBeaconAct
 echo If only beacon packets go to CLOSEOUT
 pause
 
@@ -406,26 +422,18 @@ if $sdWriteMisc_2 != $sdpbkMisc
     else
         set sdNumPktsMisc = $sdWriteMisc_2 - $sdpbkMisc
     endif
-    set cmdCnt = beacon_cmd_succ_count + 1
-;    while beacon_cmd_succ_count < $cmdCnt
-;        cmd_sd_playback stream UHF start $sdpbkMisc num $sdNumPktsMisc timeout 700 partition 0 decimation 1
-;        set cmdTry = cmdTry + 1
-;        wait 3500
-;    endwhile
 
-	cmd_sd_playback stream UHF start $sdpbkMisc num $sdNumPktsMisc timeout 700 partition 0 decimation 1
-	echo Retry if playback did not start
-	pause
-
+		set cmdCnt = beacon_cmd_succ_count + 1
+	  cmd_sd_playback stream UHF start $sdpbkMisc num $sdNumPktsMisc timeout 700 partition 0 decimation 1
+	  echo Retry if playback did not start
+	  pause
     set cmdSucceed = cmdSucceed + 1
+
 endif
 tlmwait sd_partition_pbk0 >= $sdWriteMisc_2 - 1 ? 700000
 set sdNumPktsMiscAct = sd_partition_pbk0 - $sdpbkMisc
 echo Verify Misc playback finished over UHF
-echo Expected packets
-print sdNumPktsMisc
-echo Actual packets
-print sdNumPktsMiscAct
+echo Expected packets = $sdNumPktsMisc, Actual packets = $sdNumPktsMiscAct
 pause
 
 ; Start playback ADCS partition
@@ -436,26 +444,18 @@ if $sdWriteADCS_2 != $sdpbkADCS
     else
         set sdNumPktsADCS = $sdWriteADCS_2 - $sdpbkADCS
     endif
+
     set cmdCnt = beacon_cmd_succ_count + 1
-;    while beacon_cmd_succ_count < $cmdCnt
-;        cmd_sd_playback stream UHF start $sdpbkADCS num $sdNumPktsADCS timeout 300 partition 3 decimation 1
-;        set cmdTry = cmdTry + 1
-;        wait 3500
-;    endwhile
-
-	cmd_sd_playback stream UHF start $sdpbkADCS num $sdNumPktsADCS timeout 300 partition 3 decimation 1
-	echo Retry if playback did not start
-	pause
-
+  	cmd_sd_playback stream UHF start $sdpbkADCS num $sdNumPktsADCS timeout 300 partition 3 decimation 1
+	  echo Retry if playback did not start
+	  pause
     set cmdSucceed = cmdSucceed + 1
+
 endif
 tlmwait sd_partition_pbk3 >= $sdWriteADCS_2 - 1 ? 300000
 set sdNumPktsADCSAct = sd_partition_pbk3 - $sdpbkADCS
 echo Verify ADCS playback finished over UHF
-echo Expected packets
-print sdNumPktsADCS
-echo Actual packets
-print sdNumPktsADCSAct
+echo Expected packets = $sdNumPktsADCS, Actual packets = $sdNumPktsADCSAct
 pause
 
 ; Start playback LOG partition
@@ -466,30 +466,18 @@ if $sdWriteLog_2 != $sdpbkLog
     else
         set sdNumPktsLog = $sdWriteLog_2 - $sdpbkLog
     endif
-    set cmdCnt = beacon_cmd_succ_count + 1
-;    while beacon_cmd_succ_count < $cmdCnt
-;        cmd_sd_playback stream UHF start $sdpbkLog num $sdNumPktsLog timeout 300 partition 5 decimation 1
-;        set cmdTry = cmdTry + 1
-;        wait 3500
-;    endwhile
 
-	cmd_sd_playback stream UHF start $sdpbkLog num $sdNumPktsLog timeout 300 partition 5 decimation 1
-	echo Retry if playback did not start
-	pause
-
+		set cmdCnt = beacon_cmd_succ_count + 1
+		cmd_sd_playback stream UHF start $sdpbkLog num $sdNumPktsLog timeout 300 partition 5 decimation 1
+		echo Retry if playback did not start
+		pause
     set cmdSucceed = cmdSucceed + 1
 endif
 tlmwait sd_partition_pbk5 >= $sdWriteLog_2 - 1 ? 300000
 set sdNumPktsLogAct = sd_partition_pbk5 - $sdpbkLog
 echo Verify Log playback finished over UHF
-echo Expected packets
-print sdNumPktsLog
-echo Actual packets
-print sdNumPktsLogAct
+echo Expected packets = $sdNumPktsLog, Actual packets = $sdNumPktsLogAct
 pause
-
-
-
 
 
 
@@ -497,9 +485,6 @@ CLOSEOUT:
 call show_time
 echo Note down ground pass time between time stamps
 
-echo 1 orbit completed with
-print cmdSucceed
-print cmdTry
-print cmdCnt
+echo Orbit simulation completed with success = $cmdSucceed, tries = $cmdTry and total commands = $cmdCnt
 
 test end

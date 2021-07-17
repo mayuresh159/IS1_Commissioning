@@ -43,6 +43,7 @@ set isFlight = 0
 if beacon_mode != 1
     set cmdCnt = beacon_cmd_succ_count + 1
     while beacon_cmd_succ_count < $cmdCnt
+        cmd_noop
         cmd_mode_set mode 1
         set cmdTry = cmdTry + 1
         wait 3529
@@ -56,6 +57,7 @@ endif
 ; adcs_analogs
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+    cmd_noop
     cmd_set_pkt_rate apid 215 rate 10 stream UHF
     set cmdTry = cmdTry + 1
     wait 3500
@@ -64,6 +66,7 @@ set successCnt = successCnt + 1
 ; adcs_command_tlm
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+    cmd_noop
     cmd_set_pkt_rate apid 200 rate 10 stream UHF
     set cmdTry = cmdTry + 1
     wait 3500
@@ -72,6 +75,7 @@ set successCnt = successCnt + 1
 ; adcs_mag
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+    cmd_noop
     cmd_set_pkt_rate apid 211 rate 10 stream UHF
     set cmdTry = cmdTry + 1
     wait 3500
@@ -80,6 +84,7 @@ set successCnt = successCnt + 1
 ; adcs_rw_drive
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+    cmd_noop
     cmd_set_pkt_rate apid 206 rate 10 stream UHF
     set cmdTry = cmdTry + 1
     wait 3500
@@ -581,9 +586,10 @@ else
     echo ADCS Tlm Check: SUCCESS!
 endif
 
-;turn of routing of adcs_analogs, adcs_command_tlm, and adcs_mag
+;turn off routing of adcs_analogs, adcs_command_tlm, and adcs_mag
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+    cmd_noop
     cmd_set_pkt_rate apid 215 rate 0 stream UHF
     set cmdTry = cmdTry + 1
     wait 3500
@@ -592,6 +598,7 @@ set successCnt = successCnt + 1
 
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+    cmd_noop
     cmd_set_pkt_rate apid 200 rate 0 stream UHF
     set cmdTry = cmdTry + 1
     wait 3500
@@ -600,6 +607,7 @@ set successCnt = successCnt + 1
 
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+    cmd_noop
     cmd_set_pkt_rate apid 211 rate 0 stream UHF
     set cmdTry = cmdTry + 1
     wait 3500
@@ -608,10 +616,13 @@ set successCnt = successCnt + 1
 
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+    cmd_noop
     cmd_set_pkt_rate apid 206 rate 0 stream UHF
     set cmdTry = cmdTry + 1
     wait 3500
 endwhile
 set successCnt = successCnt + 1
 
+FINISH:
+echo COMPLETED  ADCS  tlm checks with Successes = $successCnt and Failures = $failCnt
 ; End adcs_tlm_check

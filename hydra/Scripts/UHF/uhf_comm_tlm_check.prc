@@ -35,6 +35,7 @@ if beacon_pwr_status_sband == 0
     set SBANDpwr = 0
     set cmdCnt = beacon_cmd_succ_count + 1
     while beacon_cmd_succ_count < $cmdCnt
+        cmd_noop
         cmd_eps_pwr_on component SBAND override 1
         set cmdTry = cmdTry + 1
         wait 3500
@@ -573,6 +574,7 @@ FINISH:
 if $SBANDpwr == 0
     set cmdCnt = beacon_cmd_succ_count + 1
     while beacon_cmd_succ_count < $cmdCnt
+        cmd_noop
         cmd_eps_pwr_off component SBAND override 0
         set cmdTry = cmdTry + 1
         wait 3500

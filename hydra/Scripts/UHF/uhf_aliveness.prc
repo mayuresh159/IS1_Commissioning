@@ -14,20 +14,21 @@ declare seqCnt dn14
 set cmdTry = 0
 
 echo STARTING Aliveness Test
-
+echo Ensure that beacon packets are being received currently and the command count valid
 echo Power on InspireSat-1 and Press GO
 pause
 
 ;Get beacon packet to UHF every 3 seconds
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_set_pkt_rate apid 1 rate 3 stream UHF
 	set cmdTry = cmdTry + 1
 	wait 3500
 endwhile
 set cmdSucceed = cmdSucceed + 1
 
-;Issue one becon pkt to UHF
+;Issue one beacon pkt to UHF
 ;The stream is set to 0, should it be set to 1? Clarified should be 1.
 ;When Aliveness is run for the first time at IIST,
 ;UHF groundstation may not available, should we disable this?
@@ -35,6 +36,7 @@ set cmdSucceed = cmdSucceed + 1
 
 set cmdTry = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
+	cmd_noop
 	cmd_issue_pkt apid 1 stream UHF
 	set cmdTry = cmdTry + 1
 	wait 3500
