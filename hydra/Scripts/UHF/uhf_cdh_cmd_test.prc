@@ -30,7 +30,8 @@ if beacon_mode == 0
 	pause
 endif
 
-call Scripts/cdh_tlm_check
+; Call UHF operated cdh telemetry check
+call Scripts/UHF/uhf_cdh_tlm_check
 
 COMMAND_STATUS:
 

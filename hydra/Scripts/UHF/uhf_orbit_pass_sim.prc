@@ -53,6 +53,10 @@ declare sdNumPktsBeacon dn32l
 declare sdNumPktsBeaconAct dn32l
 declare sdNumPktsLog    dn32l
 declare sdNumPktsLogAct    dn32l
+; Time variables
+declare timeStart		dn32l
+declare timeEnd			dn32l
+declare timeInterval	dn32l
 
 
 
@@ -261,6 +265,7 @@ pause
 GP_START:
 ; Print system time now
 call show_time
+set timeStart = systemTimemSec / 1000
 
 ; Detect beacon and start sd_hk packet routing
 set cmdCnt = beacon_cmd_succ_count + 1
@@ -483,7 +488,10 @@ pause
 
 CLOSEOUT:
 call show_time
-echo Note down ground pass time between time stamps
+set timeEnd = systemTimemSec / 1000
+set timeInterval = timeEnd - timeStart
+
+echo Total time for the download = $timeInterval sec
 
 echo Orbit simulation completed with success = $cmdSucceed, tries = $cmdTry and total commands = $cmdCnt
 
