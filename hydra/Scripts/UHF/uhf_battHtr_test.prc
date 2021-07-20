@@ -23,7 +23,8 @@ echo Starting Battery Heater Test
 ; first get EPS packet to verify that Battery Heater Set Point
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-	cmd_set_pkt_rate apid 2 rate 3 stream 0
+	cmd_noop
+	cmd_set_pkt_rate apid ANA_HK rate 3 stream UHF
 	set cmdTry = cmdTry + 1
 	wait 3500
 endwhile
@@ -48,6 +49,7 @@ pause
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
 	set cmdTry = cmdTry + 1
+	cmd_noop
 	cmd_eps_htr_setpoint low $setpoint_new_low high $setpoint_new_high
 	wait 3529
 endwhile
@@ -58,6 +60,7 @@ verify eps_batt_set_low == $setpoint_new_low
 verify eps_batt_set_high == $setpoint_new_high
 verify beacon_pwr_status_htr == 1
 
+echo Check if heater is ON and wait till the temperature rises above the high set point
 tlmwait eps_bat0_temp_conv >= $setpoint_new_high
 
 DISABLE:
@@ -66,6 +69,7 @@ echo Disabling Battery Heater
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
 	set cmdTry = cmdTry + 1
+	cmd_noop
 	cmd_eps_pwr_off component 4
 	wait 3529
 endwhile
@@ -96,6 +100,7 @@ echo Returning Batter Heater back to it's original state
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
 	set cmdTry = cmdTry + 1
+	cmd_noop
 	cmd_eps_htr_setpoint low $setpoint_original_low high $setpoint_original_high
 	wait 3529
 endwhile
@@ -119,6 +124,7 @@ set sample_original = eps_batt_samples
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
 	set cmdTry = cmdTry + 1
+	cmd_noop
 	cmd_eps_htr_samples samples 20
 	wait 3529
 endwhile
@@ -129,6 +135,7 @@ verify eps_batt_samples == 20
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
 	set cmdTry = cmdTry + 1
+	cmd_noop
 	cmd_eps_htr_samples samples $sample_original
 	wait 3529
 endwhile
@@ -140,7 +147,8 @@ echo Done with Battery Heater Test
 
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-	cmd_set_pkt_rate apid 2 rate 0 stream 0
+	cmd_noop
+	cmd_set_pkt_rate apid ANA_HK rate 0 stream UHF
 	set cmdTry = cmdTry + 1
 	wait 3500
 endwhile

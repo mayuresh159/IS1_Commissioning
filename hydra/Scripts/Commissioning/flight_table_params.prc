@@ -18,6 +18,7 @@
 ;	    14. Flash partition sizes (2560 KB per 6 partition currently; Can we change partition sizes to reduce MISC and LOG and increase SCIC and SCID)
 ;	    15. SD Card error count set to 10
 ;	    16. DAXSS integration time (60s)
+;			17. Drag the beacon playback pointer to the last write pointer before launch
 
 declare cmdCnt dn16l
 declare cmdTry dn16l
@@ -360,8 +361,17 @@ set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
 pause
 
+; 	16. Take beacon playback pointer to the current write pointer
+echo Saving the latest Write pointer in playback pointer before shipping to SHAR
+pause
+cmd_sd_playback stream DBG start sd_partition_write4 num 1 timeout 1 partition 4 decimation 1
+tlmwait sd_partition_pbk4 >= sd_partition_write4 ? 5000
+timeout
+		echo Playback pointer not set properly
+endtimeout
 
-;   16. Unroute packets
+
+;   17. Unroute packets
 set cmdTry = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
 	cmd_noop

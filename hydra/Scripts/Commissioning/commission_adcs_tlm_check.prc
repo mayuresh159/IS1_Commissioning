@@ -32,7 +32,47 @@ declare magnetometerSquareSum dn16
 
 
 ; Safe mode already ensured in calling script
-; Packets already routed to UHF in calling script
+;route adcs_analogs, adcs_command_tlm, adcs_mag and adcs_rw_drive
+; New definition of beacon packet includes critical ADCS data and we do not need the additional ADCS packets to be routed
+; Streams - 0/DBG 1/UHF 2/SD 3/SBAND
+
+; adcs_analogs
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+    cmd_set_pkt_rate apid 215 rate 3 stream UHF
+    set cmdTry = cmdTry + 1
+    wait 3500
+endwhile
+set successCnt = successCnt + 1
+
+; adcs_command_tlm
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+    cmd_set_pkt_rate apid 200 rate 3 stream UHF
+    set cmdTry = cmdTry + 1
+    wait 3500
+endwhile
+set successCnt = successCnt + 1
+
+; adcs_mag
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+    cmd_set_pkt_rate apid 211 rate 3 stream UHF
+    set cmdTry = cmdTry + 1
+    wait 3500
+endwhile
+set successCnt = successCnt + 1
+
+; adcs_rw_drive
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+    cmd_set_pkt_rate apid 206 rate 3 stream UHF
+    set cmdTry = cmdTry + 1
+    wait 3500
+endwhile
+set successCnt = successCnt + 1
+
+
 
 SUN_SENSOR_STATUS:
 ; Sun point status - require operator to okay for proceed since this is highly context dependent
@@ -479,6 +519,43 @@ verify magnetometerSquareSum >= 0
 verify magnetometerSquareSum <= 5625
 
 CLOSEOUT:
+; Unroute ADCS packets
+; adcs_analogs
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+    cmd_set_pkt_rate apid 215 rate 0 stream UHF
+    set cmdTry = cmdTry + 1
+    wait 3500
+endwhile
+set successCnt = successCnt + 1
+
+; adcs_command_tlm
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+    cmd_set_pkt_rate apid 200 rate 0 stream UHF
+    set cmdTry = cmdTry + 1
+    wait 3500
+endwhile
+set successCnt = successCnt + 1
+
+; adcs_mag
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+    cmd_set_pkt_rate apid 211 rate 0 stream UHF
+    set cmdTry = cmdTry + 1
+    wait 3500
+endwhile
+set successCnt = successCnt + 1
+
+; adcs_rw_drive
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+    cmd_set_pkt_rate apid 206 rate 0 stream UHF
+    set cmdTry = cmdTry + 1
+    wait 3500
+endwhile
+set successCnt = successCnt + 1
+
 echo Success count = $successCnt expected many (40?)
 echo Fail count = $failCnt
 if $failCnt > 0

@@ -29,7 +29,7 @@ echo NOTE that one should GOTO FINISH when less than 2 minutes from the pass end
 set cmdCnt = beacon_cmd_succ_count + 1
 ; repeat until command is accepted by SC
 while beacon_cmd_succ_count < $cmdCnt
-	cmd_set_pkt_rate apid 1 rate 3 stream 1
+	cmd_set_pkt_rate apid SW_STAT rate 3 stream UHF
 	set cmdTry = cmdTry + 1
 	wait 3500
 endwhile
@@ -49,80 +49,64 @@ timeout
 endtimeout
 
 
-;route adcs_analogs, adcs_command_tlm, adcs_mag and adcs_rw_drive
-; New definition of beacon packet includes critical ADCS data and we do not need the additional ADCS packets to be routed
-; Streams - 0/DBG 1/UHF 2/SD 3/SBAND
-
-; adcs_analogs
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 215 rate 10 stream 1
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set successCnt = successCnt + 1
-
-; adcs_command_tlm
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 200 rate 10 stream 1
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set successCnt = successCnt + 1
-
-; adcs_mag
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 211 rate 10 stream 1
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set successCnt = successCnt + 1
-
-; adcs_rw_drive
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 206 rate 10 stream 1
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set successCnt = successCnt + 1
-
-
-
-
 CHECKOUT:
 ; Decided to keep all parameter checks
 ; Call cdh_tlm_check
-call commission_cdh_tlm_check
+call Scripts/Commissioning/commission_cdh_tlm_check
 
 ; Call eps_tlm_check
-call commission_eps_tlm_check
+call Scripts/Commissioning/commission_eps_tlm_check
 
 ; Call comm_tlm_check
-call commission_comm_tlm_check
-
-; Call sband_tlm_check
+call Scripts/Commissioning/commission_comm_tlm_check
 
 ; Call adcs_tlm_check
-call commission_adcs_tlm_check
+call Scripts/Commissioning/commission_adcs_tlm_check
 
-
-; TODO: Cancel all deployments commands put over here
-; Keep a pause first before confirming 
+; Zero launch delay table parameter to avoid recurring launch delay after spacecraft reset
+echo To cancel launch delay press GO
+echo Else jump to CANCEL_DEPLOYMENTS
 pause
 
-; First Route mode_hk_packet to UHF, to verify status of deployments
+; First Route mode_hk_packet to UHF, to verify launch delay, launch flag, and status of deployments
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 53 rate 10 stream 1
+    cmd_set_pkt_rate apid MODE_HK rate 3 stream UHF
     set cmdTry = cmdTry + 1
     wait 3500
 endwhile
 set cmdSucceed = cmdSucceed + 1
 
-; Stop deployments 
+; Set launch delay to value 10
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < cmdCnt
+		cmd_mode_launch_delay value 10
+		set cmdTry = cmdTry + 1
+		wait 3500
+endwhile
+set cmdSucceed = cmdSucceed + 1
+
+verify mode_launch_delay == 10
+
+; Set launch flag to 1
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < cmdCnt
+		cmd_mode_launch_set_flag state 1
+		set cmdTry = cmdTry + 1
+		wait 3500
+endwhile
+set cmdSucceed = cmdSucceed + 1
+
+verify mode_launch_flag == 1
+
+
+CANCEL_DEPLOYMENTS:
+; Cancel all deployments commands
+echo To cancel deployments press GO
+echo Else jump to FINISH
+pause
+
+; Stop deployments
 ; Set deploy flag states (PANEL1, PANEL2 and ANTENNA) to 1
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
@@ -164,52 +148,15 @@ while beacon_cmd_succ_count < $cmdCnt
 endwhile
 set cmdSucceed = cmdSucceed + 1
 
+
+
 ; Finish up aliveness test tasks
 FINISH:
-
-; Turn off routing of adcs_analogs, adcs_command_tlm, adcs_mag and adcs_rw_drive
-; adcs_analogs
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 215 rate 0 stream 1
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set successCnt = successCnt + 1
-
-; adcs_command_tlm
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 200 rate 0 stream 1
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set successCnt = successCnt + 1
-
-; adcs_mag
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 211 rate 0 stream 1
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set successCnt = successCnt + 1
-
-; adcs_rw_drive
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 206 rate 0 stream 1
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set successCnt = successCnt + 1
-
-
 ; Set beacons back to UHF stream with default rate of 30 seconds
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
 	set cmdTry = cmdTry + 1
-	cmd_set_pkt_rate apid 1 rate 30 stream 1
+	cmd_set_pkt_rate apid 1 rate 30 stream UHF
 	wait 3529
 endwhile
 set cmdSucceed = cmdSucceed + 1
