@@ -42,10 +42,10 @@ set cmdSucceed = cmdSucceed + 1
 tlmwait beacon_mode == 1 ? 10000
 timeout
   echo Spacecraft not in Safe Mode
-	; Set mode to safe manually
-	cmd_mode_set mode 1
-	wait 3000
-	;goto FINISH
+	echo Running the wrong script
+	echo Check if the S/C is in nominal/ science modes
+	pause
+	goto FINISH
 endtimeout
 
 
@@ -106,8 +106,12 @@ echo To cancel deployments press GO
 echo Else jump to FINISH
 pause
 
+PANEL1:
 ; Stop deployments
 ; Set deploy flag states (PANEL1, PANEL2 and ANTENNA) to 1
+echo User to verify if PANEL1 currents are nominal
+echo Jump to Panel2 if skipping this
+pause
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
     cmd_mode_deploy_flag component 0 state 1
@@ -115,7 +119,12 @@ while beacon_cmd_succ_count < $cmdCnt
     wait 3529
 endwhile
 set cmdSucceed = cmdSucceed + 1
+verify mode_deployables[0] == 1
 
+PANEL2:
+echo User to verify if PANEL2 currents are nominal
+echo Jump to ANTENNA if skipping this
+pause
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
     cmd_mode_deploy_flag component 1 state 1
@@ -123,7 +132,11 @@ while beacon_cmd_succ_count < $cmdCnt
     wait 3529
 endwhile
 set cmdSucceed = cmdSucceed + 1
+verify mode_deployables[1] == 1
 
+ANTENNA:
+echo User to verify if ANTENNA is deployed through UHF waterfall plot
+pause
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
     cmd_mode_deploy_flag component 2 state 1
@@ -131,38 +144,32 @@ while beacon_cmd_succ_count < $cmdCnt
     wait 3529
 endwhile
 set cmdSucceed = cmdSucceed + 1
-
-wait 3500
-
-; Verify that the deployable states have been set
-verify mode_deployables[0] == 1
-verify mode_deployables[1] == 1
 verify mode_deployables[2] == 1
 
-; Disable mode_hk_packet routing
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 53 rate 0 stream 0
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set cmdSucceed = cmdSucceed + 1
+wait 3500
 
 
 
 ; Finish up aliveness test tasks
 FINISH:
+; Disable mode_hk_packet routing
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+    cmd_set_pkt_rate apid MODE_HK rate 0 stream 0
+    set cmdTry = cmdTry + 1
+    wait 3500
+endwhile
+set cmdSucceed = cmdSucceed + 1
+
 ; Set beacons back to UHF stream with default rate of 30 seconds
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
 	set cmdTry = cmdTry + 1
-	cmd_set_pkt_rate apid 1 rate 30 stream UHF
+	cmd_set_pkt_rate apid SW_STAT rate 10 stream UHF
 	wait 3529
 endwhile
 set cmdSucceed = cmdSucceed + 1
 
 
 ; Report completion of script
-echo COMPLETED Commission aliveness safe test
-print cmdTry
-print cmdSucceed
+echo COMPLETED Commission aliveness safe test: $cmdTry, $cmdSucceed

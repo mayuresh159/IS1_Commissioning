@@ -53,7 +53,8 @@ tlmwait beacon_mode == 0 ? 10000
 timeout
   echo Spacecraft not in Phoenix Mode
   echo Do you wish to continue in Phoenix mode?
-  pause 
+	echo Jump to FINISH if not
+  pause
 endtimeout
 
 
@@ -70,14 +71,110 @@ call commission_eps_tlm_check
 call commission_comm_tlm_check
 
 
+; Zero launch delay table parameter to avoid recurring launch delay after spacecraft reset
+echo To cancel launch delay press GO
+echo Else jump to CANCEL_DEPLOYMENTS
+pause
+
+; First Route mode_hk_packet to UHF, to verify launch delay, launch flag, and status of deployments
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+    cmd_set_pkt_rate apid MODE_HK rate 3 stream UHF
+    set cmdTry = cmdTry + 1
+    wait 3500
+endwhile
+set cmdSucceed = cmdSucceed + 1
+
+; Set launch delay to value 10
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < cmdCnt
+		cmd_mode_launch_delay value 10
+		set cmdTry = cmdTry + 1
+		wait 3500
+endwhile
+set cmdSucceed = cmdSucceed + 1
+
+verify mode_launch_delay == 10
+
+; Set launch flag to 1
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < cmdCnt
+		cmd_mode_launch_set_flag state 1
+		set cmdTry = cmdTry + 1
+		wait 3500
+endwhile
+set cmdSucceed = cmdSucceed + 1
+
+verify mode_launch_flag == 1
+
+
+CANCEL_DEPLOYMENTS:
+; Cancel all deployments commands
+echo To cancel Panel deployments press GO
+echo Else jump to FINISH
+pause
+
+PANEL1:
+; Stop deployments
+; Set deploy flag states (PANEL1, PANEL2 and ANTENNA) to 1
+echo User to verify if PANEL1 currents are nominal
+echo Jump to PANEL2 if skipping this
+pause
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+    cmd_mode_deploy_flag component 0 state 1
+    set cmdTry = cmdTry + 1
+    wait 3529
+endwhile
+set cmdSucceed = cmdSucceed + 1
+verify mode_deployables[0] == 1
+
+PANEL2:
+echo User to verify if PANEL2 currents are nominal
+echo Jump to ANTENNA if skipping this
+pause
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+    cmd_mode_deploy_flag component 1 state 1
+    set cmdTry = cmdTry + 1
+    wait 3529
+endwhile
+set cmdSucceed = cmdSucceed + 1
+verify mode_deployables[1] == 1
+
+ANTENNA:
+echo User to verify if ANTENNA is deployed through signal strength in UHF waterfall plot
+pause
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+    cmd_mode_deploy_flag component 2 state 1
+    set cmdTry = cmdTry + 1
+    wait 3529
+endwhile
+set cmdSucceed = cmdSucceed + 1
+verify mode_deployables[2] == 1
+
+wait 3500
+
+
 
 ; Finish up aliveness test tasks
 FINISH:
+; Disable mode_hk_packet routing
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+    cmd_set_pkt_rate apid MODE_HK rate 0 stream 0
+    set cmdTry = cmdTry + 1
+    wait 3500
+endwhile
+set cmdSucceed = cmdSucceed + 1
+
+
 ; Set beacons back to UHF stream with default rate of 30 seconds
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
 	set cmdTry = cmdTry + 1
-	cmd_set_pkt_rate apid 1 rate 30 stream 1
+	cmd_set_pkt_rate apid SW_STAT rate 10 stream UHF
 	wait 3529
 endwhile
 set cmdSucceed = cmdSucceed + 1

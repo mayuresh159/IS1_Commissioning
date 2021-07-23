@@ -1,5 +1,6 @@
 ; Update flight table parameters in the firmware
 ;Purpose: Upload flight table parameters to the firmware. This code is to be run before shipping the satellite to SHAR
+;				This script can be run on DBG through the umbilical chord instead of UHF
 ;Outline
 ;  Commands to set the table parameters
 ;    	1. Deployment timeout for beacon (40 minutes)
@@ -70,46 +71,41 @@ set waitinterval = 3500
 ;
 
 ;   0. Route packets
-set cmdTry = beacon_cmd_succ_count + 1
+set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-	cmd_noop
-	cmd_set_pkt_rate apid MODE_HK rate 3 stream UHF
+	cmd_set_pkt_rate apid MODE_HK rate 1 stream DBG
 	set cmdTry = cmdTry + 1
 	wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 
-set cmdTry = beacon_cmd_succ_count + 1
+set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-	cmd_noop
-	cmd_set_pkt_rate apid ADCS_HK rate 3 stream UHF
+	cmd_set_pkt_rate apid ADCS_HK rate 1 stream DBG
 	set cmdTry = cmdTry + 1
 	wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 
-set cmdTry = beacon_cmd_succ_count + 1
+set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-	cmd_noop
-	cmd_set_pkt_rate apid ANA_HK rate 3 stream UHF
+	cmd_set_pkt_rate apid ANA_HK rate 1 stream DBG
 	set cmdTry = cmdTry + 1
 	wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 
-set cmdTry = beacon_cmd_succ_count + 1
+set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-	cmd_noop
-	cmd_set_pkt_rate apid TLM_HK rate 3 stream UHF
+	cmd_set_pkt_rate apid TLM_HK rate 1 stream DBG
 	set cmdTry = cmdTry + 1
 	wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 
-set cmdTry = beacon_cmd_succ_count + 1
+set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-	cmd_noop
-	cmd_set_pkt_rate apid SD_HK rate 3 stream UHF
+	cmd_set_pkt_rate apid SD_HK rate 1 stream DBG
 	set cmdTry = cmdTry + 1
 	wait $waitinterval
 endwhile
@@ -122,75 +118,94 @@ set cmdSucceed = cmdSucceed + 1
 ; The same launch delay works for antenna, SA and beacons.
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < cmdCnt
-  cmd_noop
   cmd_mode_launch_delay value 2400
   set cmdTry = cmdTry + 1
   wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
+wait $waitinterval
+verify mode_launch_delay == 2400
+echo Verification accepted, Press Go to upload the next Table parameter
 pause
+
+
 
 
 ;   3. Deployment flags (set to 0 pre- launch)
 ; Component: 0/PANEL1, 1/PANEL2, 2/Antenna
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < cmdCnt
-  cmd_noop
   cmd_mode_launch_set_flag state 0
   set cmdTry = cmdTry + 1
   wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
+wait $waitinterval
+verify mode_launch_flag == 0
+echo Verification accepted, Press Go to upload the next Table parameter
 pause
+
+
 
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < cmdCnt
-  cmd_noop
   cmd_mode_deploy_flag component 0 state 0
   set cmdTry = cmdTry + 1
   wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
+wait $waitinterval
+verify mode_deployables[0] == 0
+echo Verification accepted, Press Go to upload the next Table parameter
 pause
+
 
 
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < cmdCnt
-  cmd_noop
   cmd_mode_deploy_flag component 1 state 0
   set cmdTry = cmdTry + 1
   wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
+wait $waitinterval
+verify mode_deployables[1] == 0
+echo Verification accepted, Press Go to upload the next Table parameter
 pause
+
 
 
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < cmdCnt
-  cmd_noop
   cmd_mode_deploy_flag component 2 state 0
   set cmdTry = cmdTry + 1
   wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
+wait $waitinterval
+verify mode_deployables[2] == 0
+echo Verification accepted, Press Go to upload the next Table parameter
 pause
+
 
 
 ;   4. Deployment timeouts between retry. (135 minutes)
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < cmdCnt
-  cmd_noop
   cmd_mode_deploy_interval value 8100
   set cmdTry = cmdTry + 1
   wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
+wait $waitinterval
+verify mode_deploy_int == 8100
+echo Verification accepted, Press Go to upload the next Table parameter
 pause
 
 
@@ -198,49 +213,60 @@ pause
 ; Phoenix to safe
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < cmdCnt
-  cmd_noop
   cmd_mode_set_threshold threshold 0 value 7400
   set cmdTry = cmdTry + 1
   wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
+wait $waitinterval
+verify mode_threshold[0] == 7400
+echo Verification accepted, Press Go to upload the next Table parameter
 pause
 
 
 ; Safe to Phoenix
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < cmdCnt
-  cmd_noop
   cmd_mode_set_threshold threshold 1 value 6700
   set cmdTry = cmdTry + 1
+	wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
+wait $waitinterval
+verify mode_threshold[1] == 6700
+echo Verification accepted, Press Go to upload the next Table parameter
 pause
 
 
 ; Safe to nominal
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < cmdCnt
-  cmd_noop
   cmd_mode_set_threshold threshold 2 value 8500
   set cmdTry = cmdTry + 1
+	wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
+wait $waitinterval
+verify mode_threshold[2] == 8500
+echo Verification accepted, Press Go to upload the next Table parameter
 pause
 
 
 ; Nominal to Safe
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < cmdCnt
-  cmd_noop
   cmd_mode_set_threshold threshold 3 value 7000
   set cmdTry = cmdTry + 1
+	wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
+wait $waitinterval
+verify mode_threshold[3] == 7000
+echo Verification accepted, Press Go to upload the next Table parameter
 pause
 
 
@@ -248,100 +274,127 @@ pause
 ; Set eclipse method to ADCS
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < cmdCnt
-  cmd_noop
   cmd_mode_eclipse_method method 0
   set cmdTry = cmdTry + 1
+	wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
+wait $waitinterval
+verify mode_eclipse_method == 0
+echo Verification accepted, Press Go to upload the next Table parameter
 pause
 
 
 set cmdCnt = beacon_adcs_cmd_acpt + 1
 while beacon_adcs_cmd_acpt < cmdCnt
-  cmd_noop
   cmd_adcs_eclipse_update threshold 2500 count 3
   set cmdTry = cmdTry + 1
+	wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
+wait $waitinterval
+verify adcs_eclipse_threshold == 2500
+verify adcs_eclipse_count == 3
+echo Verification accepted, Press Go to upload the next Table parameter
 pause
 
 
-;   7. EPS eclipse determination (Current 0.04 )
+;   7. EPS eclipse determination (Current 0.04)
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < cmdCnt
-  cmd_noop
-  cmd_eps_eclipse_thresh threshold 0.04
+  cmd_eps_eclipse_thresh threshold 80
   set cmdTry = cmdTry + 1
+	wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
+wait $waitinterval
+verify eps_eclipse_thresh == 0.04
+echo Verification accepted, Press Go to upload the next Table parameter
 pause
 
 
 
-;   8. Beacon packet rate (30s)
+;   8. Beacon packet rate (10s)
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < cmdCnt
-  cmd_noop
-  cmd_set_pkt_rate apid 1 rate 30 stream 1
+  cmd_set_pkt_rate apid SW_STAT rate 10 stream UHF
   set cmdTry = cmdTry + 1
+	wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
+wait $waitinterval
+verify tlm_pkt_rate[0] == 10
+echo Verification accepted, Press Go to upload the next Table parameter
 pause
 
 
 ;   9. Packet write rates (ADCS (1s), HK (1s), SCIC (1s), SCID(9s))
 ; Write packets to SD card ?
+echo Default states of packets cannot be programmed from console. Needs FSW reprogramming
 
 
 ;   10. Last command watchdog timeout (Command link loss timer )(24 hours and 48 hours after commissioning)
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < cmdCnt
-  cmd_noop
   cmd_clt_threshold value 86400
   set cmdTry = cmdTry + 1
+	wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
+wait $waitinterval
+verify clt_threshold == 86400
+echo Verification accepted, Press Go to upload the next Table parameter
 pause
 
 
 ;   11. Battery heater temperature (5 (on) - 7 (off))
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < cmdCnt
-  cmd_noop
   cmd_eps_htr_setpoint low 5 high 7
   set cmdTry = cmdTry + 1
+	wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
+wait $waitinterval
+verify eps_batt_set_low == 5
+verify eps_batt_set_high == 7
+echo Verification accepted, Press Go to upload the next Table parameter
 pause
 
 
 ;   12. Battery heater samples before turn on (set to 15 currently at 1 Hz)
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < cmdCnt
-  cmd_noop
   cmd_eps_htr_samples samples 15
   set cmdTry = cmdTry + 1
+	wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
+wait $waitinterval
+verify eps_batt_samples == 15
+echo Verification accepted, Press Go to upload the next Table parameter
 pause
 
 
 ;   13. Sd card select (last selected by default)
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < cmdCnt
-  cmd_noop
   cmd_sd_select card 1
   set cmdTry = cmdTry + 1
+	wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
+wait $waitinterval
+verify sd_card_sel == 1
+echo Verification accepted, Press Go to upload the next Table parameter
 pause
 
 
@@ -349,71 +402,85 @@ pause
 
 
 ;   15. SD Card error count set to 10
-echo Check if FDRI is the correct command
-pause
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < cmdCnt
-  cmd_noop
   cmd_sd_fdri_limit limit 10
   set cmdTry = cmdTry + 1
+	wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
+wait $waitinterval
+echo Max number of FDRI attempts set to 10, Press Go to upload the next Table parameter
 pause
 
-; 	16. Take beacon playback pointer to the current write pointer
-echo Saving the latest Write pointer in playback pointer before shipping to SHAR
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < cmdCnt
+  cmd_sd_fdri_reset
+  set cmdTry = cmdTry + 1
+	wait $waitinterval
+endwhile
+set cmdSucceed = cmdSucceed + 1
+echo Wait for table parameter to be updated
+wait $waitinterval
+echo FDRI attempts resetted, Press Go to upload the next Table parameter
 pause
-cmd_sd_playback stream DBG start sd_partition_write4 num 1 timeout 1 partition 4 decimation 1
-tlmwait sd_partition_pbk4 >= sd_partition_write4 ? 5000
-timeout
-		echo Playback pointer not set properly
-endtimeout
 
+
+; 	16. Note down all partition write pointers
+echo Saving the latest Write pointers before shipping to SHAR
+echo Misc partition write pointer
+print sd_partition_write0
+echo SCIC partition write pointer
+print sd_partition_write1
+echo SCID partition write pointer
+print sd_partition_write2
+echo ADCS partition write pointer
+print sd_partition_write3
+echo BEACON partition write pointer
+print sd_partition_write4
+echo LOG partition write pointer
+print sd_partition_write5
+pause
 
 ;   17. Unroute packets
-set cmdTry = beacon_cmd_succ_count + 1
+set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-	cmd_noop
-	cmd_set_pkt_rate apid MODE_HK rate 0 stream UHF
+	cmd_set_pkt_rate apid MODE_HK rate 0 stream DBG
 	set cmdTry = cmdTry + 1
-	wait 3500
+	wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 
-set cmdTry = beacon_cmd_succ_count + 1
+set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-	cmd_noop
-	cmd_set_pkt_rate apid ADCS_HK rate 0 stream UHF
+	cmd_set_pkt_rate apid ADCS_HK rate 0 stream DBG
 	set cmdTry = cmdTry + 1
-	wait 3500
+	wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 
-set cmdTry = beacon_cmd_succ_count + 1
+set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-	cmd_noop
-	cmd_set_pkt_rate apid ANA_HK rate 0 stream UHF
+	cmd_set_pkt_rate apid ANA_HK rate 0 stream DBG
 	set cmdTry = cmdTry + 1
-	wait 3500
+	wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 
-set cmdTry = beacon_cmd_succ_count + 1
+set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-	cmd_noop
-	cmd_set_pkt_rate apid TLM_HK rate 0 stream UHF
+	cmd_set_pkt_rate apid TLM_HK rate 0 stream DBG
 	set cmdTry = cmdTry + 1
-	wait 3500
+	wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 
-set cmdTry = beacon_cmd_succ_count + 1
+set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-	cmd_noop
-	cmd_set_pkt_rate apid SD_HK rate 0 stream UHF
+	cmd_set_pkt_rate apid SD_HK rate 0 stream DBG
 	set cmdTry = cmdTry + 1
-	wait 3500
+	wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 
