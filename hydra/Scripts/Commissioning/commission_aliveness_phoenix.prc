@@ -20,7 +20,8 @@ echo STARTING Commission aliveness phoenix test
 echo NOTE that one should GOTO FINISH when less than 2 minutes from the pass end time
 
 ; wait until IS-1 responds
-; call hello_is1,
+call hello_is1
+
 ; wait for beacon packets at the normal cadence
 ; verify that the command counter increments
 ; NoOp command and incrementing command counter should confirm the hello_is1

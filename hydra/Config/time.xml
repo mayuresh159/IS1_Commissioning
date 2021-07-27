@@ -1,4 +1,5 @@
 <hydraDef>
+  <!-- The epoch should be updated beginning of every month -->
   <itemTime name="systemTimemSec" type="dn32" value="0" method="msSinceMidnight" epoch="Jul 1 2021 0:0:0"/>
   <itemTime name="systemTimeSec" type="dn32" value="0" method="secSinceEpoch" epoch="Jul 1 2021 0:0:0"/>
   <itemTime name="systemTimeDay" type="dn32" value="0" method="daySinceEpoch" epoch="Jul 1 2021 0:0:0"/>

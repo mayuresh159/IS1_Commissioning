@@ -20,7 +20,7 @@ echo STARTING Commission aliveness safe test
 echo NOTE that one should GOTO FINISH when less than 2 minutes from the pass end time
 
 ; wait until IS-1 responds
-; call hello_is1
+call hello_is1
 
 ; Get beacon packet to debug every 3 seconds
 ; Should the beacon be set to DBG or UHF? The beacon packet update when in orbit will happen over UHF and no hardline exists!

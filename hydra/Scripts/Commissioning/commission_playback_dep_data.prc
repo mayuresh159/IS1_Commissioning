@@ -18,6 +18,8 @@
 ;   5. Repeat the playback for n number of times each time downloading 300 packets from SD Card
 ;   6. Close out
 
+argument partition_id dn8l
+argument launchWritePtr dn32l
 
 declare cmdCnt dn16l
 declare cmdTry dn16l
@@ -26,9 +28,16 @@ declare cmdSuccess dn16l
 declare waitInterval dn16l
 
 declare currWritePtr dn32l
-declare launchWritePtr dn32l
 declare burstWritePtr dn32l
 declare currPbkPtr dn32l
+
+declare writePtrStr varString
+declare sizeStr varString
+declare pbkPtrStr varString
+
+set writePtrStr = sd_partition_write
+set sizeStr = sd_partition_size
+set pbkPtrStr = sd_partition_pbk
 
 declare totNumPkts dn32l
 declare remNumPkts dn32l
@@ -40,7 +49,6 @@ declare singleBurstTimeout dn32l
 ; Initial variable defines
 set waitInterval = 4000
 ; Remember to change to the latest write pointer before shipping to SHAR
-set launchWritePtr = 413111
 set cmdTry = 0
 set cmdSuccess = 0
 set dwnldBurstSize = 300
@@ -67,9 +75,8 @@ set cmdSuccess = $cmdSuccess + 1
 
 
 
-; 2-5. Note down latest beacon partition write pointer from beacon packet
-set currWritePtr = beacon_sd_write_beacon
-
+; 2-5. Note down latest beacon partition write pointer from sd_hk packet and calculate number of packets needed for download
+set currWritePtr = $writePtrStr$partition_id
 if $launchWritePtr == $currWritePtr
   echo Check beacon updates again and wait till packets start updating on page
   pause
@@ -79,7 +86,7 @@ endif
 if $currWritePtr > $launchWritePtr
     set totNumPkts = $currWritePtr - $launchWritePtr
 else
-    set totNumPkts = sd_partition_size4 - $launchWritePtr + $currWritePtr
+    set totNumPkts = $sizeStr$partition_id - $launchWritePtr + $currWritePtr
 endif
 
 echo Current write pointer = $currWritePtr
@@ -96,20 +103,20 @@ set burstWritePtr = $launchWritePtr
 while $remNumPkts > $dwnldBurstSize
     set cmdCnt = beacon_cmd_succ_count + 1
     ; Send playback command
-    cmd_sd_playback stream UHF start $burstWritePtr num $dwnldBurstSize timeout $burstTimeout partition 4 decimation 1
+    cmd_sd_playback stream UHF start $burstWritePtr num $dwnldBurstSize timeout $burstTimeout partition $partition_id decimation 1
     echo Check whether playback started or resend command
     echo Also check if sufficient time to download additional packets or Jump to FINISH after this download
     pause
     ; Increment burstWritePtr
     set burstWritePtr = $burstWritePtr + $dwnldBurstSize
     ; Wait till the playback completes
-    tlmwait sd_partition_pbk4 >= $burstWritePtr - 1 ? $burstTimeout
+    tlmwait $pbkPtrStr$partition_id >= $burstWritePtr - 1 ? $burstTimeout
     ; Set new variables for re-running the loop
     set remNumPkts = $remNumPkts - $dwnldBurstSize
 endwhile
 
 ; Download remaining packets after integer number of short bursts
-cmd_sd_playback stream UHF start $burstWritePtr num $remNumPkts timeout $burstTimeout partition 4 decimation 1
+cmd_sd_playback stream UHF start $burstWritePtr num $remNumPkts timeout $burstTimeout partition $partition_id decimation 1
 echo Check whether playback started or resend command
 pause
 
@@ -118,25 +125,27 @@ goto VERIFY
 
 SINGLE_BURST:
 ; Download Beacon packets from beacon partition
-cmd_sd_playback stream UHF start $launchWritePtr num $totNumPkts timeout $singleBurstTimeout partition 4 decimation 1
+cmd_sd_playback stream UHF start $launchWritePtr num $totNumPkts timeout $singleBurstTimeout partition $partition_id decimation 1
 echo Check whether playback started or resend command
 pause
 
 
 VERIFY:
-tlmwait sd_partition_pbk4 >= $currWritePtr - 1 ? 300000
+tlmwait $pbkPtrStr$partition_id >= $currWritePtr - 1 ? 300000
 timeout
   echo All packets not downloaded
+  echo Press GO if playback is complete
+  pause
 
-  set currPbkPtr = sd_partition_pbk4
+  set currPbkPtr = $pbkPtrStr$partition_id
 
   if $currPbkPtr > $launchWritePtr
       set totNumPkts = $currPbkPtr - $launchWritePtr
   else
-      set totNumPkts = sd_partition_size4 - $launchWritePtr + $currPbkPtr
+      set totNumPkts = $sizeStr$partition_id - $launchWritePtr + $currPbkPtr
   endif
 
-  echo Curr Write pointer = $currPbkPtr
+  echo Curr playback pointer = $currPbkPtr
   echo Total downloaded number of Packets = $totNumPkts
 endtimeout
 
@@ -158,3 +167,5 @@ while beacon_cmd_succ_count < cmdCnt
     wait $waitInterval
 endwhile
 set cmdSuccess = $cmdSuccess + 1
+
+echo Playback deployment data from partition $partition_id completed
