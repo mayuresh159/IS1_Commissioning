@@ -338,7 +338,7 @@ endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
 wait $waitinterval
-verify eps_eclipse_thresh == 0.04
+verify eps_eclipse_threshold == 0.04
 echo Verification accepted, Press Go to upload the next Table parameter
 pause
 
