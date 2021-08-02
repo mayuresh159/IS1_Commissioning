@@ -70,10 +70,37 @@ set waitinterval = 3500
 ;    card_select - 0/CARD_0, 1/CARD_1, 2/FLASH
 ;
 
+
+echo Power ON InspireSat-1 and press GO
+pause
+
+echo Initial table parameters are
+print mode_launch_delay
+print mode_launch_flag
+print mode_deployables[0]
+print mode_deployables[1]
+print mode_deployables[2]
+print mode_deploy_int
+print mode_thresholds[0]
+print mode_thresholds[1]
+print mode_thresholds[2]
+print mode_thresholds[3]
+print mode_eclipse_method
+print adcs_eclipse_threshold
+print adcs_eclipse_count
+print eps_eclipse_threshold
+print clt_threshold
+print eps_batt_set_low
+print eps_batt_set_high
+print eps_batt_samples
+print sd_card_sel
+echo ***** Starting to reprogram table parameters *****
+
+
 ;   0. Route packets
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-	cmd_set_pkt_rate apid MODE_HK rate 1 stream DBG
+	cmd_set_pkt_rate apid MODE_HK rate 3 stream DBG
 	set cmdTry = cmdTry + 1
 	wait $waitinterval
 endwhile
@@ -81,7 +108,7 @@ set cmdSucceed = cmdSucceed + 1
 
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-	cmd_set_pkt_rate apid ADCS_HK rate 1 stream DBG
+	cmd_set_pkt_rate apid ADCS_HK rate 3 stream DBG
 	set cmdTry = cmdTry + 1
 	wait $waitinterval
 endwhile
@@ -89,7 +116,7 @@ set cmdSucceed = cmdSucceed + 1
 
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-	cmd_set_pkt_rate apid ANA_HK rate 1 stream DBG
+	cmd_set_pkt_rate apid ANA_HK rate 3 stream DBG
 	set cmdTry = cmdTry + 1
 	wait $waitinterval
 endwhile
@@ -97,7 +124,7 @@ set cmdSucceed = cmdSucceed + 1
 
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-	cmd_set_pkt_rate apid TLM_HK rate 1 stream DBG
+	cmd_set_pkt_rate apid TLM_HK rate 3 stream DBG
 	set cmdTry = cmdTry + 1
 	wait $waitinterval
 endwhile
@@ -105,7 +132,7 @@ set cmdSucceed = cmdSucceed + 1
 
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-	cmd_set_pkt_rate apid SD_HK rate 1 stream DBG
+	cmd_set_pkt_rate apid SD_HK rate 3 stream DBG
 	set cmdTry = cmdTry + 1
 	wait $waitinterval
 endwhile
@@ -220,7 +247,7 @@ endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
 wait $waitinterval
-verify mode_threshold[0] == 7400
+verify mode_thresholds[0] == 7.400
 echo Verification accepted, Press Go to upload the next Table parameter
 pause
 
@@ -235,7 +262,7 @@ endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
 wait $waitinterval
-verify mode_threshold[1] == 6700
+verify mode_thresholds[1] == 6.700
 echo Verification accepted, Press Go to upload the next Table parameter
 pause
 
@@ -250,7 +277,7 @@ endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
 wait $waitinterval
-verify mode_threshold[2] == 8500
+verify mode_thresholds[2] == 8.500
 echo Verification accepted, Press Go to upload the next Table parameter
 pause
 
@@ -265,7 +292,7 @@ endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
 wait $waitinterval
-verify mode_threshold[3] == 7000
+verify mode_thresholds[3] == 7.000
 echo Verification accepted, Press Go to upload the next Table parameter
 pause
 
@@ -286,8 +313,8 @@ echo Verification accepted, Press Go to upload the next Table parameter
 pause
 
 
-set cmdCnt = beacon_adcs_cmd_acpt + 1
-while beacon_adcs_cmd_acpt < cmdCnt
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < cmdCnt
   cmd_adcs_eclipse_update threshold 2500 count 3
   set cmdTry = cmdTry + 1
 	wait $waitinterval
@@ -327,7 +354,7 @@ endwhile
 set cmdSucceed = cmdSucceed + 1
 echo Wait for table parameter to be updated
 wait $waitinterval
-verify tlm_pkt_rate[0] == 10
+echo Check if the UHF packet rate is roughly 10 seconds
 echo Verification accepted, Press Go to upload the next Table parameter
 pause
 
@@ -442,6 +469,29 @@ print sd_partition_write4
 echo LOG partition write pointer
 print sd_partition_write5
 pause
+
+FINISH:
+echo Programmed table parameters are
+print mode_launch_delay
+print mode_launch_flag
+print mode_deployables[0]
+print mode_deployables[1]
+print mode_deployables[2]
+print mode_deploy_int
+print mode_thresholds[0]
+print mode_thresholds[1]
+print mode_thresholds[2]
+print mode_thresholds[3]
+print mode_eclipse_method
+print adcs_eclipse_threshold
+print adcs_eclipse_count
+print eps_eclipse_threshold
+print clt_threshold
+print eps_batt_set_low
+print eps_batt_set_high
+print eps_batt_samples
+print sd_card_sel
+
 
 ;   17. Unroute packets
 set cmdCnt = beacon_cmd_succ_count + 1
