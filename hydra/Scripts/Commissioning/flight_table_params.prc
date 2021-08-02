@@ -74,28 +74,6 @@ set waitinterval = 3500
 echo Power ON InspireSat-1 and press GO
 pause
 
-echo Initial table parameters are
-print mode_launch_delay
-print mode_launch_flag
-print mode_deployables[0]
-print mode_deployables[1]
-print mode_deployables[2]
-print mode_deploy_int
-print mode_thresholds[0]
-print mode_thresholds[1]
-print mode_thresholds[2]
-print mode_thresholds[3]
-print mode_eclipse_method
-print adcs_eclipse_threshold
-print adcs_eclipse_count
-print eps_eclipse_threshold
-print clt_threshold
-print eps_batt_set_low
-print eps_batt_set_high
-print eps_batt_samples
-print sd_card_sel
-echo ***** Starting to reprogram table parameters *****
-
 
 ;   0. Route packets
 set cmdCnt = beacon_cmd_succ_count + 1
@@ -137,6 +115,29 @@ while beacon_cmd_succ_count < $cmdCnt
 	wait $waitinterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
+
+
+echo Initial table parameters are
+print mode_launch_delay
+print mode_launch_flag
+print mode_deployables[0]
+print mode_deployables[1]
+print mode_deployables[2]
+print mode_deploy_int
+print mode_thresholds[0]
+print mode_thresholds[1]
+print mode_thresholds[2]
+print mode_thresholds[3]
+print mode_eclipse_method
+print adcs_eclipse_threshold
+print adcs_eclipse_count
+print eps_eclipse_threshold
+print clt_threshold
+print eps_batt_set_low
+print eps_batt_set_high
+print eps_batt_samples
+print sd_card_sel
+echo ***** Starting to reprogram table parameters *****
 
 
 ;   1. Deployment timeout for beacon (40 minutes)
