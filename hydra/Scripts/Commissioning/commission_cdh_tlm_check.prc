@@ -53,8 +53,10 @@ if beacon_eclipse_state == 0
 else if beacon_eclipse_state == 1
     echo InspireSAT-1 believes it is in eclipse
     set failCnt = failCnt + 1
+    pause
 else
     echo Unknown eclipse state!
+    pause
 endif
 
 ; Recieved Count
@@ -63,6 +65,7 @@ if beacon_cmd_recv_count >= 0 && beacon_cmd_recv_count <= 255
 else
     echo CMD Recieved Count outside of Limits
     set failCnt = failCnt + 1
+    pause
 endif
 
 ;Success Count
@@ -71,6 +74,7 @@ if beacon_cmd_succ_count >= 0 && beacon_cmd_succ_count <= 255
 else
     echo CMD Success Count outside of Limits
     set failCnt = failCnt + 1
+    pause
 endif
 
 ; Fail Count
@@ -79,6 +83,7 @@ if beacon_cmd_fail_count >= 0 && beacon_cmd_fail_count <= 255
 else
     echo CMD Fail Count outside of Limits
     set failCnt = failCnt + 1
+    pause
 endif
 
 ; CLT Fault
@@ -87,6 +92,7 @@ if beacon_clt_state == 0
 else
     echo Command Loss Timer Fault
     set failCnt = failCnt + 1
+    pause
 endif
 
 ; SD Card Power State
@@ -98,6 +104,7 @@ else
     else
         echo Neither SD card is on
         set failCnt = failCnt + 1
+        pause
     endif
 endif
 
@@ -148,6 +155,7 @@ if beacon_obc_temp <= 35
 else
     echo CDH Temperature Above High Limit
     set failCnt = failCnt + 1
+    pause
 endif
 
 ;Interface Temp
@@ -161,8 +169,9 @@ if beacon_int_temp <= 35
 else
     echo Interface Temperature Above High Limit
     set failCnt = failCnt + 1
+    pause
 endif
 
-END_TEMPERATURES:
+FINISH:
 echo See above for any telemetry check error messages
 echo COMPLETED CDH Check with Successes = $successCnt and Failures = $failCnt

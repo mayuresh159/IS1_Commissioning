@@ -29,6 +29,7 @@ if beacon_pwr_status_htr == 0
 else
     echo Heater is enabled. Check temperature.
     set failCnt = failCnt + 1
+    pause
 endif
 
 ;SBAND
@@ -38,6 +39,7 @@ if beacon_pwr_status_sband == 0
 else
     echo SBAND is enabled
     set failCnt = failCnt + 1
+    pause
 endif
 
 ;ADCS
@@ -49,19 +51,23 @@ if beacon_pwr_status_adcs == 1 && beacon_mode == 1
     else
         echo but not Alive
         set failCnt = failCnt + 1
+        pause
     endif
 else if beacon_pwr_status_adcs == 0 && beacon_mode == 1
     echo ADCS is disable in SAFE is unexpected
     set failCnt = failCnt + 1
+    pause
 else if beacon_pwr_status_adcs == 0 && beacon_mode == 0
     echo ADCS is disabled in PHOENIX
     set successCnt = successCnt + 1
 else if beacon_pwr_status_adcs == 1 && beacon_mode == 0
     echo ADCS is enabled in PHOENIX is unexpected
     set failCnt = failCnt + 1
+    pause
 else
     echo Unexpected mode and/or ADCS configuration
     set failCnt = failCnt + 1
+    pause
 endif
 
 ;CIP
@@ -71,6 +77,7 @@ if beacon_pwr_status_cip == 0
 else
     echo CIP is enabled is unexpected
     set failCnt = failCnt + 1
+    pause
 endif
 
 ;DAXSS
@@ -80,6 +87,7 @@ if beacon_pwr_status_daxss == 0
 else
     echo DAXSS is enabled is unexpected
     set failCnt = failCnt + 1
+    pause
 endif
 
 
@@ -91,6 +99,7 @@ if beacon_eps_temp <= 30
         echo EPS temp outside of limits
         print beacon_eps_temp
         set failCnt = failCnt + 1
+        pause
     endif
 else
     echo EPS temp outside of limits
@@ -105,11 +114,13 @@ if beacon_obc_temp <= 30
         echo OBC temp outside of limits
         print beacon_obc_temp
         set failCnt = failCnt + 1
+        pause
     endif
 else
     echo OBC temp outside of limits
     print beacon_obc_temp
     set failCnt = failCnt + 1
+    pause
 endif
 
 if beacon_int_temp <= 30
@@ -119,11 +130,13 @@ if beacon_int_temp <= 30
         echo Interface card temp outside of limits
         print beacon_int_temp
         set failCnt = failCnt + 1
+        pause
     endif
 else
     echo Interface card temp outside of limits
     print beacon_int_temp
     set failCnt = failCnt + 1
+    pause
 endif
 
 
@@ -135,6 +148,7 @@ else
     echo 3.3 A Monitor Below Low Limit
     print beacon_cdh_curr
     set failCnt = failCnt + 1
+    pause
 endif
 
 if beacon_cdh_curr <= .28
@@ -143,6 +157,7 @@ else
     echo 3.3 A Monitor Above High Limit
     print beacon_cdh_curr
     set failCnt = failCnt + 1
+    pause
 endif
 
 ;Battery Voltage (Update with actual values)
@@ -153,6 +168,7 @@ if beacon_pwr_status_htr == 1
         echo Battery Voltage Below Low Limit
         print beacon_bat_volt
         set failCnt = failCnt + 1
+        pause
     endif
     if beacon_bat_volt <= 8.2
         set successCnt = successCnt + 1
@@ -160,6 +176,7 @@ if beacon_pwr_status_htr == 1
         echo Battery Voltage Above High Limit
         print beacon_bat_volt
         set failCnt = failCnt + 1
+        pause
     endif
 
 ;Battery Current(Update with actual values)
@@ -167,13 +184,15 @@ if beacon_pwr_status_htr == 1
         set successCnt = successCnt + 1
     else
         echo Battery Current Below Low Limit
-            set failCnt = failCnt + 1
+        set failCnt = failCnt + 1
+        pause
     endif
     if beacon_bat_volt <= .2
         set successCnt = successCnt + 1
     else
         echo Battery Current Above High Limit
-            set failCnt = failCnt + 1
+        set failCnt = failCnt + 1
+        pause
     endif
 endif
 

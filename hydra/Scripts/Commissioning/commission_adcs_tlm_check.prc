@@ -518,7 +518,7 @@ set magnetometerSquareSum = magnetometerSquareSum + magnetometer3Squared
 verify magnetometerSquareSum >= 0
 verify magnetometerSquareSum <= 5625
 
-CLOSEOUT:
+FINISH:
 ; Unroute ADCS packets
 ; adcs_analogs
 set cmdCnt = beacon_cmd_succ_count + 1

@@ -67,6 +67,7 @@ if uhf_tx_count >= 0
 else
     echo UHF TX Count invalid
     set failCnt = failCnt + 1
+    pause
 endif
 
 if uhf_rx_discard == 0
@@ -74,6 +75,7 @@ if uhf_rx_discard == 0
 else
     echo UHF RX Discarded bytes
     set failCnt = failCnt + 1
+    pause
 endif
 
 if uhf_sbe_count == 0
@@ -81,6 +83,7 @@ if uhf_sbe_count == 0
 else
     echo UHF has Single Bit Errors
     set failCnt = failCnt + 1
+    pause
 endif
 
 ; Why check == 2?
@@ -89,6 +92,7 @@ if uhf_mbe_count >= 2
 else
     echo UHF has Multi Bit Errors
     set failCnt = failCnt + 1
+    pause
 endif
 
 if uhf_cmd_ready == 1
@@ -96,6 +100,7 @@ if uhf_cmd_ready == 1
 else
     echo UHF not Command Ready
     set failCnt = failCnt + 1
+    pause
 endif
 
 if uhf_pass_err_cnt == 0
@@ -103,6 +108,7 @@ if uhf_pass_err_cnt == 0
 else
     echo UHF has Passthrough Packet Response Errors
     set failCnt = failCnt + 1
+    pause
 endif
 
 if uhf_uart_drop_cnt == 0
@@ -110,6 +116,7 @@ if uhf_uart_drop_cnt == 0
 else
     echo UHF has bytes dropped by UART
     set failCnt = failCnt + 1
+    pause
 endif
 
 if uhf_uart_fra_err == 0
@@ -117,6 +124,7 @@ if uhf_uart_fra_err == 0
 else
     echo UHF has UART Framing Errors
     set failCnt = failCnt + 1
+    pause
 endif
 
 if uhf_uart_par_err == 0
@@ -124,6 +132,7 @@ if uhf_uart_par_err == 0
 else
     echo UHF has UART Parity Errors
     set failCnt = failCnt + 1
+    pause
 endif
 
 if uhf_uart_ovr_err == 0
@@ -131,6 +140,7 @@ if uhf_uart_ovr_err == 0
 else
     echo UHF has UART Overrun Errors
     set failCnt = failCnt + 1
+    pause
 endif
 
 if uhf_trap_count == 0
@@ -138,6 +148,7 @@ if uhf_trap_count == 0
 else
     echo UHF has Trap Counts
     set failCnt = failCnt + 1
+    pause
 endif
 
 if uhf_PLL_count == 0
@@ -145,6 +156,7 @@ if uhf_PLL_count == 0
 else
     echo UHF has PLL Counts
     set failCnt = failCnt + 1
+    pause
 endif
 
 if uhf_watchdog_count == 0
@@ -152,6 +164,7 @@ if uhf_watchdog_count == 0
 else
     echo UHF has Watchdog Counts
     set failCnt = failCnt + 1
+    pause
 endif
 
 ;UHF Locked
@@ -160,6 +173,7 @@ if uhf_locked == 0
 else
     echo UHF Mode Locked
     set failCnt = failCnt + 1
+    pause
 endif
 
 ;UHF Readback
@@ -168,6 +182,7 @@ if uhf_read_mode == 0x4E
 else
     echo UHF in Readback not N
     set failCnt = failCnt + 1
+    pause
 endif
 
 ;UHF SWD
@@ -176,6 +191,7 @@ if uhf_swd_mode == 0x56
 else
     echo UHF Mode SWD not V
     set failCnt = failCnt + 1
+    pause
 endif
 
 ;UHF AFC
@@ -184,6 +200,7 @@ if uhf_afc_mode == 0x46
 else
     echo UHF Mode not F
     set failCnt = failCnt + 1
+    pause
 endif
 
 ;UHF ECHO
@@ -192,6 +209,7 @@ if uhf_echo_mode == 0x45
 else
     echo UHF Mode ECHO not E
     set failCnt = failCnt + 1
+    pause
 endif
 
 ;UHF Channel
@@ -200,6 +218,7 @@ if uhf_channel == 0x41
 else
     echo UHF Channel not A
     set failCnt = failCnt + 1
+    pause
 endif
 
 
@@ -210,6 +229,7 @@ if sband_sent_count >= 0
 else
     echo SBAND Sent Count Invalid
     set failCnt = failCnt + 1
+    pause
 endif
 
 if sband_idle_count >= 0
@@ -217,6 +237,7 @@ if sband_idle_count >= 0
 else
     echo SBAND Idle Count Invalid
     set failCnt = failCnt + 1
+    pause
 endif
 
 if sband_power == 0x3
@@ -224,6 +245,7 @@ if sband_power == 0x3
 else
     echo SBAND Power not at -30 DB
     set failCnt = failCnt + 1
+    pause
 endif
 
 if sband_synth_offset == 4
@@ -231,6 +253,7 @@ if sband_synth_offset == 4
 else
     echo Incorrect Synth Offset
     set failCnt = failCnt + 1
+    pause
 endif
 
 if sband_control == 0 || 128
@@ -238,6 +261,7 @@ if sband_control == 0 || 128
 else
     echo Incorrect SBAND Control register
     set failCnt = failCnt + 1
+    pause
 endif
 
 if sband_encoder == 0
@@ -245,6 +269,7 @@ if sband_encoder == 0
 else
     echo Incorrect SBAND Encoder register
     set failCnt = failCnt + 1
+    pause
 endif
 
 if sband_underrun == 0
@@ -252,6 +277,7 @@ if sband_underrun == 0
 else
     echo SBAND buffer underruns
     set failCnt = failCnt + 1
+    pause
 endif
 
 if sband_overruns == 0
@@ -259,6 +285,7 @@ if sband_overruns == 0
 else
     echo SBAND buffer overruns
     set failCnt = failCnt + 1
+    pause
 endif
 
 if sband_underrun == 0
@@ -266,6 +293,7 @@ if sband_underrun == 0
 else
     echo SBAND buffer underruns
     set failCnt = failCnt + 1
+    pause
 endif
 
 if sband_tx_ready == 1
@@ -273,6 +301,7 @@ if sband_tx_ready == 1
 else
     echo SBAND TX not Ready
     set failCnt = failCnt + 1
+    pause
 endif
 
 if sband_hk_valid == 1
@@ -280,6 +309,7 @@ if sband_hk_valid == 1
 else
     echo SBAND HK not Valid
     set failCnt = failCnt + 1
+    pause
 endif
 
 if sband_i2c_timeout == 0
@@ -287,6 +317,7 @@ if sband_i2c_timeout == 0
 else
     echo SBAND i2c not running
     set failCnt = failCnt + 1
+    pause
 endif
 
 if sband_i2c_fail == 0
@@ -294,6 +325,7 @@ if sband_i2c_fail == 0
 else
     echo SBAND i2c failed
     set failCnt = failCnt + 1
+    pause
 endif
 
 VOLTAGES_CURRENTS:
@@ -305,6 +337,7 @@ else
     echo UHF Voltage outside low limit
     print beackon_uhf_volt
     set failCnt = failCnt + 1
+    pause
 endif
 
 if beacon_uhf_volt <= 6.25
@@ -313,6 +346,7 @@ else
     echo UHF Voltage outside high limit
     print beacon_uhf_volt
     set failCnt = failCnt + 1
+    pause
 endif
 
 if beacon_uhf_curr >= .03
@@ -321,6 +355,7 @@ else
     echo UHF Current outside of low limit
     print beacon_uhf_curr
     set failCnt = failCnt + 1
+    pause
 endif
 
 if beacon_uhf_curr <= .05
@@ -329,6 +364,7 @@ else
     echo UHF Current outside of high limit
     print beacon_uhf_curr
     set failCnt = failCnt + 1
+    pause
 endif
 
 
@@ -339,11 +375,13 @@ if beacon_sband_volt >= 5.75
         echo SBAND Voltage outside of high limit
         print beacon_sband_volt
         set failCnt = failCnt + 1
+        pause
     endif
 else
     echo SBAND Voltage outside of low limit
     print beacon_sband_volt
     set failCnt = failCnt + 1
+    pause
 endif
 
 if sband_status == 1
@@ -354,11 +392,13 @@ if sband_status == 1
             echo SBAND Current outside of high limit
             print sband_bat_cur
             set failCnt = failCnt + 1
+            pause
         endif
     else
         echo SBAND Current outside of low limit
         print sband_bat_cur
         set failCnt = failCnt + 1
+        pause
     endif
 endif
 
@@ -370,11 +410,13 @@ if sband_status == 3
             echo SBAND Current outside of high limit
             print sband_bat_cur
             set failCnt = failCnt + 1
+            pause
         endif
     else
         echo SBAND Current outside of low limit
         print sband_bat_cur
         set failCnt = failCnt + 1
+        pause
     endif
     if sband_pa_volt >= 5.0
         if sband_pa_volt <= 5.5
@@ -383,11 +425,13 @@ if sband_status == 3
             echo SBAND PA Voltage outside of high limit
             print sband_pa_volt
             set failCnt = failCnt + 1
+            pause
         endif
     else
         echo SBAND PA Voltage outside of low limit
         print sband_pa_volt
         set failCnt = failCnt + 1
+        pause
     endif
 
     if sband_pa_curr >= 0.0
@@ -397,11 +441,13 @@ if sband_status == 3
             echo SBAND Current outside of high limit
             print sband_pa_curr
             set failCnt = failCnt + 1
+            pause
         endif
     else
         echo SBAND Current outside of low limit
         print sband_pa_curr
         set failCnt = failCnt + 1
+        pause
     endif
 endif
 
@@ -413,11 +459,13 @@ if beacon_sband_top_temp >= 15
         echo SBAND Top Temp outside of high limit
         print beacon_sband_top_temp
         set failCnt = failCnt + 1
+        pause
     endif
 else
     echo SBAND Top Temp outside of low limit
     print beacon_sband_top_temp
     set failCnt = failCnt + 1
+    pause
 endif
 
 if sband_bdb_temp >= 15
@@ -427,11 +475,13 @@ if sband_bdb_temp >= 15
         echo SBAND Bottom Temp outside of high limit
         print sband_bdb_temp
         set failCnt = failCnt + 1
+        pause
     endif
 else
     echo SBAND Bottom Temp outside of low limit
     print sband_bdb_temp
     set failCnt = failCnt + 1
+    pause
 endif
 
 if sband_pa_temp >= 15
@@ -441,11 +491,13 @@ if sband_pa_temp >= 15
         echo SBAND PA Temp outside of high limit
         print sband_pa_temp
         set failCnt = failCnt + 1
+        pause
     endif
 else
     echo SBAND PA Temp outside of low limit
     print sband_pa_temp
     set failCnt = failCnt + 1
+    pause
 endif
 
 if beacon_uhf_temp >= 15
@@ -455,11 +507,13 @@ if beacon_uhf_temp >= 15
         echo UHF Temp outside of high limit
         print beacon_uhf_temp
         set failCnt = failCnt + 1
+        pause
     endif
 else
     echo UHF Temp outside of low limit
     print beacon_uhf_temp
     set failCnt = failCnt + 1
+    pause
 endif
 
 
