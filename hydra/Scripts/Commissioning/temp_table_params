@@ -1,0 +1,112 @@
+; Update temporary table parameters in the firmware
+;Purpose: Upload temporary table parameters to the firmware. This code is to be run before shipping the satellite to SHAR
+;				This script can be run on DBG through the umbilical chord instead of UHF
+
+
+declare cmdCnt dn16l
+declare cmdTry dn16l
+declare cmdSucceed dn16l
+declare waitinterval dn16l
+
+set cmdSucceed = 0
+set waitinterval = 3500
+
+
+echo Power ON InspireSat-1 and press GO
+pause
+
+
+;   0. Route packets
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+	cmd_set_pkt_rate apid MODE_HK rate 3 stream DBG
+	set cmdTry = cmdTry + 1
+	wait $waitinterval
+endwhile
+set cmdSucceed = cmdSucceed + 1
+
+
+;   1. Deployment timeout for beacon (40 minutes)
+;   2. Deployment timeout for antenna and SA (40 minutes)
+; Delay value to be given in seconds
+; The same launch delay works for antenna, SA and beacons.
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < cmdCnt
+  cmd_mode_launch_delay value 100
+  set cmdTry = cmdTry + 1
+  wait $waitinterval
+endwhile
+set cmdSucceed = cmdSucceed + 1
+echo Wait for table parameter to be updated
+wait $waitinterval
+verify mode_launch_delay == 100
+echo Verification accepted, Press Go to upload the next Table parameter
+pause
+
+
+;   3. Deployment flags (set to 0 pre- launch)
+; Component: 0/PANEL1, 1/PANEL2, 2/Antenna
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < cmdCnt
+  cmd_mode_launch_set_flag state 0
+  set cmdTry = cmdTry + 1
+  wait $waitinterval
+endwhile
+set cmdSucceed = cmdSucceed + 1
+echo Wait for table parameter to be updated
+wait $waitinterval
+verify mode_launch_flag == 0
+echo Verification accepted, Press Go to upload the next Table parameter
+pause
+
+
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < cmdCnt
+  cmd_mode_deploy_flag component 0 state 1
+  set cmdTry = cmdTry + 1
+  wait $waitinterval
+endwhile
+set cmdSucceed = cmdSucceed + 1
+echo Wait for table parameter to be updated
+wait $waitinterval
+verify mode_deployables[0] == 1
+echo Verification accepted, Press Go to upload the next Table parameter
+pause
+
+
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < cmdCnt
+  cmd_mode_deploy_flag component 1 state 1
+  set cmdTry = cmdTry + 1
+  wait $waitinterval
+endwhile
+set cmdSucceed = cmdSucceed + 1
+echo Wait for table parameter to be updated
+wait $waitinterval
+verify mode_deployables[1] == 1
+echo Verification accepted, Press Go to upload the next Table parameter
+pause
+
+
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < cmdCnt
+  cmd_mode_deploy_flag component 2 state 1
+  set cmdTry = cmdTry + 1
+  wait $waitinterval
+endwhile
+set cmdSucceed = cmdSucceed + 1
+echo Wait for table parameter to be updated
+wait $waitinterval
+verify mode_deployables[2] == 1
+echo Verification accepted, Press Go to upload the next Table parameter
+pause
+
+
+;   0. Unroute packets
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+	cmd_set_pkt_rate apid MODE_HK rate 0 stream DBG
+	set cmdTry = cmdTry + 1
+	wait $waitinterval
+endwhile
+set cmdSucceed = cmdSucceed + 1

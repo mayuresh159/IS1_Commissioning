@@ -115,13 +115,13 @@ set ephSecond = ephTotSec % 60
 echo Current time - $ephYear, $ephMonth, $ephDay, $ephHour, $ephMinute , $ephSecond
 
 ; 5. Upload the latest time to ADCS and confirm if it updated
-;set cmdADCSCnt = beacon_adcs_cmd_acpt + 1
-;while beacon_adcs_cmd_acpt < cmdADCSCnt
-;    cmd_adcs_Time_SetCurrentTimeUtc year $ephYear mon $ephMonth day $ephDay hour $ephHour min $ephMinute sec $ephSecond
-;    set cmdADCSTry = cmdADCSTry + 1
-;    wait $waitInterval
-;endwhile
-;set cmdADCSSucceed = cmdADCSSucceed + 1
+set cmdADCSCnt = beacon_adcs_cmd_acpt + 1
+while beacon_adcs_cmd_acpt < cmdADCSCnt
+    cmd_adcs_Time_SetCurrentTimeUtc year $ephYear mon $ephMonth day $ephDay hour $ephHour min $ephMinute sec $ephSecond
+    set cmdADCSTry = cmdADCSTry + 1
+    wait $waitInterval
+endwhile
+set cmdADCSSucceed = cmdADCSSucceed + 1
 echo Confirm if the ADCS time follows the system UTC time
 echo If not, send the command again
 
