@@ -45,7 +45,7 @@ verify beacon_alive_sband == 1
 ; Issue UHF_HK packet to UHF
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid UHF_HK rate 3 stream UHF
+    cmd_issue_pkt apid UHF_HK stream UHF
     set cmdTry = cmdTry + 1
     wait 3500
 endwhile
@@ -54,7 +54,7 @@ set successCnt = successCnt + 1
 ; Issue SBAND_HK packet to UHF
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid SBAND_HK rate 3 stream UHF
+    cmd_issue_pkt apid SBAND_HK stream UHF
     set cmdTry = cmdTry + 1
     wait 3500
 endwhile

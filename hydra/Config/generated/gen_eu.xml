@@ -134,7 +134,7 @@
   <typeDN endian="LITTLE" eu="SBAND_PA_Temp" name="SBAND_PA_Temp8L" size="8"/>
   <typeDN endian="LITTLE" eu="SBAND_PA_Temp" name="SBAND_PA_Temp16L" size="16"/>
   <typeDN endian="LITTLE" eu="SBAND_PA_Temp" name="SBAND_PA_Temp32L" size="32"/>
-  <typeEU endian="LITTLE" eu="SBAND_PA_Temp" name="SBAND_PA_Temp12L" size="12"/>
+  <typeEU endian="LITTLE" eu="SBAND_Board_Temp_seg" name="SBAND_PA_Temp12L" size="12"/>
   <typeDN endian="BIG" eu="SBAND_PA_Temp" name="SBAND_PA_Temp8B" size="8"/>
   <typeDN endian="BIG" eu="SBAND_PA_Temp" name="SBAND_PA_Temp16B" size="16"/>
   <typeDN endian="BIG" eu="SBAND_PA_Temp" name="SBAND_PA_Temp32B" size="32"/>
@@ -4752,4 +4752,3 @@
   <typeSN endian="BIG" eu="adcs_mag_mag_vector_body3_eu" name="adcs_mag_mag_vector_body3_eu16BS" size="16"/>
   <typeSN endian="BIG" eu="adcs_mag_mag_vector_body3_eu" name="adcs_mag_mag_vector_body3_eu32BS" size="32"/>
 </hydraDef>
-
