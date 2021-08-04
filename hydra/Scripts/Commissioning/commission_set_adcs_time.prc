@@ -34,7 +34,7 @@ declare ephTotSec dn32b
 
 ; Change these variables depending on the month and year
 set ephYear = 21
-set ephMonth = 07
+set ephMonth = 08
 
 set cmdTry = 0
 set cmdADCSTry = 0
@@ -124,6 +124,7 @@ endwhile
 set cmdADCSSucceed = cmdADCSSucceed + 1
 echo Confirm if the ADCS time follows the system UTC time
 echo If not, send the command again
+pause
 
 
 FINISH:

@@ -11,6 +11,7 @@ declare ephDay dn32b
 declare ephHour dn32b
 declare ephMinute dn32b
 declare ephSecond dn32b
+declare ephSecondJ2000 dn32b
 
 ; extra variables
 declare ephMinuteexcess dn32b
@@ -18,11 +19,12 @@ declare ephSecexcess dn32b
 declare ephTotSec dn32b
 
 set ephYear = 2021
-set ephMonth = 07
+set ephMonth = 08
 
 ; Stamp current time and day
 set currTimemSec = systemTimemSec
 set currTimeDay = systemTimeDay
+set ephSecondJ2000 = systemTimeSecJ2000
 
 ; Convert current time into ephemeris time
 set ephDay = currTimeDay
@@ -42,3 +44,4 @@ print ephDay
 print ephHour
 print ephMinute
 print ephSecond
+print ephSecondJ2000

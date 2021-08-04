@@ -1,5 +1,6 @@
 ; Update temporary table parameters in the firmware
-;Purpose: Upload temporary table parameters to the firmware. This code is to be run before shipping the satellite to SHAR
+;Purpose: Upload temporary table parameters to the firmware. For testing purposes we should reduce the launch delay and set deployment flags.
+; This script does exactly that on DBG serial line. This script can be run to reinstate satellite state after running flight_table_params
 ;				This script can be run on DBG through the umbilical chord instead of UHF
 
 

@@ -97,7 +97,7 @@
     <coeff index="1" value="0.0625"/>
   </euPoly>
   <typeDN endian="LITTLE" eu="SBAND_Board_Temp" name="SBAND_Board_Temp8L" size="8"/>
-  <typeDN endian="LITTLE" eu="SBAND_Board_Temp_seg" name="SBAND_Board_Temp12L" size="12"/>
+  <typeEU endian="LITTLE" eu="SBAND_Board_Temp_seg" name="SBAND_Board_Temp12L" size="12"/>
   <typeDN endian="LITTLE" eu="SBAND_Board_Temp" name="SBAND_Board_Temp16L" size="16"/>
   <typeDN endian="LITTLE" eu="SBAND_Board_Temp" name="SBAND_Board_Temp32L" size="32"/>
   <typeDN endian="BIG" eu="SBAND_Board_Temp" name="SBAND_Board_Temp8B" size="8"/>
@@ -131,19 +131,33 @@
     <coeff index="0" value="-50"/>
     <coeff index="1" value="0.0732421875"/>
   </euPoly>
-  <typeDN endian="LITTLE" eu="SBAND_PA_Temp" name="SBAND_PA_Temp8L" size="8"/>
-  <typeDN endian="LITTLE" eu="SBAND_PA_Temp" name="SBAND_PA_Temp16L" size="16"/>
-  <typeDN endian="LITTLE" eu="SBAND_PA_Temp" name="SBAND_PA_Temp32L" size="32"/>
-  <typeEU endian="LITTLE" eu="SBAND_Board_Temp_seg" name="SBAND_PA_Temp12L" size="12"/>
-  <typeDN endian="BIG" eu="SBAND_PA_Temp" name="SBAND_PA_Temp8B" size="8"/>
-  <typeDN endian="BIG" eu="SBAND_PA_Temp" name="SBAND_PA_Temp16B" size="16"/>
-  <typeDN endian="BIG" eu="SBAND_PA_Temp" name="SBAND_PA_Temp32B" size="32"/>
-  <typeSN endian="LITTLE" eu="SBAND_PA_Temp" name="SBAND_PA_Temp8LS" size="8"/>
-  <typeSN endian="LITTLE" eu="SBAND_PA_Temp" name="SBAND_PA_Temp16LS" size="16"/>
-  <typeSN endian="LITTLE" eu="SBAND_PA_Temp" name="SBAND_PA_Temp32LS" size="32"/>
-  <typeSN endian="BIG" eu="SBAND_PA_Temp" name="SBAND_PA_Temp8BS" size="8"/>
-  <typeSN endian="BIG" eu="SBAND_PA_Temp" name="SBAND_PA_Temp16BS" size="16"/>
-  <typeSN endian="BIG" eu="SBAND_PA_Temp" name="SBAND_PA_Temp32BS" size="32"/>
+  <euSegmented name="SBAND_PA_Temp_seg" size="12">
+    <segment low="0" high="2048" eu="pos_SBAND_PA_Temp"/>
+    <segment low="2047" high="4095" eu="neg_SBAND_PA_Temp"/>
+  </euSegmented>
+  <euPoly name="neg_SBAND_PA_Temp">
+    <!--From file apps/hk/AnaHkPkt.h-->
+    <coeff index="0" value="-256"/>
+    <coeff index="1" value="0.0625"/>
+  </euPoly>
+  <euPoly name="pos_SBAND_PA_Temp">
+    <!--From file apps/hk/AnaHkPkt.h-->
+    <coeff index="0" value="0"/>
+    <coeff index="1" value="0.0625"/>
+  </euPoly>
+  <typeDN endian="LITTLE" eu="SBAND_PA_Temp_seg" name="SBAND_PA_Temp8L" size="8"/>
+  <typeDN endian="LITTLE" eu="SBAND_PA_Temp_seg" name="SBAND_PA_Temp16L" size="16"/>
+  <typeDN endian="LITTLE" eu="SBAND_PA_Temp_seg" name="SBAND_PA_Temp32L" size="32"/>
+  <typeEU endian="LITTLE" eu="SBAND_PA_Temp_seg" name="SBAND_PA_Temp12L" size="12"/>
+  <typeDN endian="BIG" eu="SBAND_PA_Temp_seg" name="SBAND_PA_Temp8B" size="8"/>
+  <typeDN endian="BIG" eu="SBAND_PA_Temp_seg" name="SBAND_PA_Temp16B" size="16"/>
+  <typeDN endian="BIG" eu="SBAND_PA_Temp_seg" name="SBAND_PA_Temp32B" size="32"/>
+  <typeSN endian="LITTLE" eu="SBAND_PA_Temp_seg" name="SBAND_PA_Temp8LS" size="8"/>
+  <typeSN endian="LITTLE" eu="SBAND_PA_Temp_seg" name="SBAND_PA_Temp16LS" size="16"/>
+  <typeSN endian="LITTLE" eu="SBAND_PA_Temp_seg" name="SBAND_PA_Temp32LS" size="32"/>
+  <typeSN endian="BIG" eu="SBAND_PA_Temp_seg" name="SBAND_PA_Temp8BS" size="8"/>
+  <typeSN endian="BIG" eu="SBAND_PA_Temp_seg" name="SBAND_PA_Temp16BS" size="16"/>
+  <typeSN endian="BIG" eu="SBAND_PA_Temp_seg" name="SBAND_PA_Temp32BS" size="32"/>
   <euPoly name="SBAND_Bat_Curr">
     <!--From file apps/hk/AnaHkPkt.h-->
     <coeff index="0" value="0"/>
