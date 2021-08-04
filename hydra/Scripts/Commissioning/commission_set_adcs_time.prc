@@ -19,6 +19,7 @@ declare cmdADCSSucceed dn32l
 ; Define time variables
 declare currTimemSec dn32b
 declare currTimeDay dn32b
+declare currTimeSecJ2000 dn32b
 
 declare ephYear dn32b
 declare ephMonth dn32b
@@ -81,7 +82,32 @@ pause
 ; Stamp current time and day
 set currTimemSec = systemTimemSec
 set currTimeDay = systemTimeDay
+set currTimeSecJ2000 = systemTimeSecJ2000
 
+echo Select the method of programming time
+echo If using UTC jump to UTC, else press GO
+pause
+
+TAI:
+echo Current TAI time - $currTimeSecJ2000
+echo Confirm and press GO to program
+pause
+; 5. Upload the latest time to ADCS and confirm if it updated
+set cmdADCSCnt = beacon_adcs_cmd_acpt + 1
+while beacon_adcs_cmd_acpt < cmdADCSCnt
+    cmd_adcs_Time_SetCurrentTimeTai Time $currTimeSecJ2000
+    set cmdADCSTry = cmdADCSTry + 1
+    wait $waitInterval
+endwhile
+set cmdADCSSucceed = cmdADCSSucceed + 1
+echo Confirm if the ADCS time follows the system UTC time
+echo If not, send the command again
+pause
+
+GOTO FINISH
+
+
+UTC:
 ; Convert current time into ephemeris time
 set ephDay = currTimeDay + 1
 
@@ -112,7 +138,7 @@ endif
 
 set ephSecond = ephTotSec % 60
 
-echo Current time - $ephYear, $ephMonth, $ephDay, $ephHour, $ephMinute , $ephSecond
+echo Current UTC time - $ephYear, $ephMonth, $ephDay, $ephHour, $ephMinute , $ephSecond
 echo Confirm and press GO to program
 pause
 
