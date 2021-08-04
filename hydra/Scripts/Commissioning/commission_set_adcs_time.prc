@@ -113,6 +113,8 @@ endif
 set ephSecond = ephTotSec % 60
 
 echo Current time - $ephYear, $ephMonth, $ephDay, $ephHour, $ephMinute , $ephSecond
+echo Confirm and press GO to program
+pause
 
 ; 5. Upload the latest time to ADCS and confirm if it updated
 set cmdADCSCnt = beacon_adcs_cmd_acpt + 1
