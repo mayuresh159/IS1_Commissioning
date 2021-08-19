@@ -40,7 +40,7 @@ call hello_is1
 set cmdCnt = beacon_cmd_succ_count + 1
 ; repeat until command is accepted by SC
 while beacon_cmd_succ_count < $cmdCnt
-	cmd_set_pkt_rate apid 1 rate 3 stream 1
+	cmd_set_pkt_rate apid SW_STAT rate 3 stream UHF
 	set cmdTry = cmdTry + 1
 	wait 3500
 endwhile
@@ -59,118 +59,57 @@ timeout
 endtimeout
 
 
-
 CHECKOUT:
 ; Decided to keep all parameter checks
 ; Call cdh_tlm_check
-call commission_cdh_tlm_check
+call Scripts/Commissioning/commission_cdh_tlm_check
 
 ; Call eps_tlm_check in flight context
-call commission_eps_tlm_check
+call Scripts/Commissioning/commission_eps_tlm_check
 
 ; Call comm_tlm_check in flight context
-call commission_comm_tlm_check
+call Scripts/Commissioning/commission_comm_tlm_check
 
 
+REDUCE_LAUNCH_DELAY:
 ; Zero launch delay table parameter to avoid recurring launch delay after spacecraft reset
 echo To cancel launch delay press GO
 echo Else jump to CANCEL_DEPLOYMENTS
 pause
 
-; First Route mode_hk_packet to UHF, to verify launch delay, launch flag, and status of deployments
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid MODE_HK rate 3 stream UHF
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set cmdSucceed = cmdSucceed + 1
-
-; Set launch delay to value 10
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < cmdCnt
-		cmd_mode_launch_delay value 10
-		set cmdTry = cmdTry + 1
-		wait 3500
-endwhile
-set cmdSucceed = cmdSucceed + 1
-
-verify mode_launch_delay == 10
-
-; Set launch flag to 1
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < cmdCnt
-		cmd_mode_launch_set_flag state 1
-		set cmdTry = cmdTry + 1
-		wait 3500
-endwhile
-set cmdSucceed = cmdSucceed + 1
-
-verify mode_launch_flag == 1
+call Scripts/Commissioning/commission_reduce_launch_delay
 
 
 CANCEL_DEPLOYMENTS:
 ; Cancel all deployments commands
 echo To cancel Panel deployments press GO
+echo Else jump to REDUCE_BEACON_RATE
+pause
+
+call Scripts/Commissioning/commission_act_deployables
+
+
+REDUCE_BEACON_RATE:
+; Reduce beacon rate to SD card to avoid beacon partition overflow before deployment data download
+echo To reduce beacon rate to SD card press GO
 echo Else jump to FINISH
 pause
 
-PANEL1:
-; Stop deployments
-; Set deploy flag states (PANEL1, PANEL2 and ANTENNA) to 1
-echo User to verify if PANEL1 currents are nominal
-echo Jump to PANEL2 if skipping this
-pause
+; Reduce beacon rate to SD card to avoid beacon partition overflow before deployment data download
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
-    cmd_mode_deploy_flag component 0 state 1
-    set cmdTry = cmdTry + 1
-    wait 3529
+	set cmdTry = cmdTry + 1
+	cmd_set_pkt_rate apid SW_STAT rate 3 stream SD
+	wait 3529
 endwhile
 set cmdSucceed = cmdSucceed + 1
-verify mode_deployables[0] == 1
 
-PANEL2:
-echo User to verify if PANEL2 currents are nominal
-echo Jump to ANTENNA if skipping this
-pause
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_mode_deploy_flag component 1 state 1
-    set cmdTry = cmdTry + 1
-    wait 3529
-endwhile
-set cmdSucceed = cmdSucceed + 1
-verify mode_deployables[1] == 1
 
-ANTENNA:
-echo User to verify if ANTENNA is deployed through signal strength in UHF waterfall plot
-pause
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_mode_deploy_flag component 2 state 1
-    set cmdTry = cmdTry + 1
-    wait 3529
-endwhile
-set cmdSucceed = cmdSucceed + 1
-verify mode_deployables[2] == 1
 
 wait 3500
 
-
-
 ; Finish up aliveness test tasks
 FINISH:
-; Disable mode_hk_packet routing
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid MODE_HK rate 0 stream 0
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set cmdSucceed = cmdSucceed + 1
-
-
 ; Set beacons back to UHF stream with default rate of 30 seconds
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
@@ -182,6 +121,4 @@ set cmdSucceed = cmdSucceed + 1
 
 
 ; Report completion of script
-echo COMPLETED Commission aliveness phoenix test
-print cmdTry
-print cmdSucceed
+echo COMPLETED Commission aliveness phoenix test with Tries = $cmdTry and Success = $cmdSucceed

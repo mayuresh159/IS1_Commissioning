@@ -73,10 +73,26 @@ call Scripts/Commissioning/commission_reduce_launch_delay
 COMPLETE_DEPLOYMENTS:
 ; Cancel all deployments commands
 echo To cancel deployments press GO
-echo Else jump to FINISH
+echo Else jump to REDUCE_BEACON_RATE
 pause
 
 call Scripts/Commissioning/commission_act_deployables
+
+REDUCE_BEACON_RATE:
+; Reduce beacon rate to SD card to avoid beacon partition overflow before deployment data download
+echo To reduce beacon rate to SD card press GO
+echo Else jump to FINISH
+pause
+
+; Reduce beacon rate to SD card to avoid beacon partition overflow before deployment data download
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < $cmdCnt
+	set cmdTry = cmdTry + 1
+	cmd_set_pkt_rate apid SW_STAT rate 3 stream SD
+	wait 3529
+endwhile
+set cmdSucceed = cmdSucceed + 1
+
 
 wait 3500
 
@@ -93,4 +109,4 @@ set cmdSucceed = cmdSucceed + 1
 
 
 ; Report completion of script
-echo COMPLETED Commission aliveness safe test: $cmdTry, $cmdSucceed
+echo COMPLETED Commission aliveness safe test with Tries = $cmdTry and Success = $cmdSucceed
