@@ -100,6 +100,10 @@ while beacon_adcs_cmd_acpt < cmdADCSCnt
     wait $waitInterval
 endwhile
 set cmdADCSSucceed = cmdADCSSucceed + 1
+
+echo Confirm if ADCS time valid flag is set
+verify beacon_adcs_time_valid == 1
+
 echo Confirm if the ADCS time follows the system UTC time
 echo If not, send the command again
 pause
@@ -150,6 +154,10 @@ while beacon_adcs_cmd_acpt < cmdADCSCnt
     wait $waitInterval
 endwhile
 set cmdADCSSucceed = cmdADCSSucceed + 1
+
+echo Confirm if the ADCS time valid flag is set
+verify beacon_adcs_time_valid == 1
+
 echo Confirm if the ADCS time follows the system UTC time
 echo If not, send the command again
 pause

@@ -34,6 +34,14 @@ while beacon_cmd_succ_count < cmdCnt
 endwhile
 set cmdSucceed = cmdSucceed + 1
 
+; 2. Route DAXSS packets
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < cmdCnt
+    cmd_set_pkt_rate apid DAXSS_HK rate 3 stream UHF
+    set cmdTry = cmdTry + 1
+    wait $waitInterval
+endwhile
+set cmdSucceed = cmdSucceed + 1
 
 ; 3. Grab system time
 set currTimeSec = systemTimeSecJ2000
@@ -42,8 +50,8 @@ echo Confirm and press GO to program
 pause
 
 ; 4. Set DAXSS GPS time
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < cmdCnt
+set cmdCnt = daxss_cmd_succ + 1
+while daxss_cmd_succ < cmdCnt
     cmd_daxss_set_time time $currTimeSec
     set cmdTry = cmdTry + 1
     wait $waitInterval
@@ -55,7 +63,15 @@ pause
 
 
 FINISH:
-; 5. Reduce beacon rate
+; 5. Stop daxss packet routing and reduce beacon rate
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < cmdCnt
+    cmd_set_pkt_rate apid DAXSS_HK rate 0 stream UHF
+    set cmdTry = cmdTry + 1
+    wait $waitInterval
+endwhile
+set cmdSucceed = cmdSucceed + 1
+
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < cmdCnt
     cmd_set_pkt_rate apid SW_STAT rate 10 stream UHF
@@ -64,6 +80,4 @@ while beacon_cmd_succ_count < cmdCnt
 endwhile
 set cmdSucceed = cmdSucceed + 1
 
-echo Set DAXSS time succeeded with
-echo Tries - $cmdTry
-echo Success - $cmdSucceed
+echo Set DAXSS time succeeded with Tries = $cmdTry, Success = $cmdSucceed
