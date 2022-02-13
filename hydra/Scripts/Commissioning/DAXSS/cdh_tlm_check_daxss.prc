@@ -19,8 +19,8 @@
 ;                                  Added isTVACTest so that temperatures won't fail in TVAC if isTVACTest == 1
 ;                                  Takes 5 seconds to run this script. 
 ;    2016-03-05: James Paul Mason: Updated for flight. 
-;	 2019-03-28: James Paul Mason: Updated for DAXSS (no ADCS, COMM, batteries, or solar arrays)
-;
+;    2019-03-28: James Paul Mason: Updated for DAXSS (no ADCS, COMM, batteries, or solar arrays)
+;    2022-02-13: Robert Sewell:    Updated for IS-1 commissioning
 
 declare cmdCntDaxss dn16
 declare cmdCnt dn16
@@ -43,31 +43,8 @@ CDH:
 echo STARTING DAXSS CDH tlm checks
 
 READ_PARAM:
-set paramCnt = ccsdsTlmHeader_count_daxss_mem + 1 
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 177 rate 3 stream 0
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set cmdSucceed = cmdSucceed + 1 
+call Scripts/Commissioning/DAXSS/dump_parameters
 
-while ccsdsTlmHeader_count_daxss_mem < paramCnt
-    set cmdCntDaxss = daxss_sci_cmd_acpt_count + 1
-    while daxss_sci_cmd_acpt_count < $cmdCntDaxss
-        set cmdTryDaxss = cmdTryDaxss + 1
-        cmd_daxss_dump_param set 0
-        wait 5029
-    endwhile
-    set cmdSucceedDaxss = cmdSucceedDaxss + 1
-endwhile
-
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 177 rate 0 stream 0
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set cmdSucceed = cmdSucceed + 1 
 ; Now check that all tlm is in range
 
 CDH_TLM_CHECKS:
