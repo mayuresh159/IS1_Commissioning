@@ -11,6 +11,8 @@ declare cmdCnt dn32l
 declare cmdTry dn32l
 declare cmdSucceed dn32l
 declare waitInterval dn32l
+declare pktRateNew dn32l
+declare pktRateDefault dn32l
 declare modeError dn32l
 declare sdError dn32l
 
@@ -25,10 +27,14 @@ declare secDiff dn32l
 set secDiff = 0
 set secOld = 0
 set secNew = 0
-set waitInterval = 3500
+set pktRateNew = 5 ;in seconds
+set pktRateDefault = 10 ;in seconds
+set waitInterval = 5500 ;in miliseconds
 
 echo STARTING hello_is1
-echo sending hk packet every 3 seconds
+echo sending hk packet every 5 seconds
+
+ISSUE_HK:
 
 while secDiff == 0
     cmd_issue_pkt apid SW_STAT stream UHF
@@ -46,15 +52,17 @@ if beacon_mode == 0
     set modeError = 1
 endif
 
-; We got a beacon, so now route beacons every 3 seconds
+INCREASE_RATE:
+; We got a beacon, so now route beacons every 5 seconds
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < cmdCnt
-    cmd_set_pkt_rate apid SW_STAT rate 3 stream UHF
+    cmd_set_pkt_rate apid SW_STAT rate $pktRateNew stream UHF
     set cmdTry = cmdTry + 1
     wait $waitInterval
 endwhile
 set cmdSucceed = cmdSucceed + 1
 
+ISSUE_SD_HK:
 ; Send the command to get sd card hk
 set cmdCnt = beacon_cmd_succ_count + 1
 set secDiff = 0
@@ -77,6 +85,7 @@ if sd_card_sel == 2
     set sdError = 1
 endif
 
+CLEAR_FDRI:
 ;clear sd fdri counter
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < cmdCnt
@@ -97,5 +106,20 @@ if sdError == 1
     echo Consider recovering from FLASH before starting other scripts
 endif
 
+echo If you are running other scripts this pass:
+echo GOTO finish or return from this script
+echo Else we will set the beacon rate to 10 seconds after 1 min
+wait 60000
+
+RETURN_RATE:
+set cmdCnt = beacon_cmd_succ_count + 1
+while beacon_cmd_succ_count < cmdCnt
+    cmd_set_pkt_rate apid SW_STAT rate $pktRateDefault stream UHF
+    set cmdTry = cmdTry + 1
+    wait $waitInterval
+endwhile
+set cmdSucceed = cmdSucceed + 1
+
+FINISH:
 print cmdTry
 print cmdSucceed
