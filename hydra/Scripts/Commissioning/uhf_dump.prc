@@ -17,8 +17,8 @@
 ;   4. Repeat the playback for n number of times each time downloading 300 packets from SD Card
 ;   5. Close out
 
-argument partition_id dn8l
-argument launchWritePtr dn32l
+declare partition_id dn8l
+declare launchWritePtr dn32l
 
 ; Declaring variables
 declare cmdCnt dn16l
@@ -40,7 +40,7 @@ set cmdSuccess = 0
 set dwnldBurstSize = 180
 set burstTimeout = 180
 set launchWritePtr = 2685052
-set partition_id = BEACON
+set partition_id = 04
 
 ; SD_HK packet 1
 set cmdCnt = beacon_cmd_succ_count + 1
