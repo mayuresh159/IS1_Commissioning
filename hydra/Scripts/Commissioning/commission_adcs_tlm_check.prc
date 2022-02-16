@@ -19,6 +19,13 @@
 ;                                  Script takes 30 seconds to run depending on how long it takes operator to click continue at a couple points.
 ;    2016/03/05: James Paul Mason: Updated for flight.
 ;
+;
+; MANAGEMENT:
+; 1. Hydra Operator (Commander): Dhruva Anantha Datta (IIST)
+; 2. GNU radio Operator; Murala Aman Naveen (IIST)
+; 3. GS Superviser; Raveendranath Sir (IIST) and Joji Sir (IIST)
+; 4. QA, Arosish Priyadarshan (IIST)
+; 
 
 declare cmdCnt dn16l
 declare cmdTry dn16l
@@ -521,40 +528,6 @@ verify magnetometerSquareSum <= 5625
 FINISH:
 ; Unroute ADCS packets
 ; adcs_analogs
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 215 rate 0 stream UHF
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set successCnt = successCnt + 1
-
-; adcs_command_tlm
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 200 rate 0 stream UHF
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set successCnt = successCnt + 1
-
-; adcs_mag
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 211 rate 0 stream UHF
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set successCnt = successCnt + 1
-
-; adcs_rw_drive
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid 206 rate 0 stream UHF
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set successCnt = successCnt + 1
 
 echo Success count = $successCnt expected many (40?)
 echo Fail count = $failCnt

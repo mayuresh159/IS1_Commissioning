@@ -17,6 +17,12 @@
 ;    2020-3-12: Robert Sewell -- Created
 ;    2021-5-18: Mayuresh -- Converted variables isFlight and isTVACTest to arguments
 ;
+; MANAGEMENT:
+; 1. Hydra Operator (Commander): Dhruva Anantha Datta (IIST)
+; 2. GNU radio Operator; Murala Aman Naveen (IIST)
+; 3. GS Superviser; Raveendranath Sir (IIST) and Joji Sir (IIST)
+; 4. QA, Arosish Priyadarshan (IIST)
+; 5. Script Lead; Mayuresh (Dhruva Space, NTU)
 
 declare cmdCnt      dn16l
 declare cmdTry      dn16l
