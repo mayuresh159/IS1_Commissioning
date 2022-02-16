@@ -61,6 +61,10 @@ while beacon_cmd_succ_count < cmdCnt
 endwhile
 set cmdSuccess = $cmdSuccess + 1
 
+echo Press GO once the UHF dump has been completed
+pause
+
+
 ; SD_HK packet 2
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < cmdCnt
