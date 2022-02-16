@@ -534,7 +534,8 @@ if $SBANDpwr == 0
     set successCnt = successCnt + 1
 endif
 
-verify beacon_alive_sband == 1
+;RHAS: Changed to "== 0" as Sband should now be off
+verify beacon_alive_sband == 0
 
 ; Unroute packets from UHF if any (other than the 10 second beacon)
 
