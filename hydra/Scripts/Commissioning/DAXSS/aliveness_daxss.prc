@@ -146,7 +146,7 @@ set cmdSucceedDaxss = cmdSucceedDaxss + 1
 echo Turning off DAXSS SCI UHF routing
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < cmdCnt
-    cmd_set_pkt_rate apid DAXSS_SCI rate 3 stream UHF
+    cmd_set_pkt_rate apid DAXSS_SCI rate 0 stream UHF
     set cmdTry = cmdTry + 1
     wait $waitInterval
 endwhile
