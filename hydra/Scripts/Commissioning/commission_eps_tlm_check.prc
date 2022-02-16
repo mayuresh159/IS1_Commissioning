@@ -10,6 +10,13 @@
 ;
 ; MODIFICATION HISTORY
 ;   2020-03-13 : Robert Sewell - Created
+;
+; MANAGEMENT:
+; 1. Hydra Operator (Commander): Dhruva Anantha Datta (IIST)
+; 2. GNU radio Operator; Murala Aman Naveen (IIST)
+; 3. GS Superviser; Raveendranath Sir (IIST) and Joji Sir (IIST)
+; 4. QA, Arosish Priyadarshan (IIST)
+; 
 
 declare cmdCnt      dn16
 declare seqCnt      dn14

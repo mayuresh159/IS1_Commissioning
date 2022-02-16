@@ -14,6 +14,12 @@
 ; MODIFICATION HISTORY:
 ;    2020-3-12: Robert Sewell -- Created
 ;
+; MANAGEMENT:
+; 1. Hydra Operator (Commander): Dhruva Anantha Datta (IIST)
+; 2. GNU radio Operator; Murala Aman Naveen (IIST)
+; 3. GS Superviser; Raveendranath Sir (IIST) and Joji Sir (IIST)
+; 4. QA, Arosish Priyadarshan (IIST)
+; 
 
 declare cmdCnt dn16
 declare seqCnt dn14
@@ -42,7 +48,7 @@ verify beacon_alive_uhf == 1
 verify beacon_alive_sband == 1
 
 ; All packets stream to UHF and not DBG
-; Issue UHF_HK packet to UHF
+; Issue UHF_HK packet to UHF for the first time
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
     cmd_issue_pkt apid UHF_HK stream UHF
@@ -51,7 +57,7 @@ while beacon_cmd_succ_count < $cmdCnt
 endwhile
 set successCnt = successCnt + 1
 
-; Issue SBAND_HK packet to UHF
+; Issue SBAND_HK packet to UHF for the first time
 set cmdCnt = beacon_cmd_succ_count + 1
 while beacon_cmd_succ_count < $cmdCnt
     cmd_issue_pkt apid SBAND_HK stream UHF
@@ -59,7 +65,6 @@ while beacon_cmd_succ_count < $cmdCnt
     wait 3500
 endwhile
 set successCnt = successCnt + 1
-
 
 UHF_TLM_CHECKS:
 if uhf_tx_count >= 0
@@ -529,23 +534,8 @@ if $SBANDpwr == 0
     set successCnt = successCnt + 1
 endif
 
-; Unroute packets from UHF
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid UHF_HK rate 0 stream UHF
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set successCnt = successCnt + 1
+verify beacon_alive_sband == 1
 
-; Issue SBAND_HK packet to UHF
-set cmdCnt = beacon_cmd_succ_count + 1
-while beacon_cmd_succ_count < $cmdCnt
-    cmd_set_pkt_rate apid SBAND_HK rate 0 stream UHF
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set successCnt = successCnt + 1
-
+; Unroute packets from UHF if any (other than the 10 second beacon)
 
 echo COMPLETED Radios tlm checks with Successes = $successCnt and Failures = $failCnt
