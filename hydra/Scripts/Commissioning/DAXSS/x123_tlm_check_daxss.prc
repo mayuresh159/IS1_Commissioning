@@ -40,6 +40,7 @@
 ;    2016-03-05: James Paul Mason: Updated for flight.
 ;	 2019-03-28: James Paul Mason: Updated for DAXSS
 ;    2022-02-13: Robert Sewell:    Updated for IS-1 commissioning
+;    2022-02-27: Dhruva Anantha Datta: Updated for manual PTT mode
 
 declare cmdCnt dn16l
 declare cmdTry dn16l
