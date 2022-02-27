@@ -63,13 +63,13 @@ X123:
 echo STARTING X123 tlm checks
 
 ;set rates to what this script expects for integration time
-set cmdCnt = daxss_sci_cmd_acpt_count + 1
-while daxss_sci_cmd_acpt_count < $cmdCnt
-    cmd_daxss_set_sci_pkt_rate time 3
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set cmdSucceed = cmdSucceed + 1 
+;set cmdCnt = daxss_sci_cmd_acpt_count + 1
+;while daxss_sci_cmd_acpt_count < $cmdCnt
+;    cmd_daxss_set_sci_pkt_rate time 3
+;    set cmdTry = cmdTry + 1
+;    wait 3500
+;endwhile
+;set cmdSucceed = cmdSucceed + 1 
 
 ; Switch on X123 if it is off
 if daxss_sci_x123_enabled == 1
@@ -93,9 +93,9 @@ endif
 ; Check flight model number
 set FM_number = daxss_sci_fm
 
-call Scripts/Commissioning/DAXSS/dump_parameters
+;call Scripts/Commissioning/DAXSS/dump_parameters
 ; check PARAM for compression is turned on
-verify daxss_param_sd_x123_comp == 1   
+;verify daxss_param_sd_x123_comp == 1   
 
 echo Waiting for X123 detector to cool down below 240 K
 tlmwait daxss_sci_x123_det_temp < 240
@@ -197,13 +197,13 @@ else
 endif
 
 FINISH:
-echo Setting back to nominal DAXSS sci rate production
-set cmdCnt = daxss_sci_cmd_acpt_count + 1
-while daxss_sci_cmd_acpt_count < $cmdCnt
-    cmd_daxss_set_sci_pkt_rate time $DaxssNominalRate
-    set cmdTry = cmdTry + 1
-    wait 3500
-endwhile
-set cmdSucceed = cmdSucceed + 1 
+;echo Setting back to nominal DAXSS sci rate production
+;set cmdCnt = daxss_sci_cmd_acpt_count + 1
+;while daxss_sci_cmd_acpt_count < $cmdCnt
+;    cmd_daxss_set_sci_pkt_rate time $DaxssNominalRate
+;    set cmdTry = cmdTry + 1
+;    wait 3500
+;endwhile
+;set cmdSucceed = cmdSucceed + 1 
 echo COMPLETED  X123  tlm checks
-echo cmdSucceedDaxss = $cmdSucceedDaxss
+;echo cmdSucceedDaxss = $cmdSucceedDaxss

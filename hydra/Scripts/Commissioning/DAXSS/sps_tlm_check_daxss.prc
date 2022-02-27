@@ -91,33 +91,33 @@ set FM_number = daxss_sci_fm
 SPS_AUTOMATED_TELEMETRY_CHECK:
 
 ; Dump current MinXSS parameters stored in RAM
-call Scripts/Commissioning/DAXSS/dump_parameters        
+;call Scripts/Commissioning/DAXSS/dump_parameters        
 
 TELEMETRY_CHECKS:
 
 ;verify param offsets
-if $FM_number == 4
+;if $FM_number == 4
     ;SPS ASIC Offset 0 in PARAM=0 packet: checks that offsets are what they should be
-    verify daxss_param_sps_asic_off[0] == 30948
+    ;verify daxss_param_sps_asic_off[0] == 30948
 
     ;SPS ASIC Offset 1: checks that offsets are what they should be
-    verify daxss_param_sps_asic_off[1] == 30948
+    ;verify daxss_param_sps_asic_off[1] == 30948
 
     ;SPS ASIC Offset 2: checks that offsets are what they should be
-    verify daxss_param_sps_asic_off[2] == 30948
+    ;verify daxss_param_sps_asic_off[2] == 30948
 
     ;SPS ASIC Offset 3: checks that offsets are what they should be
-    verify daxss_param_sps_asic_off[3] == 30948
+    ;verify daxss_param_sps_asic_off[3] == 30948
 
     ;SPS ASIC Offset 4: checks that offsets are what they should be
-    verify daxss_param_sps_asic_off[4] == 30948
+    ;verify daxss_param_sps_asic_off[4] == 30948
 
     ;SPS ASIC Offset 5: checks that offsets are what they should be
-    verify daxss_param_sps_asic_off[5] == 30948
-else
-    echo This script should only be run for FM4 with PicoSIM (DAXSS)
-    pause
-endif
+    ;verify daxss_param_sps_asic_off[5] == 30948
+;else
+    ;echo This script should only be run for FM4 with PicoSIM (DAXSS)
+    ;pause
+;endif
 
 ; check tlm monitors against upper and lower limit
 
@@ -148,21 +148,21 @@ else
 endif
 
 ; SPS Signal in HK Packet: checks that it is greater than offsets in sunlight 
-if daxss_sci_cdh_eclipse == 0 
-    echo Housekeeping indicates that MinXSS is in sunlight so SPS diodes should be bright
-    verify daxss_sci_sps_data1 < daxss_param_sps_asic_off[0]
-    verify daxss_sci_sps_data2 < daxss_param_sps_asic_off[1]
-    verify daxss_sci_sps_data3 < daxss_param_sps_asic_off[2]
-    verify daxss_sci_sps_data4 < daxss_param_sps_asic_off[3]
-    verify daxss_sci_sps_sum > 4000
-else
-    echo Housekeeping indicate that MinXSS is in eclipse so SPS diodes should be dark (with some tolerance for temperature)
-    verify daxss_sci_sps_data1 >= daxss_param_sps_asic_off[0] - 200
-    verify daxss_sci_sps_data2 >= daxss_param_sps_asic_off[1] - 200 
-    verify daxss_sci_sps_data3 >= daxss_param_sps_asic_off[2] - 200
-    verify daxss_sci_sps_data4 >= daxss_param_sps_asic_off[3] - 200
-    verify daxss_sci_sps_sum < 4000
-endif
+;if daxss_sci_cdh_eclipse == 0 
+;    echo Housekeeping indicates that MinXSS is in sunlight so SPS diodes should be bright
+;    verify daxss_sci_sps_data1 < daxss_param_sps_asic_off[0]
+;    verify daxss_sci_sps_data2 < daxss_param_sps_asic_off[1]
+;    verify daxss_sci_sps_data3 < daxss_param_sps_asic_off[2]
+;    verify daxss_sci_sps_data4 < daxss_param_sps_asic_off[3]
+;    verify daxss_sci_sps_sum > 4000
+;else
+;    echo Housekeeping indicate that MinXSS is in eclipse so SPS diodes should be dark (with some tolerance for temperature)
+;    verify daxss_sci_sps_data1 >= daxss_param_sps_asic_off[0] - 200
+;    verify daxss_sci_sps_data2 >= daxss_param_sps_asic_off[1] - 200 
+;    verify daxss_sci_sps_data3 >= daxss_param_sps_asic_off[2] - 200
+;    verify daxss_sci_sps_data4 >= daxss_param_sps_asic_off[3] - 200
+;    verify daxss_sci_sps_sum < 4000
+;endif
 
 ; Sps sum in HK: checks range between 0 and 4000
 verify daxss_sci_sps_sum >= 0
@@ -203,21 +203,21 @@ else
 endif
 
 RETURN_PWR:
-if daxss_sci_sps_enabled == $initState
-    echo Leaving SPS/PicoSIM ON as prior to test
-else
-    echo Turn SPS/PicoSIM OFF as to match state prior to test?
-    echo Press GO to turn OFF or GOTO FINISH
-    echo (Turn OFF recommended)
-    pause
-    set cmdCntDaxss = daxss_sci_cmd_acpt_count + 1
-    while daxss_sci_cmd_acpt_count < $cmdCntDaxss
-        cmd_daxss_pwr_sps pwr OFF
-        set cmdTryDaxss = cmdTryDaxss + 1
-        wait 3500
-    endwhile
-    set cmdSucceedDaxss = cmdSucceedDaxss + 1 
-endif
+;if daxss_sci_sps_enabled == $initState
+;    echo Leaving SPS/PicoSIM ON as prior to test
+;else
+;    echo Turn SPS/PicoSIM OFF as to match state prior to test?
+;    echo Press GO to turn OFF or GOTO FINISH
+;    echo (Turn OFF recommended)
+;    pause
+;    set cmdCntDaxss = daxss_sci_cmd_acpt_count + 1
+;    while daxss_sci_cmd_acpt_count < $cmdCntDaxss
+;        cmd_daxss_pwr_sps pwr OFF
+;        set cmdTryDaxss = cmdTryDaxss + 1
+;        wait 3500
+;    endwhile
+;    set cmdSucceedDaxss = cmdSucceedDaxss + 1 
+;endif
 
 FINISH:
 echo COMPLETED SPS tlm checks

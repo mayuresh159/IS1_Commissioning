@@ -42,8 +42,8 @@ set isFlight = 1
 CDH:
 echo STARTING DAXSS CDH tlm checks
 
-READ_PARAM:
-call Scripts/Commissioning/DAXSS/dump_parameters
+;READ_PARAM:
+;call Scripts/Commissioning/DAXSS/dump_parameters
 
 ; Now check that all tlm is in range
 
@@ -211,7 +211,7 @@ if isTVACTest == 1
     goto IS_TVAC
 endif
 if isFlight == 1
-    goto IS_TVAC
+    goto NOT_TVAC
 endif
 
 NOT_TVAC:
