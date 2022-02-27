@@ -164,38 +164,38 @@ verify daxss_sci_x123_cmp_info != 0
 verify daxss_sci_x123_spect_len > 0
 verify daxss_sci_x123_spect_len <= 3072
 
-if daxss_sci_sps_enabled == $initState
-    echo Leaving SPS/PicoSIM ON as prior to test
-else
-    echo Turning SPS/PicoSIM OFF as to match state prior to test
-    echo Press GO to turn OFF or GOTO FINISH
-    echo (Turn OFF recommended)
-    pause
-    ;set cmdCntDaxss = daxss_sci_cmd_acpt_count + 1
-    ;while daxss_sci_cmd_acpt_count < $cmdCntDaxss
-        ;cmd_daxss_pwr_sps pwr OFF
-        ;set cmdTryDaxss = cmdTryDaxss + 1
-        ;wait 3500
-    ;endwhile
-    ;set cmdSucceedDaxss = cmdSucceedDaxss + 1 
-endif
+;if daxss_sci_sps_enabled == $initState
+;    echo Leaving SPS/PicoSIM ON as prior to test
+;else
+;    echo Turning SPS/PicoSIM OFF as to match state prior to test
+;    echo Press GO to turn OFF or GOTO FINISH
+;    echo (Turn OFF recommended)
+;    pause
+;    set cmdCntDaxss = daxss_sci_cmd_acpt_count + 1
+;     while daxss_sci_cmd_acpt_count < $cmdCntDaxss
+;        cmd_daxss_pwr_sps pwr OFF
+;        set cmdTryDaxss = cmdTryDaxss + 1
+;        wait 3500
+;    endwhile
+;    set cmdSucceedDaxss = cmdSucceedDaxss + 1 
+;endif
 
 RETURN_PWR:
-if daxss_sci_x123_enabled == $initState
-    echo Leaving X123 ON as prior to test
-else
-    echo Turn X123 OFF as to match state prior to test?
-    echo Press GO to turn OFF or GOTO FINISH
-    echo (Turn OFF recommended)
-    pause
-    ;set cmdCntDaxss = daxss_sci_cmd_acpt_count + 1
-    ;while daxss_sci_cmd_acpt_count < $cmdCntDaxss
-        ;cmd_daxss_pwr_x123 pwr OFF
-        ;set cmdTryDaxss = cmdTryDaxss + 1
-        ;wait 3500
-    ;endwhile
-    ;set cmdSucceedDaxss = cmdSucceedDaxss + 1 
-endif
+;if daxss_sci_x123_enabled == $initState
+;    echo Leaving X123 ON as prior to test
+;else
+;    echo Turn X123 OFF as to match state prior to test?
+;    echo Press GO to turn OFF or GOTO FINISH
+;    echo (Turn OFF recommended)
+;    pause
+;    set cmdCntDaxss = daxss_sci_cmd_acpt_count + 1
+;    while daxss_sci_cmd_acpt_count < $cmdCntDaxss
+;        cmd_daxss_pwr_x123 pwr OFF
+;        set cmdTryDaxss = cmdTryDaxss + 1
+;        wait 3500
+;    endwhile
+;    set cmdSucceedDaxss = cmdSucceedDaxss + 1 
+;endif
 
 FINISH:
 ;echo Setting back to nominal DAXSS sci rate production
