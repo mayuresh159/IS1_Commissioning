@@ -170,13 +170,13 @@ else
     echo Press GO to turn OFF or GOTO FINISH
     echo (Turn OFF recommended)
     pause
-    set cmdCntDaxss = daxss_sci_cmd_acpt_count + 1
-    while daxss_sci_cmd_acpt_count < $cmdCntDaxss
-        cmd_daxss_pwr_sps pwr OFF
-        set cmdTryDaxss = cmdTryDaxss + 1
-        wait 3500
-    endwhile
-    set cmdSucceedDaxss = cmdSucceedDaxss + 1 
+    ;set cmdCntDaxss = daxss_sci_cmd_acpt_count + 1
+    ;while daxss_sci_cmd_acpt_count < $cmdCntDaxss
+        ;cmd_daxss_pwr_sps pwr OFF
+        ;set cmdTryDaxss = cmdTryDaxss + 1
+        ;wait 3500
+    ;endwhile
+    ;set cmdSucceedDaxss = cmdSucceedDaxss + 1 
 endif
 
 RETURN_PWR:
@@ -187,13 +187,13 @@ else
     echo Press GO to turn OFF or GOTO FINISH
     echo (Turn OFF recommended)
     pause
-    set cmdCntDaxss = daxss_sci_cmd_acpt_count + 1
-    while daxss_sci_cmd_acpt_count < $cmdCntDaxss
-        cmd_daxss_pwr_x123 pwr OFF
-        set cmdTryDaxss = cmdTryDaxss + 1
-        wait 3500
-    endwhile
-    set cmdSucceedDaxss = cmdSucceedDaxss + 1 
+    ;set cmdCntDaxss = daxss_sci_cmd_acpt_count + 1
+    ;while daxss_sci_cmd_acpt_count < $cmdCntDaxss
+        ;cmd_daxss_pwr_x123 pwr OFF
+        ;set cmdTryDaxss = cmdTryDaxss + 1
+        ;wait 3500
+    ;endwhile
+    ;set cmdSucceedDaxss = cmdSucceedDaxss + 1 
 endif
 
 FINISH:
