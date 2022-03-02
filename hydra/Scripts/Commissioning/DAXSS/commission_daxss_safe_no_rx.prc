@@ -8,6 +8,8 @@
 ;    If in Rx mode, check power state
 ;
 ; 26-02-2022: Robert Sewell		Created for IS-1 commissioning
+; 02-03-2022: Robert Sewell     Commented out routing as we don't get
+;                               full spectra in beacon mode
 
 declare cmdLoopCnt dn16l
 declare cmdLoopMax dn16l
@@ -27,15 +29,16 @@ echo This Script assumes IIST GS in Tx only mode
 echo Press GO to commission DAXSS
 pause
 
+;Don't route science we don't get group ID1 in beacon mode
 ;Route DAXSS SCI every 60 seconds over UHF
-ROUTE_DAXSS_SCI:
-echo Press GO to route DAXSS Sci over UHF every $DAXSSSciUHFRate seconds
-pause
-while cmdLoopCnt < cmdLoopMax
-    cmd_set_pkt_rate apid DAXSS_SCI rate $DAXSSSciUHFRate stream UHF
-    set cmdLoopCnt = cmdLoopCnt + 1
-    wait $waitInterval
-endwhile
+;ROUTE_DAXSS_SCI:
+;echo Press GO to route DAXSS Sci over UHF every $DAXSSSciUHFRate seconds
+;pause
+;while cmdLoopCnt < cmdLoopMax
+;    cmd_set_pkt_rate apid DAXSS_SCI rate $DAXSSSciUHFRate stream UHF
+;    set cmdLoopCnt = cmdLoopCnt + 1
+;    wait $waitInterval
+;endwhile
 
 set cmdLoopCnt = 0
 
