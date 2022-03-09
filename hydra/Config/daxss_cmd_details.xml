@@ -125,7 +125,8 @@
         <pair key="7" str="EEPMax"/>
     </dictionary>
     <typeState name="daxssDumpParamSet8" size="8" dict="daxssDumpParamSet"/>
-    <itemTime name="gpsTime" type="dn32" method="secSinceEpoch" epoch="Jan 6 1980 00:00:00" offset="16"/>
+    <itemTime name="gpsTime" type="dn32" method="secSinceEpoch" epoch="Jan 6 1980 00:00:00" offset="18"/>
+    <itemTime name="taiTime" type="dn32" method="secSinceEpoch" epoch="Jan 1 2000 00:00:00" offset="37"/>
 
 
     <command decoder="cmdDecoder" name="cmd_daxss_dump_param">
