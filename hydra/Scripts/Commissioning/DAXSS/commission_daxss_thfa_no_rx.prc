@@ -8,7 +8,8 @@
 ;	 Wait 3 minutes to collect data in new config
 ;	 Playback last 4 minutes of data
 ;
-; 06-30-2022: Robert Sewell		Created for IS-1 commissioning
+; 2022-06-30: Robert Sewell		Created for IS-1 commissioning
+; 3033-07-03: Robert Sewell     Updated for THFA=15.4
 
 declare cmdLoopCnt dn16l
 declare cmdLoopMax dn16l
