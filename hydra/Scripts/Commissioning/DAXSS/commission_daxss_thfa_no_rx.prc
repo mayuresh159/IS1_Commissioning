@@ -40,13 +40,13 @@ pause
 ;Never changed the THFA
 ;Analysis by Woods on 27-06-2022 showed THFA needed increasing
 ;On 6/29 THSL was increased to to 2.5% (THSL=2.5) 
-;This script is used to set the THFA to 12.8 (~2.5%)
+;This script is used to set the THFA to 15.4 (~2.5%)
 ;Typically we loop over THSL values until slow_count<10 in dark
 ;But we can't currently do this without ADCS being able to off point
 ;and with current IIST mode of uplink only 
 ;Ground default value for DAXSS (FM4) is THSL=0.622 THFA=8.0
 
-set setTHFA = 12.8
+set setTHFA = 15.4
 set waitInterval = 10000
 set cmdLoopCnt = 0
 set cmdLoopMax = 8
