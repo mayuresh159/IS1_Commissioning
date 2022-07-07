@@ -47,8 +47,8 @@ pause
 ;and with current IIST mode of uplink only 
 ;Ground default value for DAXSS (FM4) is THSL=0.622 THFA=8.0
 
-set setTHSL = 2.5
-set setTHFA = 12.8
+set setTHSL = 2.0
+set setTHFA = 10.2
 set waitInterval = 10000
 set cmdLoopCnt = 0
 set cmdLoopMax = 5
